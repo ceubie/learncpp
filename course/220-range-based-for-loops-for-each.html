@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>16.8 — Range-based for loops (for-each)</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>16.8 — Range-based for loops (for-each)</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/">
+        https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="219-arrays-loops-and-sign-challenge-solutions.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="221-array-indexing-and-length-using-enumerators.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>In lesson <a href="218-arrays-and-loops.html">16.6 -- Arrays and loops</a>, we showed examples where we used a for-loop to iterate through each element of an array using a loop variable as an index. Here’s another example of such:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">fibonacci</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">fibonacci</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">index</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fibonacci</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Although for-loops provide a convenient and flexible way to iterate through an array, they are also easy to mess up, prone to off-by-one errors, and subject to array indexing sign problems (discussed in lesson <a href="219-arrays-loops-and-sign-challenge-solutions.html">16.7 -- Arrays, loops, and sign challenge solutions</a>).<p>Because traversing (forwards) through an array is such a common thing to do, C++ supports another type of for-loop called a <strong>range-based for loop</strong> (also sometimes called a <strong>for-each loop</strong>) that allows traversal of a container without having to do explicit indexing. Range-based for loops are simpler, safer, and work with all the common array types in C++ (including <code>std::vector</code>, <code>std::array</code>, and C-style arrays).<p class="cpp-section cpp-topline" style="clear:both">Range-based for loops<p>The <em>range-based for</em> statement has a syntax that looks like this:<pre>for (element_declaration : array_object)
+   statement;
+</pre><p>When a range-based for loop is encountered, the loop will iterate through each element in <code>array_object</code>. For each iteration, the value of the current array element will be assigned to the variable declared in <code>element_declaration</code>, and then <code>statement</code> will execute.<p>For best results, <code>element_declaration</code> should have the same type as the array elements, otherwise type conversion will occur.<p>Here’s a simple example that uses a <em>range-based for</em> loop to print all of the elements in an array named <code>fibonacci</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">fibonacci</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">fibonacci</span><span class="p">)</span><span class="w"> </span><span class="c1">// iterate over array fibonacci and copy each value into `num`</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span><span class="w"> </span><span class="c1">// print the current value of `num`</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This prints:<pre>0 1 1 2 3 5 8 13 21 34 55 89
+</pre><p>Note that this example does not require us to use the array’s length, nor does it require us to index the array!<p>Let’s take a closer look at how this works. This range-based for loop will execute through all the elements of <code>fibonacci</code>. For the first iteration, variable <code>num</code> is assigned the value of the first element (<code>0</code>). Then the program executes the associated statement, which prints the value of <code>num</code> (<code>0</code>) to the console. For the second iteration, <code>num</code> is assigned the value of the second element (<code>1</code>). The associated statement executes again, which prints <code>1</code>. The range-based for loop continues to iterate through each of the array elements in turn, executing the associated statement for each one, until there are no elements left in the array to iterate over. At that point, the loop terminates, and the program continues execution (printing a newline and then returning <code>0</code> to the operating system).<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>The declared element (<code>num</code> in the prior example) is not an array index. Rather, it is assigned the value of the array element being iterated over.</p></p></div><p>Because <code>num</code> is assigned the value of the array element, this does mean the array element is copied (which can be expensive for some types).<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Favor range-based for loops over regular for-loops when traversing containers.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Range-based for loops and empty containers<p>In cases where the container being traversed has no elements, the body of the range-based for-loop will simply not execute:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">empty</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hi mom!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The above example does not print anything. Sorry mom!<p class="cpp-section cpp-topline" style="clear:both">Range-based for loops and type deduction using the <code>auto</code> keyword<p>Because <code>element_declaration</code> should have the same type as the array elements (to prevent type conversion from occurring), this is an ideal case in which to use the <code>auto</code> keyword, and let the compiler deduce the type of the array elements for us. That way we don’t have to redundantly specify the type, and there’s no risk of accidentally mistyping (and “mis-typing”, ha!)<p>Here’s the same example as above, but using <code>auto</code> as the type of <code>num</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">fibonacci</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">fibonacci</span><span class="p">)</span><span class="w"> </span><span class="c1">// compiler will deduce type of num to be `int`</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Because <code>std::vector fibonacci</code> has elements of type <code>int</code>, <code>num</code> will be deduced to be an <code>int</code>.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Use type deduction (<code>auto</code>) with range-based for loops to have the compiler deduce the type of the array element.</p></p></div><p>Another benefit to using <code>auto</code> is that if the element type of the array is ever updated (e.g. from <code>int</code> to <code>long</code>), <code>auto</code> will automatically deduce the updated element type, ensuring they stay in sync (and preventing type conversion from occurring).<p class="cpp-section cpp-topline" style="clear:both">Avoid element copies using references<p>Consider the following range-based for loop, which iterates over an array of <code>std::string</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="p">{</span><span class="w"> </span><span class="s">"peter"</span><span class="p">,</span><span class="w"> </span><span class="s">"likes"</span><span class="p">,</span><span class="w"> </span><span class="s">"frozen"</span><span class="p">,</span><span class="w"> </span><span class="s">"yogurt"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>For each iteration of this loop, the next <code>std::string</code> element from the <code>words</code> array will be assigned (copied) into the variable <code>word</code>. Copying a <code>std::string</code> is expensive, which is why we typically pass <code>std::string</code> to functions by const reference. We want to avoid making copies of things that are expensive to copy unless we really need a copy. In this case, we’re just printing the value of the copy and then the copy is destroyed. It would be better if we could avoid making a copy and just reference the actual array element.<p>Fortunately, we can do exactly that by making our <code>element_declaration</code> a (const) reference:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="p">{</span><span class="w"> </span><span class="s">"peter"</span><span class="p">,</span><span class="w"> </span><span class="s">"likes"</span><span class="p">,</span><span class="w"> </span><span class="s">"frozen"</span><span class="p">,</span><span class="w"> </span><span class="s">"yogurt"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="c1">// word is now a const reference</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In the above example, <code>word</code> is now a const reference. With each iteration of this loop, <code>word</code> will be bound to the next array element. This allows us to access the array element’s value without having to make an expensive copy.<p>If the reference is non-const, it can also be used to change the values in the array (something not possible if our <code>element_declaration</code> is a copy of the value).<p class="cpp-section cpp-topline" style="clear:both">When to use <code>auto</code> vs <code>auto&amp;</code> vs <code>const auto&amp;</code><p>Normally we’d use <code>auto</code> for cheap-to-copy types, <code>auto&amp;</code> when we want to modify the elements, and <code>const auto&amp;</code> for expensive-to-copy types. But with range-based for loops, many developers believe it is preferable to always use <code>const auto&amp;</code> because it is more future-proof.<p>For example, consider the following example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="p">{</span><span class="w"> </span><span class="s">"peter"</span><span class="p">,</span><span class="w"> </span><span class="s">"likes"</span><span class="p">,</span><span class="w"> </span><span class="s">"frozen"</span><span class="p">,</span><span class="w"> </span><span class="s">"yogurt"</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// elements are type std::string_view</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="c1">// We normally pass string_view by value, so we'll use auto here</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In this example, we have a <code>std::vector</code> containing <code>std::string_view</code> objects. Since <code>std::string_view</code> is normally passed by value, using <code>auto</code> seems appropriate.<p>But consider what happens if <code>words</code> is later updated to an array of <code>std::string</code> instead.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="p">{</span><span class="w"> </span><span class="s">"peter"</span><span class="p">,</span><span class="w"> </span><span class="s">"likes"</span><span class="p">,</span><span class="w"> </span><span class="s">"frozen"</span><span class="p">,</span><span class="w"> </span><span class="s">"yogurt"</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// obvious we should update this</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="c1">// Probably not obvious we should update this too</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The range-based for loop will compile and execute just fine, but <code>word</code> will now be deduced to be a <code>std::string</code>, and because we’re using <code>auto</code>, our loop will silently make expensive copies of <code>std::string</code> elements. We just took a huge performance hit!<p>There are a couple of reasonable ways to ensure this doesn’t happen:<ul><li>Don’t use type deduction in your range-based for loop. If we’d explicitly specified the element type as <code>std::string_view</code>, then when the array was later updated to <code>std::string</code>, the <code>std::string</code> elements will implicitly convert to <code>std::string_view</code>, which is no problem. If the array is updated to some other type that is not convertible, the compiler will error, and we can figure out what the appropriate thing to do is at that point. But if the element type is convertible, then the compiler will silently perform the conversion and we may not realize we’re doing something suboptimal.<li>Use <code>const auto&amp;</code> instead of <code>auto</code> when using type deduction in your range-based for loop when you don’t want to work with copies. The performance penalty of accessing elements through a reference instead of by value is likely to be small, and this insulates us from potentially significant performance penalties down the road if the element type is later changed to something that is expensive to copy.</li></li></ul><div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>For range-based for loops, prefer to define the element type as:<ul><li><code>auto</code> when you want to modify copies of the elements.<li><code>auto&amp;</code> when you want to modify the original elements.<li><code>const auto&amp;</code> otherwise (when you just need to view the original elements).</li></li></li></ul></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Range-based for loops and other standard container types<p>Range-based for loops work with a wide variety of array types, including (non-decayed) C-style arrays, <code>std::array</code>, <code>std::vector</code>, linked list, trees, and maps. We haven’t covered any of these yet, so don’t worry if you don’t know what these are. Just remember that <em>range-based for</em> loops provide a flexible and generic way to iterate through more than just <code>std::vector</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">fibonacci</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// note use of std::array here</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">fibonacci</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>Range-based for loops won’t work with decayed C-style arrays. This is because a range-based for-loop needs to know the length of the array to know when traversal is complete, and decayed C-style arrays do not contain this information.<p>Range-based for loops also won’t work with enumerations. We show a method for working around this in lesson <a href="231-stdarray-and-enumerations.html">17.6 -- std::array and enumerations</a>.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Getting the index of the current element<p>Range-based for loops do <em>not</em> provide a direct way to get the array index of the current element. This is because many of the structures that a range-based for loop can iterate over (such as <code>std::list</code>) do not support indices.<p>However, because range-based for loops always iterate in a forwards direction and don’t skip elements, you can always declare (and increment) your own counter. However, if you’re going to do this, you should consider whether you’re better off using a normal for-loop instead of a range-based for loop.<p class="cpp-section cpp-topline" style="clear:both">Range-based for loops in reverse <span class="cpp-section-pill cpp-section-standard">C++20</span><p>Range-based for loops only iterate in forwards order. However, there are cases where we want to traverse an array in reverse order. Prior to C++20, range-based for loops could not be easily used for this purpose, and other solutions had to be employed (typically normal for-loops).<p>However, as of C++20, you can use the <code>std::views::reverse</code> capability of the Ranges library to create a reverse view of the elements that can be traversed:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ranges&gt;</span><span class="c1"> // C++20</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="p">{</span><span class="w"> </span><span class="s">"Alex"</span><span class="p">,</span><span class="w"> </span><span class="s">"Bobby"</span><span class="p">,</span><span class="w"> </span><span class="s">"Chad"</span><span class="p">,</span><span class="w"> </span><span class="s">"Dave"</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// sorted in alphabetical order</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">words</span><span class="p">))</span><span class="w"> </span><span class="c1">// create a reverse view</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This prints:<pre>Dave
+Chad
+Bobby
+Alex
+</pre><p>We haven’t covered the ranges library, so consider this a useful bit of magic for now.<p class="cpp-section cpp-topline" style="clear:both">Quiz time<p class="cpp-quiz-question" style="clear:both">Question #1<p>Define a <code>std::vector</code> with the following names: “Alex”, “Betty”, “Caroline”, “Dave”, “Emily”, “Fred”, “Greg”, and “Holly”. Ask the user to enter a name. Use a range-based for loop to see if the name the user entered is in the array.<p>Sample output:<pre>Enter a name: Betty
+Betty was found.
+</pre><pre>Enter a name: Megatron
+Megatron was not found.
+</pre><p>Hint: Use <code>std::string</code> to hold the string the user inputs.<br/>Hint: <code>std::string_view</code> is cheap to copy.<p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_0"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">{</span><span class="w"> </span><span class="s">"Alex"</span><span class="p">,</span><span class="w"> </span><span class="s">"Betty"</span><span class="p">,</span><span class="w"> </span><span class="s">"Caroline"</span><span class="p">,</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span>
+<span class="w"> </span><span class="s">"Emily"</span><span class="p">,</span><span class="w"> </span><span class="s">"Fred"</span><span class="p">,</span><span class="w"> </span><span class="s">"Greg"</span><span class="p">,</span><span class="w"> </span><span class="s">"Holly"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter a name: "</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">username</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">username</span><span class="p">;</span>
+<span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// We will be explicit about expecting `name` to be a std::string_view here</span>
+<span class="w"> </span><span class="c1">// That way if `names` is ever changed to an expensive to copy type</span>
+<span class="w"> </span><span class="c1">// (like std::string), we won't end up making expensive copies.</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">names</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">username</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" was found.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" was not found.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></details><p class="cpp-quiz-question cpp-topline" style="clear:both">Question #2<p>Modify your solution to quiz 1. In this version, create a function template (not a normal function) called <code>isValueInArray()</code> that takes two parameters: a <code>std::vector</code>, and a value. The function should return <code>true</code> if the value is in the array, and <code>false</code> otherwise. Call the function from <code>main()</code> and pass it the array of names and the name the user entered.<p>Reminder:<ul><li>A function template that is using template argument deduction (when template type arguments are not explicitly specified) will not do conversions to match the template type parameters. The call either matches the template (and the template type can be deduced) or it doesn’t.<li>A function template with an explicitly specified template type argument will convert arguments to match the parameter type (since the type is known).</li></li></ul><p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_1"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">isValueInArray</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// we'll use a reference since we don't know if T is expensive to copy</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">{</span><span class="w"> </span><span class="s">"Alex"</span><span class="p">,</span><span class="w"> </span><span class="s">"Betty"</span><span class="p">,</span><span class="w"> </span><span class="s">"Caroline"</span><span class="p">,</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span>
+<span class="w"> </span><span class="s">"Emily"</span><span class="p">,</span><span class="w"> </span><span class="s">"Fred"</span><span class="p">,</span><span class="w"> </span><span class="s">"Greg"</span><span class="p">,</span><span class="w"> </span><span class="s">"Holly"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter a name: "</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">username</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">username</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">// By explicitly specifying std::string_view as a function template argument,</span>
+<span class="w"> </span><span class="c1">// the compiler will implicitly convert username to `std::string_view` to match the parameter type.</span>
+<span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="p">{</span><span class="w"> </span><span class="n">isValueInArray</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="p">(</span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// The following is also okay.  If we rely on template argument deduction instead, the compiler </span>
+<span class="w"> </span><span class="c1">// won't do implicit conversions, so we need to make sure `username` has the expected type.</span>
+<span class="w"> </span><span class="c1">// bool found{ isValueInArray(names, static_cast&lt;std::string_view&gt;(username)) };</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" was found.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" was not found.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></details></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="219-arrays-loops-and-sign-challenge-solutions.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="221-array-indexing-and-length-using-enumerators.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

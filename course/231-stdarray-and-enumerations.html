@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>17.6 — std::array and enumerations</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>17.6 — std::array and enumerations</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/stdarray-and-enumerations/">
+        https://www.learncpp.com/cpp-tutorial/stdarray-and-enumerations/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="230-arrays-of-references-via-stdreference_wrapper.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="232-introduction-to-c-style-arrays.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>In lesson <a href="221-array-indexing-and-length-using-enumerators.html">16.9 -- Array indexing and length using enumerators</a>, we discussed arrays and enumerations.<p>Now that we have <code>constexpr std::array</code> in our toolkit, we’re going to continue that discussion and show a few additional tricks.<p class="cpp-section cpp-topline" style="clear:both">Using static assert to ensure the proper number of array initializers<p>When initializing a <code>constexpr std::array</code> using CTAD, the compiler will deduce how long the array should be from the number of initializers. If less initializers are provided than there should be, the array will be shorter than expected, and indexing it can lead to undefined behavior.<p>For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">StudentNames</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">kenny</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0</span>
+<span class="w"> </span><span class="n">kyle</span><span class="p">,</span><span class="w"> </span><span class="c1">// 1</span>
+<span class="w"> </span><span class="n">stan</span><span class="p">,</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="w"> </span><span class="n">butters</span><span class="p">,</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="w"> </span><span class="n">cartman</span><span class="p">,</span><span class="w"> </span><span class="c1">// 4</span>
+<span class="w"> </span><span class="n">max_students</span><span class="w"> </span><span class="c1">// 5</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">testScores</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// oops, only 4 values</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Cartman got a score of "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">testScores</span><span class="p">[</span><span class="n">StudentNames</span><span class="o">::</span><span class="n">cartman</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// undefined behavior due to invalid index</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Whenever the number of initializers in a <code>constexpr std::array</code> can be reasonably sanity checked, you can do so using a static assert:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">StudentNames</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">kenny</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0</span>
+<span class="w"> </span><span class="n">kyle</span><span class="p">,</span><span class="w"> </span><span class="c1">// 1</span>
+<span class="w"> </span><span class="n">stan</span><span class="p">,</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="w"> </span><span class="n">butters</span><span class="p">,</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="w"> </span><span class="n">cartman</span><span class="p">,</span><span class="w"> </span><span class="c1">// 4</span>
+<span class="w"> </span><span class="n">max_students</span><span class="w"> </span><span class="c1">// 5</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">testScores</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// Ensure the number of test scores is the same as the number of students</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">testScores</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_students</span><span class="p">);</span><span class="w"> </span><span class="c1">// compile error: static_assert condition failed</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Cartman got a score of "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">testScores</span><span class="p">[</span><span class="n">StudentNames</span><span class="o">::</span><span class="n">cartman</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>That way, if you add a new enumerator later but forget to add a corresponding initializer to <code>testScores</code>, the program will fail to compile.<p>You can also use a static assert to ensure two different <code>constexpr std::array</code> have the same length.<p class="cpp-section cpp-topline" style="clear:both">Using constexpr arrays for better enumeration input and output<p>In lesson <a href="171-introduction-to-overloading-the-i-o-operators.html">13.5 -- Introduction to overloading the I/O operators</a>, we covered a few ways to input and output the names of enumerators. To assist in this task, we had helper functions that converted an enumerator to a string and vice-versa. These functions each had their own (duplicate) set of string literals, and we had to specifically code logic to check each:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="nf">getPetName</span><span class="p">(</span><span class="n">Pet</span><span class="w"> </span><span class="n">pet</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pet</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">cat</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"cat"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">dog</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"dog"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">pig</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"pig"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">whale</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"whale"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"???"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Pet</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getPetFromString</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">sv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"cat"</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">cat</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"dog"</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">dog</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"pig"</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">pig</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"whale"</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">whale</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
+</code></pre><p>This means that if we were to add a new enumerator, we’d have to remember to update these functions.<p>Let’s improve these functions a bit. In cases where the value of our enumerators start at 0 and proceed sequentially (which is true for most enumerations), we can use an array to hold the name of each enumerator.<p>This allows us to do two things:<ol start="1"><li>Index the array using the enumerator’s value to get the name of that enumerator.<li>Use a loop to iterate through all of the names, and be able to correlate a name back to the enumerator based on index.</li></li></ol><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Type</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">black</span><span class="p">,</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span>
+<span class="w"> </span><span class="n">max_colors</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// use sv suffix so std::array will infer type as std::string_view</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">string_view_literals</span><span class="p">;</span><span class="w"> </span><span class="c1">// for sv suffix</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">colorName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"red"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"blue"</span><span class="n">sv</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// Make sure we've defined strings for all our colors</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">colorName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_colors</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="nf">getColorName</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// We can index the array using the enumerator to get the name of the enumerator</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">colorName</span><span class="p">[</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">color</span><span class="p">)];</span>
+<span class="p">}</span>
+<span class="c1">// Teach operator&lt;&lt; how to print a Color</span>
+<span class="c1">// std::ostream is the type of std::cout</span>
+<span class="c1">// The return type and parameter type are references (to prevent copies from being made)!</span>
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">getColorName</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Teach operator&gt;&gt; how to input a Color by name</span>
+<span class="c1">// We pass color by non-const reference so we can have the function modify its value</span>
+<span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ws</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+<span class="w"> </span><span class="c1">// Iterate through the list of names to see if we can find a matching name</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">colorName</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">index</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">colorName</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="c1">// If we found a matching name, we can get the enumerator value based on its index</span>
+<span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// We didn't find a match, so input must have been invalid</span>
+<span class="w"> </span><span class="c1">// so we will set input stream to fail state</span>
+<span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">setstate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ios_base</span><span class="o">::</span><span class="n">failbit</span><span class="p">);</span>
+<span class="w"> </span><span class="c1">// On an extraction failure, operator&gt;&gt; zero-initializes fundamental types</span>
+<span class="w"> </span><span class="c1">// Uncomment the following line to make this operator do the same thing</span>
+<span class="w"> </span><span class="c1">// color = {};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">shirt</span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">blue</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Your shirt is "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shirt</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter a new color: "</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">shirt</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Invalid</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Your shirt is now "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shirt</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This prints:<pre>Your shirt is blue
+Enter a new color: red
+Your shirt is now red
+</pre><p class="cpp-section cpp-topline" style="clear:both"><a name="rangedEnumeration"></a>Range-based for-loops and enumerations <a href="#rangedEnumeration"><i class="fa fa-link" style="font-size:.8em"></i></a><p>Occasionally we run across situations where it would be useful to iterate through the enumerators of an enumeration. While we can do this using a for-loop with an integer index, this is likely to require a lot of static casting of the integer index to our enumeration type.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Type</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">black</span><span class="p">,</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span>
+<span class="w"> </span><span class="n">max_colors</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// use sv suffix so std::array will infer type as std::string_view</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">string_view_literals</span><span class="p">;</span><span class="w"> </span><span class="c1">// for sv suffix</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">colorName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"red"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"blue"</span><span class="n">sv</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// Make sure we've defined strings for all our colors</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">colorName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_colors</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="nf">getColorName</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">colorName</span><span class="p">[</span><span class="n">color</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="c1">// Teach operator&lt;&lt; how to print a Color</span>
+<span class="c1">// std::ostream is the type of std::cout</span>
+<span class="c1">// The return type and parameter type are references (to prevent copies from being made)!</span>
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">getColorName</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// Use a for loop to iterate through all our colors</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">max_colors</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Unfortunately, range-based for-loops won’t allow you to iterate over the enumerators of an enumeration:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Type</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">black</span><span class="p">,</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span>
+<span class="w"> </span><span class="n">max_colors</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// use sv suffix so std::array will infer type as std::string_view</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">string_view_literals</span><span class="p">;</span><span class="w"> </span><span class="c1">// for sv suffix</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">colorName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"red"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"blue"</span><span class="n">sv</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="c1">// Make sure we've defined strings for all our colors</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">colorName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_colors</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="nf">getColorName</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">colorName</span><span class="p">[</span><span class="n">color</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="c1">// Teach operator&lt;&lt; how to print a Color</span>
+<span class="c1">// std::ostream is the type of std::cout</span>
+<span class="c1">// The return type and parameter type are references (to prevent copies from being made)!</span>
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">getColorName</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="o">:</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="p">)</span><span class="w"> </span><span class="c1">// compile error: can't traverse enumeration</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>There are many creative solutions for this. Since we can use a range-based for-loop on an array, one of the most straightforward solutions is to create a <code>constexpr std::array</code> containing each of our enumerators, and then iterate over that. This method only works if the enumerators have unique values.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Type</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">black</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span><span class="w"> </span><span class="c1">// 1</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="w"> </span><span class="n">max_colors</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">string_view_literals</span><span class="p">;</span><span class="w"> </span><span class="c1">// for sv suffix</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">colorName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"red"</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="s">"blue"</span><span class="n">sv</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">colorName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_colors</span><span class="p">);</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">black</span><span class="p">,</span><span class="w"> </span><span class="n">red</span><span class="p">,</span><span class="w"> </span><span class="n">blue</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// A std::array containing all our enumerators</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">types</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_colors</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="nf">getColorName</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">colorName</span><span class="p">[</span><span class="n">color</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="c1">// Teach operator&lt;&lt; how to print a Color</span>
+<span class="c1">// std::ostream is the type of std::cout</span>
+<span class="c1">// The return type and parameter type are references (to prevent copies from being made)!</span>
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">getColorName</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="o">:</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">types</span><span class="p">)</span><span class="w"> </span><span class="c1">// ok: we can do a range-based for on a std::array</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In the above example, since the element type of <code>Color::types</code> is <code>Color::Type</code>, variable <code>c</code> will be deduced as a <code>Color::Type</code>, which is exactly what we want!<p>This prints:<pre>black
+red
+blue
+</pre><p class="cpp-section cpp-topline" style="clear:both">Quiz time<p>Define a namespace named <code>Animal</code>. Inside it, define an enum containing the following animals: chicken, dog, cat, elephant, duck, and snake. Also create a struct named <code>Data</code> to store each animal’s name, number of legs, and the sound it makes. Create a <code>std::array</code> of Data and fill out a Data element for each animal.<p>Ask the user to enter the name of an animal. If the name does not match the name of one of our animals, tell them so. Otherwise, print the data for that animal. Then print the data for all of the other animals that didn’t match their input.<p>For example:<pre>Enter an animal: dog
+A dog has 4 legs and says woof.
+
+Here is the data for the rest of the animals:
+A chicken has 2 legs and says cluck.
+A cat has 4 legs and says meow.
+A elephant has 4 legs and says pawoo.
+A duck has 2 legs and says quack.
+A snake has 0 legs and says hissss.
+</pre><pre>Enter an animal: frog
+That animal couldn't be found.
+
+Here is the data for the rest of the animals:
+A chicken has 2 legs and says cluck.
+A dog has 4 legs and says woof.
+A cat has 4 legs and says meow.
+A elephant has 4 legs and says pawoo.
+A duck has 2 legs and says quack.
+A snake has 0 legs and says hissss.
+</pre><p class="cpp-quiz-question" style="clear:both">Question #1<p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_0"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Animal</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Type</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">chicken</span><span class="p">,</span>
+<span class="w"> </span><span class="n">dog</span><span class="p">,</span>
+<span class="w"> </span><span class="n">cat</span><span class="p">,</span>
+<span class="w"> </span><span class="n">elephant</span><span class="p">,</span>
+<span class="w"> </span><span class="n">duck</span><span class="p">,</span>
+<span class="w"> </span><span class="n">snake</span><span class="p">,</span>
+<span class="w"> </span><span class="n">max_animals</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Data</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">{};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">legs</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">sound</span><span class="p">{};</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">chicken</span><span class="p">,</span><span class="w"> </span><span class="n">dog</span><span class="p">,</span><span class="w"> </span><span class="n">cat</span><span class="p">,</span><span class="w"> </span><span class="n">elephant</span><span class="p">,</span><span class="w"> </span><span class="n">duck</span><span class="p">,</span><span class="w"> </span><span class="n">snake</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">Data</span><span class="p">{</span><span class="w"> </span><span class="s">"chicken"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">"cluck"</span><span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="n">Data</span><span class="p">{</span><span class="w"> </span><span class="s">"dog"</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">"woof"</span><span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="n">Data</span><span class="p">{</span><span class="w"> </span><span class="s">"cat"</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">"meow"</span><span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="n">Data</span><span class="p">{</span><span class="w"> </span><span class="s">"elephant"</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">"pawoo"</span><span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="n">Data</span><span class="p">{</span><span class="w"> </span><span class="s">"duck"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">"quack"</span><span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="n">Data</span><span class="p">{</span><span class="w"> </span><span class="s">"snake"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">"hissss"</span><span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">types</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_animals</span><span class="p">);</span>
+<span class="w"> </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">max_animals</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Teach operator&gt;&gt; how to input an Animal by name</span>
+<span class="c1">// We pass animal by non-const reference so we can have the function modify its value</span>
+<span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">Type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">animal</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ws</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+<span class="w"> </span><span class="c1">// See if we can find a match</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">index</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">name</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">::</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// We didn't find a match, so input must have been invalid</span>
+<span class="w"> </span><span class="c1">// so we will set input stream to fail state</span>
+<span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">setstate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ios_base</span><span class="o">::</span><span class="n">failbit</span><span class="p">);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">printAnimalData</span><span class="p">(</span><span class="n">Animal</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">Data</span><span class="o">&amp;</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">data</span><span class="p">[</span><span class="n">type</span><span class="p">]</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"A "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">animal</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" has "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">animal</span><span class="p">.</span><span class="n">legs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" legs and says "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">animal</span><span class="p">.</span><span class="n">sound</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">".</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter an animal: "</span><span class="p">;</span>
+<span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">// If users input didn't match</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"That animal couldn't be found.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">max_animals</span><span class="p">;</span><span class="w"> </span><span class="c1">// set to invalid option so we don't match below</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="n">printAnimalData</span><span class="p">(</span><span class="n">type</span><span class="p">);</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">Here is the data for the rest of the animals:</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Animal</span><span class="o">::</span><span class="n">types</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
+<span class="w"> </span><span class="n">printAnimalData</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></details></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="230-arrays-of-references-via-stdreference_wrapper.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="232-introduction-to-c-style-arrays.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

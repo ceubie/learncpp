@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>6.6 — The conditional operator</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>6.6 — The conditional operator</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/the-conditional-operator/">
+        https://www.learncpp.com/cpp-tutorial/the-conditional-operator/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="078-the-comma-operator.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="080-relational-operators-and-floating-point-comparisons.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><div class="cpp-table-wrapper"><table class="cpp-table"><tbody><tr><th>Operator<th>Symbol<th>Form<th>Meaning<tr><td>Conditional<td>?:<td><nobr>c ? x : y</nobr><td>If conditional <code>c</code> is <code>true</code> then evaluate <code>x</code>, otherwise evaluate <code>y</code></td></td></td></td></tr></th></th></th></th></tr></tbody></table></div><p>The <strong>conditional operator</strong> (<code>?:</code>) (also sometimes called the <strong>arithmetic if</strong> operator) is a ternary operator (an operator that takes 3 operands). Because it has historically been C++’s only ternary operator, it’s also sometimes referred to as “the ternary operator”.<p>The <code>?:</code> operator provides a shorthand method for doing a particular type of if-else statement.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Related content<p>We cover if-else statements in lesson <a href="060-introduction-to-if-statements.html">4.10 -- Introduction to if statements</a>.</p></p></div><p>To recap, an if-else statement takes the following form:<pre>if (condition)
+    statement1;
+else
+    statement2;
+</pre><p>If <code>condition</code> evaluates to <code>true</code>, then <code>statement1</code> is executed, otherwise <code>statement2</code> is executed. The <code>else</code> and <code>statement2</code> are optional.<p>The <code>?:</code> operator takes the following form:<pre>condition ? expression1 : expression2;
+</pre><p>If <code>condition</code> evaluates to <code>true</code>, then <code>expression1</code> is evaluated, otherwise <code>expression2</code> is evaluated. The <code>:</code> and <code>expression2</code> are not optional.<p>Consider an if-else statement that looks like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="k">else</span>
+<span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</code></pre><p>This can be rewritten as:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</code></pre><p>In such cases, the conditional operator can help compact code without losing readability.<p class="cpp-section cpp-topline" style="clear:both">An example<p>Consider the following example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">getValue</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter a number: "</span><span class="p">;</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The max of "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">" and "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" is "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">".</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>First, let’s enter <code>5</code> and <code>7</code> as input (so <code>x</code> is <code>5</code>, and <code>y</code> is <code>7</code>). When <code>max</code> is initialized, the expression <code>(5 &gt; 7) ? 5 : 7</code> is evaluated. Since <code>5 &gt; 7</code> is false, this yields <code>false ? 5 : 7</code>, which evaluates to <code>7</code>. The program prints:<pre>The max of 5 and 7 is 7.
+</pre><p>Now let’s enter <code>7</code> and <code>5</code> as input (so <code>x</code> is <code>7</code>, and <code>y</code> is <code>5</code>). In this case, we get <code>(7 &gt; 5) ? 7 : 5</code>, which is <code>true ? 7 : 5</code>, which evaluates to <code>7</code>. The program prints:<pre>The max of 7 and 5 is 7.
+</pre><p class="cpp-section cpp-topline" style="clear:both">The conditional operator evaluates as part of an expression<p>Since the conditional operator is evaluated as part of an expression, it can be used anywhere an expression is accepted. In cases where the operands of the conditional operator are constant expressions, the conditional operator can be used in a constant expression.<p>This allows the conditional operator to be used in places where statements cannot be used.<p>For example, when initializing a variable:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">inBigClassroom</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">inBigClassroom</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The class size is: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>There’s no direct if-else replacement for this.<p>You might think to try something like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">inBigClassroom</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inBigClassroom</span><span class="p">)</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The class size is: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// Compile error: classSize not defined</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>However, this won’t compile, and you’ll get an error message that <code>classSize</code> isn’t defined. Much like how variables defined inside functions die at the end of the function, variables defined inside an if-statement or else-statement die at the end of the if-statement or else-statement. Thus, <code>classSize</code> has already been destroyed by the time we try to print it.<p>If you want to use an if-else, you’d have to do something like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">getClassSize</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">inBigClassroom</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inBigClassroom</span><span class="p">)</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">getClassSize</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The class size is: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">classSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This one works because <code>getClassSize(false)</code> is an expression, and the if-else logic is inside a function (where we can use statements). But this is a lot of extra code when we could just use the conditional operator instead.<p class="cpp-section cpp-topline" style="clear:both">Parenthesizing the conditional operator<p>Because C++ prioritizes the evaluation of most operators above the evaluation of the conditional operator, it’s quite easy to write expressions using the conditional operator that don’t evaluate as expected.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Related content<p>We cover the way that C++ prioritizes the evaluation of operators in future lesson <a href="074-operator-precedence-and-associativity.html">6.1 -- Operator precedence and associativity</a>.</p></p></div><p>For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>You might expect this to evaluate as <code>10 - (x &gt; y ? x : y)</code> (which would evaluate to <code>8</code>) but it actually evaluates as <code>(10 - x) &gt; y ? x : y</code> (which evaluates to <code>2</code>).<p>Here’s another example that exhibits a common mistake:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">"negative"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">"non-negative"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>You might expect this to print <code>non-negative</code>, but it actually prints <code>0</code>.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Optional reading<p>Here’s what’s happening in the above example. First, <code>x &lt; 0</code> evaluates to <code>false</code>. The partially evaluated expression is now <code>std::cout &lt;&lt; false ? "negative" : "non-negative"</code>. Because <code>operator&lt;&lt;</code> has higher precedence than <code>operator?:</code>, this expression evaluates as if it were written as <code>(std::cout &lt;&lt; false) ? "negative" : "non-negative"</code>. Thus <code>std::cout &lt;&lt; false</code> is evaluated, which prints <code>0</code> (and returns <code>std::cout</code>).<p>The partially evaluated expression is now <code>std::cout ? "negative" : "non-negative"</code>. Since <code>std::cout</code> is all that is remaining in the condition, the compiler will try to convert it to a <code>bool</code> so the condition can be resolved. Perhaps surprisingly, <code>std::cout</code> has a defined conversion to <code>bool</code>, which will most likely return <code>false</code>. Assuming it returns <code>false</code>, we now have <code>false ? "negative" : "non-negative"</code>, which evaluates to <code>"non-negative"</code>. So our fully evaluated statement is <code>"non-negative";</code>. An expression statement that is just a literal (in this case, a string literal) has no effect, so we’re done.</p></p></p></div><p>To avoid such evaluation prioritization issues, the conditional operator should be parenthesized as follows:<ul><li>Parenthesize the entire conditional operation (including operands) when used in a compound expression (an expression with other operators).<li>For readability, consider parenthesizing the condition if it contains any operators (other than the function call operator).</li></li></ul><p>The operands of the conditional operator do not need to be parenthesized.<p>Let’s take a look at some statements containing the conditional operator and how they should be parenthesized:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">return</span><span class="w"> </span><span class="n">isStunned</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">movesLeft</span><span class="p">;</span><span class="w"> </span><span class="c1">// not used in compound expression, condition contains no operators</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// not used in compound expression, condition contains operators</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">isAfternoon</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">"PM"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">"AM"</span><span class="p">);</span><span class="w"> </span><span class="c1">// used in compound expression, condition contains no operators (function call operator excluded)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">// used in compound expression, condition contains operators</span>
+</code></pre><div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Parenthesize the entire conditional operation (including operands) when used in a compound expression.<p>For readability, consider parenthesizing the condition if it contains any operators (other than the function call operator).</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">The type of the expressions must match or be convertible<p>To comply with C++’s type checking rules, one of the following must be true:<ul><li>The type of the second and third operand must match.<li>The compiler must be able to find a way to convert one or both of the second and third operands to matching types. The conversion rules the compiler uses are fairly complex and may yield surprising results in some cases.</li></li></ul><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>Alternatively, one or both of the second and third operands is allowed to be a throw expression. We cover <code>throw</code> in lesson <a href="319-basic-exception-handling.html">27.2 -- Basic exception handling</a>.</p></p></div><p>For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// okay: both operands have matching type int</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="nb">false</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2.2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// okay: int value 1 converted to double</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2u</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// surprising result: -1 converted to unsigned int, result out of range</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Assuming 4 byte integers, the above prints:<pre>1
+2.2
+4294967295
+</pre><p>In general, it’s okay to mix operands with fundamental types (excluding mixing signed and unsigned values). If either operand is not a fundamental type, it’s generally best to explicitly convert one or both operands to a matching type yourself so you know exactly what you’ll get.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Related content<p>The surprising case above related to mixing signed and unsigned values is due to the arithmetic conversion rules, which we cover in lesson <a href="129-arithmetic-conversions.html">10.5 -- Arithmetic conversions</a>.</p></p></div><p>If the compiler can’t find a way to convert the second and third operands to a matching type, a compile error will result:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">"x is 5"</span><span class="p">);</span><span class="w"> </span><span class="c1">// compile error: compiler can't find common type for constexpr int and C-style string literal</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In the above example, one of the expressions is an integer, and the other is a C-style string literal. The compiler will not be able to find a matching type on its own, so a compile error will result.<p>In such cases, you can either do an explicit conversion, or use an if-else statement:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// intentionally non-constexpr for this example</span>
+<span class="w"> </span><span class="c1">// We can explicitly convert the types to match</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="s">"x is 5"</span><span class="p">})</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">// Or use an if-else statement</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"x is 5"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>If <code>x</code> is constexpr, then the condition <code>x != 5</code> is a constant expression. In such cases, using <code>if constexpr</code> should be preferred over <code>if</code>, and your compiler may generate a warning indicating so (which will be promoted to an error if you are treating warnings as errors).<p>Since we haven’t covered <code>if constexpr</code> yet (we do so in lesson <a href="105-constexpr-if-statements.html">8.4 -- Constexpr if statements</a>), <code>x</code> is non-constexpr in this example to avoid the potential compiler warning.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">So when should you use the conditional operator?<p>The conditional operator is most useful when doing one of the following:<ul><li>Initializing an object with one of two values.<li>Assigning one of two values to an object.<li>Passing one of two values to a function.<li>Returning one of two values from a function.<li>Printing one of two values.</li></li></li></li></li></ul><p>Complicated expressions should generally avoid use of the conditional operator, as they tend to be error prone and hard to read.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Prefer to avoid the conditional operator in complicated expressions.</p></p></div></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="078-the-comma-operator.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="080-relational-operators-and-floating-point-comparisons.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

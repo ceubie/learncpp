@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>B.2 — Introduction to C++14</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>B.2 — Introduction to C++14</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/introduction-to-c14/">
+        https://www.learncpp.com/cpp-tutorial/introduction-to-c14/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="340-introduction-to-c11.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="342-introduction-to-c17.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p><strong>What is C++14?</strong><p>On August 18, 2014, the <a href="https://www.iso.org/home.html">ISO (International Organization for Standardization)</a> approved a new version of C++, called C++14. Unlike C++11, which added a huge amount of new functionality, C++14 is a comparatively minor update, mainly featuring bug fixes and small improvements.<p><strong>New improvements in C++14</strong><p>For your interest, here’s a list of the major improvements that C++14 adds. Note that this list is not comprehensive, but rather intended to highlight some of the key improvements of interest.<ul><li>Aggregate member initialization (<a href="173-introduction-to-structs-members-and-member-selection.html">13.7 -- Introduction to structs, members, and member selection</a>)<li>Binary literals (<a href="066-numeral-systems-decimal-binary-hexadecimal-and-octal.html">5.3 -- Numeral systems (decimal, binary, hexadecimal, and octal)</a>)<li>[[deprecated]] attribute (no tutorial yet)<li>Digit separators (<a href="066-numeral-systems-decimal-binary-hexadecimal-and-octal.html">5.3 -- Numeral systems (decimal, binary, hexadecimal, and octal)</a>)<li>Function return type deduction (<a href="132-type-deduction-for-objects-using-the-auto-keyword.html">10.8 -- Type deduction for objects using the auto keyword</a>)<li>Generic lambdas (<a href="254-introduction-to-lambdas-anonymous-functions.html">20.6 -- Introduction to lambdas (anonymous functions)</a>)<li>Relaxed constexpr functions (<a href="146-constexpr-functions.html">F.1 -- Constexpr functions</a>)<li>Variable templates (no tutorial yet)<li>std::make_unique (<a href="277-stdunique_ptr.html">22.5 -- std::unique_ptr</a>)</li></li></li></li></li></li></li></li></li></ul></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="340-introduction-to-c11.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="342-introduction-to-c17.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

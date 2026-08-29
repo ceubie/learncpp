@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>0.1 — Introduction to these tutorials</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>0.1 — Introduction to these tutorials</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/introduction-to-these-tutorials/">
+        https://www.learncpp.com/cpp-tutorial/introduction-to-these-tutorials/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <span class="nav-button disabled">← Previous</span>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="002-introduction-to-programming-languages.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p class="cpp-section">Welcome!<p>Welcome to the Learn C++ tutorials! Above all else, these tutorials aim to make learning C++ easy.<p>Unlike many other sites and books, these tutorials don’t assume you have any prior programming experience. We’ll teach you everything you need to know as you progress, with <em>lots</em> of examples along the way.<p>Whether you’re interested in learning C++ as a hobby or for professional development, you’re in the right place!<p><p style="clear:both"></p><br/>A testimonial from reader Syam from Trinidad:<p><blockquote><p>It’s crazy how perfect this website explains C++ concepts and teaches programming. I read the book “Programming: Principles and Practice Using C++” [by Bjarne Stroustrup, the creator of C++] and it was rather confusing…. This website makes it clear the first time, and they explain everything you need to know. Somehow they know what I don’t know, and what I need to know. It’s almost like my future self went back in the past to teach me what mistakes I will make.</p></blockquote><p class="cpp-section cpp-topline" style="clear:both">Lesson structure<p>The lessons in this introductory chapter are aimed at giving you some context around what C++ is, how it came about, how programs work, and what software you need to install to create your own programs. You’ll even write your own first program.<p>Further chapters will explore different parts of the C++ language. In the first chapter (chapter 1), you’ll get a broad but shallow overview of many fundamental C++ concepts, so we can start writing some simple programs. Further chapters will explore those concepts in depth, or introduce new concepts.<p>Each chapter has a theme, with most of the lessons underneath it being generally related to that theme. There is no suggested amount of time that you should spend with each lesson or chapter; progress through the material at a pace that is comfortable for you.<p class="cpp-section cpp-topline" style="clear:both">Goals<p>Before we get started, let’s cover a few important goals for these tutorials:<ul><li>Cover general programming topics as well as C++. Traditional textbooks do a pretty good job of teaching the basics of a given programming language, but they often do not cover other programming topics that are incidental to the language. For example, books will omit sections on programming style, common pitfalls, debugging, good/bad programming practices, and testing. Consequently, by the time you finish the book, you may understand how to program in a language, but you might also have picked up bad habits that will come back to bite you later! One of the goals of these tutorials is to make sure that all of these incidental topics are covered along the way, in the sections where it naturally makes sense to discuss them. When you finish, you will not only know how to program in C++, you will know how NOT to program in C++, which is arguably as important.</li></ul><p><ul><li>Provide a lot of examples. Most people learn as much or more from following the examples as they do from reading the text. These tutorials will endeavor to provide plenty of clear, concise examples to show the application of concepts you are learning. We will also avoid (as much as possible) the twin evils: the <em>ellipsis</em> (also known as <em>…</em>), where a necessary or non-obvious part of an example is omitted in the interest of space, and the <em>unexplained new concept</em>, where a new concept that is integral to the example is introduced without any mention of what it is or how it works. Both of these tend to lead to getting stuck.</li></ul><p><ul><li>Provide practice programs. The end of many lessons and sections will contain some exercises that you can attempt to answer on your own, along with solutions. You can compare your solution against ours to see what we did differently, or, if you get stuck, how we solved the problem. Then you can go back and refocus on the areas you need more work on.</li></ul><p><ul><li>Most importantly: have fun. Programming can be a lot of fun, and if you’re not generally having fun, you’re not in the right mindset to be programming. Tired or unhappy programmers make mistakes, and debugging code tends to take much longer than writing it correctly in the first place! Often you can save yourself some time by going to bed, getting a good night’s sleep, and coming back to a problem in the morning.</li></ul><p class="cpp-section cpp-topline" style="clear:both">Getting the most out of these tutorials<p>As you go through these tutorials, we recommend a number of practices to maximize your learning experience:<ul><li>Type in the examples <em>by hand</em>. This will help you learn where you commonly make errors, as well as becoming familiar with various diagnostic messages that result from typos. As you enter each line, think about what it does, and how it contributes to the overall program. If you encounter anything that you don’t understand, that’s something to investigate further.</li></ul><p><ul><li>As you make mistakes or find bugs in your programs, fix them. Try to solve your own problems before asking others for help. Learning how to find and fix errors is a critical skill to successful programming. Don’t neglect learning how to use a debugger (we’ll explain how in a future chapter) -- it’s a key tool in figuring out where your programs are going wrong.</li></ul><p><ul><li>Experiment with the examples. Change numbers and text to see what happens. Modify the programs to do additional things (e.g. if a program adds two numbers, make it add three numbers). Try to find different ways to break the programs (if a program asks you to enter a number, try entering a letter instead and see what happens). You’ll learn more by modifying the examples than by simply following them.</li></ul><p><ul><li>Plan to spend some time with the quizzes. If you’re new to programming, you may find these challenging (and that’s normal, as your brain acclimates to the programming mindset). Don’t be discouraged if you don’t get the right answer the first time. You may need to try several different approaches before you find a path to success. It’s okay to look at the answer if you’re really stuck. Just make sure you understand how the provided answer works before proceeding.</li></ul><p><ul><li>Write your own short programs using the concepts you have learned. This will reinforce your learning and improve your retention.</li></ul><p class="cpp-section cpp-topline" style="clear:both"><a name="FAQ"></a>Common site-related questions <a href="#FAQ"><i class="fa fa-link" style="font-size:.8em"></i></a><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: How do I sign up for the site? How do I get a login?<p>All parts of this site are accessible anonymously -- therefore, no user account or signup is needed!</p></p></div><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: Is there a PDF version of this site available for offline viewing?<p>Unfortunately, there is not. The site is able to stay free for everyone because we’re ad-sponsored -- that model simply doesn’t work in PDF format. You are welcome to convert pages from this website into PDF (or any other) format for your own private use, so long as you do not distribute them.</p></p></div><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: What should I do if I get stuck on a concept?<p>If you don’t understand something or feel stuck:<ul><li>Read through the comments. Other readers may have encountered similar challenges.<li>Scan through the next lesson or two in the series -- your question may be answered there.<li>Use a search engine to see if your question (or error message) has been addressed elsewhere.<li>Ask an AI to explain something to you. Keep in mind that the information provided by AI may be fully or partially incorrect.<li>Ask your question on a site that is designed for programming Q&amp;A, like <a href="https://stackoverflow.com/">Stack Overflow</a>.</li></li></li></li></li></ul><p>If all else fails, skip the material you don’t understand, and come back to it later. You may find that something that was hard to understand is easier with the additional knowledge and context provided by other articles.</p></p></p></div><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: What do I do if I forget what something means?<p>Use our <a href="https://www.learncpp.com/learn-c-site-index/">Site index</a> to look up any topics you want to know more about there, and you’ll find links to the lessons where that topic is discussed. The site index is also accessible from every lesson via a link in the title bar.<p>You might also try <a href="https://www.stroustrup.com/glossary.html">this glossary of C++ terms</a>, provided by Bjarne Stroustrup (the creator of C++).</p></p></p></div><p><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: Do you have any similar sites for other programming languages?<p>Nope. Maintaining this site requires a <em>lot</em> of time. Doing other languages would require being able to clone myself a few times.</p></p></div><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: Can you do a dark mode for this site?<p>Not easily, but you can! See <a href="https://darkreader.org/">darkreader.org</a>.</p></p></div><p>Finally, one small nag: This site is free because it is ad-supported. If you find yourself enjoying the lessons, please consider disabling your ad blocker.<p>Alright, let’s get on with it!</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <span class="nav-button disabled">← Previous</span>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="002-introduction-to-programming-languages.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>8.13 — Introduction to random number generation</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>8.13 — Introduction to random number generation</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/">
+        https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="113-halts-exiting-your-program-early.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="115-generating-random-numbers-using-mersenne-twister.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>The ability to generate random numbers can be useful in certain kinds of programs, particularly in games, statistical modelling programs, and cryptographic applications that need to encrypt and decrypt things. Take games for example -- without random events, monsters would always attack you the same way, you’d always find the same treasure, the dungeon layout would never change, etc… and that would not make for a very good game.<p>In real life, we often produce randomization by doing things like flipping a coin, rolling a dice, or shuffling a deck of cards. These events aren’t actually random, but involve so many physical variables (e.g. gravity, friction, air resistance, momentum, etc…) that they become almost impossible to predict or control, and (unless you’re a magician) produce results that are for all intents and purposes random.<p>However, computers aren’t designed to take advantage of physical variables -- your computer can’t toss a coin, throw a dice, or shuffle real cards. Modern computers live in a controlled electrical world where everything is binary (0 or 1) and there is no in-between. By their very nature, computers are designed to produce results that are as predictable as possible. When you tell the computer to calculate 2 + 2, you <em>always</em> want the answer to be 4. Not 3 or 5 on occasion.<p>Consequently, computers are generally incapable of generating truly random numbers (at least through software). Instead, modern programs typically <em>simulate</em> randomness using an algorithm.<p>In this lesson, we’ll cover a lot of the theory behind how random numbers are generated in programs, and introduce some terminology we’ll use in future lessons.<p class="cpp-section cpp-topline" style="clear:both">Algorithms and state<p>First, let’s take a detour through the concepts of algorithms and states.<p>An <strong>algorithm</strong> is a finite sequence of instructions that can be followed to solve some problem or produce some useful result.<p>For example, let’s say your boss gives you a small text file containing a bunch of unsorted names (one per line), and asks you to sort the list. Since the list is small, and you don’t expect to do this often, you decide to sort it by hand. There are multiple ways to sort a list, but you might do something like this:<ul><li>Create a new empty list to hold the sorted results<li>Scan the list of unsorted names to find the name that comes first alphabetically<li>Cut that name out of the unsorted list and paste it at the bottom of the sorted list<li>Repeat the previous two steps until there are no more names on the unsorted list</li></li></li></li></ul><p>The above set of steps describes a sorting algorithm (using natural language). By nature, algorithms are reusable -- if your boss asks you to sort another list tomorrow, you can just apply the same algorithm to the new list.<p>Because computers can execute instructions and manipulate data much more quickly than we can, algorithms are often written using programming languages, allowing us to automate tasks. In C++, algorithms are typically implemented as reusable functions.<p>Here’s a simple algorithm for generating a sequence of numbers where each successive number is incremented by 1:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">plusOne</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">s_state</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// only initialized the first time this function is called</span>
+<span class="w"> </span><span class="c1">// Generate the next number</span>
+<span class="w"> </span><span class="o">++</span><span class="n">s_state</span><span class="p">;</span><span class="w"> </span><span class="c1">// first we modify the state</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s_state</span><span class="p">;</span><span class="w"> </span><span class="c1">// then we use the new state to generate the next number in the sequence</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">plusOne</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">plusOne</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">plusOne</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This prints:<pre>4
+5
+6
+</pre><p>This algorithm is pretty simple. The first time we call <code>plusOne()</code>, <code>s_state</code> is initialized to value <code>3</code>. Then the next number in the output sequence is generated and returned.<p>An algorithm is considered to be <strong>stateful</strong> if it retains some information across calls. Conversely, a <strong>stateless</strong> algorithm does not store any information (and must be given all the information it needs to work with whenever it is called). Our <code>plusOne()</code> function is stateful, in that it uses the static variable <code>s_state</code> to store the last number that was generated. When applied to algorithms, the term <strong>state</strong> refers to the current values held in stateful variables (those retained across calls).<p>To generate the next number in the sequence, our algorithm uses a two step process:<ul><li>First, the current state (initialized from the start value, or preserved from the prior call) is modified to produce a new state.<li>Then, the next number in the sequence is generated from the new state.</li></li></ul><p>Our algorithm is considered <strong>deterministic</strong>, meaning that for a given input (the value provided for <code>start</code>), it will always produce the same output sequence.<p class="cpp-section cpp-topline" style="clear:both">Pseudo-random number generators (PRNGs)<p>To simulate randomness, programs typically use a pseudo-random number generator. A <strong>pseudo-random number generator (PRNG)</strong> is an algorithm that generates a sequence of numbers whose properties simulate a sequence of random numbers.<p>It’s easy to write a basic PRNG algorithm. Here’s a short PRNG example that generates 100 16-bit pseudo-random numbers:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="c1">// For illustrative purposes only, don't use this</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">LCG16</span><span class="p">()</span><span class="w"> </span><span class="c1">// our PRNG</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">s_state</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// only initialized the first time this function is called</span>
+<span class="w"> </span><span class="c1">// Generate the next number</span>
+<span class="w"> </span><span class="c1">// We modify the state using large constants and intentional overflow to make it hard</span>
+<span class="w"> </span><span class="c1">// for someone to casually determine what the next number in the sequence will be.</span>
+<span class="w"> </span><span class="n">s_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8253729</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">s_state</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2396403</span><span class="p">;</span><span class="w"> </span><span class="c1">// first we modify the state</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s_state</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">32768</span><span class="p">;</span><span class="w"> </span><span class="c1">// then we use the new state to generate the next number in the sequence</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// Print 100 random numbers</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">count</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LCG16</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\t'</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">// If we've printed 10 numbers, start a new row</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The result of this program is:<pre>4339	838	25337	15372	6783	2642	6021	19992	14859	26462	
+25105	13860	28567	6762	17053	29744	15139	9078	14633	2108	
+7343	642	17845	29256	5179	14222	26689	12884	8647	17050	
+8397	18528	17747	9126	28505	13420	32479	23218	21477	30328	
+20075	26558	20081	3716	13303	19146	24317	31888	12163	982	
+1417	16540	16655	4834	16917	23208	26779	30702	5281	19124	
+9767	13050	32045	4288	31155	17414	31673	11468	25407	11026	
+4165	7896	25291	26654	15057	26340	30807	31530	31581	1264	
+9187	25654	20969	30972	25967	9026	15989	17160	15611	14414	
+16641	25364	10887	9050	22925	22816	11795	25702	2073	9516	
+</pre><p>Each number appears to be pretty random with respect to the previous one.<p>Notice how similar <code>LCG16()</code> is to our <code>plusOne()</code> example above! The state is initially set to value <code>0</code>. Then to produce the next number in the output sequence, the current state is modified (by applying some mathematical operations) to produce a new state, and the next number in the sequence is generated from that new state.<p>As it turns out, this particular algorithm isn’t very good as a random number generator (note how each result alternates between even and odd -- that’s not very random!). But most PRNGs work similarly to <code>LCG16()</code> -- they just typically use more state variables and more complex mathematical operations in order to generate better quality results.<p class="cpp-section cpp-topline" style="clear:both">Seeding a PRNG<p>The sequence of “random numbers” generated by a PRNG is not random at all. Just like our <code>plusOne()</code> function, <code>LCG16()</code> is also deterministic. Given some initial state value (such as <code>0</code>), a PRNG will generate the same sequence of numbers each time. If you run the above program 3 times, you’ll see it generates the same sequence of values each time.<p>In order to generate different output sequences, the initial state of a PRNG needs to be varied. The value (or set of values) used to set the initial state of a PRNG is called a <strong>random seed</strong> (or <strong>seed</strong> for short). When the initial state of a PRNG has been set using a seed, we say it has been <strong>seeded</strong>.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>Because the initial state of the PRNG is set from the seed value(s), all of the values that a PRNG will produce are deterministically calculated from the seed value(s).</p></p></div><p>The seed value is typically provided by the program using the PRNG. Here’s a sample program that requests a seed value from the user and then generates 10 random numbers using that seed value (using our <code>LCG16()</code> function).<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">g_state</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">seedPRNG</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">g_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seed</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// For illustrative purposes only, don't use this</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">LCG16</span><span class="p">()</span><span class="w"> </span><span class="c1">// our PRNG</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// We modify the state using large constants and intentional overflow to make it hard</span>
+<span class="w"> </span><span class="c1">// for someone to casually determine what the next number in the sequence will be.</span>
+<span class="w"> </span><span class="n">g_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8253729</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">g_state</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2396403</span><span class="p">;</span><span class="w"> </span><span class="c1">// first we modify the state</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">g_state</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">32768</span><span class="p">;</span><span class="w"> </span><span class="c1">// then we use the new state to generate the next number in the sequence</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print10</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// Print 10 random numbers</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">count</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LCG16</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\t'</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter a seed value: "</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w"> </span><span class="n">seedPRNG</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// seed our PRNG</span>
+<span class="w"> </span><span class="n">print10</span><span class="p">();</span><span class="w"> </span><span class="c1">// generate 10 random values</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Here are 3 sample runs from this:<pre>Enter a seed value: 7
+10458	3853	16032	17299	10726	32153	19116	7455	242	549	
+</pre><pre>Enter a seed value: 7
+10458	3853	16032	17299	10726	32153	19116	7455	242	549	
+</pre><pre>Enter a seed value: 9876
+24071	18138	27917	23712	8595	18406	23449	26796	31519	7922	
+</pre><p>Notice that when we provide the same seed value, we get the same output sequence. If we provide a different seed value, we get a different output sequence.<p class="cpp-section cpp-topline" style="clear:both">Seed quality and underseeding<p>If we want the program to produce different randomized numbers each time it is run, then we need some way to vary the seed each time the program is run. Asking the user to provide a seed value isn’t great, since they can just enter the same value each time. The program really needs some way to generate a randomized seed value each time it is run. Unfortunately, we can’t use a PRNG to generate a random seed, because we need a randomized seed to generate random numbers. Instead, we’ll typically use a seed generation algorithm that is designed to produce seed values. We’ll discuss (and implement) such algorithms in the next lesson.<p>The theoretical maximum number of unique sequences that a PRNG can generate is determined by the number of bits in the PRNG’s state. For example, a PRNG with 128 bits of state can theoretically generate up to 2^128 (340,282,366,920,938,463,463,374,607,431,768,211,456) unique output sequences. That’s a lot!<p>However, which output sequence is <em>actually</em> generated depends on the initial state of the PRNG, which is determined by the seed. Therefore, practically speaking, the number of unique output sequences a PRNG can <em>actually</em> generate is limited by the number of unique seed values the program using the PRNG can provide. For example, if a particular seed generation algorithm can only generate 4 different seed values, then the PRNG will only be able to generate at most 4 different output sequences.<p>If a PRNG is not provided with enough bits of quality seed data, we say that it is <strong>underseeded</strong>. An underseeded PRNG may begin to produce randomized results whose quality is compromised in some way -- and the more severe the underseeding, the more the quality of the results will suffer.<p>For example, an underseeded PRNG may exhibit any of the following issues:<ul><li>The random sequences generated by consecutive runs may have a high correlation to each other.<li>On the generation of the Nth random number, some values will never be able to be generated. For example, a Mersenne Twister that is underseeded in a particular way will never generate the values 7 or 13 as its first output.<li>Someone may be able to guess the seed based on the initial random value produced (or the first few random values). That would allow them to then generate all future random numbers that are going to be produced by the generator. This may allow them to cheat or game the system.</li></li></li></ul><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>An ideal seed should have the following characteristics:<ul><li>The seed should contain at least as many bits as the state of the PRNG, so that every bit in the state of the PRNG can be initialized by an independent bit in the seed.<li>Each bit in the seed should be independently randomized.<li>The seed should contain a good mix of 0 and 1s distributed across all of the bits.<li>There should be no bits in the seed that are always 0 or always 1. These “stuck bits” do not provide any value.<li>The seed should have a low correlation with previously generated seeds.</li></li></li></li></li></ul><p>In practice, we may compromise on some of these characteristics. Some PRNGs have huge states (e.g. the state of a Mersenne Twister has 19937 bits), and generating quality seeds that large can be difficult. As a result, PRNGs with large states are often designed to be resilient to being seeded with fewer bits. Stuck bits are also common. For example, if we use the system clock as part of our seed, we’ll end up with some number of stuck bits, as the bits that represent larger time units (e.g. years) are effectively stuck.</p></p></p></div><p>Developers who aren’t familiar with proper seeding practices will often try to initialize a PRNG using a single 32-bit or 64-bit value (unfortunately, the design of C++’s standard Random library inadvertently encourages this). This will generally result in a significantly underseeded PRNG.<p>Seeding a PRNG with 64 bytes of quality seed data (less if the PRNGs state is smaller) is typically good enough to facilitate the generation of 8-byte random values for non-sensitive uses (e.g. not statistical simulations or cryptography).<p class="cpp-section cpp-topline" style="clear:both">What makes a good PRNG? (optional reading)<p>In order to be a good PRNG, the PRNG needs to exhibit a number of properties:<ul><li>The PRNG should generate each number with approximately the same probability.</li></ul><p>This is called distribution uniformity. If some numbers are generated more often than others, the result of the program that uses the PRNG will be biased! To check distribution uniformity, we can use a histogram. A histogram is a graph that tracks how many times each number has been generated. Since our histograms are text-based, we’ll use a * symbol to represent each time a given number was generated.<p>Consider a PRNG that generates numbers between 1 and 6. If we generate 36 numbers, a PRNG with distribution uniformity should generate a histogram that looks something like this:<pre>1|******
+2|******
+3|******
+4|******
+5|******
+6|******
+</pre><p>A PRNG that is biased in some way will generate a histogram that is uneven, like this:<pre>1|***
+2|******
+3|******
+4|******
+5|******
+6|*********
+</pre><p>or this:<pre>1|****
+2|********
+3|******
+4|********
+5|******
+6|****
+</pre><p>or maybe even this:<pre>1|*******
+2|********
+3|*******
+4|********
+5|
+6|******
+</pre><p>Let’s say you’re trying to write a random item generator for a game. When a monster is killed, your code generates a random number between 1 and 6, and if the result is a 6, the monster will drop a rare item instead of a common one. You would expect a 1 in 6 chance of this happening. But if the underlying PRNG is not uniform, and generates a lot more 6s than it should (like the second histogram above), your players will end up getting more rare items than you’d intended, possibly trivializing the difficulty of your game, or messing up your in-game economy.<p>Finding PRNG algorithms that produce uniform results is difficult.<ul><li>The method by which the next number in the sequence is generated shouldn’t be predictable.</li></ul><p>For example, consider the following PRNG algorithm: <code>return ++num</code>. This PRNG is perfectly uniform, but it is also completely predictable -- and not very useful as a sequence of random numbers!<p>Even sequences of numbers that seem random to the eye (such as the output of <code>LCG16()</code> above) may be trivially predictable by someone who is motivated. By examining just a few numbers generated from the <code>LCG16()</code> function above, it is possible to determine which constants are used (<code>8253729</code> and <code>2396403</code>) to modify the state. Once that is known, it becomes trivial to calculate all of the future numbers that will be generated from this PRNG.<p>Now, imagine you’re running a betting website where users can bet $100. Your website then generates a random number between 0 and 32767. If the number is greater than 20000, the customer wins and you return double the bet. Otherwise, they lose and you keep the bet. Since the customer wins only 12767/32767 (39%) of the time, your website should make tons of money, right? However, if customers are able to determine which numbers will be generated next, then they can strategically place bets so they always (or usually) win. Congrats, now you get to file for bankruptcy!<ul><li>The PRNG should have a good dimensional distribution of numbers.</li></ul><p>This means the PRNG should return numbers across the entire range of possible results at random. For example, the PRNG should generate low numbers, middle numbers, high numbers, even numbers, and odd numbers seemingly at random.<p>A PRNG that returned all low numbers, then all high numbers may be uniform and non-predictable, but it’s still going to lead to biased results, particularly if the number of random numbers you actually use is small.<ul><li>The PRNG should have a high period for all seeds</li></ul><p>All PRNGs are periodic, which means that at some point the sequence of numbers generated will begin to repeat itself. The length of the sequence before a PRNG begins to repeat itself is known as the <strong>period</strong>.<p>For example, here are the first 100 numbers generated from a PRNG with poor periodicity:<pre>112	9	130	97	64	31	152	119	86	53	
+20	141	108	75	42	9	130	97	64	31	
+152	119	86	53	20	141	108	75	42	9	
+130	97	64	31	152	119	86	53	20	141	
+108	75	42	9	130	97	64	31	152	119	
+86	53	20	141	108	75	42	9	130	97	
+64	31	152	119	86	53	20	141	108	75	
+42	9	130	97	64	31	152	119	86	53	
+20	141	108	75	42	9	130	97	64	31	
+152	119	86	53	20	141	108	75	42	9
+</pre><p>You will note that it generated 9 as the 2nd number, again as the 16th number, and then every 14 numbers after that. This PRNG is stuck generating the following sequence repeatedly: 9-130-97-64-31-152-119-86-53-20-141-108-75-42-(repeat).<p>This happens because PRNGs are deterministic. Once the state of a PRNG is identical to a prior state, the PRNG will start producing the same sequence of outputs it has produced before -- resulting in a loop.<p>A good PRNG should have a long period for <em>all</em> seed numbers. Designing an algorithm that meets this property can be extremely difficult -- many PRNGs have long periods only for some seeds and not others. If the user happens to pick a seed that results in a state with a short period, then the PRNG won’t do a good job if many random numbers are needed.<ul><li>The PRNG should be efficient</li></ul><p>Most PRNGs have a state size of less than 4096 bytes, so total memory usage typically isn’t a concern. However, the larger the internal state, the more likely the PRNG is to be underseeded, and the slower the initial seeding will be (since there’s more state to initialize).<p>Second, to generate the next number in sequence, a PRNG has to mix up its internal state by applying various mathematical operations. How much time this takes can vary significantly by PRNG and also by architecture (some PRNGs perform better on certain architectures than others). This doesn’t matter if you only generate random numbers periodically, but can have a huge impact if you need lots of randomness.<p class="cpp-section cpp-topline" style="clear:both">There are many different kinds of PRNG algorithms<p>Over the years, many different kinds of PRNG algorithms have been developed (Wikipedia has a good list <a href="https://en.wikipedia.org/wiki/List_of_random_number_generators">here</a>). Every PRNG algorithm has strengths and weaknesses that might make it more or less suitable for a particular application, so selecting the right algorithm for your application is important.<p>Many PRNGs are now considered relatively poor by modern standards -- and there’s no reason to use a PRNG that doesn’t perform well when it’s just as easy to use one that does.<p class="cpp-section cpp-topline" style="clear:both"><a name="random"></a>Randomization in C++ <a href="#random"><i class="fa fa-link" style="font-size:.8em"></i></a><p>The randomization capabilities in C++ are accessible via the <code>&lt;random&gt;</code> header of the standard library. Within the random library, there are 6 PRNG families available for use (as of C++20):<div class="cpp-table-wrapper"><table class="cpp-table"><tbody><tr><th>Type name<th>Family<th>Period<th>State size*<th>Performance<th>Quality<th>Should I use this?<tr><td>minstd_rand<br/>minstd_rand0<td>Linear congruential generator<td>2^31<td>4 bytes<td>Bad<td>Awful<td>No<tr><td>mt19937<br/>mt19937_64<td>Mersenne twister<td>2^19937<td>2500 bytes<td>Decent<td>Decent<td>Probably (see next section)<tr><td>ranlux24<br/>ranlux48<td>Subtract and carry<td>10^171<td>96 bytes<td>Awful<td>Good<td>No<tr><td>knuth_b<td>Shuffled linear congruential generator<td>2^31<td>1028 bytes<td>Awful<td>Bad<td>No<tr><td>default_random_engine<td>Any of above (implementation defined)<td>Varies<td>Varies<td>?<td>?<td>No<sup>2</sup><tr><td>rand()<td>Linear congruential generator<td>2^31<td>4 bytes<td>Bad<td>Awful<td>No<sup>no</sup></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></tr></th></th></th></th></th></th></th></tr></tbody></table></div><p>There is zero reason to use <code>knuth_b</code>, <code>default_random_engine</code>, or <code>rand()</code> (which is a random number generator provided for compatibility with C).<p>As of C++20, the Mersenne Twister algorithm is the only PRNG that ships with C++ that has both decent performance and quality.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>A test called <a href="http://pracrand.sourceforge.net/">PracRand</a> is often used to assess the performance and quality of PRNGs (to determine whether they have different kinds of biases). You may also see references to SmallCrush, Crush or BigCrush -- these are other tests that are sometimes used for the same purpose.<p>If you want to see what the output of Pracrand looks like, <a href="https://arvid.io/2018/06/30/on-cxx-random-number-generator-quality/">this website</a> has output for all of the PRNGs that C++ supports as of C++20.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">So we should use Mersenne Twister, right?<p>Probably. For most applications, Mersenne Twister is fine, both in terms of performance and quality.<p>However, it’s worth noting that by modern PRNG standards, Mersenne Twister is <a href="https://en.wikipedia.org/wiki/Mersenne_Twister#Characteristics">a bit outdated</a>. The biggest issue with Mersenne Twister is that its results can be predicted after seeing 624 generated numbers, making it non-suitable for any application that requires non-predictability.<p>If you are developing an application that requires the highest quality random results (e.g. a statistical simulation), the fastest results, or one where non-predictability is important (e.g. cryptography), you’ll need to use a 3rd party library.<p>Popular choices as of the time of writing:<ul><li>The <a href="https://prng.di.unimi.it/">Xoshiro family</a> and <a href="https://github.com/wangyi-fudan/wyhash">Wyrand</a> for non-cryptographic PRNGs.<li>The <a href="https://cr.yp.to/chacha.html">Chacha family</a> for cryptographic (non-predictable) PRNGs.</li></li></ul><p>Okay, now that your eyes are probably bleeding, that’s enough theory. Let’s discuss how to actually generate random numbers with Mersenne Twister in C++.</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="113-halts-exiting-your-program-early.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="115-generating-random-numbers-using-mersenne-twister.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

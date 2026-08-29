@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>15.1 — The hidden “this” pointer and member function chaining</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>15.1 — The hidden “this” pointer and member function chaining</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/the-hidden-this-pointer-and-member-function-chaining/">
+        https://www.learncpp.com/cpp-tutorial/the-hidden-this-pointer-and-member-function-chaining/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="201-chapter-14-summary-and-quiz.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="203-classes-and-header-files.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>One of the questions about classes that new programmers often ask is, “When a member function is called, how does C++ keep track of which object it was called on?”.<p>First, let’s define a simple class to work with. This class encapsulates an integer value, and provides some access functions to get and set that value:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Simple</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="p">{};</span>
+<span class="w"> </span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Simple</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getID</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">setID</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Simple</span><span class="w"> </span><span class="n">simple</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="w"> </span><span class="n">simple</span><span class="p">.</span><span class="n">setID</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w"> </span><span class="n">simple</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>As you would expect, this program produces the result:<pre>2
+</pre><p>Somehow, when we call <code>simple.setID(2);</code>, C++ knows that function <code>setID()</code> should operate on object <code>simple</code>, and that <code>m_id</code> actually refers to <code>simple.m_id</code>.<p>The answer is that C++ utilizes a hidden pointer named <code>this</code>! In this lesson, we’ll take a look at <code>this</code> in more detail.<p class="cpp-section cpp-topline" style="clear:both">The hidden <code>this</code> pointer<p>Inside every member function, the keyword <strong>this</strong> is a const pointer that holds the address of the current implicit object.<p>Most of the time, we don’t mention <code>this</code> explicitly, but just to prove we can:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Simple</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="p">{};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Simple</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getID</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">setID</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// use `this` pointer to access the implicit object and operator-&gt; to select member m_id</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Simple</span><span class="w"> </span><span class="n">simple</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">simple</span><span class="p">.</span><span class="n">setID</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">simple</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This works identically to prior example, and prints:<pre>2
+</pre><p>Note that the <code>print()</code> member functions from the prior two examples do exactly the same thing:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// implicit use of this</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// explicit use of this</span>
+</code></pre><p>It turns out that the former is shorthand for the latter. When we compile our programs, the compiler will implicitly prefix any member referencing the implicit object with <code>this-&gt;</code>. This helps keep our code more concise and prevents the redundancy from having to explicitly write <code>this-&gt;</code> over and over.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">A reminder<p>We use <code>-&gt;</code> to select a member from a pointer to an object. <code>this-&gt;m_id</code> is the equivalent of <code>(*this).m_id</code>.<p>We cover <code>operator-&gt;</code> in lesson <a href="178-member-selection-with-pointers-and-references.html">13.12 -- Member selection with pointers and references</a>.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">How is <code>this</code> set?<p>Let’s take a closer look at this function call:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="w"> </span><span class="n">simple</span><span class="p">.</span><span class="n">setID</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre><p>Although the call to function <code>setID(2)</code> looks like it only has one argument, it actually has two! When compiled, the compiler rewrites the expression <code>simple.setID(2);</code> as follows:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="w"> </span><span class="n">Simple</span><span class="o">::</span><span class="n">setID</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// note that simple has been changed from an object prefix to a function argument!</span>
+</code></pre><p>Note that this is now just a standard function call, and the object <code>simple</code> (which was formerly an object prefix) is now passed by address as an argument to the function.<p>But that’s only half of the answer. Since the function call now has an added argument, the member function definition also needs to be modified to accept (and use) this argument as a parameter. Here’s our original member function definition for <code>setID()</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setID</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre><p>How the compiler rewrites functions is an implementation-specific detail, but the end-result is something like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setID</span><span class="p">(</span><span class="n">Simple</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre><p>Note that our <code>setId</code> function has a new leftmost parameter named <code>this</code>, which is a const pointer (meaning it cannot be re-pointed, but the contents of the pointer can be modified). The <code>m_id</code> member has also been rewritten as <code>this-&gt;m_id</code>, utilizing the <code>this</code> pointer.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>In this context, the <code>static</code> keyword means the function is not associated with objects of the class, but instead is treated as if it were a normal function inside the scope region of the class. We cover static member functions in lesson <a href="208-static-member-functions.html">15.7 -- Static member functions</a>.</p></p></div><p>Putting it all together:<ol start="1"><li>When we call <code>simple.setID(2)</code>, the compiler actually calls <code>Simple::setID(&amp;simple, 2)</code>, and <code>simple</code> is passed by address to the function.<li>The function has a hidden parameter named <code>this</code> which receives the address of <code>simple</code>.<li>Member variables inside setID() are prefixed with <code>this-&gt;</code>, which points to <code>simple</code>. So when the compiler evaluates <code>this-&gt;m_id</code>, it’s actually resolving to <code>simple.m_id</code>.</li></li></li></ol><p>The good news is that all of this happens automatically, and it doesn’t really matter whether you remember how it works or not. All you need to remember is that all non-static member functions have a <code>this</code> pointer that refers to the object the function was called on.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>All non-static member functions have a <code>this</code> const pointer that holds the address of the implicit object.</p></p></div><p class="cpp-section cpp-topline" style="clear:both"><code>this</code> always points to the object being operated on<p>New programmers are sometimes confused about how many <code>this</code> pointers exist. Each member function has a single <code>this</code> pointer parameter that points to the implicit object. Consider:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Simple</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"> </span><span class="c1">// this = &amp;a inside the Simple constructor</span>
+<span class="w"> </span><span class="n">Simple</span><span class="w"> </span><span class="n">b</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span><span class="w"> </span><span class="c1">// this = &amp;b inside the Simple constructor</span>
+<span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">setID</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// this = &amp;a inside member function setID()</span>
+<span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">setID</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// this = &amp;b inside member function setID()</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Note that the <code>this</code> pointer alternately holds the address of object <code>a</code> or <code>b</code> depending on whether we’ve called a member function on object <code>a</code> or <code>b</code>.<p>Because <code>this</code> is just a function parameter (and not a member), it does not make instances of your class larger memory-wise.<p class="cpp-section cpp-topline" style="clear:both">Explicitly referencing <code>this</code><p>Most of the time, you won’t need to explicitly reference the <code>this</code> pointer. However, there are a few occasions where doing so can be useful:<p>First, if you have a member function that has a parameter with the same name as a data member, you can disambiguate them by using <code>this</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">struct</span><span class="w"> </span><span class="nc">Something</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">{};</span><span class="w"> </span><span class="c1">// not using m_ prefix because this is a struct</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setData</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="c1">// this-&gt;data is the member, data is the local parameter</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre><p>This <code>Something</code> class has a member named <code>data</code>. The function parameter of <code>setData()</code> is also named <code>data</code>. Within the <code>setData()</code> function, <code>data</code> refers to the function parameter (because the function parameter shadows the data member), so if we want to reference the <code>data</code> member, we use <code>this-&gt;data</code>.<p>Some developers prefer to explicitly add <code>this-&gt;</code> to all class members to make it clear that they are referencing a member. We recommend that you avoid doing so, as it tends to make your code less readable for little benefit. Using the “m_” prefix is a more concise way to differentiate private member variables from non-member (local) variables.<p class="cpp-section cpp-topline" style="clear:both">Returning <code>*this</code><p>Second, it can sometimes be useful to have a member function return the implicit object as a return value. The primary reason to do this is to allow member functions to be “chained” together, so several member functions can be called on the same object in a single expression! This is called <strong>function chaining</strong> (or <strong>method chaining</strong>).<p>Consider this common example where you’re outputting several bits of text using <code>std::cout</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
+</code></pre><p>The compiler evaluates the above snippet like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, "</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
+</code></pre><p>First, <code>operator&lt;&lt;</code> uses <code>std::cout</code> and the string literal <code>"Hello, "</code> to print <code>"Hello, "</code> to the console. However, since this is part of an expression, <code>operator&lt;&lt;</code> also needs to return a value (or <code>void</code>). If <code>operator&lt;&lt;</code> returned <code>void</code>, you’d end up with this as the partially evaluated expression:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="p">{}</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
+</code></pre><p>which clearly doesn’t make any sense (and the compiler would throw an error). Instead, <code>operator&lt;&lt;</code> returns the stream object that was passed in, which in this case is <code>std::cout</code>. That way, after the first <code>operator&lt;&lt;</code> has been evaluated, we get:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
+</code></pre><p>which then prints the user’s name.<p>This way, we only need to specify <code>std::cout</code> once, and then we can chain as many pieces of text together using <code>operator&lt;&lt;</code> as we want. Each call to <code>operator&lt;&lt;</code> returns <code>std::cout</code> so the next call to <code>operator&lt;&lt;</code> uses <code>std::cout</code> as the left operand.<p>We can implement this kind of behavior in our member functions too. Consider the following class:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">class</span><span class="w"> </span><span class="nc">Calc</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="p">{};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">sub</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">mult</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre><p>If you wanted to add 5, subtract 3, and multiply by 4, you’d have to do this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Calc</span><span class="w"> </span><span class="n">calc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns void</span>
+<span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns void</span>
+<span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">mult</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns void</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>However, if we make each function return <code>*this</code> by reference, we can chain the calls together. Here is the new version of <code>Calc</code> with “chainable” functions:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">class</span><span class="w"> </span><span class="nc">Calc</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="p">{};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Calc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Calc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sub</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Calc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mult</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre><p>Note that <code>add()</code>, <code>sub()</code> and <code>mult()</code> are now returning <code>*this</code> by reference. Consequently, this allows us to do the following:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Calc</span><span class="w"> </span><span class="n">calc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">sub</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="n">mult</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// method chaining</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>We have effectively condensed three lines into one expression! Let’s take a closer look at how this works.<p>First, <code>calc.add(5)</code> is called, which adds <code>5</code> to <code>m_value</code>. <code>add()</code> then returns a reference to <code>*this</code>, which is a reference to implicit object <code>calc</code>, so <code>calc</code> will be the object used in the subsequent evaluation. Next <code>calc.sub(3)</code> evaluates, which subtracts <code>3</code> from <code>m_value</code> and again returns <code>calc</code>. Finally, <code>calc.mult(4)</code> multiplies <code>m_value</code> by <code>4</code> and returns <code>calc</code>, which isn’t used further, and is thus ignored.<p>Since each function modified <code>calc</code> as it was executed, the <code>m_value</code> of <code>calc</code> now contains the value (((0 + 5) - 3) * 4), which is <code>8</code>.<p>This is probably the most common explicit use of <code>this</code>, and is one you should consider whenever it makes sense to have chainable member functions.<p>Because <code>this</code> always points to the implicit object, we don’t need to check whether it is a null pointer before dereferencing it.<p class="cpp-section cpp-topline" style="clear:both">Resetting a class back to default state<p>If your class has a default constructor, you may be interested in providing a way to return an existing object back to its default state.<p>As noted in previous lessons (<a href="195-delegating-constructors.html">14.12 -- Delegating constructors</a>), constructors are only for initialization of new objects, and should not be called directly. Doing so will result in unexpected behavior.<p>The best way to reset a class back to a default state is to create a <code>reset()</code> member function, have that function create a new object (using the default constructor), and then assign that new object to the current implicit object, like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="c1">// value initialize a new object and overwrite the implicit object</span>
+<span class="w"> </span><span class="p">}</span>
+</code></pre><p>Here’s a full program demonstrating this <code>reset()</code> function in action:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Calc</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="p">{};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Calc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Calc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sub</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Calc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mult</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Calc</span><span class="w"> </span><span class="n">calc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">sub</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="n">mult</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// prints 8</span>
+<span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// prints 0</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p class="cpp-section cpp-topline" style="clear:both"><code>this</code> and const objects<p>For non-const member functions, <code>this</code> is a const pointer to a non-const value (meaning <code>this</code> cannot be pointed at something else, but the object pointing to may be modified). With const member functions, <code>this</code> is a const pointer to a const value (meaning the pointer cannot be pointed at something else, nor may the object being pointed to be modified).<p>The errors generated from attempting to call a non-const member function on a const object can be a little cryptic:<pre>error C2662: 'int Something::getValue(void)': cannot convert 'this' pointer from 'const Something' to 'Something &amp;'
+error: passing 'const Something' as 'this' argument discards qualifiers [-fpermissive]
+</pre><p>When we call a non-const member function on a const object, the implicit <code>this</code> function parameter is a const pointer to a <em>non-const</em> object. But the argument has type const pointer to a <em>const</em> object. Converting a pointer to a const object into a pointer to a non-const object requires discarding the const qualifier, which cannot be done implicitly. The compiler error generated by some compilers reflects the compiler complaining about being asked to perform such a conversion.<p class="cpp-section cpp-topline" style="clear:both">Why <code>this</code> a pointer and not a reference<p>Since the <code>this</code> pointer always points to the implicit object (and can never be a null pointer unless we’ve done something to cause undefined behavior), you may be wondering why <code>this</code> is a pointer instead of a reference. The answer is simple: when <code>this</code> was added to C++, references didn’t exist yet.<p>If <code>this</code> were added to the C++ language today, it would undoubtedly be a reference instead of a pointer. In other more modern C++-like languages, such as Java and C#, <code>this</code> is implemented as a reference.</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="201-chapter-14-summary-and-quiz.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="203-classes-and-header-files.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

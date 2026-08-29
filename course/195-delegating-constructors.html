@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>14.12 — Delegating constructors</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>14.12 — Delegating constructors</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/delegating-constructors/">
+        https://www.learncpp.com/cpp-tutorial/delegating-constructors/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="194-default-constructors-and-default-arguments.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="196-temporary-class-objects.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>Whenever possible, we want to reduce redundant code (following the DRY principle -- Don’t Repeat Yourself).<p>Consider the following functions:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="w"> </span><span class="nf">A</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// statements that do task A</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">B</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// statements that do task A</span>
+<span class="w"> </span><span class="c1">// statements that do task B</span>
+<span class="p">}</span>
+</code></pre><p>Both functions have a set of statements that do exactly the same thing (task A). In such a case, we can refactor like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="w"> </span><span class="nf">A</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// statements that do task A</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">B</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">A</span><span class="p">();</span>
+<span class="w"> </span><span class="c1">// statements that do task B</span>
+<span class="p">}</span>
+</code></pre><p>In that way, we’ve removed redundant code that existed in functions <code>A()</code> and <code>B()</code>. This makes our code easier to maintain, as changes only need to be made in one place.<p>When a class contains multiple constructors, it’s extremely common for the code in each constructor to be similar if not identical, with lots of repetition. We’d similarly like to remove constructor redundancy where possible.<p>Consider the following example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"???"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">m_isManager</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="c1">// Employees must have a name and an id</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isManager</span><span class="p">)</span><span class="w"> </span><span class="c1">// They can optionally be a manager</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_isManager</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">isManager</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e1</span><span class="p">{</span><span class="w"> </span><span class="s">"James"</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e2</span><span class="p">{</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre><p>The body of each constructor has the exact same print statement.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Author’s note<p>It’s generally not a good idea to have a constructor print something (except for debugging purposes), as this means you can’t create an object using that constructor in cases where you do not want to print something. We’re doing it in this example to help illustrate what’s happening.</p></p></div><p>Constructors are allowed to call other functions, including other member functions of the class. So we could refactor like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"???"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">m_isManager</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">printCreated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="c1">// our new helper function</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">printCreated</span><span class="p">();</span><span class="w"> </span><span class="c1">// we call it here</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isManager</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_isManager</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">isManager</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">printCreated</span><span class="p">();</span><span class="w"> </span><span class="c1">// and here</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e1</span><span class="p">{</span><span class="w"> </span><span class="s">"James"</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e2</span><span class="p">{</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre><p>While this is better than the prior version (as the redundant statement has been replaced by a redundant function call), it requires introduction of a new function. And our two constructors are also both initializing <code>m_name</code> and <code>m_id</code>. Ideally we’d remove this redundancy too.<p>Can we do better? We can. But this is where many new programmers run into trouble.<p class="cpp-section cpp-topline" style="clear:both">Calling a constructor in the body of a function creates a temporary object<p>Analogous to how we had function <code>B()</code> call function <code>A()</code> in the example above, the obvious solution seems like it would be to call the <code>Employee(std::string_view, int)</code> constructor from the body of <code>Employee(std::string_view, int, bool)</code> in order to initialize <code>m_name</code>, <code>m_id</code>, and print the statement. Here’s what that looks like:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"???"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">m_isManager</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// this constructor initializes name and id</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span><span class="w"> </span><span class="c1">// our print statement is back here</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isManager</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_isManager</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">isManager</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// this constructor initializes m_isManager</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="c1">// Call Employee(std::string_view, int) to initialize m_name and m_id</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w"> </span><span class="c1">// this doesn't work as expected!</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e2</span><span class="p">{</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"e2 has name: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e2</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span><span class="w"> </span><span class="c1">// print e2.m_name</span>
+<span class="p">}</span>
+</code></pre><p>But this doesn’t work correctly, as the program outputs the following:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">Employee</span><span class="w"> </span><span class="n">Dave</span><span class="w"> </span><span class="n">created</span>
+<span class="n">e2</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">name</span><span class="o">:</span><span class="w"> </span><span class="o">???</span>
+</code></pre><p>Even though <code>Employee Dave created</code> printed, after <code>e2</code> finished construction, <code>e2.m_name</code> still appears to be set to its initial value of <code>"???"</code>. How is that possible?<p>We were expecting <code>Employee(name, id)</code> to call the constructor in order to continue initialization of the current implicit object (<code>e2</code>). But initialization of a class object is finished once the member initializer list has finished executing. By the time we begin executing the constructor’s body, it’s too late to do more initialization.<p>When called from the body of a function, what looks like a function call to a constructor usually creates and direct-initializes a temporary object (in one other case, you’ll get a compile error instead). In our example above, <code>Employee(name, id);</code> creates a temporary (unnamed) Employee object. This temporary object is the one whose <code>m_name</code> is set to <code>Dave</code>, and is the one that prints <code>Employee Dave created</code>. Then the temporary is destroyed. <code>e2</code> never has its <code>m_name</code> or <code>m_id</code> changed from the default values.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Constructors should not be called directly from the body of another function. Doing so will either result in a compilation error, or will direct-initialize a temporary object.<br/>If you do want a temporary object, prefer list-initialization (which makes it clear you are intending to create an object).</p></p></div><p>So if we can’t call a constructor from the body of another constructor, then how do we solve this issue?<p class="cpp-section cpp-topline" style="clear:both">Delegating constructors<p>Constructors are allowed to delegate (transfer responsibility for) initialization to another constructor from the same class type. This process is sometimes called <strong>constructor chaining</strong> and such constructors are called <strong>delegating constructors</strong>.<p>To make one constructor delegate initialization to another constructor, simply call the constructor in the member initializer list:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"???"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Employee</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// delegate initialization to Employee(std::string_view, int) constructor</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// actually initializes the members</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e1</span><span class="p">{</span><span class="w"> </span><span class="s">"James"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e2</span><span class="p">{</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre><p>When <code>e1 { "James" }</code> is initialized, matching constructor <code>Employee(std::string_view)</code> is called with parameter <code>name</code> set to <code>"James"</code>. The member initializer list of this constructor delegates initialization to other constructor, so <code>Employee(std::string_view, int)</code> is then called. The value of <code>name</code> (<code>"James"</code>) is passed as the first argument, and literal <code>0</code> is passed as the second argument. The member initializer list of the delegated constructor then initializes the members. The body of the delegated constructor then runs. Then control returns to the initial constructor, whose (empty) body runs. Finally, control returns to the caller.<p>The downside of this method is that it sometimes requires duplication of initialization values. In the delegation to the <code>Employee(std::string_view, int)</code> constructor, we need an initialization value for the <code>int</code> parameter. We had to hardcode literal <code>0</code>, as there is no way to reference the default member initializer.<p>A few additional notes about delegating constructors. First, a constructor that delegates to another constructor is not allowed to do any member initialization itself. So your constructors can delegate or initialize, but not both.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">As an aside…<p>Note that we had <code>Employee(std::string_view)</code> (the constructor with less parameters) delegate to <code>Employee(std::string_view name, int id)</code> (the constructor with more parameters). It is common to have the constructor with fewer parameters delegate to the constructor with more parameters.<p>If we had instead chosen to have <code>Employee(std::string_view name, int id)</code> delegate to <code>Employee(std::string_view)</code>, then that would have left us unable to initialize <code>m_id</code> using <code>id</code>, as a constructor can only delegate or initialize, not both.</p></p></p></div><p>Second, it’s possible for one constructor to delegate to another constructor, which delegates back to the first constructor. This forms an infinite loop, and will cause your program to run out of stack space and crash. You can avoid this by ensuring all of your constructors resolve to a non-delegating constructor.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>If you have multiple constructors, consider whether you can use delegating constructors to reduce duplicate code.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Reducing constructors using default arguments<p>Default values can also sometimes be used to reduce multiple constructors into fewer constructors. For example, by putting a default value on our <code>id</code> parameter, we can create a single <code>Employee</code> constructor that requires a name argument but will optionally accept an id argument:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_name</span><span class="p">{};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// default member initializer</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// default argument for id</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e1</span><span class="p">{</span><span class="w"> </span><span class="s">"James"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e2</span><span class="p">{</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre><p>Since default values must be attached to the rightmost parameters in a function call, a good practice when defining classes is to define members for which a user <em>must</em> provide initialization values for first (and then make those the leftmost parameters of the constructor). Members for which the user can optionally provide (because the default values are acceptable) should be defined second (and then make those the rightmost parameters of the constructor).<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Members for which the user must provide initialization values should be defined first (and as the leftmost parameters of the constructor). Members for which the user can optionally provide initialization values (because the default values are acceptable) should be defined second (and as the rightmost parameters of the constructor).</p></p></div><p>Note that this method also requires duplication of the default initialization value for <code>m_id</code> (‘0’): once as a default member initializer, and once as a default argument.<p class="cpp-section cpp-topline" style="clear:both">A conundrum: Redundant constructors vs redundant default values<p>In the above examples, we used delegating constructors and then default arguments to reduce constructor redundancy. But both of these methods required us to duplicate initialization values for our members in various places. Unfortunately, there is currently no way to specify that a delegating constructor or default argument should use the default member initializer value.<p>There are various opinions about whether it is better to have fewer constructors (with duplication of initialization values) or more constructors (with no duplication of initialization values). Our opinion is that it’s usually more straightforward to have fewer constructors, even if it results in duplication of initialization values.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>When we have an initialization value that is used in multiple places (e.g. as a default member initializer and a default argument for a constructor parameter), we can define a named constant and use that wherever our initialization value is needed. This allows the initialization value to be defined in one place.<p>Although you could use a constexpr global variable for this, a better option is to use a <code>static constexpr</code> member inside the class:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">default_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// define a named constant with our desired initialization value</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="p">{};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">default_id</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// we can use it here</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">default_id</span><span class="p">)</span><span class="w"> </span><span class="c1">// and we can use it here</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">m_id</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Employee "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" created</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"James"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="n">e2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Dave"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre><p>Use of the <code>static</code> keyword in this context allows us to have a single <code>default_id</code> member that is shared by all <code>Employee</code> objects. Without the <code>static</code>, each <code>Employee</code> object would have its own independent <code>default_id</code> member (which would work, but be a waste of memory).<p>The downside of this approach is that each additional named constant adds another name that must be understood, making your class a little more cluttered and complex. Whether this is worth it depends on how many of such constants are required, and in how many places the initialization values are needed.<p>We cover static data members in lesson <a href="207-static-member-variables.html">15.6 -- Static member variables</a>.</p></p></p></p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Quiz time<p class="cpp-quiz-question" style="clear:both">Question #1<p>Write a class named Ball. Ball should have two private member variables, one to hold a color (default value: <code>black</code>), and one to hold a radius (default value: <code>10.0</code>). Add 4 constructors, one to handle each case below:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">def</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">blue</span><span class="p">{</span><span class="w"> </span><span class="s">"blue"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">twenty</span><span class="p">{</span><span class="w"> </span><span class="mf">20.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">blueTwenty</span><span class="p">{</span><span class="w"> </span><span class="s">"blue"</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The program should produce the following result:<pre>Ball(black, 10)
+Ball(blue, 10)
+Ball(black, 20)
+Ball(blue, 20)
+</pre><p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_0"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Ball</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_color</span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">m_radius</span><span class="p">{</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="c1">// Default constructor (color and radius will use default value)</span>
+<span class="w"> </span><span class="n">Ball</span><span class="p">()</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// Constructor with only radius parameter (color will use default value)</span>
+<span class="w"> </span><span class="n">Ball</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_radius</span><span class="p">{</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// Constructor with only color parameter (radius will use default value)</span>
+<span class="w"> </span><span class="n">Ball</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_color</span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// Constructor with both color and radius parameters</span>
+<span class="w"> </span><span class="n">Ball</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_color</span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">m_radius</span><span class="p">{</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Ball("</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_color</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_radius</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">")</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">def</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">blue</span><span class="p">{</span><span class="w"> </span><span class="s">"blue"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">twenty</span><span class="p">{</span><span class="w"> </span><span class="mf">20.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">blueTwenty</span><span class="p">{</span><span class="w"> </span><span class="s">"blue"</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></details><p class="cpp-quiz-question cpp-topline" style="clear:both">Question #2<p>Reduce the number of constructors in the above program by using default arguments and delegating constructors.<p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_1"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Ball</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">m_color</span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">m_radius</span><span class="p">{</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="c1">// Handles Ball(radius)</span>
+<span class="w"> </span><span class="n">Ball</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Ball</span><span class="p">{</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// delegate to the other constructor</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="c1">// We don't need to call print() here since it will be called by</span>
+<span class="w"> </span><span class="c1">// the constructor we delegate to		</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// Handles Ball(color, radius), Ball(color), and Ball()</span>
+<span class="w"> </span><span class="n">Ball</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_color</span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">m_radius</span><span class="p">{</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">print</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Ball("</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_color</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_radius</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">")</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">def</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">blue</span><span class="p">{</span><span class="w"> </span><span class="s">"blue"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">twenty</span><span class="p">{</span><span class="w"> </span><span class="mf">20.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Ball</span><span class="w"> </span><span class="n">blueTwenty</span><span class="p">{</span><span class="w"> </span><span class="s">"blue"</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></details></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="194-default-constructors-and-default-arguments.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="196-temporary-class-objects.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

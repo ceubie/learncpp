@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>10.1 — Implicit type conversion</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>10.1 — Implicit type conversion</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/">
+        https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="124-chapter-9-summary-and-quiz.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="126-floating-point-and-integral-promotion.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>We introduced type conversion in lesson <a href="062-introduction-to-type-conversion-and-static_cast.html">4.12 -- Introduction to type conversion and static_cast</a>. To recap the most important points from that lesson:<ul><li>The process of converting data from one type to another type is called “type conversion”.<li>Implicit type conversion is performed automatically by the compiler when one data type is required, but a different data type is supplied.<li>Explicit type conversion is requested by using a cast operator, such as <code>static_cast</code>.<li>Conversions do not change the data being converted. Instead, the conversion process uses that data as input, and produces the converted result.<li>When converting a value to another type of value, the conversion process produces a temporary object of the target type that holds the result of the conversion.</li></li></li></li></li></ul><p>In the first half of this chapter, we’re going to dig a bit deeper into how type conversion works. We’ll start with implicit conversions in this lesson, and explicit type conversions (casting) in upcoming lesson <a href="130-explicit-type-conversion-casting-and-static-cast.html">10.6 -- Explicit type conversion (casting) and static_cast</a>. Since type conversion is used all over the place, having some understanding of what’s happening under the hood when a conversion is needed is important. This knowledge is also relevant when for understanding how overloaded functions (functions that can have the same name as other functions) work.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Author’s note<p>In this chapter, we’ll focus on the conversion of values to other types of values. We’ll cover other types of conversions once we introduce the prerequisite topics (such as pointers, references, inheritance, etc…).</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Why conversions are needed<p>The value of an object is stored as a sequence of bits, and the data type of the object tells the compiler how to interpret those bits into meaningful values. Different data types may represent the “same” value differently. For example, the integer value <code>3</code> might be stored as binary <code>0000 0000 0000 0000 0000 0000 0000 0011</code>, whereas floating point value <code>3.0</code> might be stored as binary <code>0100 0000 0100 0000 0000 0000 0000 0000</code>.<p style="clear:both"></p><p>So what happens when we do something like this?<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// initialize floating point variable with int 3</span>
+</code></pre><p>In such a case, the compiler can’t just copy the bits used to represent <code>int</code> value <code>3</code> into the memory allocated for <code>float</code> variable <code>f</code>. If it were to do so, then when <code>f</code> (which has type <code>float</code>) was evaluated, those bits would be interpreted as a <code>float</code> rather than an <code>int</code>, and who knows what <code>float</code> value we’d end up with!<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">As an aside…<p>The following program actually prints <code>int</code> value <code>3</code> as if it were a <code>float</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstring&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// here's int value 3</span>
+<span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="c1">// here's our float variable</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span><span class="w"> </span><span class="c1">// copy the bits from n into f</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// print f (containing the bits from n)</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This produces the following result:<pre>4.2039e-45
+</pre></p></p></p></div><p>Instead, the integer value <code>3</code> needs to be converted into the equivalent floating point value <code>3.0</code>, which can then be stored in the memory allocated for <code>f</code> (using the bit representation for <code>float</code> value <code>3.0</code>) .<p class="cpp-section cpp-topline" style="clear:both">When implicit type conversion happens<p><strong>Implicit type conversion</strong> (also called <strong>automatic type conversion</strong> or <strong>coercion</strong>) is performed automatically by the compiler when an expression of some type is supplied in a context where some other type is expected. The vast majority of type conversions in C++ are implicit type conversions. For example, implicit type conversion happens in all of the following cases:<p>When initializing (or assigning a value to) a variable with a value of a different data type:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// int value 3 implicitly converted to type double</span>
+<span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="c1">// int value 6 implicitly converted to type double</span>
+</code></pre><p>When the type of a return value is different from the function’s declared return type:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">float</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// double value 3.0 implicitly converted to type float</span>
+<span class="p">}</span>
+</code></pre><p>When using certain binary operators with operands of different types:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">double</span><span class="w"> </span><span class="n">division</span><span class="p">{</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// int value 3 implicitly converted to type double</span>
+</code></pre><p>When using a non-Boolean value in an if-statement:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// int value 5 implicitly converted to type bool</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre><p>When an argument passed to a function is a different type than the function parameter:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">l</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="n">doSomething</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// int value 3 implicitly converted to type long</span>
+</code></pre><p>So how does the compiler know how to convert a value to a different type anyway?<p class="cpp-section cpp-topline" style="clear:both">The standard conversions<p>As part of the core language, the C++ standard defines a collection of conversion rules known as the “standard conversions”. The <strong>standard conversions</strong> specify how various fundamental types (and certain compound types, including arrays, references, pointers, and enumerations) convert to other types within that same group.<p>As of C++23, there are 14 different standard conversions. These can be roughly grouped into 5 general categories:<div class="cpp-table-wrapper"><table class="cpp-table"><tbody><tr><th>Category<th>Meaning<th>Link<tr><td>Numeric promotions<td>Conversions of small integral types to <code>int</code> or <code>unsigned int</code>, and of <code>float</code> to <code>double</code>.<td><a href="126-floating-point-and-integral-promotion.html">10.2 -- Floating-point and integral promotion</a><tr><td>Numeric conversions<td>Other integral and floating point conversions that aren’t promotions.<td><a href="127-numeric-conversions.html">10.3 -- Numeric conversions</a><tr><td>Qualification conversions<td>Conversions that add or remove <code>const</code> or <code>volatile</code>.<td><tr><td>Value transformations<td>Conversions that change the value category of an expression<td><a href="152-value-categories-lvalues-and-rvalues.html">12.2 -- Value categories (lvalues and rvalues)</a><tr><td>Pointer conversions<td>Conversions from <code>std::nullptr</code> to pointer types, or pointer types to other pointer types<td></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></th></th></th></tr></tbody></table></div><p>For example, converting an <code>int</code> value to a <code>float</code> value falls under the numeric conversions category, so the compiler to perform such a conversion, the compiler simply need apply the <code>int</code> to <code>float</code> numeric conversion rules.<p>The numeric conversions and numeric promotions are the most important of these categories, and we’ll cover them in more detail in upcoming lessons.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>Here is the full list of standard conversions:<div class="cpp-table-wrapper"><table class="cpp-table"><tbody><tr><th>Category<th>Standard Conversion<th>Description<th>Also See<tr><td>Value transformation<td>Lvalue-to-rvalue<td>Converts lvalue expression to rvalue expression<td><a href="152-value-categories-lvalues-and-rvalues.html">12.2 -- Value categories (lvalues and rvalues)</a><tr><td>Value transformation<td>Array-to-pointer<td>Converts C-style array to pointer to first array element (a.k.a. array decay)<td><a href="233-c-style-array-decay.html">17.8 -- C-style array decay</a><tr><td>Value transformation<td>Function-to-pointer<td>Converts function to function pointer<td><a href="249-function-pointers.html">20.1 -- Function Pointers</a><tr><td>Value transformation<td>Temporary materialization<td>Converts value to temporary object<td><tr><td>Qualification conversion<td>Qualification conversion<td>Adds or removes <code>const</code> or <code>volatile</code> from types<td><tr><td>Numeric promotions<td>Integral promotions<td>Converts smaller integral types to <code>int</code> or <code>unsigned int</code><td><a href="126-floating-point-and-integral-promotion.html">10.2 -- Floating-point and integral promotion</a><tr><td>Numeric promotions<td>Floating point promotions<td>Converts <code>float</code> to <code>double</code><td><a href="126-floating-point-and-integral-promotion.html">10.2 -- Floating-point and integral promotion</a><tr><td>Numeric conversions<td>Integral conversions<td>Integral conversions that aren’t integral promotions<td><a href="127-numeric-conversions.html">10.3 -- Numeric conversions</a><tr><td>Numeric conversions<td>Floating point conversions<td>Floating point conversions that aren’t floating point promotions<td><a href="127-numeric-conversions.html">10.3 -- Numeric conversions</a><tr><td>Numeric conversions<td>Integral-floating conversions<td>Converts integral and floating point types<td><a href="127-numeric-conversions.html">10.3 -- Numeric conversions</a><tr><td>Numeric conversions<td>Boolean conversions<td>Converts integral, unscoped enumeration, pointer, or pointer-to-memver to bool<td><a href="060-introduction-to-if-statements.html">4.10 -- Introduction to if statements</a><tr><td>Pointer conversions<td>Pointer conversions<td>Converts <code>std::nullptr</code> to pointer, or pointer to void pointer or base class<td><tr><td>Pointer conversions<td>Pointer-to-member conversions<td>Converts <code>std::nullptr</code> to pointer-to-member<br/>or pointer-to-member of base class to pointer-to-member of derived class<td><tr><td>Pointer conversions<td>Function pointer conversions<td>Converts pointer-to-noexcept-function to pointer-to-function<td></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></td></td></td></td></tr></th></th></th></th></tr></tbody></table></div></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Type conversion can fail<p>When a type conversion is invoked (whether implicitly or explicitly), the compiler will determine whether it can convert the value from the current type to the desired type. If a valid conversion can be found, then the compiler will produce a new value of the desired type.<p>If the compiler can’t find an acceptable conversion, then the compilation will fail with a compile error. Type conversions can fail for any number of reasons. For example, the compiler might not know how to convert a value between the original type and the desired type.<p>For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"14"</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The because there isn’t a standard conversion from the string literal “14” to <code>int</code>, the compiler will produce an error. For example, GCC produces the error: <code>prog.cc:3:13: error: invalid conversion from 'const char*' to 'int' [-fpermissive]</code>.<p>In other cases, specific features may disallow some categories of conversions. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">3.5</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// brace-initialization disallows conversions that result in data loss</span>
+</code></pre><p>Even though the compiler knows how to convert a <code>double</code> value to an <code>int</code> value, narrowing conversions are disallowed when using brace-initialization.<p>There are also cases where the compiler may not be able to figure out which of several possible type conversions is the best one to use. We’ll see examples of this in lesson <a href="137-function-overload-resolution-and-ambiguous-matches.html">11.3 -- Function overload resolution and ambiguous matches</a>.<p>The full set of rules describing how type conversions work is both lengthy and complicated, and for the most part, type conversion “just works”. In the next set of lessons, we’ll cover the most important things you need to know about the standard conversions. If finer detail is required for some uncommon case, the full rules are detailed in <a href="https://en.cppreference.com/w/cpp/language/implicit_conversion">technical reference documentation for implicit conversions</a>.<p>Let’s get to it!</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="124-chapter-9-summary-and-quiz.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="126-floating-point-and-integral-promotion.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>1.9 — Introduction to literals and operators</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>1.9 — Introduction to literals and operators</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/introduction-to-literals-and-operators/">
+        https://www.learncpp.com/cpp-tutorial/introduction-to-literals-and-operators/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="021-whitespace-and-basic-formatting.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="023-introduction-to-expressions.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p class="cpp-section">Literals<p>Consider the following two statements:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello world!"</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+</code></pre><p>What are ‘”Hello world!”‘ and ‘5’? They are literals. A <strong>literal</strong> (also known as a <strong>literal constant</strong>) is a fixed value that has been inserted directly into the source code.<p>Literals and variables both have a value (and a type). Unlike a variable (whose value can be set and changed through initialization and assignment respectively), the value of a literal is fixed and cannot be changed. The literal <code>5</code> always has value <code>5</code>. This is why literals are called constants.<p>To further highlight the difference between literals and variables, let’s examine this short program:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// print the value of a literal</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// print the value of a variable</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>On line 5, we’re printing the value <code>5</code> to the console. When the compiler compiles this, it will generate code that causes <code>std::cout</code> to print the value <code>5</code>. This value <code>5</code> is compiled into the executable and can be used directly.<p>On line 7, we’re creating a variable named <code>x</code>, and initializing it with value <code>5</code>. The compiler will generate code that copies the literal value <code>5</code> into whatever memory location is given to <code>x</code>. On line 8, when we print <code>x</code>, the compiler will generate code that causes <code>std::cout</code> to print the value at the memory location of <code>x</code> (which has value <code>5</code>).<p>Thus, both output statements do the same thing (print the value 5). But in the case of the literal, the value <code>5</code> can be printed directly. In the case of the variable, the value <code>5</code> must be fetched from the memory the variable represents.<p>This also explains why a literal is constant while a variable can be changed. A literal’s value is placed directly in the executable, and the executable itself can’t be changed after it is created. A variable’s value is placed in memory, and the value of memory can be changed while the executable is running.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>Literals are values that are inserted directly into the source code. These values usually appear directly in the executable code (unless they are optimized out).<p>Objects and variables represent memory locations that hold values. These values can be fetched on demand.</p></p></p></div><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Related content<p>We talk more about literals in lesson <a href="065-literals.html">5.2 -- Literals</a>.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Operators<p>In mathematics, an <strong>operation</strong> is a process involving zero or more input values (called <strong>operands</strong>) that produces a new value (called an <em>output value</em>). The specific operation to be performed is denoted by a symbol called an <strong>operator</strong>.<p>For example, as children we all learn that <em>2 + 3</em> equals <em>5</em>. In this case, the literals <em>2</em> and <em>3</em> are the operands, and the symbol <em>+</em> is the operator that tells us to apply mathematical addition on the operands to produce the new value <em>5</em>.<p>In C++, operations work as you’d expect. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In this program, the literals <code>1</code> and <code>2</code> are operands to the plus (<code>+</code>) operator, which produces the output value <code>3</code>. This output value is then printed to the console. In C++, the output value of an operation is often called a <strong>return value</strong>.<p>You are likely already quite familiar with standard arithmetic operators from common usage in mathematics, including addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), and division (<code>/</code>). In C++, assignment (<code>=</code>) is an operator as well, as are insertion (<code>&lt;&lt;</code>), extraction (<code>&gt;&gt;</code>), and equality (<code>==</code>). While most operators have symbols for names (e.g. <code>+</code>, or <code>==</code>), there are also a number of operators that are keywords (e.g. <code>new</code>, <code>delete</code>, and <code>throw</code>).<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Author’s note<p>For reasons that will become clear when we discuss operators in more detail, for operators that are symbols, it is common to append the operator’s symbol to the word <em>operator</em>.<p>For example, the plus operator would be written <code>operator+</code>, and the extraction operator would be written <code>operator&gt;&gt;</code>.</p></p></p></div><p>The number of operands that an operator takes as input is called the operator’s <strong>arity</strong>. Few people know what this word means, so don’t drop it in a conversation and expect anybody to have any idea what you’re talking about. Operators in C++ come in four different arities:<p><strong>Unary</strong> operators act on one operand. An example of a unary operator is the <code>-</code> operator. For example, given <code>-5</code>, <code>operator-</code> takes literal operand <code>5</code> and flips its sign to produce new output value <code>-5</code>.<p><strong>Binary</strong> operators act on two operands (often called <em>left</em> and <em>right</em>, as the left operand appears on the left side of the operator, and the right operand appears on the right side of the operator). An example of a binary operator is the <code>+</code> operator. For example, given <code>3 + 4</code>, <code>operator+</code> takes the left operand <code>3</code> and the right operand <code>4</code> and applies mathematical addition to produce new output value <code>7</code>. The insertion (<code>&lt;&lt;</code>) and extraction (<code>&gt;&gt;</code>) operators are binary operators, taking <code>std::cout</code> or <code>std::cin</code> on the left side, and the value to output or variable to input to on the right side.<p><strong>Ternary</strong> operators act on three operands. There is only one of these in C++ (the conditional operator), which we’ll cover later.<p><strong>Nullary</strong> operators act on zero operands. There is also only one of these in C++ (the throw operator), which we’ll also cover later.<p>Note that some operators have more than one meaning depending on how they are used. For example, <code>operator-</code> has two contexts. It can be used in unary form to invert a number’s sign (e.g. to convert <code>5</code> to <code>-5</code>, or vice versa), or it can be used in binary form to do subtraction (e.g. <code>4 - 3</code>).<p class="cpp-section cpp-topline" style="clear:both">Chaining operators<p>Operators can be chained together such that the output of one operator can be used as the input for another operator. For example, given the following: <code>2 * 3 + 4</code>, the multiplication operator goes first, and converts left operand <code>2</code> and right operand <code>3</code> into return value <code>6</code> (which becomes the left operand for the plus operator). Next, the plus operator executes, and converts left operand <code>6</code> and right operand <code>4</code> into new value <code>10</code>.<p>We’ll talk more about the order in which operators execute when we do a deep dive into the topic of operators. For now, it’s enough to know that the arithmetic operators execute in the same order as they do in standard mathematics: Parenthesis first, then Exponents, then Multiplication &amp; Division, then Addition &amp; Subtraction. This ordering is sometimes abbreviated <em>PEMDAS</em>, or expanded to the mnemonic “Please Excuse My Dear Aunt Sally”.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Author’s note<p>In some countries, PEMDAS is taught as PEDMAS, BEDMAS, BODMAS, or BIDMAS instead.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Return values and side effects<p>Most operators in C++ just use their operands to calculate a return value. For example, <code>-5</code> produces return value <code>-5</code> and <code>2 + 3</code> produces return value <code>5</code>. There are a few operators that do not produce return values (such as <code>delete</code> and <code>throw</code>). We’ll cover what these do later.<p>Some operators have additional behaviors. An operator (or function) that has some observable effect beyond producing a return value is said to have a <strong>side effect</strong>. For example, <code>x = 5</code> has the side effect of assigning value <code>5</code> to variable <code>x</code>. The changed value of <code>x</code> is observable (e.g. by printing the value of <code>x</code>) even after the operator has finished executing. <code>std::cout &lt;&lt; 5</code> has the side effect of printing <code>5</code> to the console. We can observe the fact that <code>5</code> has been printed to the console even after <code>std::cout &lt;&lt; 5</code> has finished executing.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Nomenclature<p>In common language, the term “side effect” is typically used to mean a secondary (often negative or unexpected) result of some other thing happening (such as taking medicine). For example, a common side effect of taking oral antibiotics is diarrhea. As such, we often think of side effects as things we want to avoid, or things that are incidental to the primary goal.<p>In C++, the term “side effect” has a different meaning: it is an observable effect of an operator or function beyond producing a return value.<p>Since assignment has the observable effect of changing the value of an object, this is considered a side effect. We use certain operators (e.g. the assignment operator) primarily for their side effects (rather than the return value those operators produce). In such cases, the side effect is both beneficial and predictable (and it is the return value that is often incidental).</p></p></p></p></div><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>For the operators that we call primarily for their return values (e.g. <code>operator+</code> or <code>operator*</code>), it’s usually obvious what their return values will be (e.g. the sum or product of the operands).<p>For the operators we call primarily for their side effects (e.g. <code>operator=</code> or <code>operator&lt;&lt;</code>), it’s not always obvious what return values they produce (if any). For example, what return value would you expect <code>x = 5</code> to have?<p>Both <code>operator=</code> and <code>operator&lt;&lt;</code> (when used to output values to the console) return their left operand. Thus, <code>x = 5</code> returns <code>x</code>, and <code>std::cout &lt;&lt; 5</code> returns <code>std::cout</code>. This is done so that these operators can be chained.<p>For example, <code>x = y = 5</code> evaluates as <code>x = (y = 5)</code>. First <code>y = 5</code> assigns <code>5</code> to <code>y</code>. This operation then returns <code>y</code>, which can then be assigned to <code>x</code>.<p><code>std::cout &lt;&lt; "Hello " &lt;&lt; "world!"</code> evaluates as <code>(std::cout &lt;&lt; "Hello ") &lt;&lt; "world!"</code>. This first prints <code>"Hello "</code> to the console. This operation returns <code>std::cout</code>, which can then be used to print <code>"world!"</code> to the console as well.<p>We talk more about the order in which operators evaluate in lesson <a href="074-operator-precedence-and-associativity.html">6.1 -- Operator precedence and associativity</a>.</p></p></p></p></p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Quiz time<p><p class="cpp-quiz-question" style="clear:both">Question #1</p><br/>For each of the following, indicate what output they produce:<p><p>a)<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</code></pre><p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_0">7</div></details><p>b)<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</code></pre><p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_1">2</div></details><p>c)<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</code></pre><p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_2"><ol start="14"><li>Multiplication goes before addition, so 3 * 4 goes first, producing the result 12. 2 + 12 is 14.</li></ol></div></details><p>d) Extra credit:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</code></pre><p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_3"><ol start="5"><li><code>x = 5</code> assigns the value <code>5</code> to <code>x</code>, and then returns <code>x</code>. The value of <code>x</code> (now <code>5</code>) is then printed to the console.</li></ol></div></details></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="021-whitespace-and-basic-formatting.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="023-introduction-to-expressions.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

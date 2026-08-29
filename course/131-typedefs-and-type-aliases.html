@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>10.7 — Typedefs and type aliases</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>10.7 — Typedefs and type aliases</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/">
+        https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="130-explicit-type-conversion-casting-and-static-cast.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="132-type-deduction-for-objects-using-the-auto-keyword.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p class="cpp-section">Type aliases<p>In C++, <strong>using</strong> is a keyword that creates an alias for an existing data type. To create such a type alias, we use the <code>using</code> keyword, followed by a name for the type alias, followed by an equals sign and an existing data type. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">using</span><span class="w"> </span><span class="n">Distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="p">;</span><span class="w"> </span><span class="c1">// define Distance as an alias for type double</span>
+</code></pre><p>Once defined, a type alias can be used anywhere a type is needed. For example, we can create a variable with the type alias name as the type:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">Distance</span><span class="w"> </span><span class="n">milesToDestination</span><span class="p">{</span><span class="w"> </span><span class="mf">3.4</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// defines a variable of type double</span>
+</code></pre><p>When the compiler encounters a type alias name, it will substitute in the aliased type. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="p">;</span><span class="w"> </span><span class="c1">// define Distance as an alias for type double</span>
+<span class="w"> </span><span class="n">Distance</span><span class="w"> </span><span class="n">milesToDestination</span><span class="p">{</span><span class="w"> </span><span class="mf">3.4</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// defines a variable of type double</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">milesToDestination</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// prints a double value</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This prints:<pre>3.4
+</pre><p>In the above program, we first define <code>Distance</code> as an alias for type <code>double</code>.<p>Next, we define a variable named <code>milesToDestination</code> of type alias <code>Distance</code>. Because the compiler knows <code>Distance</code> is a type alias, it will use the aliased type, which is <code>double</code>. Thus, variable <code>milesToDestination</code> is actually compiled to be a variable of type <code>double</code>, and it will behave as a <code>double</code> in all regards.<p>Finally, we print the value of <code>milesToDestination</code>, which prints as a <code>double</code> value.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>Type aliases can also be templated. We cover this in lesson <a href="180-class-template-argument-deduction-ctad-and-deduction-guides.html">13.14 -- Class template argument deduction (CTAD) and deduction guides</a>.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Naming type aliases<p>Historically, there hasn’t been a lot of consistency in how type aliases have been named. There are three common naming conventions (and you will run across all of them):<ul><li>Type aliases that end in a “_t” suffix (the “_t” is short for “type”). This convention is often used by the standard library for globally scoped type names (like <code>size_t</code> and <code>nullptr_t</code>).</li></ul><p>This convention was inherited from C, and used to be the most popular when defining your own type aliases (and sometimes other types), but has fallen out of favor in modern C++. Note that <a href="https://en.wikipedia.org/wiki/POSIX">POSIX</a> reserves the “_t” suffix for globally scoped type names, so using this convention may cause type naming conflicts on POSIX systems.<ul><li>Type aliases that end in a “_type” suffix. This convention is used by some standard library types (like <code>std::string</code>) to name nested type aliases (e.g. <code>std::string::size_type</code>).</li></ul><p>But many such nested type aliases do not use a suffix at all (e.g. <code>std::string::iterator</code>), so this usage is inconsistent at best.<ul><li>Type aliases that use no suffix.</li></ul><p>In modern C++, the convention is to name type aliases (or any other type) that you define yourself starting with a capital letter, and using no suffix. The capital letter helps differentiate the names of types from the names of variables and functions (which start with a lower case letter), and prevents naming collisions between them.<p>When using this naming convention, it is common to see this usage:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="w"> </span><span class="nf">printDistance</span><span class="p">(</span><span class="n">Distance</span><span class="w"> </span><span class="n">distance</span><span class="p">);</span><span class="w"> </span><span class="c1">// Distance is some defined type</span>
+</code></pre><p>In this case, <code>Distance</code> is the type, and <code>distance</code> is the parameter name. C++ is case-sensitive, so this is fine.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Name your type aliases starting with a capital letter and do not use a suffix (unless you have a specific reason to do otherwise).</p></p></div><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Author’s note<p>Some future lessons in this tutorial series still use the “_t” or “_type” suffix. Please feel free to leave a comment on those lessons so we can make them consistent with best practices.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Type aliases are not distinct types<p>An alias does not actually define a new, distinct type (one that is considered separate from other types) -- it just introduces a new identifier for an existing type. A type alias is completely interchangeable with the aliased type.<p>This allows us to do things that are syntactically valid but semantically meaningless. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Miles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="p">;</span><span class="w"> </span><span class="c1">// define Miles as an alias for type long</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="p">;</span><span class="w"> </span><span class="c1">// define Speed as an alias for type long</span>
+<span class="w"> </span><span class="n">Miles</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// distance is actually just a long</span>
+<span class="w"> </span><span class="n">Speed</span><span class="w"> </span><span class="n">mhz</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3200</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// mhz is actually just a long</span>
+<span class="w"> </span><span class="c1">// The following is syntactically valid (but semantically meaningless)</span>
+<span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mhz</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Although conceptually we intend <code>Miles</code> and <code>Speed</code> to have distinct meanings, both are just aliases for type <code>long</code>. This effectively means <code>Miles</code>, <code>Speed</code>, and <code>long</code> can all be used interchangeably. And indeed, when we assign a value of type <code>Speed</code> to a variable of type <code>Miles</code>, the compiler only sees that we’re assigning a value of type <code>long</code> to a variable of type <code>long</code>, and it will not complain.<p>Because the compiler does not prevent these kinds of semantic errors for type aliases, we say that aliases are not <strong>type safe</strong>. In spite of that, they are still useful.<div class="cpp-note cpp-lightredbackground"><p class="cpp-note-title cpp-bottomline">Warning<p>Care must be taken not to mix values of aliases that are intended to be semantically distinct.</p></p></div><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">As an aside…<p>Some languages support the concept of a <strong>strong typedef</strong> (or strong type alias). A strong typedef actually creates a new type that has all the original properties of the original type, but the compiler will throw an error if you try to mix values of the aliased type and the strong typedef. As of C++20, C++ does not directly support strong typedefs (though enum classes, covered in lesson <a href="172-scoped-enumerations-enum-classes.html">13.6 -- Scoped enumerations (enum classes)</a>, are similar), but there are quite a few 3rd party C++ libraries that implement strong typedef-like behavior.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">The scope of a type alias<p>Because scope is a property of an identifier, type alias identifiers follow the same scoping rules as variable identifiers: a type alias defined inside a block has block scope and is usable only within that block, whereas a type alias defined in the global namespace has global scope and is usable to the end of the file. In the above example, <code>Miles</code> and <code>Speed</code> are only usable in the <code>main()</code> function.<p>If you need to use one or more type aliases across multiple files, they can be defined in a header file and #included into any code files that needs to use the definition:<p>mytypes.h:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#ifndef MYTYPES_H</span>
+<span class="cp">#define MYTYPES_H</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Miles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="p">;</span>
+<span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="p">;</span>
+<span class="cp">#endif</span>
+</code></pre><p>Type aliases #included this way will be imported into the global namespace and thus have global scope.<p class="cpp-section cpp-topline" style="clear:both">Typedefs<p>A <strong>typedef</strong> (which is short for “type definition”) is an older way of creating an alias for a type. To create a typedef alias, we use the <code>typedef</code> keyword:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="c1">// The following aliases are identical</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">Miles</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Miles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="p">;</span>
+</code></pre><p>Typedefs are still in C++ for backwards compatibility reasons, but they have been largely replaced by type aliases in modern C++.<p>Typedefs have a few syntactical issues. First, it’s easy to forget whether the name of the typedef or the name of the type to alias comes first. Which is correct?<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">typedef</span><span class="w"> </span><span class="n">Distance</span><span class="w"> </span><span class="kt">double</span><span class="p">;</span><span class="w"> </span><span class="c1">// incorrect (typedef name first)</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Distance</span><span class="p">;</span><span class="w"> </span><span class="c1">// correct (aliased type name first)</span>
+</code></pre><p>It’s easy to get backwards. Fortunately, in such cases, the compiler will complain.<p>Second, the syntax for typedefs can get ugly with more complex types. For example, here is a hard-to-read typedef, along with an equivalent (and slightly easier to read) type alias:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">FcnType</span><span class="p">)(</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span><span class="w"> </span><span class="c1">// FcnType hard to find</span>
+<span class="k">using</span><span class="w"> </span><span class="n">FcnType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span><span class="w"> </span><span class="c1">// FcnType easier to find</span>
+</code></pre><p>In the above typedef definition, the name of the new type (<code>FcnType</code>) is buried in the middle of the definition, whereas in the type alias, the name of the new type and the rest of the definition are separated by an equals sign.<p>Third, the name “typedef” suggests that a new type is being defined, but that’s not true. A typedef is just an alias.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Prefer type aliases over typedefs.</p></p></div><div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Nomenclature<p>The C++ standard uses the term “typedef names” for the names of both typedefs and type aliases.<p>In conventional language, the term “typedef” is often used to mean “either a typedef or a type alias” since they effectively do the same thing.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">When should we use type aliases?<p>Now that we’ve covered what type aliases are, let’s talk about what they are useful for.<p class="cpp-section cpp-topline" style="clear:both">Using type aliases for platform independent coding<p>One of the primary uses for type aliases is to hide platform specific details. On some platforms, an <code>int</code> is 2 bytes, and on others, it is 4 bytes. Thus, using <code>int</code> to store more than 2 bytes of information can be potentially dangerous when writing platform independent code.<p>Because <code>char</code>, <code>short</code>, <code>int</code>, and <code>long</code> give no indication of their size, it is fairly common for cross-platform programs to use type aliases to define aliases that include the type’s size in bits. For example, <code>int8_t</code> would be an 8-bit signed integer, <code>int16_t</code> a 16-bit signed integer, and <code>int32_t</code> a 32-bit signed integer. Using type aliases in this manner helps prevent mistakes and makes it more clear about what kind of assumptions have been made about the size of the variable.<p>In order to make sure each aliased type resolves to a type of the right size, type aliases of this kind are typically used in conjunction with preprocessor directives:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#ifdef INT_2_BYTES</span>
+<span class="k">using</span><span class="w"> </span><span class="kt">int8_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">char</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="p">;</span>
+<span class="cp">#else</span>
+<span class="k">using</span><span class="w"> </span><span class="kt">int8_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">char</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">short</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="cp">#endif</span>
+</code></pre><p>On machines where integers are only 2 bytes, <code>INT_2_BYTES</code> can be #defined (as a compiler/preprocessor setting), and the program will be compiled with the top set of type aliases. On machines where integers are 4 bytes, leaving <code>INT_2_BYTES</code> undefined will cause the bottom set of type aliases to be used. In this way, as long as <code>INT_2_BYTES</code> is #defined correctly, <code>int8_t</code> will resolve to a 1 byte integer, <code>int16_t</code> will resolve to a 2 bytes integer, and <code>int32_t</code> will resolve to a 4 byte integer (using the combination of <code>char</code>, <code>short</code>, <code>int</code>, and <code>long</code> that is appropriate for the machine the program is being compiled on).<p>The fixed-width integer types (such as <code>std::int16_t</code> and <code>std::uint32_t</code>) and the <code>size_t</code> type (both covered in lesson <a href="056-fixed-width-integers-and-size-t.html">4.6 -- Fixed-width integers and size_t</a>) are actually just type aliases to various fundamental types.<p>This is also why when you print an 8-bit fixed-width integer using <code>std::cout</code>, you’re likely to get a character value. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdint&gt;</span><span class="c1"> // for fixed-width integers</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">int8_t</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="w"> </span><span class="mi">97</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// int8_t is usually a typedef for signed char</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This program prints:<pre>a
+</pre><p>Because <code>std::int8_t</code> is typically a typedef for <code>signed char</code>, variable <code>x</code> will likely be defined as a <code>signed char</code>. And char types print their values as ASCII characters rather than as integer values.<p class="cpp-section cpp-topline" style="clear:both">Using type aliases to make complex types easier to read<p>Although we have only dealt with simple data types so far, in advanced C++, types can be complicated and lengthy to manually enter on your keyboard. For example, you might see a function and variable defined like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="c1"> // for std::string</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="c1"> // for std::vector</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // for std::pair</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">hasDuplicates</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">pairlist</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// some code here</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">pairlist</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Typing <code>std::vector&lt;std::pair&lt;std::string, int&gt;&gt;</code> everywhere you need to use that type is cumbersome, and it is easy to make a typing mistake. It’s much easier to use a type alias:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="c1"> // for std::string</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="c1"> // for std::vector</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // for std::pair</span>
+<span class="k">using</span><span class="w"> </span><span class="n">VectPairSI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// make VectPairSI an alias for this crazy type</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">hasDuplicates</span><span class="p">(</span><span class="n">VectPairSI</span><span class="w"> </span><span class="n">pairlist</span><span class="p">)</span><span class="w"> </span><span class="c1">// use VectPairSI in a function parameter</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// some code here</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">VectPairSI</span><span class="w"> </span><span class="n">pairlist</span><span class="p">;</span><span class="w"> </span><span class="c1">// instantiate a VectPairSI variable</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Much better! Now we only have to type <code>VectPairSI</code> instead of <code>std::vector&lt;std::pair&lt;std::string, int&gt;&gt;</code>.<p>Don’t worry if you don’t know what <code>std::vector</code>, <code>std::pair</code>, or all these crazy angle brackets are yet. The only thing you really need to understand here is that type aliases allow you to take complex types and give them a simpler name, which makes your code easier to read and saves typing.<p>This is probably the best use for type aliases.<p class="cpp-section cpp-topline" style="clear:both">Using type aliases to document the meaning of a value<p>Type aliases can also help with code documentation and comprehension.<p>With variables, we have the variable’s identifier to help document the purpose of the variable. But consider the case of a function’s return value. Data types such as <code>char</code>, <code>int</code>, <code>long</code>, <code>double</code>, and <code>bool</code> describe what <em>type</em> of value a function returns, but more often we want to know what the <em>meaning</em> of a return value is.<p>For example, given the following function:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">gradeTest</span><span class="p">();</span>
+</code></pre><p>We can see that the return value is an integer, but what does the integer mean? A letter grade? The number of questions missed? The student’s ID number? An error code? Who knows! The return type of <code>int</code> does not tell us much. If we’re lucky, documentation for the function exists somewhere that we can reference. If we’re unlucky, we have to read the code and infer the purpose.<p>Now let’s do an equivalent version using a type alias:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">using</span><span class="w"> </span><span class="n">TestScore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="n">TestScore</span><span class="w"> </span><span class="nf">gradeTest</span><span class="p">();</span>
+</code></pre><p>The return type of <code>TestScore</code> makes it a little more obvious that the function is returning a type that represents a test score.<p>In our experience, creating a type alias just to document the return type of a single function isn’t worth it (use a comment instead). But if you have multiple functions passing or returning such a type, creating a type alias might be worthwhile.<p class="cpp-section cpp-topline" style="clear:both">Using type aliases for easier code maintenance<p>Type aliases also allow you to change the underlying type of an object without having to update lots of hardcoded types. For example, if you were using a <code>short</code> to hold a student’s ID number, but then later decided you needed a <code>long</code> instead, you’d have to comb through lots of code and replace <code>short</code> with <code>long</code>. It would probably be difficult to figure out which objects of type <code>short</code> were being used to hold ID numbers and which were being used for other purposes.<p>However, if you use type aliases, then changing types becomes as simple as updating the type alias (e.g. from <code>using StudentId = short;</code> to <code>using StudentId = long;</code>).<p>While this seems like a nice benefit, caution is necessary whenever a type is changed, as the behavior of the program may also change. This is especially true when changing the type of a type alias to a type in a different type family (e.g. an integer to a floating point value, or a signed to unsigned value)! The new type may have comparison or integer/floating point division issues, or other issues that the old type did not. If you change an existing type to some other type, your code should be thoroughly retested.<p class="cpp-section cpp-topline" style="clear:both">Downsides and conclusion<p>While type aliases offer some benefits, they also introduce yet another identifier into your code that needs to be understood. If this isn’t offset by some benefit to readability or comprehension, then the type alias is doing more harm than good.<p>A poorly utilized type alias can take a familiar type (such as <code>std::string</code>) and hide it behind a custom name that needs to be looked up. In some cases (such as with smart pointers, which we’ll cover in a future chapter), obscuring the type information can also be harmful to understanding how the type should be expected to work.<p>For this reason, type aliases should be used primarily in cases where there is a clear benefit to code readability or code maintenance. This is as much of an art as a science. Type aliases are most useful when they can be used in many places throughout your code, rather than in fewer places.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Use type aliases judiciously, when they provide a clear benefit to code readability or code maintenance.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Quiz time<p class="cpp-quiz-question" style="clear:both">Question #1<p>Given the following function prototype:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">printData</span><span class="p">();</span>
+</code></pre><p>Convert the <code>int</code> return value to a type alias named <code>PrintError</code>. Include both the type alias statement and the updated function prototype.<p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_0"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">using</span><span class="w"> </span><span class="n">PrintError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="n">PrintError</span><span class="w"> </span><span class="nf">printData</span><span class="p">();</span>
+</code></pre></div></details></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="130-explicit-type-conversion-casting-and-static-cast.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="132-type-deduction-for-objects-using-the-auto-keyword.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

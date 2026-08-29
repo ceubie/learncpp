@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>13.2 — Unscoped enumerations</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>13.2 — Unscoped enumerations</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/">
+        https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="167-introduction-to-program-defined-user-defined-types.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="169-unscoped-enumerator-integral-conversions.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>C++ contains many useful fundamental and compound data types (which we introduced in lessons <a href="051-introduction-to-fundamental-data-types.html">4.1 -- Introduction to fundamental data types</a> and <a href="151-introduction-to-compound-data-types.html">12.1 -- Introduction to compound data types</a>). But these types aren’t always sufficient for the kinds of things we want to do.<p>For example, let’s say you’re writing a program that needs to keep track of whether an apple is red, yellow, or green, or what color a shirt is (from a preset list of colors). If only fundamental types were available, how might you do this?<p>You might store the color as an integer value, using some kind of implicit mapping (0 = red , 1 = green, 2 = blue):<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">appleColor</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my apple is red</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shirtColor</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my shirt is green</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>But this isn’t at all intuitive, and we’ve already discussed why magic numbers are bad (<a href="065-literals.html">5.2 -- Literals</a>). We can get rid of the magic numbers by using symbolic constants:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">red</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">green</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">blue</span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">appleColor</span><span class="p">{</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shirtColor</span><span class="p">{</span><span class="w"> </span><span class="n">green</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>While this is a bit better for reading, the programmer is still left to deduce that <code>appleColor</code> and <code>shirtColor</code> (which are of type <code>int</code>) are meant to hold one of the values defined in the set of color symbolic constants (which are likely defined elsewhere, probably in a separate file).<p>We can make this program a little more clear by using a type alias:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">using</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"> </span><span class="c1">// define a type alias named Color</span>
+<span class="c1">// The following color values should be used for a Color</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">red</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">green</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">blue</span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">appleColor</span><span class="p">{</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">shirtColor</span><span class="p">{</span><span class="w"> </span><span class="n">green</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>We’re getting closer. Someone reading this code still has to understand that these color symbolic constants are meant to be used with variables of type <code>Color</code>, but at least the type has a unique name now so someone searching for <code>Color</code> would be able to find the set of associated symbolic constants.<p>However, because <code>Color</code> is just an alias for an <code>int</code>, we still have the problem that nothing enforces proper usage of these color symbolic constants. We can still do something like this:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">Color</span><span class="w"> </span><span class="n">eyeColor</span><span class="p">{</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// syntactically valid, semantically meaningless</span>
+</code></pre><p>Also, if we debug any of these variables in our debugger, we’ll only see the integer value of the color (e.g. <code>0</code>), not the symbolic meaning (<code>red</code>), which can make it harder to tell if our program is correct.<p>Fortunately, we can do better.<p>As inspiration, consider the <code>bool</code> type. What makes <code>bool</code> particularly interesting is that it only has two defined values: <code>true</code> and <code>false</code>. We can use <code>true</code> or <code>false</code> directly (as literals), or we can instantiate a <code>bool</code> object and have it hold either one of those values. Additionally, the compiler is able to differentiate <code>bool</code> from other types. This means we can overload functions, and customize how those functions behave when passed a <code>bool</code> value.<p>If we had the ability to define our own custom types, where <em>we</em> could define the set of named values associated with that type, then we would have the perfect tool to elegantly solve the challenge above…<p class="cpp-section cpp-topline" style="clear:both">Enumerations<p>An <strong>enumeration</strong> (also called an <strong>enumerated type</strong> or an <strong>enum</strong>) is a compound data type whose values are restricted to a set of named symbolic constants (called <strong>enumerators</strong>).<p>C++ supports two kinds of enumerations: unscoped enumerations (which we’ll cover now) and scoped enumerations (which we’ll cover later in this chapter).<p>Because enumerations are program-defined types <a href="167-introduction-to-program-defined-user-defined-types.html">13.1 -- Introduction to program-defined (user-defined) types</a>, each enumeration needs to be fully defined before we can use it (a forward declaration is not sufficient).<p class="cpp-section cpp-topline" style="clear:both">Unscoped enumerations<p>Unscoped enumerations are defined via the <code>enum</code> keyword.<p>Enumerated types are best taught by example, so let’s define an unscoped enumeration that can hold some color values. We’ll explain how it all works below.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="c1">// Define a new unscoped enumeration named Color</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// Here are the enumerators</span>
+<span class="w"> </span><span class="c1">// These symbolic constants define all the possible values this type can hold</span>
+<span class="w"> </span><span class="c1">// Each enumerator is separated by a comma, not a semicolon</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">green</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// trailing comma optional but recommended</span>
+<span class="p">};</span><span class="w"> </span><span class="c1">// the enum definition must end with a semicolon</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// Define a few variables of enumerated type Color</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my apple is red</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">shirt</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">green</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my shirt is green</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">cup</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">blue</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my cup is blue</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">socks</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">white</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// error: white is not an enumerator of Color</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">hat</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// error: 2 is not an enumerator of Color</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>We start our example by using the <code>enum</code> keyword to tell the compiler that we are defining an unscoped enumeration, which we’ve named <code>Color</code>.<p>Inside a pair of curly braces, we define the enumerators for the <code>Color</code> type: <code>red</code>, <code>green</code>, and <code>blue</code>. These enumerators define the specific values that type <code>Color</code> is restricted to. Each enumerator must be separated by a comma (not a semicolon) -- a trailing comma after the last enumerator is optional but recommended for consistency.<p>It is most common to define one enumerator per line, but in simple cases (where there are a small number of enumerators and no comments are needed), they may all be defined on a single line.<p>The type definition for <code>Color</code> ends with a semicolon. We’ve now fully defined what enumerated type <code>Color</code> is!<p>Inside <code>main()</code>, we instantiate three variables of type <code>Color</code>: <code>apple</code> is initialized with the color <code>red</code>, <code>shirt</code> is initialized with the color <code>green</code>, and <code>cup</code> is initialized with the color <code>blue</code>. Memory is allocated for each of these objects. Note that the initializer for an enumerated type must be one of the defined enumerators for that type. The variables <code>socks</code> and <code>hat</code> cause compile errors because the initializers <code>white</code> and <code>2</code> are not enumerators of <code>Color</code>.<p>Enumerators are implicitly constexpr.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">A reminder<p>To quickly recap on nomenclature:<ul><li>An <em>enumeration</em> or <em>enumerated type</em> is the program-defined type itself (e.g. <code>Color</code>).<li>An <em>enumerator</em> is a specific named value belonging to the enumeration (e.g. <code>red</code>).</li></li></ul></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Naming enumerations and enumerators<p>By convention, the names of enumerated types start with a capital letter (as do all program-defined types).<div class="cpp-note cpp-lightredbackground"><p class="cpp-note-title cpp-bottomline">Warning<p>Enumerations don’t have to be named, but unnamed enumerations should be avoided in modern C++.</p></p></div><p>Enumerators must be given names. Unfortunately, there is no common naming convention for enumerator names. Common choices include starting with lower case (e.g. red), starting with caps (Red), all caps (RED), all caps with a prefix (COLOR_RED), or prefixed with a “k” and intercapped (kColorRed).<p>Modern C++ guidelines typically recommend avoiding the all caps naming conventions, as all caps is typically used for preprocessor macros and may conflict. We recommend also avoiding the conventions starting with a capital letter, as names beginning with a capital letter are typically reserved for program-defined types.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Name your enumerated types starting with a capital letter. Name your enumerators starting with a lower case letter.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Enumerated types are distinct types<p>Each enumerated type you create is considered to be a <strong>distinct type</strong>, meaning the compiler can distinguish it from other types (unlike typedefs or type aliases, which are considered non-distinct from the types they are aliasing).<p>Because enumerated types are distinct, enumerators defined as part of one enumerated type can’t be used with objects of another enumerated type:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">Pet</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">cat</span><span class="p">,</span>
+<span class="w"> </span><span class="n">dog</span><span class="p">,</span>
+<span class="w"> </span><span class="n">pig</span><span class="p">,</span>
+<span class="w"> </span><span class="n">whale</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">black</span><span class="p">,</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Pet</span><span class="w"> </span><span class="n">myPet</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">black</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// compile error: black is not an enumerator of Pet</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">shirt</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">pig</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// compile error: pig is not an enumerator of Color</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>You probably didn’t want a pig shirt anyway.<p class="cpp-section cpp-topline" style="clear:both">Putting enumerations to use<p>Because enumerators are descriptive, they are useful for enhancing code documentation and readability. Enumerated types are best used when you have a smallish set of related constants, and objects only need to hold one of those values at a time.<p>Commonly defined enumerations include days of the week, the cardinal directions, and the suits in a deck of cards:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">DaysOfWeek</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">sunday</span><span class="p">,</span>
+<span class="w"> </span><span class="n">monday</span><span class="p">,</span>
+<span class="w"> </span><span class="n">tuesday</span><span class="p">,</span>
+<span class="w"> </span><span class="n">wednesday</span><span class="p">,</span>
+<span class="w"> </span><span class="n">thursday</span><span class="p">,</span>
+<span class="w"> </span><span class="n">friday</span><span class="p">,</span>
+<span class="w"> </span><span class="n">saturday</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">CardinalDirections</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">north</span><span class="p">,</span>
+<span class="w"> </span><span class="n">east</span><span class="p">,</span>
+<span class="w"> </span><span class="n">south</span><span class="p">,</span>
+<span class="w"> </span><span class="n">west</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">CardSuits</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">clubs</span><span class="p">,</span>
+<span class="w"> </span><span class="n">diamonds</span><span class="p">,</span>
+<span class="w"> </span><span class="n">hearts</span><span class="p">,</span>
+<span class="w"> </span><span class="n">spades</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre><p>Sometimes functions will return a status code to the caller to indicate whether the function executed successfully or encountered an error. Traditionally, small negative numbers were used to represent different possible error codes. For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">readFileContents</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">openFile</span><span class="p">())</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">readFile</span><span class="p">())</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">-2</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">parseFile</span><span class="p">())</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">-3</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// success</span>
+<span class="p">}</span>
+</code></pre><p>However, using magic numbers like this isn’t very descriptive. A better method would be to use an enumerated type:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">FileReadResult</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">readResultSuccess</span><span class="p">,</span>
+<span class="w"> </span><span class="n">readResultErrorFileOpen</span><span class="p">,</span>
+<span class="w"> </span><span class="n">readResultErrorFileRead</span><span class="p">,</span>
+<span class="w"> </span><span class="n">readResultErrorFileParse</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">FileReadResult</span><span class="w"> </span><span class="nf">readFileContents</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">openFile</span><span class="p">())</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">readResultErrorFileOpen</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">readFile</span><span class="p">())</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">readResultErrorFileRead</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">parseFile</span><span class="p">())</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">readResultErrorFileParse</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">readResultSuccess</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Then the caller can test the function’s return value against the appropriate enumerator, which is easier to understand than testing the return result for a specific integer value.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">readFileContents</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">readResultSuccess</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// do something</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// print error message</span>
+<span class="p">}</span>
+</code></pre><p>Enumerated types can also be put to good use in games, to identify different types of items, or monsters, or terrain. Basically, anything that is a small set of related objects.<p>For example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">ItemType</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">sword</span><span class="p">,</span>
+<span class="w"> </span><span class="n">torch</span><span class="p">,</span>
+<span class="w"> </span><span class="n">potion</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">ItemType</span><span class="w"> </span><span class="n">holding</span><span class="p">{</span><span class="w"> </span><span class="n">torch</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Enumerated types can also make for useful function parameters when the user needs to make a choice between two or more options:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">SortOrder</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">alphabetical</span><span class="p">,</span>
+<span class="w"> </span><span class="n">alphabeticalReverse</span><span class="p">,</span>
+<span class="w"> </span><span class="n">numerical</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">sortData</span><span class="p">(</span><span class="n">SortOrder</span><span class="w"> </span><span class="n">order</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">alphabetical</span><span class="p">:</span>
+<span class="w"> </span><span class="c1">// sort data in forwards alphabetical order</span>
+<span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">alphabeticalReverse</span><span class="p">:</span>
+<span class="w"> </span><span class="c1">// sort data in backwards alphabetical order</span>
+<span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">numerical</span><span class="p">:</span>
+<span class="w"> </span><span class="c1">// sort data numerically</span>
+<span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre><p>Many languages use enumerations to define Booleans -- after all, a Boolean is essentially just an enumeration with 2 enumerators: <code>false</code> and <code>true</code>! However, in C++, <code>true</code> and <code>false</code> are defined as keywords instead of enumerators.<p>Because enumerations are small and inexpensive to copy, it is fine to pass (and return) them by value.<p>In lesson <a href="083-bit-flags-and-bit-manipulation-via-stdbitset.html">O.1 -- Bit flags and bit manipulation via std::bitset</a>, we discussed bit flags. Enums can also be used to define a collection of related bit flag positions for use with <code>std::bitset</code>:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;bitset&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Flags</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">State</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">isHungry</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isSad</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isMad</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isHappy</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isLaughing</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isAsleep</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isDead</span><span class="p">,</span>
+<span class="w"> </span><span class="n">isCrying</span><span class="p">,</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">8</span><span class="o">&gt;</span><span class="w"> </span><span class="n">me</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">me</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">Flags</span><span class="o">::</span><span class="n">isHappy</span><span class="p">);</span>
+<span class="w"> </span><span class="n">me</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">Flags</span><span class="o">::</span><span class="n">isLaughing</span><span class="p">);</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">boolalpha</span><span class="p">;</span><span class="w"> </span><span class="c1">// print bool as true/false</span>
+<span class="w"> </span><span class="c1">// Query a few states (we use the any() function to see if any bits remain set)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"I am happy? "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">.</span><span class="n">test</span><span class="p">(</span><span class="n">Flags</span><span class="o">::</span><span class="n">isHappy</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"I am laughing? "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">.</span><span class="n">test</span><span class="p">(</span><span class="n">Flags</span><span class="o">::</span><span class="n">isLaughing</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>If you’re wondering how we can use an enumerator where an integral value is expected, unscoped enumerators will implicitly convert to integral values. We will explore this further in the next lesson (<a href="169-unscoped-enumerator-integral-conversions.html">13.3 -- Unscoped enumerator integral conversions</a>).<p class="cpp-section cpp-topline" style="clear:both">The scope of unscoped enumerations<p>Unscoped enumerations are named such because they put their enumerator names into the same scope as the enumeration definition itself (as opposed to creating a new scope region like a namespace does).<p>For example, given this program:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">Color</span><span class="w"> </span><span class="c1">// this enum is defined in the global namespace</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span><span class="w"> </span><span class="c1">// so red is put into the global namespace</span>
+<span class="w"> </span><span class="n">green</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my apple is red</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The <code>Color</code> enumeration is defined in the global scope. Therefore, all the enumeration names (<code>red</code>, <code>green</code>, and <code>blue</code>) also go into the global scope. This pollutes the global scope and significantly raises the chance of naming collisions.<p>One consequence of this is that an enumerator name can’t be used in multiple enumerations within the same scope:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">green</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// blue is put into the global namespace</span>
+<span class="p">};</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">Feeling</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">happy</span><span class="p">,</span>
+<span class="w"> </span><span class="n">tired</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// error: naming collision with the above blue</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// my apple is red</span>
+<span class="w"> </span><span class="n">Feeling</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">happy</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// I'm happy right now (even though my program doesn't compile)</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In the above example, both unscoped enumerations (<code>Color</code> and <code>Feeling</code>) put enumerators with the same name <code>blue</code> into the global scope. This leads to a naming collision and subsequent compile error.<p>Unscoped enumerations also provide a named scope region for their enumerators (much like a namespace acts as a named scope region for the names declared within). This means we can access the enumerators of an unscoped enumeration as follows:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">green</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// blue is put into the global namespace</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// okay, accessing enumerator from global namespace</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">raspberry</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">red</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// also okay, accessing enumerator from scope of Color</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Most often, unscoped enumerators are accessed without using the scope resolution operator.<p class="cpp-section cpp-topline" style="clear:both">Avoiding enumerator naming collisions<p>There are quite a few common ways to prevent unscoped enumerator naming collisions.<p>One option is to prefix each enumerator with the name of the enumeration itself:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">color_red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">color_blue</span><span class="p">,</span>
+<span class="w"> </span><span class="n">color_green</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">Feeling</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">feeling_happy</span><span class="p">,</span>
+<span class="w"> </span><span class="n">feeling_tired</span><span class="p">,</span>
+<span class="w"> </span><span class="n">feeling_blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// no longer has a naming collision with color_blue</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">paint</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color_blue</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Feeling</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">feeling_blue</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This still pollutes the namespace but reduces the chance for naming collisions by making the names longer and more unique.<p>A better option is to put the enumerated type inside something that provides a separate scope region, such as a namespace:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">namespace</span><span class="w"> </span><span class="nn">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// The names Color, red, blue, and green are defined inside namespace Color</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">green</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Feeling</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Feeling</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">happy</span><span class="p">,</span>
+<span class="w"> </span><span class="n">tired</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span><span class="w"> </span><span class="c1">// Feeling::blue doesn't collide with Color::blue</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Color</span><span class="w"> </span><span class="n">paint</span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">blue</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Feeling</span><span class="o">::</span><span class="n">Feeling</span><span class="w"> </span><span class="n">me</span><span class="p">{</span><span class="w"> </span><span class="n">Feeling</span><span class="o">::</span><span class="n">blue</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This means we now have to prefix our enumeration and enumerator names with the name of the scoped region.<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">For advanced readers<p>Classes also provide a scope region, and it’s common to put enumerated types related to a class inside the scope region of the class. We discuss this in lesson <a href="204-nested-types-member-types.html">15.3 -- Nested types (member types)</a>.</p></p></div><p>A related option is to use a scoped enumeration (which defines its own scope region). We’ll discuss scoped enumerations shortly (<a href="172-scoped-enumerations-enum-classes.html">13.6 -- Scoped enumerations (enum classes)</a>).<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Prefer putting your enumerations inside a named scope region (such as a namespace or class) so the enumerators don’t pollute the global namespace.</p></p></div><p>Alternatively, if an enumeration is only used within the body of a single function, the enumeration should be defined inside the function. This limits the scope of the enumeration and its enumerators to just that function. The enumerators of such an enumeration will shadow identically named enumerators defined in the global scope.<p class="cpp-section cpp-topline" style="clear:both">Comparing against enumerators<p>We can use the equality operators (<code>operator==</code> and <code>operator!=</code>) to test whether an enumeration has the value of a particular enumerator or not.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">red</span><span class="p">,</span>
+<span class="w"> </span><span class="n">green</span><span class="p">,</span>
+<span class="w"> </span><span class="n">blue</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">shirt</span><span class="p">{</span><span class="w"> </span><span class="n">blue</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shirt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">blue</span><span class="p">)</span><span class="w"> </span><span class="c1">// if the shirt is blue</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Your shirt is blue!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Your shirt is not blue!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In the above example, we use an if-statement to test whether <code>shirt</code> is equal to the enumerator <code>blue</code>. This gives us a way to conditionalize our program’s behavior based on what enumerator our enumeration is holding.<p>We’ll make more use of this in the next lesson.<p class="cpp-section cpp-topline" style="clear:both">Quiz time<p class="cpp-quiz-question" style="clear:both">Question #1<p>Define an unscoped enumerated type named MonsterType to choose between the following monster races: orc, goblin, troll, ogre, and skeleton.<p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_0"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">enum</span><span class="w"> </span><span class="nc">MonsterType</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">orc</span><span class="p">,</span>
+<span class="w"> </span><span class="n">goblin</span><span class="p">,</span>
+<span class="w"> </span><span class="n">troll</span><span class="p">,</span>
+<span class="w"> </span><span class="n">ogre</span><span class="p">,</span>
+<span class="w"> </span><span class="n">skeleton</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></details><p class="cpp-quiz-question cpp-topline" style="clear:both">Question #2<p>Put the MonsterType enumeration inside a namespace. Then, create a main() function and instantiate a troll. The program should compile.<p><details class="local-quiz-answer"><summary></summary><div class="wpsolution" id="cpp_solution_id_1"><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">namespace</span><span class="w"> </span><span class="nn">Monster</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">MonsterType</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">orc</span><span class="p">,</span>
+<span class="w"> </span><span class="n">goblin</span><span class="p">,</span>
+<span class="w"> </span><span class="n">troll</span><span class="p">,</span>
+<span class="w"> </span><span class="n">ogre</span><span class="p">,</span>
+<span class="w"> </span><span class="n">skeleton</span><span class="p">,</span>
+<span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// We use [[maybe_unused]] to avoid warnings about unused variables</span>
+<span class="w"> </span><span class="c1">// You could also output the monster instead</span>
+<span class="w"> </span><span class="p">[[</span><span class="n">maybe_unused</span><span class="p">]]</span><span class="w"> </span><span class="n">Monster</span><span class="o">::</span><span class="n">MonsterType</span><span class="w"> </span><span class="n">monster</span><span class="p">{</span><span class="w"> </span><span class="n">Monster</span><span class="o">::</span><span class="n">troll</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Because <code>MonsterType</code> is an unscoped enumeration, its enumerators (e.g. <code>troll</code>) are placed into namespace of the enumeration itself (which in this case is <code>namespace Monster</code>). Thus, we can access <code>troll</code> as <code>Monster::troll</code>.<p>Because unscoped enumerations also put their enumerators into their own namespace, <code>troll</code> can also be accessed as <code>Monster::MonsterType::troll</code>. However, there is no real benefit to doing so.</p></p></div></details></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="167-introduction-to-program-defined-user-defined-types.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="169-unscoped-enumerator-integral-conversions.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

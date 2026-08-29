@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>4.11 — Chars</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>4.11 — Chars</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/chars/">
+        https://www.learncpp.com/cpp-tutorial/chars/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="060-introduction-to-if-statements.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="062-introduction-to-type-conversion-and-static_cast.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>To this point, the fundamental data types we’ve looked at have been used to hold numbers (integers and floating points) or true/false values (Booleans). But what if we want to store letters or punctuation?<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Would you like a burrito? (y/n)"</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">// We want the user to enter a 'y' or 'n' character</span>
+<span class="w"> </span><span class="c1">// How do we do this?</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The <strong>char</strong> data type was designed to hold a single <code>character</code>. A <strong>character</strong> can be a single letter, number, symbol, or whitespace.<p>The char data type is an integral type, meaning the underlying value is stored as an integer. Similar to how a Boolean value <code>0</code> is interpreted as <code>false</code> and non-zero is interpreted as <code>true</code>, the integer stored by a <code>char</code> variable are intepreted as an <code>ASCII character</code>.<p><strong>ASCII</strong> stands for American Standard Code for Information Interchange, and it defines a particular way to represent English characters (plus a few other symbols) as numbers between 0 and 127 (called an <strong>ASCII code</strong> or <strong>code point</strong>). For example, ASCII code 97 is interpreted as the character ‘a’.<p>Character literals are always placed between single quotes (e.g. ‘g’, ‘1’, ‘ ‘).<p style="clear:both">Here’s a full table of ASCII characters:<p><div class="cpp-table-wrapper"><p><p><table class="cpp-table"><tbody><tr><th>Code<th>Symbol<th>Code<th>Symbol<th>Code<th>Symbol<th>Code<th>Symbol<tr><td style="background-color:#ccc">0<td>NUL (null)<td style="background-color:#ccc">32<td>(space)<td style="background-color:#ccc">64<td>@<td style="background-color:#ccc">96<td>`<tr><td "="" style="background-color:#ccc">1<td>SOH (start of header)<td style="background-color:#ccc">33<td>!<td style="background-color:#ccc">65<td>A<td style="background-color:#ccc">97<td>a<tr><td style="background-color:#ccc">2<td>STX (start of text)<td style="background-color:#ccc">34<td>”<td style="background-color:#ccc">66<td>B<td style="background-color:#ccc">98<td>b<tr><td style="background-color:#ccc">3<td>ETX (end of text)<td style="background-color:#ccc">35<td>#<td style="background-color:#ccc">67<td>C<td style="background-color:#ccc">99<td>c<tr><td style="background-color:#ccc">4<td>EOT (end of transmission)<td style="background-color:#ccc">36<td>$<td style="background-color:#ccc">68<td>D<td style="background-color:#ccc">100<td>d<tr><td style="background-color:#ccc">5<td>ENQ (enquiry)<td style="background-color:#ccc">37<td>%<td style="background-color:#ccc">69<td>E<td style="background-color:#ccc">101<td>e<tr><td style="background-color:#ccc">6<td>ACK (acknowledge)<td style="background-color:#ccc">38<td>&amp;<td style="background-color:#ccc">70<td>F<td style="background-color:#ccc">102<td>f<tr><td style="background-color:#ccc">7<td>BEL (bell)<td style="background-color:#ccc">39<td>’<td style="background-color:#ccc">71<td>G<td style="background-color:#ccc">103<td>g<tr><td style="background-color:#ccc">8<td>BS (backspace)<td style="background-color:#ccc">40<td>(<td style="background-color:#ccc">72<td>H<td style="background-color:#ccc">104<td>h<tr><td style="background-color:#ccc">9<td>HT (horizontal tab)<td style="background-color:#ccc">41<td>)<td style="background-color:#ccc">73<td>I<td style="background-color:#ccc">105<td>i<tr><td style="background-color:#ccc">10<td>LF (line feed/new line)<td style="background-color:#ccc">42<td>*<td style="background-color:#ccc">74<td>J<td style="background-color:#ccc">106<td>j<tr><td style="background-color:#ccc">11<td>VT (vertical tab)<td style="background-color:#ccc">43<td>+<td style="background-color:#ccc">75<td>K<td style="background-color:#ccc">107<td>k<tr><td style="background-color:#ccc">12<td>FF (form feed / new page)<td style="background-color:#ccc">44<td>,<td style="background-color:#ccc">76<td>L<td style="background-color:#ccc">108<td>l<tr><td style="background-color:#ccc">13<td>CR (carriage return)<td style="background-color:#ccc">45<td>-<td style="background-color:#ccc">77<td>M<td style="background-color:#ccc">109<td>m<tr><td style="background-color:#ccc">14<td>SO (shift out)<td style="background-color:#ccc">46<td>.<td style="background-color:#ccc">78<td>N<td style="background-color:#ccc">110<td>n<tr><td style="background-color:#ccc">15<td>SI (shift in)<td style="background-color:#ccc">47<td>/<td style="background-color:#ccc">79<td>O<td style="background-color:#ccc">111<td>o<tr><td style="background-color:#ccc">16<td>DLE (data link escape)<td style="background-color:#ccc">48<td>0<td style="background-color:#ccc">80<td>P<td style="background-color:#ccc">112<td>p<tr><td style="background-color:#ccc">17<td>DC1 (data control 1)<td style="background-color:#ccc">49<td>1<td style="background-color:#ccc">81<td>Q<td style="background-color:#ccc">113<td>q<tr><td style="background-color:#ccc">18<td>DC2 (data control 2)<td style="background-color:#ccc">50<td>2<td style="background-color:#ccc">82<td>R<td style="background-color:#ccc">114<td>r<tr><td style="background-color:#ccc">19<td>DC3 (data control 3)<td style="background-color:#ccc">51<td>3<td style="background-color:#ccc">83<td>S<td style="background-color:#ccc">115<td>s<tr><td style="background-color:#ccc">20<td>DC4 (data control 4)<td style="background-color:#ccc">52<td>4<td style="background-color:#ccc">84<td>T<td style="background-color:#ccc">116<td>t<tr><td style="background-color:#ccc">21<td>NAK (negative acknowledge)<td style="background-color:#ccc">53<td>5<td style="background-color:#ccc">85<td>U<td style="background-color:#ccc">117<td>u<tr><td style="background-color:#ccc">22<td>SYN (synchronous idle)<td style="background-color:#ccc">54<td>6<td style="background-color:#ccc">86<td>V<td style="background-color:#ccc">118<td>v<tr><td style="background-color:#ccc">23<td>ETB (end of transmission block)<td style="background-color:#ccc">55<td>7<td style="background-color:#ccc">87<td>W<td style="background-color:#ccc">119<td>w<tr><td style="background-color:#ccc">24<td>CAN (cancel)<td style="background-color:#ccc">56<td>8<td style="background-color:#ccc">88<td>X<td style="background-color:#ccc">120<td>x<tr><td style="background-color:#ccc">25<td>EM (end of medium)<td style="background-color:#ccc">57<td>9<td style="background-color:#ccc">89<td>Y<td style="background-color:#ccc">121<td>y<tr><td style="background-color:#ccc">26<td>SUB (substitute)<td style="background-color:#ccc">58<td>:<td style="background-color:#ccc">90<td>Z<td style="background-color:#ccc">122<td>z<tr><td style="background-color:#ccc">27<td>ESC (escape)<td style="background-color:#ccc">59<td>;<td style="background-color:#ccc">91<td>[<td style="background-color:#ccc">123<td>{<tr><td style="background-color:#ccc">28<td>FS (file separator)<td style="background-color:#ccc">60<td>&lt;<td style="background-color:#ccc">92<td>\<td style="background-color:#ccc">124<td>|<tr><td style="background-color:#ccc">29<td>GS (group separator)<td style="background-color:#ccc">61<td>=<td style="background-color:#ccc">93<td>]<td style="background-color:#ccc">125<td>}<tr><td style="background-color:#ccc">30<td>RS (record separator)<td style="background-color:#ccc">62<td>&gt;<td style="background-color:#ccc">94<td>^<td style="background-color:#ccc">126<td>~<tr><td style="background-color:#ccc">31<td>US (unit separator)<td style="background-color:#ccc">63<td>?<td style="background-color:#ccc">95<td>_<td style="background-color:#ccc">127<td>DEL (delete)</td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></td></td></td></td></td></td></td></td></tr></th></th></th></th></th></th></th></th></tr></tbody></table></p></p></div><p>Codes 0-31 and 127 are called the unprintable chars. These codes were designed to control peripheral devices such as printers (e.g. by instructing the printer how to move the print head). Most of these are obsolete now. If you try to print these chars, the results are dependent upon your OS (you may get some emoji-like characters).<p>Codes 32-126 are called the printable characters, and they represent the letters, number characters, and punctuation that most computers use to display basic English text.<p>If you try to print a character whose value is outside the range of ASCII, the results are also dependent upon your OS.<p class="cpp-section cpp-topline" style="clear:both">Initializing chars<p>You can initialize char variables using character literals:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">char</span><span class="w"> </span><span class="n">ch2</span><span class="p">{</span><span class="w"> </span><span class="sc">'a'</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// initialize with code point for 'a' (stored as integer 97) (preferred)</span>
+</code></pre><p>You can initialize chars with integers as well, but this should be avoided if possible<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">char</span><span class="w"> </span><span class="n">ch1</span><span class="p">{</span><span class="w"> </span><span class="mi">97</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// initialize with integer 97 ('a') (not preferred)</span>
+</code></pre><div class="cpp-note cpp-lightredbackground"><p class="cpp-note-title cpp-bottomline">Warning<p>Be careful not to mix up character numbers with integer numbers. The following two initializations are not the same:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span><span class="w"> </span><span class="c1">// initialize with integer 5 (stored as integer 5)</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="p">{</span><span class="sc">'5'</span><span class="p">};</span><span class="w"> </span><span class="c1">// initialize with code point for '5' (stored as integer 53)</span>
+</code></pre><p>Character numbers are intended to be used when we want to represent numbers as text, rather than as numbers to apply mathematical operations to.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Printing chars<p>When using std::cout to print a char, std::cout outputs the char variable as an ASCII character:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ch1</span><span class="p">{</span><span class="w"> </span><span class="sc">'a'</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// (preferred)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch1</span><span class="p">;</span><span class="w"> </span><span class="c1">// cout prints character 'a'</span>
+<span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ch2</span><span class="p">{</span><span class="w"> </span><span class="mi">98</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// code point for 'b' (not preferred)</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch2</span><span class="p">;</span><span class="w"> </span><span class="c1">// cout prints a character ('b')</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This produces the result:<pre>ab
+</pre><p>We can also output char literals directly:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'c'</span><span class="p">;</span>
+</code></pre><p>This produces the result:<pre>c
+</pre><p class="cpp-section cpp-topline" style="clear:both">Inputting chars<p>The following program asks the user to input a character, then prints out the character:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Input a keyboard character: "</span><span class="p">;</span>
+<span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ch</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Here’s the output from one run:<pre>Input a keyboard character: q
+You entered: q
+</pre><p>Note that std::cin will let you enter multiple characters. However, variable <em>ch</em> can only hold 1 character. Consequently, only the first input character is extracted into variable <em>ch</em>. The rest of the user input is left in the input buffer that std::cin uses, and can be extracted with subsequent calls to std::cin.<p>You can see this behavior in the following example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Input a keyboard character: "</span><span class="p">;</span><span class="w"> </span><span class="c1">// assume the user enters "abcd" (without quotes)</span>
+<span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ch</span><span class="p">;</span><span class="w"> </span><span class="c1">// ch = 'a', "bcd" is left queued.</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">// Note: The following cin doesn't ask the user for input, it grabs queued input!</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ch</span><span class="p">;</span><span class="w"> </span><span class="c1">// ch = 'b', "cd" is left queued.</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><pre>Input a keyboard character: abcd
+You entered: a
+You entered: b
+</pre><p>If you want to read in more than one char at a time (e.g. to read in a name, word, or sentence), you’ll want to use a string instead of a char. A string is a collection of sequential characters (and thus, a string can hold multiple symbols). We discuss this in upcoming lesson (<a href="070-introduction-to-stdstring.html">5.7 -- Introduction to std::string</a>).<p class="cpp-section cpp-topline" style="clear:both">Extracting whitespace characters<p>Because extracting input ignores leading whitespace, this can lead to unexpected results when trying to extract whitespace characters to a char variable:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Input a keyboard character: "</span><span class="p">;</span><span class="w"> </span><span class="c1">// assume the user enters "a b" (without quotes)</span>
+<span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ch</span><span class="p">;</span><span class="w"> </span><span class="c1">// extracts a, leaves " b\n" in stream</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ch</span><span class="p">;</span><span class="w"> </span><span class="c1">// skips leading whitespace (the space), extracts b, leaves "\n" in stream</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><pre>Input a keyboard character: a b
+You entered: a
+You entered: b
+</pre><p>In the above example, we may have expected to extract the space, but because leading whitespace is skipped, we extracted the <code>b</code> character instead.<p>One simple way to address this is to use the <code>std::cin.get()</code> function to perform the extraction instead, as this function does not ignore leading whitespace:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Input a keyboard character: "</span><span class="p">;</span><span class="w"> </span><span class="c1">// assume the user enters "a b" (without quotes)</span>
+<span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span><span class="w"> </span><span class="c1">// extracts a, leaves " b\n" in stream</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span><span class="w"> </span><span class="c1">// extracts space, leaves "b\n" in stream</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"You entered: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><pre>Input a keyboard character: a b
+You entered: a
+You entered:  
+</pre><p class="cpp-section cpp-topline" style="clear:both">Char size, range, and default sign<p>Char is defined by C++ to always be 1 byte in size. By default, a char may be signed or unsigned (though it’s usually signed). If you’re using chars to hold ASCII characters, you don’t need to specify a sign (since both signed and unsigned chars can hold values between 0 and 127).<p>If you’re using a char to hold small integers (something you should not do unless you’re explicitly optimizing for space), you should always specify whether it is signed or unsigned. A signed char can hold a number between -128 and 127. An unsigned char can hold a number between 0 and 255.<p class="cpp-section cpp-topline" style="clear:both">Escape sequences<p>There are some sequences of characters in C++ that have special meaning. These characters are called <strong>escape sequences</strong>. An escape sequence starts with a ‘\’ (backslash) character, and then a following letter or number.<p>You’ve already seen the most common escape sequence: <code>'\n'</code>, which can be used to print a newline:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The value of x is: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span><span class="c1">// standalone \n goes in single quotes</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First line</span><span class="se">\n</span><span class="s">Second line</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span><span class="w"> </span><span class="c1">// \n can be embedded in double quotes</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This outputs:<pre>The value of x is: 5
+First line
+Second line
+</pre><p>Another commonly used escape sequence is <code>'\t'</code>, which embeds a horizontal tab:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First part</span><span class="se">\t</span><span class="s">Second part"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Which outputs:<pre>First part	Second part
+</pre><p>Three other notable escape sequences are:<br/>\’ prints a single quote<br/>\” prints a double quote<br/>\\ prints a backslash<p>Here’s a table of all of the escape sequences:<div class="cpp-table-wrapper"><p><p><table class="cpp-table"><tbody><tr><th>Name<th>Symbol<th>Meaning<tr><td>Alert<td>\a<td>Makes an alert, such as a beep<tr><td>Backspace<td>\b<td>Moves the cursor back one space<tr><td>Formfeed<td>\f<td>Moves the cursor to next logical page<tr><td>Newline<td>\n<td>Moves cursor to next line<tr><td>Carriage return<td>\r<td>Moves cursor to beginning of line<tr><td>Horizontal tab<td>\t<td>Prints a horizontal tab<tr><td>Vertical tab<td>\v<td>Prints a vertical tab<tr><td>Single quote<td>\’<td>Prints a single quote<tr><td>Double quote<td>\”<td>Prints a double quote<tr><td>Backslash<td>\\<td>Prints a backslash.<tr><td>Question mark<td>\?<td>Prints a question mark.<br/>No longer relevant. You can use question marks unescaped.<tr><td>Octal number<td>\(number)<td>Translates into char represented by octal<p><tr><td>Hex number<td>\x(number)<td>Translates into char represented by hex number</td></td></td></tr></p></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></td></td></td></tr></th></th></th></tr></tbody></table></p></p></div><p>Here are some examples:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\"</span><span class="s">This is quoted text</span><span class="se">\"\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"This string contains a single backslash </span><span class="se">\\\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"6F in hex is char '</span><span class="se">\x6F</span><span class="s">'</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Prints:<pre>"This is quoted text"
+This string contains a single backslash \
+6F in hex is char 'o'
+</pre><div class="cpp-note cpp-lightredbackground"><p class="cpp-note-title cpp-bottomline">Warning<p>Escape sequences start with a backslash (\), not a forward slash (/). If you use a forward slash by accident, it may still compile, but will not yield the desired result.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Newline (\n) vs. std::endl<p>We cover this topic in lesson <a href="018-introduction-to-iostream-cout-cin-and-endl.html">1.5 -- Introduction to iostream: cout, cin, and endl</a>.<p class="cpp-section cpp-topline" style="clear:both">What’s the difference between putting symbols in single and double quotes?<p>Text between single quotes is treated as a <code>char</code> literal, which represents a single character. For example, <code>'a'</code> represents the character <code>a</code>, <code>'+'</code> represents the character for the plus symbol, <code>'5'</code> represents the character <code>5</code> (not the number 5), and <code>'\n'</code> represents the newline character.<p>Text between double quotes (e.g. “Hello, world!”) is treated as a C-style string literal, which can contain multiple characters. We discuss strings in lesson <a href="065-literals.html">5.2 -- Literals</a>.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Single characters should usually be single-quoted, not double-quoted (e.g. <code>'t'</code> or <code>'\n'</code>, not <code>"t"</code> or <code>"\n"</code>). One possible exception occurs when doing output, where it can be preferential to double quote everything for consistency (see lesson <a href="018-introduction-to-iostream-cout-cin-and-endl.html">1.5 -- Introduction to iostream: cout, cin, and endl</a>).</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Avoid multicharacter literals<p>For backwards compatibility reasons, many C++ compilers support <strong>multicharacter literals</strong>, which are char literals that contain multiple characters (e.g. <code>'56'</code>). If supported, these have an implementation-defined value (meaning it varies depending on the compiler). Because they are not part of the C++ standard, and their value is not strictly defined, multicharacter literals should be avoided.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Avoid multicharacter literals (e.g. <code>'56'</code>).</p></p></div><p>Multicharacter literal support often causes problems for new programmers when the forget whether escape sequences use forward slashes or backslashes:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="err">'</span><span class="o">/</span><span class="n">n</span><span class="err">'</span><span class="p">;</span><span class="w"> </span><span class="c1">// we used a forward slash instead of a backslash here</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>The programmer expects this program to print the value <code>3</code> and a newline. But instead, on the author’s machine, it outputs the following:<pre>312142
+</pre><p>The issue here is that the programmer accidentally used <code>'/n'</code> (a multicharacter literal consisting of a forward slash and an <code>'n'</code> character) instead of <code>'\n'</code> (the escape sequence for a newline). The program first prints <code>3</code> (the result of <code>add(1, 2)</code>) correctly. But then it prints the value of multicharacter literal <code>'/n'</code>, which on the author’s machine had the implementation-defined value <code>12142</code>.<div class="cpp-note cpp-lightredbackground"><p class="cpp-note-title cpp-bottomline">Warning<p>Make sure that your newlines are using escape sequence <code>'\n'</code> , not multicharacter literal <code>'/n'</code>.</p></p></div><div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>Note that if we’d double-quoted the output <code>"/n"</code>, the program would have printed <code>3/n</code>, which is still wrong, but much less confusing.</p></p></div><p>Here’s another example. Let’s start with the following:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The value of x is "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w"> </span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>This program outputs exactly as you expect:<pre>The value of x is 5
+</pre><p>But this output isn’t nearly exciting enough, so we decide to add an exclamation point before the newline:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The value of x is "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="err">'</span><span class="o">!</span><span class="err">\</span><span class="n">n</span><span class="err">'</span><span class="p">;</span><span class="w"> </span><span class="c1">// added exclamation point</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>While we expect this to output the following:<pre>The value of x is 5!
+</pre><p>Because <code>'!\n'</code> is a multicharacter literal, on the author’s machine, this actually printed:<pre>The value of x is 58458
+</pre><p>This is not only incorrect, it can be hard to debug because you are likely to assume that <code>x</code> has the wrong value.<p>Using double quotes when outputting character literals (instead of single quotes) either makes these kind of issues easier to discover or avoids them entirely.<p class="cpp-section cpp-topline" style="clear:both">What about the other char types, <code>wchar_t</code>, <code>char8_t</code>, <code>char16_t</code>, and <code>char32_t</code>?<p>Much like ASCII maps the integers 0-127 to American English characters, other character encoding standards exist to map integers (of varying sizes) to characters in other languages. The most well-known mapping outside of ASCII is the Unicode standard, which maps over 144,000 integers to characters in many different languages. Because Unicode contains so many code points, a single Unicode code point needs 32-bits to represent a character (called UTF-32). However, Unicode characters can also be encoded using multiple 16-bit or 8-bit characters (called UTF-16 and UTF-8 respectively).<p><code>char16_t</code> and <code>char32_t</code> were added to C++11 to provide explicit support for 16-bit and 32-bit Unicode characters. These char types have the same size as <code>std::uint_least16_t</code> and <code>std::uint_least32_t</code> respectively (but are distinct types). <code>char8_t</code> was added in C++20 to provide support for 8-bit Unicode (UTF-8). It is a distinct type that uses the same representation as <code>unsigned char</code>.<p>You won’t need to use <code>char8_t</code>, <code>char16_t</code>, or <code>char32_t</code> unless you’re planning on making your program Unicode compatible. <code>wchar_t</code> should be avoided in almost all cases (except when interfacing with the Windows API), as its size is implementation-defined.<p>Unicode and localization are generally outside the scope of these tutorials, so we won’t cover it further. In the meantime, you should only use ASCII characters when working with characters (and strings). Using characters from other character sets may cause your characters to display incorrectly.</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="060-introduction-to-if-statements.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="062-introduction-to-type-conversion-and-static_cast.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

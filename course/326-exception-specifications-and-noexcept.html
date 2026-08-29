@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>27.9 — Exception specifications and noexcept</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>27.9 — Exception specifications and noexcept</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/exception-specifications-and-noexcept/">
+        https://www.learncpp.com/cpp-tutorial/exception-specifications-and-noexcept/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="325-exception-dangers-and-downsides.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="327-stdmove_if_noexcept.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>(h/t to reader Koe for providing the first draft of this lesson!)<p>Looking at a typical function declaration, it is not possible to determine whether a function might throw an exception or not:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">();</span><span class="w"> </span><span class="c1">// can this function throw an exception or not?</span>
+</code></pre><p>In the above example, can <code>doSomething()</code> throw an exception? It’s not clear. But the answer is important in some contexts. In lesson <a href="325-exception-dangers-and-downsides.html">27.8 -- Exception dangers and downsides</a>, we described how an exception that is thrown out of a destructor during stack unwinding will cause the program to halt. If <code>doSomething()</code> can throw an exception, then calling it from a destructor (or any other place where a thrown exception is undesirable) is risky. Although we could have the destructor handle exceptions thrown by <code>doSomething()</code> (so those exceptions don’t propagate out of the destructor), we have to remember to do this, and we have to ensure we cover all the different types of exceptions that may be thrown.<p>While comments may help enumerate whether a function throws exceptions or not (and if so, what kind of exceptions), documentation can grow stale and there is no compiler enforcement for comments.<p><strong>Exception specifications</strong> are a language mechanism that was originally designed to document what kind of exceptions a function might throw as part of a function specification. While most of the exception specifications have now been deprecated or removed, one useful exception specification was added as a replacement, which we’ll cover in this lesson.<p class="cpp-section cpp-topline" style="clear:both">The noexcept specifier<p>In C++, all functions are classified as either <em>non-throwing</em> or <em>potentially throwing</em>. A <strong>non-throwing function</strong> is one that promises not to throw exceptions that are visible to the caller. A <strong>potentially throwing function</strong> may throw exceptions that are visible to the caller.<p>To define a function as non-throwing, we can use the <strong>noexcept specifier</strong>. To do so, we use the <code>noexcept</code> keyword in the function declaration, placed to the right of the function parameter list:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span><span class="w"> </span><span class="c1">// this function is specified as non-throwing</span>
+</code></pre><p>Note that <code>noexcept</code> doesn’t actually prevent the function from throwing exceptions or calling other functions that are potentially throwing. This is allowed so long as the noexcept function catches and handles those exceptions internally, and those exceptions do not exit the noexcept function.<p>If an unhandled exception would exit a noexcept function, <code>std::terminate</code> will be called (even if there is an exception handler that would otherwise handle such an exception somewhere up the stack). And if <code>std::terminate</code> is called from inside a noexcept function, stack unwinding may or may not occur (depending on implementation and optimizations), which means your objects may or may not be destructed properly prior to termination.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>The promise that a noexcept function makes to not throw exceptions that are visible to the caller is a contractual promise, not a promise enforced by the compiler. So while calling a noexcept function should be safe, any exception handling bugs in the noexcept function that cause the contract to be broken will result in termination of the program! This shouldn’t happen, but neither should bugs.<p>For this reason, it’s best that noexcept functions don’t mess with exceptions at all, or call potentially throwing functions that could raise an exception. A noexcept function can’t have an exception handling bug if no exceptions can possibly be raised in the first place!</p></p></p></div><p>Much like functions that differ only in their return values can not be overloaded, functions differing only in their exception specification can not be overloaded.<p class="cpp-section cpp-topline" style="clear:both">Illustrating the behavior of noexcept functions and exceptions<p>The following program illustrates the behavior of noexcept functions and exceptions in various cases:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="c1">// h/t to reader yellowEmu for the first draft of this program</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Doomed</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="o">~</span><span class="n">Doomed</span><span class="p">()</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Doomed destructed</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">thrower</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Throwing exception</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">pt</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"pt (potentally throwing) called</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">//This object will be destroyed during stack unwinding (if it occurs)</span>
+<span class="w"> </span><span class="n">Doomed</span><span class="w"> </span><span class="n">doomed</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">thrower</span><span class="p">();</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"This never prints</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">nt</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"nt (noexcept) called</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="c1">//This object will be destroyed during stack unwinding (if it occurs)</span>
+<span class="w"> </span><span class="n">Doomed</span><span class="w"> </span><span class="n">doomed</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">thrower</span><span class="p">();</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"this never prints</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">tester</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"tester (noexcept) case "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" called</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">try</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">pt</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nt</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(...)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"tester caught exception</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unitbuf</span><span class="p">;</span><span class="w"> </span><span class="c1">// flush buffer after each insertion</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">boolalpha</span><span class="p">;</span><span class="w"> </span><span class="c1">// print boolean as true/false</span>
+<span class="w"> </span><span class="n">tester</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Test successful</span><span class="se">\n\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="n">tester</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Test successful</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>On the author’s machine, this program printed:<pre>tester (noexcept) case 1 called
+pt (potentially throwing) called
+Throwing exception
+Doomed destructed
+tester caught exception
+Test successful
+
+tester (noexcept) case 2 called
+nt (noexcept) called
+throwing exception
+terminate called after throwing an instance of 'int'
+</pre><p>and then the program aborted.<p>Let’s explore what’s happening here in more detail. Note that <code>tester</code> is a noexcept function, and thus promises not to expose any exception to the caller (<code>main</code>).<p>The first case illustrates that noexcept functions can call potentially throwing functions and even handle any exceptions those functions throw. First, <code>tester(1)</code> is called, which calls potentially throwing function <code>pt</code> , which calls <code>thrower</code>, which throws an exception. The first handler for this exception is in <code>tester</code>, so the exception unwinds the stack (destroying local variable <code>doomed</code> in the process), and the exception is caught and handled within <code>tester</code>. Because <code>tester</code> does not expose this exception to the caller (<code>main</code>), there is no violation of noexcept here, and control returns to <code>main</code>.<p>The second case illustrates what happens when a noexcept function tries to pass an exception back to its caller. First, <code>tester(2)</code> is called, which calls non-throwing function <code>nt</code>, which calls <code>thrower</code>, which throws an exception. The first handler for this exception is in <code>tester</code>. However, <code>nt</code> is noexcept, and to get to the handler in <code>tester</code>, the exception would have to propagate to the caller of <code>nt</code>. That is a violation of the noexcept of <code>nt</code>, and so <code>std::terminate</code> is called, and our program is aborted immediately. On the author’s machine, the stack was not unwound (as illustrated by <code>doomed</code> not being destroyed).<p class="cpp-section cpp-topline" style="clear:both">The noexcept specifier with a Boolean parameter<p>The <code>noexcept</code> specifier has an optional Boolean parameter. <code>noexcept(true)</code> is equivalent to <code>noexcept</code>, meaning the function is non-throwing. <code>noexcept(false)</code> means the function is potentially throwing. These parameters are typically only used in template functions, so that a template function can be dynamically created as non-throwing or potentially throwing based on some parameterized value.<p class="cpp-section cpp-topline" style="clear:both">Which functions are non-throwing and potentially-throwing<p>Functions that are implicitly non-throwing:<ul><li>Destructors</li></ul><p>Functions that are non-throwing by default for implicitly-declared or defaulted functions:<ul><li>Constructors: default, copy, move<li>Assignments: copy, move<li>Comparison operators (as of C++20)</li></li></li></ul><p>However, if any of these functions call (explicitly or implicitly) another function which is potentially throwing, then the listed function will be treated as potentially throwing as well. For example, if a class has a data member with a potentially throwing constructor, then the class’s constructors will be treated as potentially throwing as well. As another example, if a copy assignment operator calls a potentially throwing assignment operator, then the copy assignment will be potentially throwing as well.<p>Functions that are potentially throwing (if not implicitly-declared or defaulted):<ul><li>Normal functions<li>User-defined constructors<li>User-defined operators</li></li></li></ul><p class="cpp-section cpp-topline" style="clear:both">The noexcept operator<p>The noexcept operator can also be used inside expressions. It takes an expression as an argument, and returns <code>true</code> or <code>false</code> if the compiler thinks it will throw an exception or not. The noexcept operator is checked statically at compile-time, and doesn’t actually evaluate the input expression.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="k">throw</span><span class="w"> </span><span class="mi">-1</span><span class="p">;}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">boo</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">goo</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">S</span><span class="p">{};</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">b1</span><span class="p">{</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// true; ints are non-throwing</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">b2</span><span class="p">{</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="n">foo</span><span class="p">())</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// false; foo() throws an exception</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">b3</span><span class="p">{</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="n">boo</span><span class="p">())</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// false; boo() is implicitly noexcept(false)</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">b4</span><span class="p">{</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="n">goo</span><span class="p">())</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// true; goo() is explicitly noexcept(true)</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">b5</span><span class="p">{</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="n">S</span><span class="p">{})</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// true; a struct's default constructor is noexcept by default</span>
+</code></pre><p>The noexcept operator can be used to conditionally execute code depending on whether it is potentially throwing or not. This is required to fulfill certain <strong>exception safety guarantees</strong>, which we’ll talk about in the next section.<p class="cpp-section cpp-topline" style="clear:both">Exception safety guarantees<p>An <strong>exception safety guarantee</strong> is a contractual guideline about how functions or classes will behave in the event an exception occurs. There are four levels of exception safety guarantees:<ul><li>No guarantee -- There are no guarantees about what will happen if an exception is thrown (e.g. a class may be left in an unusable state)<li>Basic guarantee -- If an exception is thrown, no memory will be leaked and the object is still usable, but the program may be left in a modified state.<li>Strong guarantee -- If an exception is thrown, no memory will be leaked and the program state will not be changed. This means the function must either completely succeed or have no side effects if it fails. This is easy if the failure happens before anything is modified in the first place, but can also be achieved by rolling back any changes so the program is returned to the pre-failure state.<li>No throw / No fail guarantee -- The function will always succeed (no-fail) or fail without throwing an exception that is exposed to the caller (no-throw). Exceptions may be thrown internally if not exposed. The <code>noexcept</code> specifier maps to this level of exception safety guarantee.</li></li></li></li></ul><p>Let’s look at the no-throw/no-fail guarantees in more detail:<p>The no-throw guarantee: if a function fails, then it won’t throw an exception. Instead, it will return an error code or ignore the problem. No-throw guarantees are required during stack unwinding when an exception is already being handled; for example, all destructors should have a no-throw guarantee (as should any functions those destructors call). Examples of code that should be no-throw:<ul><li>destructors and memory deallocation/cleanup functions<li>functions that higher-level no-throw functions need to call</li></li></ul><p>The no-fail guarantee: a function will always succeed in what it tries to do (and thus never has a need to throw an exception, thus, no-fail is a slightly stronger form of no-throw). Examples of code that should be no-fail:<ul><li>move constructors and move assignment (move semantics, covered in <a href="https://www.learncpp.com#Chapter22">chapter 22</a>)<li>swap functions<li>clear/erase/reset functions on containers<li>operations on std::unique_ptr (also covered in <a href="https://www.learncpp.com#Chapter22">chapter 22</a>)<li>functions that higher-level no-fail functions need to call</li></li></li></li></li></ul><p class="cpp-section cpp-topline" style="clear:both">When to use noexcept<p>Just because your code doesn’t explicitly throw any exceptions doesn’t mean you should start sprinkling <code>noexcept</code> around your code. By default, most functions are potentially throwing, so if your function calls other functions, there is a good chance it calls a function that is potentially throwing, and thus is potentially throwing too.<p>There are a few good reasons to mark functions a non-throwing:<ul><li>Non-throwing functions can be safely called from functions that are not exception-safe, such as destructors<li>Functions that are noexcept can enable the compiler to perform some optimizations that would not otherwise be available. Because a noexcept function cannot throw an exception outside the function, the compiler doesn’t have to worry about keeping the runtime stack in an unwindable state, which can allow it to produce faster code.<li>There are significant cases where knowing a function is noexcept allows us to produce more efficient implementations in our own code: the standard library containers (such as <code>std::vector</code>) are noexcept aware and will use the noexcept operator to determine whether to use <code>move semantics</code> (faster) or <code>copy semantics</code> (slower) in some places. We cover move semantics in <a href="https://www.learncpp.com#Chapter22">chapter 22</a>, and this optimization in lesson <a href="327-stdmove_if_noexcept.html">27.10 -- std::move_if_noexcept</a>.</li></li></li></ul><p>The standard library’s policy is to use <code>noexcept</code> only on functions that <em>must not</em> throw or fail. Functions that are potentially throwing but do not actually throw exceptions (due to implementation) typically are not marked as <code>noexcept</code>.<p>For your own code, always mark the following as <code>noexcept</code>:<ul><li>Move constructors<li>Move assignment operators<li>Swap functions</li></li></li></ul><p>For your code, consider marking the following as <code>noexcept</code>:<ul><li>Functions for which you want to express a no-throw or no-fail guarantee (e.g. to document that they can be safely called from destructors or other noexcept functions)<li>Copy constructors and copy assignment operators that are no-throw (to take advantage of optimizations).<li>Destructors. Destructors are implicitly noexcept so long as all members have noexcept destructors</li></li></li></ul><div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Always make move constructors, move assignment, and swap functions <code>noexcept</code>.<p>Make copy constructors and copy assignment operators <code>noexcept</code> when you can.<p>Use <code>noexcept</code> on other functions to express a no-fail or no-throw guarantee.</p></p></p></p></div><div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>If you are uncertain whether a function should have a no-fail/no-throw guarantee, err on the side of caution and do not mark it with <code>noexcept</code>. Reversing a decision to use noexcept violates an interface commitment to the user about the behavior of the function, and may break existing code. Making guarantees stronger by later adding noexcept to a function that was not originally noexcept is considered safe.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Dynamic exception specifications<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Optional reading<p>Before C++11, and until C++17, <em>dynamic exception specifications</em> were used in place of <code>noexcept</code>. The <strong>dynamic exception specifications</strong> syntax uses the <code>throw</code> keyword to list which exception types a function might directly or indirectly throw:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="kt">int</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="k">throw</span><span class="p">();</span><span class="w"> </span><span class="c1">// does not throw exceptions</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="k">throw</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="p">);</span><span class="w"> </span><span class="c1">// may throw either std::out_of_range or a pointer to an integer</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="k">throw</span><span class="p">(...);</span><span class="w"> </span><span class="c1">// may throw anything</span>
+</code></pre><p>Due to factors such as incomplete compiler implementations, some incompatibility with template functions, common misunderstandings about how they worked, and the fact that the standard library mostly didn’t use them, the dynamic exception specifications were deprecated in C++11 and removed from the language in C++17 and C++20. See <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0003r0.html#2.0">this paper</a> for more context.</p></p></p></div></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="325-exception-dangers-and-downsides.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="327-stdmove_if_noexcept.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

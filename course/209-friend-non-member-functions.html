@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>15.8 — Friend non-member functions</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>15.8 — Friend non-member functions</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/friend-non-member-functions/">
+        https://www.learncpp.com/cpp-tutorial/friend-non-member-functions/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="208-static-member-functions.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="210-friend-classes-and-friend-member-functions.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>For much of this chapter and last, we’ve been preaching the virtues of access controls, which provide a mechanism for controlling who can access the various members of a class. Private members can only be accessed by other members of the class and public members can be accessed by everyone. In lesson <a href="189-access-functions.html">14.6 -- Access functions</a>, we discussed the benefits of keeping your data private, and creating a public interface for non-members to use.<p>However, there are situations where this arrangement is either not sufficient or not ideal.<p>For example, consider a storage class that is focused on managing some set of data. Now lets say you also want to display that data, but the code that handles the display will have lots of options and is therefore complex. You could put both the storage management functions and the display management functions in the same class, but that would clutter things up and make for a complex interface. You could also keep them separate: the storage class manages storage, and some other display class manages all of the display capabilities. That creates a nice separation of responsibility. But the display class would then be unable to access the private members of the storage class, and might not be able to do its job.<p>Alternatively, there are cases where syntactically we might prefer to use a non-member function over a member function (we’ll show an example of this below). This is commonly the case when overloading operators, a topic we’ll discuss in future lessons. But non-member functions have the same issue -- they can’t access the private members of the class.<p>If access functions (or other public member functions) already exist and are sufficient for whatever capability we’re trying to implement, then great -- we can (and should) just use those. But in some cases, those functions don’t exist. What then?<p>One option would be to add new member functions to the class, to allow other classes or non-member functions to do whatever job they would be otherwise unable to do. But we might not want to allow public access to such things -- perhaps those things are highly implementation dependent, or prone to misuse.<p>What we really need is some way to subvert the access control system on a case by case basis.<p class="cpp-section cpp-topline" style="clear:both">Friendship is magic<p>The answer to our challenge is friendship.<p>Inside the body of a class, a <strong>friend declaration</strong> (using the <code>friend</code> keyword) can be used to tell the compiler that some other class or function is now a friend. In C++, a <strong>friend</strong> is a class or function (member or non-member) that has been granted full access to the private and protected members of another class. In this way, a class can selectively give other classes or functions full access to their members without impacting anything else.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Key insight<p>Friendship is always granted by the class whose members will be accessed (not by the class or function desiring access). Between access controls and granting friendship, a class always retains the ability to control who can access its members.</p></p></div><p>For example, if our storage class made the display class a friend, then the display class would be able to access all members of the storage class directly. The display class could use this direct access to implement display of the storage class, while remaining structurally separate.<p>The friend declaration is not affected by access controls, so it does not matter where within the class body it is placed.<p>Now that we know what a friend is, let’s take a look at specific examples where friendship is granted to non-member functions, member functions, and other classes. We’ll discuss friend non-members functions in this lesson, and then take a look at friend classes and friend member functions in the next lesson <a href="210-friend-classes-and-friend-member-functions.html">15.9 -- Friend classes and friend member functions</a>.<p class="cpp-section cpp-topline" style="clear:both">Friend non-member functions<p>A <strong>friend function</strong> is a function (member or non-member) that can access the private and protected members of a class as though it were a member of that class. In all other regards, the friend function is a normal function.<p>Let’s take a look at an example of a simple class making a non-member function a friend:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Accumulator</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// Here is the friend declaration that makes non-member function void print(const Accumulator&amp; accumulator) a friend of Accumulator</span>
+<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="c1">// Because print() is a friend of Accumulator</span>
+<span class="w"> </span><span class="c1">// it can access the private members of Accumulator</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">.</span><span class="n">m_value</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Accumulator</span><span class="w"> </span><span class="n">acc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">acc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// add 5 to the accumulator</span>
+<span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">acc</span><span class="p">);</span><span class="w"> </span><span class="c1">// call the print() non-member function</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In this example, we’ve declared a non-member function named <code>print()</code> that takes an object of class <code>Accumulator</code>. Because <code>print()</code> is not a member of the Accumulator class, it would normally not be able to access private member <code>m_value</code>. However, the Accumulator class has a friend declaration making <code>print(const Accumulator&amp; accumulator)</code> a friend, this is now allowed.<p>Note that because <code>print()</code> is a non-member function (and thus does not have an implicit object), we must explicitly pass an <code>Accumulator</code> object to <code>print()</code> to work with.<p class="cpp-section cpp-topline" style="clear:both">Defining a friend non-member inside a class<p>Much like member functions can be defined inside a class if desired, friend non-member functions can also be defined inside a class. The following example defines friend non-member function <code>print()</code> inside the <code>Accumulator</code> class:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Accumulator</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="c1">// Friend functions defined inside a class are non-member functions</span>
+<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="c1">// Because print() is a friend of Accumulator</span>
+<span class="w"> </span><span class="c1">// it can access the private members of Accumulator</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">.</span><span class="n">m_value</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Accumulator</span><span class="w"> </span><span class="n">acc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">acc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// add 5 to the accumulator</span>
+<span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">acc</span><span class="p">);</span><span class="w"> </span><span class="c1">// call the print() non-member function</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>Although you might assume that because <code>print()</code> is defined inside <code>Accumulator</code>, that makes <code>print()</code> a member of <code>Accumulator</code>, this is not the case. Because <code>print()</code> is defined as a friend, it is instead treated as a non-member function (as if it had been defined outside <code>Accumulator</code>).<p class="cpp-section cpp-topline" style="clear:both">Syntactically preferring a friend non-member function<p>In the introduction to this lesson, we mentioned that there were times we might prefer to use a non-member function over a member function. Let’s show an example of that now.<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Value</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="p">{};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="k">explicit</span><span class="w"> </span><span class="n">Value</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isEqualToMember</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isEqualToNonmember</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v2</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">Value::isEqualToMember</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">m_value</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">isEqualToNonmember</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Value</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v1</span><span class="p">.</span><span class="n">m_value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v2</span><span class="p">.</span><span class="n">m_value</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v1</span><span class="p">.</span><span class="n">isEqualToMember</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">isEqualToNonmember</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In this example, we’ve defined two similar functions that check whether two <code>Value</code> objects are equal. <code>isEqualToMember()</code> is a member function, and <code>isEqualToNonmember()</code> is a non-member function. Let’s focus on how these functions are defined.<p>In <code>isEqualToMember()</code>, we’re passing one object implicitly and the other explicitly. The implementation of the function reflects this, and we have to mentally reconcile that <code>m_value</code> belongs to the implicit object whereas <code>v.m_value</code> belongs to the explicit parameter.<p>In <code>isEqualToNonmember()</code>, both objects are passed explicitly. This leads to better parallelism in the implementation of the function, as the <code>m_value</code> member is always explicitly prefixed with an explicit parameter.<p>You may still prefer the calling syntax <code>v1.isEqualToMember(v2)</code> over <code>isEqualToNonmember(v1, v2)</code>. But when we cover operator overloading, we’ll see this topic come up again.<p class="cpp-section cpp-topline" style="clear:both">Multiple friends<p>A function can be a friend of more than one class at the same time. For example, consider the following example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Humidity</span><span class="p">;</span><span class="w"> </span><span class="c1">// forward declaration of Humidity</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Temperature</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_temp</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="k">explicit</span><span class="w"> </span><span class="n">Temperature</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_temp</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">printWeather</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Temperature</span><span class="o">&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Humidity</span><span class="o">&amp;</span><span class="w"> </span><span class="n">humidity</span><span class="p">);</span><span class="w"> </span><span class="c1">// forward declaration needed for this line</span>
+<span class="p">};</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Humidity</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_humidity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="k">explicit</span><span class="w"> </span><span class="n">Humidity</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_humidity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">humidity</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">printWeather</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Temperature</span><span class="o">&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Humidity</span><span class="o">&amp;</span><span class="w"> </span><span class="n">humidity</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">printWeather</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Temperature</span><span class="o">&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Humidity</span><span class="o">&amp;</span><span class="w"> </span><span class="n">humidity</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The temperature is "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">temperature</span><span class="p">.</span><span class="n">m_temp</span><span class="w"> </span><span class="o">&lt;&lt;</span>
+<span class="w"> </span><span class="s">" and the humidity is "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">humidity</span><span class="p">.</span><span class="n">m_humidity</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Humidity</span><span class="w"> </span><span class="n">hum</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="p">};</span>
+<span class="w"> </span><span class="n">printWeather</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">hum</span><span class="p">);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>There are three things worth noting about this example. First, because <code>printWeather()</code> uses both <code>Humidity</code> and <code>Temperature</code> equally, it doesn’t really make sense to have it be a member of either. A non-member function works better. Second, because <code>printWeather()</code> is a friend of both <code>Humidity</code> and <code>Temperature</code>, it can access the private data from objects of both classes. Finally, note the following line at the top of the example:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="k">class</span><span class="w"> </span><span class="nc">Humidity</span><span class="p">;</span>
+</code></pre><p>This is a forward declaration for <code>class Humidity</code>. Class forward declarations serve the same role as function forward declarations -- they tell the compiler about an identifier that will be defined later. However, unlike functions, classes have no return types or parameters, so class forward declarations are always simply <code>class ClassName</code> (unless they are class templates).<p>Without this line, the compiler would tell us it doesn’t know what a <code>Humidity</code> is when parsing the friend declaration inside <code>Temperature</code>.<p class="cpp-section cpp-topline" style="clear:both">Doesn’t friendship violate the principle of data hiding?<p>No. Friendship is granted by the class doing the data hiding with the expectation that the friend will access its private members. Think of a friend as an extension of the class itself, with all the same access rights. As such, access is expected, not a violation.<p>Used properly, friendship can make a program more maintainable by allowing functionality to be separated when it makes sense from a design perspective (as opposed to having to keep it together for access control reasons). Or when it makes more sense to use a non-member function instead of a member function.<p>However, because friends have direct access to the implementation of a class, changes to the implementation of the class will typically necessitate changes to the friends as well. If a class has many friends (or those friends have friends), this can lead to a ripple effect.<p>When implementing a friend function, prefer to use the public interface over direct access to members whenever possible. This will help insulate your friend function from future implementation changes and lead to less code needing to be modified and/or retested later.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>A friend function should prefer to use the class interface over direct access whenever possible.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Prefer non-friend functions to friend functions<p>In lesson <a href="191-the-benefits-of-data-hiding-encapsulation.html">14.8 -- The benefits of data hiding (encapsulation)</a>, we mentioned that we should prefer non-member functions over member functions. For the same reasons given there, we should prefer non-friend functions over friend functions.<p>For example, in the following example, if the implementation of <code>Accumulator</code> is changed (e.g. we rename <code>m_value</code>), the implementation of <code>print()</code> will need to be changed as well:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Accumulator</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// if we rename this</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// we need to modify this</span>
+<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">.</span><span class="n">m_value</span><span class="p">;</span><span class="w"> </span><span class="c1">// and we need to modify this</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Accumulator</span><span class="w"> </span><span class="n">acc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">acc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// add 5 to the accumulator</span>
+<span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">acc</span><span class="p">);</span><span class="w"> </span><span class="c1">// call the print() non-member function</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>A better idea is as follows:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Accumulator</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// added this reasonable access function</span>
+<span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">)</span><span class="w"> </span><span class="c1">// no longer a friend of Accumulator</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">accumulator</span><span class="p">.</span><span class="n">value</span><span class="p">();</span><span class="w"> </span><span class="c1">// use access function instead of direct access</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">Accumulator</span><span class="w"> </span><span class="n">acc</span><span class="p">{};</span>
+<span class="w"> </span><span class="n">acc</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// add 5 to the accumulator</span>
+<span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">acc</span><span class="p">);</span><span class="w"> </span><span class="c1">// call the print() non-member function</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>In this example, <code>print()</code> uses access function <code>value()</code> to get the value of <code>m_value</code> instead of accessing <code>m_value</code> directly. Now if the implementation of <code>Accumulator</code> is ever changed, <code>print()</code> will not need to be updated.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Prefer to implement a function as a non-friend when possible and reasonable.</p></p></div><p>Be cautious when adding new members to the public interface of an existing class, as every function (even trivial ones) adds some level of clutter and complexity. In the case of <code>Accumulator</code> above, it’s totally reasonable to have an access function to get the current accumulated value. In more complex cases, it may be preferable to use friendship instead of adding many new access functions to the interface of a class.</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="208-static-member-functions.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="210-friend-classes-and-friend-member-functions.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>

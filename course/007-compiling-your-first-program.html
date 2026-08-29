@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>0.7 — Compiling your first program</title>
+
+<style>
+
+    pre { line-height: 125%; }
+td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+pre code .hll { background-color: #6e7681 }
+pre code { background: #0d1117; color: #E6EDF3 }
+pre code .c { color: #8B949E; font-style: italic } /* Comment */
+pre code .err { color: #F85149 } /* Error */
+pre code .esc { color: #E6EDF3 } /* Escape */
+pre code .g { color: #E6EDF3 } /* Generic */
+pre code .k { color: #FF7B72 } /* Keyword */
+pre code .l { color: #A5D6FF } /* Literal */
+pre code .n { color: #E6EDF3 } /* Name */
+pre code .o { color: #FF7B72; font-weight: bold } /* Operator */
+pre code .x { color: #E6EDF3 } /* Other */
+pre code .p { color: #E6EDF3 } /* Punctuation */
+pre code .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
+pre code .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
+pre code .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
+pre code .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
+pre code .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
+pre code .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
+pre code .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
+pre code .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
+pre code .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre code .gr { color: #FFA198 } /* Generic.Error */
+pre code .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
+pre code .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
+pre code .go { color: #8B949E } /* Generic.Output */
+pre code .gp { color: #8B949E } /* Generic.Prompt */
+pre code .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
+pre code .gu { color: #79C0FF } /* Generic.Subheading */
+pre code .gt { color: #FF7B72 } /* Generic.Traceback */
+pre code .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
+pre code .kc { color: #79C0FF } /* Keyword.Constant */
+pre code .kd { color: #FF7B72 } /* Keyword.Declaration */
+pre code .kn { color: #FF7B72 } /* Keyword.Namespace */
+pre code .kp { color: #79C0FF } /* Keyword.Pseudo */
+pre code .kr { color: #FF7B72 } /* Keyword.Reserved */
+pre code .kt { color: #FF7B72 } /* Keyword.Type */
+pre code .ld { color: #79C0FF } /* Literal.Date */
+pre code .m { color: #A5D6FF } /* Literal.Number */
+pre code .s { color: #A5D6FF } /* Literal.String */
+pre code .na { color: #E6EDF3 } /* Name.Attribute */
+pre code .nb { color: #E6EDF3 } /* Name.Builtin */
+pre code .nc { color: #F0883E; font-weight: bold } /* Name.Class */
+pre code .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
+pre code .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
+pre code .ni { color: #FFA657 } /* Name.Entity */
+pre code .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
+pre code .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
+pre code .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
+pre code .nn { color: #FF7B72 } /* Name.Namespace */
+pre code .nx { color: #E6EDF3 } /* Name.Other */
+pre code .py { color: #79C0FF } /* Name.Property */
+pre code .nt { color: #7EE787 } /* Name.Tag */
+pre code .nv { color: #79C0FF } /* Name.Variable */
+pre code .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
+pre code .pm { color: #E6EDF3 } /* Punctuation.Marker */
+pre code .w { color: #6E7681 } /* Text.Whitespace */
+pre code .mb { color: #A5D6FF } /* Literal.Number.Bin */
+pre code .mf { color: #A5D6FF } /* Literal.Number.Float */
+pre code .mh { color: #A5D6FF } /* Literal.Number.Hex */
+pre code .mi { color: #A5D6FF } /* Literal.Number.Integer */
+pre code .mo { color: #A5D6FF } /* Literal.Number.Oct */
+pre code .sa { color: #79C0FF } /* Literal.String.Affix */
+pre code .sb { color: #A5D6FF } /* Literal.String.Backtick */
+pre code .sc { color: #A5D6FF } /* Literal.String.Char */
+pre code .dl { color: #79C0FF } /* Literal.String.Delimiter */
+pre code .sd { color: #A5D6FF } /* Literal.String.Doc */
+pre code .s2 { color: #A5D6FF } /* Literal.String.Double */
+pre code .se { color: #79C0FF } /* Literal.String.Escape */
+pre code .sh { color: #79C0FF } /* Literal.String.Heredoc */
+pre code .si { color: #A5D6FF } /* Literal.String.Interpol */
+pre code .sx { color: #A5D6FF } /* Literal.String.Other */
+pre code .sr { color: #79C0FF } /* Literal.String.Regex */
+pre code .s1 { color: #A5D6FF } /* Literal.String.Single */
+pre code .ss { color: #A5D6FF } /* Literal.String.Symbol */
+pre code .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
+pre code .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
+pre code .vc { color: #79C0FF } /* Name.Variable.Class */
+pre code .vg { color: #79C0FF } /* Name.Variable.Global */
+pre code .vi { color: #79C0FF } /* Name.Variable.Instance */
+pre code .vm { color: #79C0FF } /* Name.Variable.Magic */
+pre code .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        line-height: 1.7;
+
+        margin: 0;
+        padding: 0;
+
+        background: #f3f4f6;
+        color: #222;
+    }
+
+    main {
+        max-width: 900px;
+
+        margin: 40px auto;
+        padding: 50px 65px;
+
+        background: white;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 14px
+            rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        line-height: 1.25;
+
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    h2,
+    h3,
+    h4 {
+        line-height: 1.3;
+
+        margin-top: 2rem;
+    }
+
+    .source {
+        margin-bottom: 25px;
+
+        font-size: 0.85rem;
+
+        opacity: 0.65;
+
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #2367c9;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    ul,
+    ol {
+        padding-left: 2rem;
+
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0.35rem 0;
+    }
+
+
+    /* =================================================
+       LOCAL NAVIGATION
+       ================================================= */
+
+    .lesson-navigation {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap: 12px;
+
+        align-items: center;
+
+        margin:
+            25px
+            0
+            35px
+            0;
+
+        padding:
+            14px
+            0;
+
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+
+        border-bottom:
+            1px solid
+            rgba(128, 128, 128, 0.25);
+    }
+
+    .lesson-navigation
+    .nav-button {
+        display: inline-block;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 6px;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .lesson-navigation
+    .nav-button:first-child {
+        justify-self: start;
+    }
+
+    .lesson-navigation
+    .nav-button:last-child {
+        justify-self: end;
+    }
+
+    .home-button {
+        justify-self: center;
+    }
+
+    .nav-button:hover {
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.12
+            );
+    }
+
+    .nav-button.disabled {
+        opacity: 0.3;
+
+        cursor: default;
+    }
+
+
+    /* =================================================
+       LEARNCPP HEADINGS
+       ================================================= */
+
+    .cpp-section {
+        font-size: 1.35rem;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+
+        padding-top: 0.4rem;
+    }
+
+    .cpp-topline {
+        border-top:
+            1px solid
+            rgba(128, 128, 128, 0.3);
+
+        padding-top: 1.5rem;
+    }
+
+
+    /* =================================================
+       INLINE CODE
+       ================================================= */
+
+    code {
+        font-family:
+            "Cascadia Code",
+            "JetBrains Mono",
+            Consolas,
+            monospace;
+
+        font-size: 0.95em;
+    }
+
+    :not(pre) > code {
+        padding:
+            2px
+            5px;
+
+        border-radius: 4px;
+
+        background: #eeeeee;
+    }
+
+
+    /* =================================================
+       CODE BLOCKS
+       ================================================= */
+
+    pre {
+        overflow-x: auto;
+
+        margin:
+            1.4rem
+            0;
+
+        padding:
+            18px
+            20px;
+
+        border-radius: 8px;
+
+        background: #0d1117;
+        color: #f0f0f0;
+
+        line-height: 1.55;
+
+        tab-size: 4;
+    }
+
+    pre code {
+        font-size: 0.93rem;
+    }
+
+
+    /* =================================================
+       LEARNCPP CALLOUTS
+       ================================================= */
+
+    .cpp-note {
+        margin:
+            1.5rem
+            0;
+
+        padding:
+            0
+            18px
+            16px
+            18px;
+
+        border-left:
+            5px solid #888;
+
+        border-radius: 6px;
+
+        background:
+            rgba(
+                128,
+                128,
+                128,
+                0.08
+            );
+    }
+
+    .cpp-note-title {
+        margin:
+            0
+            -18px
+            12px
+            -18px;
+
+        padding:
+            10px
+            18px;
+
+        font-weight: 700;
+
+        border-bottom:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.25
+            );
+    }
+
+    .cpp-lightpurplebackground {
+        border-left-color: #8957e5;
+    }
+
+    .cpp-lightbluebackground {
+        border-left-color: #2f81f7;
+    }
+
+    .cpp-lightgreenbackground {
+        border-left-color: #3fb950;
+    }
+
+    .cpp-lightredbackground {
+        border-left-color: #f85149;
+    }
+
+    .cpp-lightyellowbackground {
+        border-left-color: #d29922;
+    }
+
+
+    /* =================================================
+       QUIZZES
+       ================================================= */
+
+    .cpp-quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        margin-top: 2rem;
+    }
+
+    details {
+        margin:
+            0.8rem
+            0
+            1.3rem
+            0;
+
+        padding:
+            10px
+            14px;
+
+        border:
+            1px solid
+            rgba(
+                128,
+                128,
+                128,
+                0.35
+            );
+
+        border-radius: 6px;
+    }
+
+    summary {
+        cursor: pointer;
+
+        font-weight: 600;
+
+        user-select: none;
+    }
+
+    details[open] summary {
+        margin-bottom: 10px;
+    }
+
+    .wpsolution,
+    .wphint {
+        display: block !important;
+    }
+
+
+    /* =================================================
+       TABLES / IMAGES / QUOTES
+       ================================================= */
+
+    blockquote {
+        border-left:
+            4px solid #888;
+
+        margin-left: 0;
+
+        padding-left: 18px;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        margin: 1.5rem 0;
+    }
+
+    th,
+    td {
+        border:
+            1px solid #ccc;
+
+        padding:
+            8px
+            12px;
+
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+
+        height: auto;
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media
+    (max-width: 700px) {
+
+        main {
+            margin: 0;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 0;
+        }
+
+        .lesson-navigation {
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+        .home-button {
+            grid-column:
+                1
+                /
+                -1;
+
+            grid-row: 1;
+
+            justify-self: center;
+        }
+
+    }
+
+
+    /* =================================================
+       DARK MODE
+       ================================================= */
+
+    @media
+    (prefers-color-scheme: dark) {
+
+        body {
+            background: #111;
+
+            color: #ddd;
+        }
+
+        main {
+            background: #191919;
+
+            box-shadow: none;
+        }
+
+        a {
+            color: #78a9ff;
+        }
+
+        :not(pre) > code {
+            background: #292929;
+        }
+
+        th,
+        td {
+            border-color: #444;
+        }
+
+        .cpp-note {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+        }
+
+        details {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>0.7 — Compiling your first program</h1>
+
+<div class="source">
+    Original lesson:
+    <a href="https://www.learncpp.com/cpp-tutorial/compiling-your-first-program/">
+        https://www.learncpp.com/cpp-tutorial/compiling-your-first-program/
+    </a>
+</div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="006-installing-an-integrated-development-environment-ide.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="008-a-few-common-cpp-problems.html">Next →</a>
+
+</nav>
+
+
+<div class="entry-content" itemprop="articleBody"><p>Before we can write our first program, we need to learn how to create new programs within our Integrated Development Environment (IDE). In this lesson, we’ll cover how to do that, and you’ll also compile and execute your first program!<p class="cpp-section cpp-topline" style="clear:both">Projects<p>To write a C++ program inside an IDE, we typically start by creating a new project (we’ll show you how to do this in a bit). A <strong>project</strong> is a container that holds all of your source code files, images, data files, etc… that are needed to produce an executable (or library, website, etc…) that you can run or use. The project also saves various IDE, compiler, and linker settings, as well as remembering where you left off, so that when you reopen the project later, the state of the IDE can be restored to wherever you left off. When you choose to compile your program, all of the .cpp files in the project will get compiled and linked.<p>Each project corresponds to one program. When you’re ready to create a second program, you’ll either need to create a new project, or overwrite the code in an existing project (if you don’t want to keep it). Project files are generally IDE specific, so a project created for one IDE will need to be recreated in a different IDE.<div class="cpp-note cpp-lightgreenbackground"><p class="cpp-note-title cpp-bottomline">Best practice<p>Create a new project for each new program you write.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Console projects<p>When you create a new project, you’ll generally be asked what type of project you want to create. All of the projects that we will create in this tutorial will be console projects. A <strong>console project</strong> means that we are going to create programs that can be run from the Windows, Linux, or Mac console.<p>Here’s a screenshot of the Windows console:<div class="cpp-image-wrapper"><img alt="Windows console" src="https://www.learncpp.com/images/CppTutorial/Chapter0/WindowsCommandLine-min.png"/></div><p>By default, console applications have no graphical user interface (GUI), they print text to the console, read input from the keyboard, and are compiled into stand-alone executable files. This is perfect for learning C++, because it keeps the complexity to a minimum, and ensures things work on a wide variety of systems.<p>Don’t worry if you’ve never used a console before, or don’t know how to access it. We’ll compile and launch our programs through our IDEs (which will invoke the console when necessary).<p class="cpp-section cpp-topline" style="clear:both">Workspaces / solutions<p>When you create a new project for your program, many IDEs will automatically add your project to a “workspace” or a “solution” (the term varies by IDE). A workspace or solution is a container that can hold one or more related projects. For example, if you were writing a game and wanted to have a separate executable for single player and multiplayer, you’d need to create two projects. It wouldn’t make sense for both of these projects to be completely independent -- after all, they are part of the same game. Most likely, each would be configured as a separate project within a single workspace/solution.<p>Although you can add multiple projects to a single solution, we generally recommend creating a new workspace or solution for each program, especially while learning. It’s simpler and there’s less chance of something going wrong.<p class="cpp-section cpp-topline" style="clear:both">Writing your first program<p>Traditionally, the first program programmers write in a new language is the infamous <a href="https://en.wikipedia.org/wiki/Hello_world">hello world program</a>, and we aren’t going to deprive you of that experience! You’ll thank us later. Maybe.<p class="cpp-section cpp-topline" style="clear:both"><a name="creating_project_vs19"></a>Creating a project in Visual Studio 2019 (or newer) <a href="#creating_project_vs19"><i class="fa fa-link" style="font-size:.8em"></i></a><p>When you run Visual Studio 2019 (or newer), you should see a dialog that looks like this:<div class="cpp-image-wrapper"><img alt="Visual Studio 2019 Get Started dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2019-GetStarted-min.png"/></div><p>Select <em>Create a new project</em>.<p>You’ll then see a dialog that looks like this:<div class="cpp-image-wrapper"><img alt="Visual Studio 2019 Create New Project dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2019-CreateNewProject-min.png"/></div><p>If you’ve already opened a prior project, you can access this dialog via the <em>File menu &gt; New &gt; Project</em>.<p>Select <em>Windows Desktop Wizard</em> and click <em>Next</em>. If you don’t see this, then you probably forgot to choose to install the <em>Desktop development with C++</em> workload when you installed Visual Studio. In that case, go back to lesson <a href="006-installing-an-integrated-development-environment-ide.html">0.6 -- Installing an Integrated Development Environment (IDE)</a> and reinstall your Visual Studio as indicated (note: rather than doing a full reinstall, you can run the Visual Studio installer and modify your existing installation to add the C++ workload).<p>Next, you’ll see a dialog that looks like this:<div class="cpp-image-wrapper"><img alt="Visual Studio 2019 Configure New Project dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2019-ConfigureNewProject-min.png"/></div><p>Replace the existing project name with <code>HelloWorld</code>.<p>It’s recommended that you also check the <em>Place solution and project in the same directory</em>, as this reduces the number of subdirectories that get created with each project.<p>Click <em>Create</em> to continue.<p>Finally, you’ll see one last dialog:<div class="cpp-image-wrapper"><img alt="Visual Studio 2019 Project options dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2019-PrecompiledHeader-min.png"/></div><p>Make sure the <em>Application type</em> is set as <em>Console Application (.exe)</em> and that the <em>Precompiled Header</em> option is unselected. Then click <em>OK</em>.<p>You’ve now created a project! Jump down to the <a href="#visual_studio_solution_explorer">Visual Studio Solution Explorer</a> section below to continue.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: What are precompiled headers and why are we turning them off?<p>In large projects (those with many code files), precompiled headers can improve compilation speed by avoiding some redundant compilation that tends to occur in larger projects.<p>However, precompiled headers require extra work to use, and for small projects (such as those you’ll create in our tutorials) make little to no difference in compilation times.<p>For this reason, we recommend turning precompiled headers off initially, and only enabling them later if and when you find your compilation times suffering.</p></p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Creating a project in Visual Studio 2017 or older<p>To create a new project in Visual Studio 2017 or older, go to the <em>File menu &gt; New &gt; Project</em>. A dialog box will pop up that looks something like this:<div class="cpp-image-wrapper"><img alt="Visual Studio 2017 New Project dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2017-NewProject-min.png"/></div><p>First, make sure <em>Visual C++</em> is listed on the left side. If you don’t see <em>Visual C++</em>, then you probably forgot to choose to install the <em>Desktop development with C++</em> workload when you installed Visual Studio. In that case, go back to lesson <a href="006-installing-an-integrated-development-environment-ide.html">0.6 -- Installing an Integrated Development Environment (IDE)</a> and reinstall your Visual Studio as indicated (note: rather doing a full reinstall, you can run the Visual Studio installer and modify your existing install to add the C++ workload).<p>If you’re using Visual Studio 2017 v15.3 or newer, underneath <em>Visual C++</em>, select <em>Windows Desktop</em> and then select <em>Windows Desktop Wizard</em> in the main window.<p>If you don’t see <em>Windows Desktop</em> as an option, you’re probably using an older version of Visual Studio. That’s fine. Instead, choose <em>Win32</em> and then <em>Win32 Console Application</em> in the main window.<p>Down below, in the <em>Name</em> field, enter the name of your program (replace the existing name with <code>HelloWorld</code>). In the Location field, you can optionally select a different location for your project to be placed into. The default is fine for now.<p>Click <em>OK</em>. If you’re using an older version of Visual Studio, the Win32 Application Wizard will launch. Press <em>Next</em>.<p>At this point, you should see a wizard dialog that looks something like this (older versions of Visual Studio use a different style, but have most of the same options):<div class="cpp-image-wrapper"><img alt="Visual Studio 2017 Desktop wizard" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2017-DesktopWizard-min.png"/></div><p>Make sure you uncheck <em>Precompiled Header</em>.<p>Then click <em>Ok</em> or <em>Finish</em>. Now your project is created!<p class="cpp-section cpp-topline" style="clear:both"><a name="visual_studio_solution_explorer"></a>Visual Studio Solution Explorer <a href="#visual_studio_solution_explorer"><i class="fa fa-link" style="font-size:.8em"></i></a><p>On the left or right side of the window, you should see a window titled <em>Solution Explorer</em>. Inside this window, Visual Studio has created a solution for you (<em>Solution ‘HelloWorld’</em>). Within that, with the name in bold, is your new project (<em>HelloWorld</em>). Within the project, Visual Studio has created a number of files for you, including <em>HelloWorld.cpp</em> (underneath the <em>Source Files</em> tree item). You may also see some other .cpp or .h files, which you can ignore for now.<div class="cpp-image-wrapper"><img alt="Visual Studio 2019 initial windows" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VS2019-Initial-min.png"/></div><p>In the text editor, you will see that Visual Studio has already opened <em>HelloWorld.cpp</em> and created some code for you. Select and delete all of the code, and type/copy the following into your IDE:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, world!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>To compile your program, either press <em>F7</em> (if this doesn’t work, try <em>Ctrl-Shift-B</em>) or go to the <em>Build menu &gt; Build Solution</em>. If all goes well, you should see the following appear in the Output window:<pre>1&gt;------ Build started: Project: HelloWorld, Configuration: Debug Win32 ------
+1&gt;HelloWorld.cpp
+1&gt;HelloWorld.vcxproj -&gt; c:\users\alex\documents\visual studio 2017\Projects\HelloWorld\Debug\HelloWorld.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+</pre><p>This means your compile was successful!<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Q: I got error C1010 ("fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add ‘#include "stdafx.h"’ to your source?"). What now?<p>You forgot to turn off precompiled headers when you created your project. Recreate your project (as per the <a href="#creating_project_vs19">instructions above</a>) and make sure to disable precompiled headers.</p></p></div><p>To run your compiled program, press <em>Ctrl-F5</em>, or go to the <em>Debug menu</em> and choose <em>Start Without Debugging</em>. You will see something like the following:<div class="cpp-image-wrapper"><img alt="Program run" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VC2005-Run-min.png"/></div><p>That is the result of your program! Congratulations, you’ve compiled and run your first program!<div class="cpp-note cpp-lightgraybackground"><p class="cpp-note-title cpp-bottomline">Related content<p>When you run a program directly from Visual Studio, you may see an additional line of output that looks something like this:<pre>C:\Users\Alex\source\repos\Project6\Debug\Project6.exe (process 21896) exited with code 0.
+</pre><p>This is normal. Visual Studio is providing some additional information about whether your program exited normally or abnormally. We discuss this further in lesson <a href="027-function-return-values-value-returning-functions.html">2.2 -- Function return values (value-returning functions)</a>.</p></p></p></div><p class="cpp-section cpp-topline" style="clear:both">Creating a project in Code::Blocks<p>To create a new project, go to <em>File menu &gt; New &gt; Project</em>. A dialog box will pop up that looks like this:<div class="cpp-image-wrapper"><img alt="Code::Blocks Project Dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/CB-Project-min.png"/></div><p>Select <em>Console application</em> and press the <em>Go (or Create)</em> button.<p>If you see a console application wizard dialog, press <em>Next</em>, make sure C++ is selected and press <em>Next</em> again.<p>Now you will be asked to name your project. Title the project <code>HelloWorld</code>. You can save it wherever you wish. On Windows, we recommend you to save it in a subdirectory of the C drive, such as <code>C:\CBProjects</code>.<div class="cpp-image-wrapper"><img alt="Code::Blocks Save Project Dialog" src="https://www.learncpp.com/images/CppTutorial/Chapter0/CB2017-Save-min.png"/></div><p>You may see another dialog asking you which configurations you want enabled. The defaults should be fine here, so select <em>Finish</em>.<p>Now your new project has been created.<p>On the left side of the screen, you should see a <em>Management</em> window, with the <em>Projects</em> tab selected. Inside that window, you’ll see a <em>Workspace</em> folder, with your <em>HelloWorld</em> project inside of it:<div class="cpp-image-wrapper"><img alt="Code::Blocks Workspace" src="https://www.learncpp.com/images/CppTutorial/Chapter0/CB-Closed-min.png"/></div><p>Inside the <em>HelloWorld</em> project, expand the <em>Sources</em> folder, and double click on “main.cpp”. You will see that a hello world program has already been written for you!<p>Replace that one with the following:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, world!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>To build your project, press <em>Ctrl-F9</em>, or go to <em>Build menu &gt; Build</em>. If all goes well, you should see the following appear in the Build log window:<pre>-------------- Build: Debug in HelloWorld (compiler: GNU GCC Compiler)---------------
+mingw32-g++.exe -Wall -fexceptions -g -std=c++14  -c C:\CBProjects\HelloWorld\main.cpp -o obj\Debug\main.o
+mingw32-g++.exe  -o bin\Debug\HelloWorld.exe obj\Debug\main.o   
+Output file is bin\Debug\HelloWorld.exe with size 1.51 MB
+Process terminated with status 0 (0 minute(s), 0 second(s))
+0 error(s), 0 warning(s) (0 minute(s), 0 second(s))
+</pre><p>This means your compile was successful!<p>To run your compiled program, press <em>Ctrl-F10</em>, or go to <em>Build menu &gt; Run</em>. You will see something similar to the following:<div class="cpp-image-wrapper"><img alt="Program run" src="https://www.learncpp.com/images/CppTutorial/Chapter0/VC2005-Run-min.png"/></div><p>That is the result of your program!<div class="cpp-note cpp-lightyellowbackground"><p class="cpp-note-title cpp-bottomline">For Linux users<p>Linux users may need to install the additional packages before Code::Blocks will compile. Please see the Code::Blocks installation instructions in lesson <a href="006-installing-an-integrated-development-environment-ide.html">0.6 -- Installing an Integrated Development Environment (IDE)</a> for more info.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">Creating a project in VS Code<p>To start a new project, go to the <em>View &gt; Explorer</em> menu (or press <em>Ctrl-Shift-E</em>). This will open the explorer pane. If you haven’t previously opened a project, you should see an <em>Open Folder</em> button in the explorer pane -- press it. If there is already an open project and you want to start a new one, choose <em>File &gt; Open Folder</em> from the top nav.<p>Inside the dialog that opens, create a new folder named <em>HelloWorld</em> and then select this folder. This folder will be your project folder.<p>Next, we need to create the file that will contain our source code. Choose <em>File &gt; New File</em> from the top nav, or click the <em>New File icon</em> to the right of <em>HELLOWORLD</em> in the explorer pane.<p>Name your file <em>main.cpp</em> and add the following contents to it:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, world!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>To compile <em>main.cpp</em> and run the program, make sure <em>main.cpp</em> is open in the main pane, and then either choose <em>Run &gt; Run Without Debugging</em> from the top nav, or click the <em>v</em> to the right of the play icon to the right of <em>main.cpp</em> tab and choose <em>Run C/C++ File</em>.<p>Next, choose the <em>g++ build and debug active file</em> option (macOS users should choose <em>clang++</em> instead of <em>g++</em>). Switch the tab from <em>DEBUG CONSOLE</em> to <em>TERMINAL</em> at the bottom of the window.<p>If the terminal contains the text “Hello, world!”, then congratulations, you’ve just run your first C++ program!<p class="cpp-section cpp-topline" style="clear:both">If you’re using g++ on the command line<p>In this case, you don’t need to create a project. Simply paste the following into a text file named HelloWorld.cpp and save your file:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, world!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><p>From the command line, type:<p><code>g++ -o HelloWorld HelloWorld.cpp</code><p>This will compile and link HelloWorld.cpp. To run it, type:<p><code>HelloWorld</code> (or possibly <code>./HelloWorld</code>), and you will see the output of your program.<p class="cpp-section cpp-topline" style="clear:both">If you’re using other IDEs or a web-based compiler<p>You will have to figure out how to do the following on your own:<ol start="1"><li>Create a console project (IDEs only)<li>Add a .cpp file to the project (IDEs only, if one isn’t auto-created for you)<li>Paste the following code into the file:</li></li></li></ol><pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello, world!"</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><ol start="4"><li>Compile the project<li>Run the project</li></li></ol><p class="cpp-section cpp-topline" style="clear:both">If compiling fails<p>It’s okay, take a deep breath. We can probably fix it. :)<p>First, look at the error message that the compiler gave you. Most often, it will contain a line number indicating which line was in error. Examine both that line and the lines around it, and make sure there are no typos or misspellings. Also make sure you’re not including line numbers in your code (your editor should be providing those).<p>Second, look at the Q&amp;A in lesson <a href="008-a-few-common-cpp-problems.html">0.8 -- A few common C++ problems</a>, as your issue may be covered there.<p>Third, read the comments below the lesson containing the example you’re compiling -- someone may have encountered the same issue and provided a solution.<p>Finally, if all of the above fail, try searching for your error message on your favorite search engine. It’s likely someone else has encountered this issue before and figured out how to fix it.<p class="cpp-section cpp-topline" style="clear:both">If your program runs but the console window flashes and closes immediately<p>When a console program is run, the console window will open and any output from the program will be written into the console window.<p>When the program has finished running, most modern IDEs will keep the console open (until you press a key) so you can inspect the results of the program before continuing. However, some older IDEs will automatically close the console window when the program finishes running. This is generally not what you want.<p>If your IDE closes the console window automatically, the following two steps can be used to ensure the console pauses at end of the program.<p>First, add or ensure the following lines are near the top of your program:<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits&gt;</span>
+</code></pre><p>Second, add the following code at the end of the main() function (just before the return statement):<pre class="language-cpp line-numbers"><code class="language-cpp match-braces"><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// reset any error flags</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">ignore</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">streamsize</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">(),</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">);</span><span class="w"> </span><span class="c1">// ignore any characters in the input buffer until we find a newline</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">get</span><span class="p">();</span><span class="w"> </span><span class="c1">// get one more char from the user (waits for user to press enter)</span>
+</code></pre><p>This will cause your program to wait for the user to press enter before continuing (you may have to press enter twice), which will give you time to examine your program’s output before your IDE closes the console window.<p>Other solutions, such as the commonly suggested <code>system("pause")</code> solution may only work on certain operating systems and should be avoided.<p>If the console window doesn’t open at all and your program doesn’t appear to be running, your anti-virus or anti-malware may also be blocking execution of the program. If that’s the case, try temporarily disabling your scanners and see if the problem resolves, or exclude the project directory from your scans.<div class="cpp-note cpp-lightbluebackground"><p class="cpp-note-title cpp-bottomline">Tip<p>If you’re using anti-virus or anti-malware, consider excluding your project directory from the scans, as compiling and debugging may cause false positives.</p></p></div><p class="cpp-section cpp-topline" style="clear:both">What is the difference between the compile, build, rebuild, clean, and run/start options in my IDE?<p>In lesson <a href="005-introduction-to-the-compiler-linker-and-libraries.html">0.5 -- Introduction to the compiler, linker, and libraries</a>, we showed that to produce an executable that can be run, each code file in a program is compiled into an object file, and then the object files are linked into an executable.<p>When a code file is compiled, your IDE may cache (save) the resulting object file on disk. A <strong>cache</strong> (pronounced like “cash”) is storage location where frequently accessed data is stored for fast retrieval later. That way, if the program is compiled again in the future, any code file that hasn’t been modified doesn’t need to be recompiled -- the cached object file from last time can be reused (rather than having to be regenerated). This can speed up compilation times significantly (at the cost of a little bit of disk space).<p>With that in mind, here’s what each of the options typically does:<ul><li><strong>Build</strong> compiles all <em>modified</em> code files in the project or workspace/solution, and then links the object files into an executable. If no code files have been modified since the last build, this option does nothing.<li><strong>Clean</strong> removes all cached objects and executables so the next time the project is built, all files will be recompiled and a new executable produced.<li><strong>Rebuild</strong> does a “clean”, followed by a “build”.<li><strong>Compile</strong> recompiles a single code file (regardless of whether it has been cached previously). This option does not invoke the linker or produce an executable.<li><strong>Run/start</strong> executes the executable from a prior build. Some IDEs (e.g. Visual Studio) will invoke a “build” before doing a “run” to ensure you are running the latest version of your code. Otherwise (e.g. Code::Blocks) will just execute the prior executable.</li></li></li></li></li></ul><p>Although we talk informally about “compiling” our programs, to actually compile our programs we will typically choose the “build” (or “run”) option in our IDE to do so.<p class="cpp-section cpp-topline" style="clear:both">Conclusion<p>Congratulations, you made it through the hardest part of this tutorial (installing the IDE and compiling your first program)!<p>Don’t worry if you don’t understand what the different lines in the Hello World program do. We’ll examine and explain each line in detail at the start of the next chapter.</p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></p></div>
+
+
+<nav class="lesson-navigation">
+
+    <a class="nav-button" href="006-installing-an-integrated-development-environment-ide.html">← Previous</a>
+
+    <a
+        class="nav-button home-button"
+        href="index.html"
+    >
+        Contents
+    </a>
+
+    <a class="nav-button" href="008-a-few-common-cpp-problems.html">Next →</a>
+
+</nav>
+
+
+</main>
+
+</body>
+
+</html>
