@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Set up course · LearnCpp Study{% endblock %}
+{% block page_id %}setup{% endblock %}
+{% block content %}
+<section class="study-empty-state">
+    <span class="study-eyebrow">One-time setup</span>
+    <h1>Generate the local course first</h1>
+    <p>
+        The study companion keeps lesson content separate from your tracked
+        study data. Generate the disposable course, then restart the app.
+    </p>
+    {% if error %}
+    <p class="study-inline-error">{{ error }}</p>
+    {% endif %}
+    <pre><code>python scraper.py --all
+python app.py</code></pre>
+    <p>
+        Already have lessons in <code>course/</code>? Run
+        <code>python scraper.py --manifest-only</code> instead.
+    </p>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Cards · LearnCpp Study{% endblock %}
+{% block page_id %}cards{% endblock %}
+{% block content %}
+<section class="study-page-heading">
+    <div>
+        <span class="study-eyebrow">Active recall</span>
+        <h1>Flashcards</h1>
+        <p>Review, search, edit, or remove the questions you created.</p>
+    </div>
+    <a class="study-primary-button" href="{{ url_for('web.review') }}">
+        Start review
+    </a>
+</section>
+<div class="study-filter-row">
+    <label class="study-search-field study-search-field-wide">
+        <span class="study-visually-hidden">Search cards</span>
+        <input
+            id="study-cards-search"
+            type="search"
+            placeholder="Search questions, answers, lessons, or tags"
+            autocomplete="off"
+        >
+    </label>
+    <label class="study-checkbox">
+        <input id="study-cards-again-only" type="checkbox">
+        Needs review
+    </label>
+</div>
+<section id="study-cards-list" class="study-card-grid" aria-live="polite">
+    <p class="study-loading">Loading cards…</p>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "learncpp-study-companion"
+version = "0.1.0"
+description = "A local, Git-friendly study companion for LearnCpp"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4",
+    "Flask",
+    "Pygments",
+    "requests",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.setuptools]
+packages = ["study_app"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+study_app = [
+    "static/*.css",
+    "static/*.js",
+    "templates/*.html",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

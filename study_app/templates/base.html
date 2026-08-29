@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>{% block title %}LearnCpp Study{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='study.css') }}">
+</head>
+<body class="study-app-page" data-page="{% block page_id %}app{% endblock %}">
+    <a class="study-skip-link" href="#main-content">Skip to content</a>
+    <header class="study-app-header">
+        <a class="study-brand" href="{{ url_for('web.dashboard') }}">
+            <span class="study-brand-mark" aria-hidden="true">C++</span>
+            <span>
+                <strong>LearnCpp Study</strong>
+                <small>Local companion</small>
+            </span>
+        </a>
+        <nav class="study-app-nav" aria-label="Study navigation">
+            <a href="{{ url_for('web.dashboard') }}">Course</a>
+            <a href="{{ url_for('web.notes') }}">Notes</a>
+            <a href="{{ url_for('web.cards') }}">Cards</a>
+            <a href="{{ url_for('web.review') }}">Review</a>
+        </nav>
+    </header>
+    <main id="main-content" class="study-app-main">
+        {% block content %}{% endblock %}
+    </main>
+    <div
+        id="study-toast"
+        class="study-toast"
+        role="status"
+        aria-live="polite"
+        hidden
+    ></div>
+    <script src="{{ url_for('static', filename='study.js') }}" defer></script>
+</body>
+</html>

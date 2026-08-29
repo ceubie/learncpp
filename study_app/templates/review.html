@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Review · LearnCpp Study{% endblock %}
+{% block page_id %}review{% endblock %}
+{% block content %}
+<section class="study-page-heading study-review-heading">
+    <div>
+        <span class="study-eyebrow">Retrieval practice</span>
+        <h1>Review flashcards</h1>
+        <p>Try to answer before revealing. Grade the recall, not the feeling.</p>
+    </div>
+    <div class="study-review-filters">
+        <label>
+            <span>Scope</span>
+            <select id="study-review-scope">
+                <option value="again">Marked Again</option>
+                <option value="all">All cards</option>
+                <option value="chapter">Chapter</option>
+                <option value="lesson">Lesson</option>
+            </select>
+        </label>
+        <label id="study-review-target-field" hidden>
+            <span id="study-review-target-label">Target</span>
+            <select id="study-review-target"></select>
+        </label>
+        <button id="study-review-start" class="study-secondary-button" type="button">
+            Build queue
+        </button>
+    </div>
+</section>
+
+<section id="study-review-empty" class="study-empty-state" hidden>
+    <span class="study-eyebrow">Queue clear</span>
+    <h2>No cards in this review</h2>
+    <p>Create a card from a lesson or choose another scope.</p>
+    <a class="study-secondary-button" href="{{ url_for('web.dashboard') }}">
+        Return to course
+    </a>
+</section>
+
+<section id="study-review-session" class="study-review-session" hidden>
+    <div class="study-review-status">
+        <span id="study-review-position">1 / 1</span>
+        <span id="study-review-lesson"></span>
+    </div>
+    <article class="study-review-card" tabindex="0">
+        <div id="study-review-front" class="study-review-face"></div>
+        <div id="study-review-back" class="study-review-face" hidden></div>
+        <button id="study-review-reveal" class="study-primary-button" type="button">
+            Show answer <kbd>Space</kbd>
+        </button>
+    </article>
+    <div id="study-review-grades" class="study-review-grades" hidden>
+        <button id="study-review-again" class="study-grade-again" type="button">
+            Again <kbd>1</kbd>
+        </button>
+        <button id="study-review-got-it" class="study-grade-good" type="button">
+            Got it <kbd>2</kbd>
+        </button>
+    </div>
+    <div class="study-review-links">
+        <button id="study-review-previous" type="button">← Previous</button>
+        <span id="study-review-context-links" hidden>
+            <a id="study-review-source" href="#">Open source lesson</a>
+            <a id="study-review-edit" href="#">Edit card</a>
+        </span>
+        <button id="study-review-next" type="button">Next →</button>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Notes · LearnCpp Study{% endblock %}
+{% block page_id %}notes{% endblock %}
+{% block content %}
+<section class="study-page-heading">
+    <div>
+        <span class="study-eyebrow">Knowledge base</span>
+        <h1>All notes</h1>
+        <p>Search the Markdown notes you intentionally saved while studying.</p>
+    </div>
+    <label class="study-search-field study-search-field-wide">
+        <span class="study-visually-hidden">Search notes</span>
+        <input
+            id="study-notes-search"
+            type="search"
+            placeholder="Search lessons or note text"
+            autocomplete="off"
+        >
+    </label>
+</section>
+<section id="study-notes-list" class="study-note-grid" aria-live="polite">
+    <p class="study-loading">Loading notes…</p>
+</section>
+{% endblock %}

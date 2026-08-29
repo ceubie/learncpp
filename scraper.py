@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import re
 import time
+from dataclasses import replace
 from html import escape
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, urlunparse
@@ -14,12 +15,20 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import CppLexer
 
+from study_app.catalog import (
+    LessonRecord,
+    apply_neighbors,
+    discover_lesson_records,
+    lesson_content_hash,
+    validate_course_artifact,
+    write_manifest,
+)
 
 BASE_URL = "https://www.learncpp.com/"
 TUTORIAL_PATH = "/cpp-tutorial/"
 
 USER_AGENT = "PersonalLearnCppReader/1.0"
-DEFAULT_DELAY = .5
+DEFAULT_DELAY = 1.0
 
 
 # =========================================================
@@ -198,10 +207,10 @@ def lesson_filename(
 # LESSON DISCOVERY
 # =========================================================
 
-def discover_lessons(
+def discover_course(
     session: requests.Session,
     robots: RobotFileParser | None,
-) -> list[str]:
+) -> list[LessonRecord]:
 
     print(
         "Reading LearnCpp "
@@ -214,44 +223,25 @@ def discover_lessons(
         robots,
     )
 
-    soup = BeautifulSoup(
+    return discover_lesson_records(
         html,
-        "html.parser",
+        base_url=BASE_URL,
     )
 
-    lessons: list[str] = []
-    seen: set[str] = set()
 
-    for link in soup.find_all(
-        "a",
-        href=True,
-    ):
-        absolute_url = urljoin(
-            BASE_URL,
-            link["href"],
+def discover_lessons(
+    session: requests.Session,
+    robots: RobotFileParser | None,
+) -> list[str]:
+    """Compatibility wrapper returning canonical lesson URLs."""
+
+    return [
+        lesson.source_url
+        for lesson in discover_course(
+            session,
+            robots,
         )
-
-        absolute_url = normalize_url(
-            absolute_url
-        )
-
-        if not is_lesson_url(
-            absolute_url
-        ):
-            continue
-
-        if absolute_url in seen:
-            continue
-
-        seen.add(
-            absolute_url
-        )
-
-        lessons.append(
-            absolute_url
-        )
-
-    return lessons
+    ]
 
 
 def build_lesson_map(
@@ -429,6 +419,12 @@ def remove_dead_quiz_labels(
             "Show hint",
         }:
             parent = element.parent
+
+            if (
+                parent is not None
+                and parent.name == "summary"
+            ):
+                continue
 
             if (
                 parent is not None
@@ -1323,16 +1319,14 @@ def save_lesson(
         url
     )
 
-    if index is None:
-        filename = (
-            f"{slug}.html"
-        )
-
-    else:
-        filename = (
+    filename = (
+        f"{slug}.html"
+        if index is None
+        else (
             f"{index:03d}-"
             f"{slug}.html"
         )
+    )
 
     destination = (
         output_directory
@@ -1576,9 +1570,320 @@ def build_index(
 """
 
 
+def finalize_lesson_document(
+    document: str,
+    previous_filename: str | None,
+    next_filename: str | None,
+    available_filenames: set[str],
+    discovered_by_id: dict[str, LessonRecord],
+) -> str:
+    """
+    Finalize navigation and local links after successful downloads are known.
+
+    This keeps one failed or removed lesson from leaving every neighboring page
+    with a broken navigation target.
+    """
+
+    soup = BeautifulSoup(
+        document,
+        "html.parser",
+    )
+
+    navigation = build_navigation(
+        previous_filename,
+        next_filename,
+    )
+
+    for old_navigation in list(
+        soup.select(
+            "nav.lesson-navigation"
+        )
+    ):
+        navigation_soup = BeautifulSoup(
+            navigation,
+            "html.parser",
+        )
+        new_navigation = (
+            navigation_soup.select_one(
+                "nav.lesson-navigation"
+            )
+        )
+        if new_navigation is not None:
+            old_navigation.replace_with(
+                new_navigation
+            )
+
+    for details, label in (
+        (
+            soup.select(
+                "details.local-quiz-answer"
+            ),
+            "Show solution",
+        ),
+        (
+            soup.select(
+                "details.local-quiz-hint"
+            ),
+            "Show hint",
+        ),
+    ):
+        for quiz_section in details:
+            summary = quiz_section.find(
+                "summary",
+                recursive=False,
+            )
+            if (
+                summary is not None
+                and not summary.get_text(
+                    " ",
+                    strip=True,
+                )
+            ):
+                summary.string = label
+
+    for link in soup.select(
+        "a[href]"
+    ):
+        href = str(
+            link.get(
+                "href",
+                "",
+            )
+        )
+        parsed = urlparse(
+            href
+        )
+        target_name = Path(
+            parsed.path
+        ).name
+
+        if (
+            not target_name.endswith(
+                ".html"
+            )
+            or target_name == "index.html"
+            or target_name
+            in available_filenames
+        ):
+            continue
+
+        match = re.fullmatch(
+            r"\d{3}-(.+)\.html",
+            target_name,
+        )
+        if match is None:
+            continue
+
+        missing_lesson = (
+            discovered_by_id.get(
+                match.group(1)
+            )
+        )
+        if missing_lesson is None:
+            continue
+
+        replacement_href = (
+            missing_lesson.source_url
+        )
+        if parsed.fragment:
+            replacement_href += (
+                f"#{parsed.fragment}"
+            )
+        link["href"] = replacement_href
+
+    return str(
+        soup
+    )
+
+
+def finalize_course_documents(
+    output_directory: Path,
+    successful_lessons: list[LessonRecord],
+    discovered_lessons: list[LessonRecord],
+) -> list[LessonRecord]:
+    successful_lessons = apply_neighbors(
+        successful_lessons
+    )
+    successful_by_id = {
+        lesson.id: lesson
+        for lesson in successful_lessons
+    }
+    discovered_by_id = {
+        lesson.id: lesson
+        for lesson in discovered_lessons
+    }
+    available_filenames = {
+        lesson.filename
+        for lesson in successful_lessons
+    }
+    finalized: list[LessonRecord] = []
+
+    for lesson in successful_lessons:
+        previous_lesson = (
+            successful_by_id.get(
+                lesson.previous_id
+            )
+            if lesson.previous_id
+            else None
+        )
+        next_lesson = (
+            successful_by_id.get(
+                lesson.next_id
+            )
+            if lesson.next_id
+            else None
+        )
+        path = (
+            output_directory
+            / lesson.filename
+        )
+        document = path.read_text(
+            encoding="utf-8"
+        )
+        document = finalize_lesson_document(
+            document=document,
+            previous_filename=(
+                previous_lesson.filename
+                if previous_lesson
+                else None
+            ),
+            next_filename=(
+                next_lesson.filename
+                if next_lesson
+                else None
+            ),
+            available_filenames=(
+                available_filenames
+            ),
+            discovered_by_id=(
+                discovered_by_id
+            ),
+        )
+        path.write_text(
+            document,
+            encoding="utf-8",
+        )
+        finalized.append(
+            replace(
+                lesson,
+                content_hash=(
+                    lesson_content_hash(
+                        document
+                    )
+                ),
+            )
+        )
+
+    return apply_neighbors(
+        finalized
+    )
+
+
 # =========================================================
 # FULL SITE
 # =========================================================
+
+def build_existing_manifest(
+    session: requests.Session,
+    robots: RobotFileParser | None,
+    output_directory: Path,
+) -> None:
+    """Build metadata for an existing generated course without refetching it."""
+
+    discovered_lessons = discover_course(
+        session,
+        robots,
+    )
+    generated_by_url: dict[
+        str,
+        tuple[
+            Path,
+            str,
+            str,
+        ],
+    ] = {}
+
+    for path in sorted(
+        output_directory.glob(
+            "*.html"
+        )
+    ):
+        if path.name == "index.html":
+            continue
+        document = path.read_text(
+            encoding="utf-8"
+        )
+        soup = BeautifulSoup(
+            document,
+            "html.parser",
+        )
+        source_link = soup.select_one(
+            ".source a[href]"
+        )
+        if source_link is None:
+            continue
+        source_url = normalize_url(
+            str(
+                source_link.get(
+                    "href",
+                    "",
+                )
+            )
+        )
+        heading = soup.select_one(
+            "main > h1"
+        )
+        title = (
+            heading.get_text(
+                " ",
+                strip=True,
+            )
+            if heading
+            else path.stem
+        )
+        generated_by_url[source_url] = (
+            path,
+            title,
+            lesson_content_hash(
+                document
+            ),
+        )
+
+    available: list[LessonRecord] = []
+    for discovered in discovered_lessons:
+        generated = generated_by_url.get(
+            normalize_url(
+                discovered.source_url
+            )
+        )
+        if generated is None:
+            continue
+        path, title, content_hash = generated
+        available.append(
+            replace(
+                discovered,
+                filename=path.name,
+                title=title,
+                content_hash=content_hash,
+            )
+        )
+
+    if not available:
+        raise RuntimeError(
+            "No generated LearnCpp lessons were found "
+            f"in {output_directory}."
+        )
+
+    manifest = write_manifest(
+        output_directory
+        / "manifest.json",
+        available,
+    )
+    print(
+        "Wrote manifest for "
+        f"{len(manifest.lessons)} existing lessons."
+    )
+
 
 def scrape_all(
     session: requests.Session,
@@ -1588,10 +1893,14 @@ def scrape_all(
     overwrite: bool,
 ) -> None:
 
-    lessons = discover_lessons(
+    discovered_lessons = discover_course(
         session,
         robots,
     )
+    lessons = [
+        lesson.source_url
+        for lesson in discovered_lessons
+    ]
 
     print(
         f"Found {len(lessons)} lessons."
@@ -1605,23 +1914,30 @@ def scrape_all(
         lessons
     )
 
-    index_entries: list[
-        tuple[str, str]
+    successful_lessons: list[
+        LessonRecord
     ] = []
 
-    for number, url in enumerate(
-        lessons,
+    for number, discovered in enumerate(
+        discovered_lessons,
         start=1,
     ):
+        url = discovered.source_url
 
         print(
-            f"[{number}/{len(lessons)}] "
+            f"[{number}/{len(discovered_lessons)}] "
             f"{url}"
         )
 
-        filename = lesson_filename(
-            number,
-            url,
+        filename = lesson_map[
+            normalize_url(
+                url
+            )
+        ]
+        lesson = replace(
+            discovered,
+            order=number,
+            filename=filename,
         )
 
         destination = (
@@ -1687,15 +2003,27 @@ def scrape_all(
                 )
 
                 existing_title = (
-                    existing_soup.title.string
-                    if existing_soup.title
-                    else slug_from_url(url)
+                    existing_soup.select_one(
+                        "main > h1"
+                    )
                 )
 
-                index_entries.append(
-                    (
-                        existing_title,
-                        filename,
+                successful_lessons.append(
+                    replace(
+                        lesson,
+                        title=(
+                            existing_title.get_text(
+                                " ",
+                                strip=True,
+                            )
+                            if existing_title
+                            else lesson.title
+                        ),
+                        content_hash=(
+                            lesson_content_hash(
+                                existing_html
+                            )
+                        ),
                     )
                 )
 
@@ -1728,10 +2056,15 @@ def scrape_all(
                 encoding="utf-8",
             )
 
-            index_entries.append(
-                (
-                    title,
-                    filename,
+            successful_lessons.append(
+                replace(
+                    lesson,
+                    title=title,
+                    content_hash=(
+                        lesson_content_hash(
+                            document
+                        )
+                    ),
                 )
             )
 
@@ -1749,6 +2082,32 @@ def scrape_all(
             delay
         )
 
+    if not successful_lessons:
+        raise RuntimeError(
+            "No lessons were available after scraping."
+        )
+
+    successful_lessons = (
+        finalize_course_documents(
+            output_directory=(
+                output_directory
+            ),
+            successful_lessons=(
+                successful_lessons
+            ),
+            discovered_lessons=(
+                discovered_lessons
+            ),
+        )
+    )
+
+    index_entries = [
+        (
+            lesson.title,
+            lesson.filename,
+        )
+        for lesson in successful_lessons
+    ]
     index_document = build_index(
         index_entries
     )
@@ -1762,6 +2121,29 @@ def scrape_all(
         index_document,
         encoding="utf-8",
     )
+
+    manifest = write_manifest(
+        output_directory
+        / "manifest.json",
+        successful_lessons,
+    )
+    problems = validate_course_artifact(
+        output_directory,
+        manifest,
+    )
+    if problems:
+        print()
+        print(
+            "Course validation failed:"
+        )
+        for problem in problems:
+            print(
+                f"    - {problem}"
+            )
+        raise RuntimeError(
+            "Generated course contains "
+            "invalid links or files."
+        )
 
     print()
 
@@ -1815,12 +2197,21 @@ def main() -> None:
         ),
     )
 
+    group.add_argument(
+        "--manifest-only",
+        action="store_true",
+        help=(
+            "Build a manifest for existing "
+            "generated lessons without refetching them."
+        ),
+    )
+
     parser.add_argument(
         "--output",
-        default="learncpp_offline",
+        default="course",
         help=(
             "Output directory "
-            "(default: learncpp_offline)."
+            "(default: course)."
         ),
     )
 
@@ -1830,7 +2221,7 @@ def main() -> None:
         default=DEFAULT_DELAY,
         help=(
             "Delay between requests "
-            "(default: 2 seconds)."
+            "(default: 1 second)."
         ),
     )
 
@@ -1858,6 +2249,16 @@ def main() -> None:
     robots = load_robots(
         session
     )
+
+    if args.manifest_only:
+        build_existing_manifest(
+            session=session,
+            robots=robots,
+            output_directory=(
+                output_directory
+            ),
+        )
+        return
 
     if args.url:
 

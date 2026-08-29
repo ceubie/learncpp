@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Course · LearnCpp Study{% endblock %}
+{% block page_id %}dashboard{% endblock %}
+{% block content %}
+<section class="study-hero">
+    <div>
+        <span class="study-eyebrow">Your C++ learning path</span>
+        <h1>Learn deliberately. Remember longer.</h1>
+        <p>
+            Read the course, capture what matters, and turn difficult ideas
+            into active recall.
+        </p>
+        <div class="study-hero-actions">
+            <a id="study-continue" class="study-primary-button" href="#course">
+                Start learning
+            </a>
+            <a class="study-secondary-button" href="{{ url_for('web.review') }}">
+                Review flashcards
+                <span id="study-again-count" class="study-count-badge">0</span>
+            </a>
+        </div>
+    </div>
+    <div class="study-progress-card" aria-label="Course progress">
+        <span>Course progress</span>
+        <strong id="study-completed-summary">0 / {{ lesson_count }}</strong>
+        <div class="study-progress-track" aria-hidden="true">
+            <span id="study-progress-fill" style="width: 0%"></span>
+        </div>
+        <small id="study-progress-percent">0% complete</small>
+    </div>
+</section>
+
+<section id="course" class="study-course-section">
+    <div class="study-section-heading">
+        <div>
+            <span class="study-eyebrow">Course map</span>
+            <h2>{{ lesson_count }} lessons</h2>
+        </div>
+        <label class="study-search-field">
+            <span class="study-visually-hidden">Search lessons</span>
+            <input
+                id="study-course-search"
+                type="search"
+                placeholder="Search lessons"
+                autocomplete="off"
+            >
+        </label>
+    </div>
+
+    <div id="study-chapter-list" class="study-chapter-list">
+        {% for chapter in chapters %}
+        <section
+            class="study-chapter"
+            data-chapter-id="{{ chapter.id }}"
+            data-search="{{ (chapter.label ~ ' ' ~ chapter.title)|lower }}"
+        >
+            <button
+                class="study-chapter-heading"
+                type="button"
+                aria-expanded="{{ 'true' if loop.first else 'false' }}"
+                aria-controls="chapter-{{ chapter.id }}"
+            >
+                <span>
+                    <small>{{ chapter.label }}</small>
+                    <strong>{{ chapter.title }}</strong>
+                </span>
+                <span class="study-chapter-meta">
+                    <span data-chapter-progress>0 / {{ chapter.lessons|length }}</span>
+                    <span aria-hidden="true">⌄</span>
+                </span>
+            </button>
+            <ol
+                id="chapter-{{ chapter.id }}"
+                class="study-lesson-list"
+                {% if not loop.first %}hidden{% endif %}
+            >
+                {% for lesson in chapter.lessons %}
+                <li
+                    class="study-lesson-row"
+                    data-lesson-id="{{ lesson.id }}"
+                    data-content-hash="{{ lesson.content_hash }}"
+                    data-search="{{ (lesson.lesson_label ~ ' ' ~ lesson.title)|lower }}"
+                >
+                    <span class="study-status-dot" aria-hidden="true"></span>
+                    <a href="{{ url_for('web.lesson', filename=lesson.filename) }}">
+                        <small>{{ lesson.lesson_label }}</small>
+                        <span>{{ lesson.title.split('—', 1)[-1]|trim }}</span>
+                    </a>
+                    {% if lesson.kind == "summary_quiz" %}
+                    <span class="study-kind-badge">Checkpoint</span>
+                    {% endif %}
+                    <span class="study-updated-badge" hidden>Updated</span>
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
+        {% endfor %}
+    </div>
+    <p id="study-no-course-results" class="study-empty-copy" hidden>
+        No lessons match that search.
+    </p>
+</section>
+{% endblock %}

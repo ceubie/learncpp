@@ -1,0 +1,16 @@
+{
+  "back": "CPUs are only capable of processing instructions written in machine language (or machine code). The set of all possible machine language instructions that a given CPU can understand is called an instruction set.",
+  "created_at": "2026-08-29T00:58:33Z",
+  "front": "What language are CPUs capable of processing? What is the set of possible instructions a given CPU can understand called?",
+  "id": "03d61740c8954495b71dda938e56aab7",
+  "lesson_id": "introduction-to-programming-languages",
+  "schema_version": 1,
+  "source_prefix": "d cannot be run on other platforms without modification. A program that can be easily transferred from one platform to another is said to be portable. The act of modifying a program so that it runs on a different platform is called porting.Now that we’ve talked about programs, let’s discuss programming languages. This isn’t just a history lesson, we’ll also be introducing terminology that will come up in future lessons.Machine LanguageA computer’s CPU is incapable of understanding C++. Instead,",
+  "source_suffix": "Here is a sample machine language instruction: 10110000 01100001.Each instruction is understood by the CPU as a command to do a very specific job, such as “compare these two numbers”, or “copy this number into that memory location”. Back when computers were first invented, programmers had to write programs directly in machine language, which was a very difficult and time-consuming thing to do.How these instructions are organized and interpreted is beyond the scope of this tutorial series, but it",
+  "source_text": "CPUs are only capable of processing instructions written in machine language (or machine code). The set of all possible machine language instructions that a given CPU can understand is called an instruction set.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-programming-languages/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-29T01:00:10Z"
+}
