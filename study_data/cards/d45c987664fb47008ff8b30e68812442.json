@@ -1,0 +1,17 @@
+{
+  "back": "An Integrated Development Environment is software designed to make it easy to develop, build, and debug programs.\n\nA typical IDE includes a code editor (line numbers, syntax highlighting, completion), a basic build system, an integrated debugger, and a way to add plugins. Some install a compiler and linker for you; others let you plug one in.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is an IDE, and what does a typical one include?",
+  "id": "d45c987664fb47008ff8b30e68812442",
+  "lesson_id": "installing-an-integrated-development-environment-ide",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/installing-an-integrated-development-environment-ide/",
+  "tags": [
+    "vocab",
+    "ide"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

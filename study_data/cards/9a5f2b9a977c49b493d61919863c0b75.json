@@ -1,0 +1,17 @@
+{
+  "back": "It is trying to replace the executable and cannot. Most commonly the program is still running -- a running exe cannot be overwritten.\n\nClose the running program (or reboot if the file is locked) and rebuild. Antivirus can also lock or block the new exe. In Visual Studio this is LNK1168.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "Why might the linker say it cannot open the .exe for writing?",
+  "id": "9a5f2b9a977c49b493d61919863c0b75",
+  "lesson_id": "a-few-common-cpp-problems",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/a-few-common-cpp-problems/",
+  "tags": [
+    "errors",
+    "toolchain"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

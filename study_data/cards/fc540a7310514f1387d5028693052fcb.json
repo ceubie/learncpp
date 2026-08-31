@@ -1,0 +1,17 @@
+{
+  "back": "Use a compiler that supports at least C++17. Do not use a compiler that does not support at least C++11.\n\nPrefer the newest compiler version available.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is the minimum C++ language standard you should use while following these tutorials?",
+  "id": "fc540a7310514f1387d5028693052fcb",
+  "lesson_id": "installing-an-integrated-development-environment-ide",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/installing-an-integrated-development-environment-ide/",
+  "tags": [
+    "best-practice",
+    "standards"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

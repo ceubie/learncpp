@@ -1,0 +1,16 @@
+{
+  "back": "\"<<\" is the insertion operator\n\n\">>\" is the extraction operator",
+  "created_at": "2026-08-31T14:45:40Z",
+  "front": "What is \"<<\" and \">>\"",
+  "id": "c664e4bf674d425487da5717ca11ca56",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "operators"
+  ],
+  "updated_at": "2026-08-31T14:45:40Z"
+}

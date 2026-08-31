@@ -1,0 +1,16 @@
+{
+  "back": "Trust the programmer.\n\nThe language gives you a lot of freedom and often will not stop you from doing something that does not make sense. Knowing what you should not do is almost as important as knowing what you should do.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is the design philosophy of C and C++?",
+  "id": "17d1ab5837444a8f9370bd5a3d6a59d0",
+  "lesson_id": "introduction-to-cplusplus",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-cplusplus/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

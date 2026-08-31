@@ -1,0 +1,17 @@
+{
+  "back": "Compilers often default to an older standard (C++14 is common), not the newest. You usually have to select the standard yourself, and often per project.\n\nWhile learning: use the latest finalized standard your compiler supports. These tutorials target C++17.\n\nIn professional environments: often one or two versions behind the newest finalized standard.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "Which C++ language standard should you choose, and what do compilers default to?",
+  "id": "136395d3f6384ab5ba749a16210fe70f",
+  "lesson_id": "configuring-your-compiler-choosing-a-language-standard",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-choosing-a-language-standard/",
+  "tags": [
+    "standards",
+    "best-practice"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

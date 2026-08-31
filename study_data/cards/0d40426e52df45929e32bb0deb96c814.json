@@ -1,0 +1,17 @@
+{
+  "back": "Compile recompiles a single code file (even if a cached object file already exists). It does not run the linker and does not produce an executable.\n\nBuild compiles the modified files and then links them into an executable. When people say compile the program, they usually mean Build.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "In an IDE, how is Compile different from Build?",
+  "id": "0d40426e52df45929e32bb0deb96c814",
+  "lesson_id": "compiling-your-first-program",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/compiling-your-first-program/",
+  "tags": [
+    "vocab",
+    "ide"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

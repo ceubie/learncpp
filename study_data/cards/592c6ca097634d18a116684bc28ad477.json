@@ -1,0 +1,17 @@
+{
+  "back": "The linker combines object files and produces the output file (usually an executable). This process is called linking.\n\nIt validates the object files, resolves cross-file references (a use in one .cpp connected to a definition in another), and links in libraries. If it cannot connect a reference to a definition, you get a linker error.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What does the linker do?",
+  "id": "592c6ca097634d18a116684bc28ad477",
+  "lesson_id": "introduction-to-the-compiler-linker-and-libraries",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-compiler-linker-and-libraries/",
+  "tags": [
+    "vocab",
+    "toolchain"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

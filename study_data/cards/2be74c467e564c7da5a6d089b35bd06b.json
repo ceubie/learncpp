@@ -1,0 +1,17 @@
+{
+  "back": "Source code (or just code) is the set of C++ instructions you type into a text editor.\n\nBest practice: name the first/primary source file main.cpp. The name marks it as the primary file; the .cpp extension marks it as C++. You may also see .cc or .cxx.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is source code, and what should you name the primary source file of a C++ program?",
+  "id": "2be74c467e564c7da5a6d089b35bd06b",
+  "lesson_id": "introduction-to-cpp-development",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-cpp-development/",
+  "tags": [
+    "vocab",
+    "best-practice"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

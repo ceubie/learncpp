@@ -1,0 +1,16 @@
+{
+  "back": "A platform is a compatible set of hardware and software (OS, etc.) that provides an environment for programs to run.\n\nA portable program can be transferred to another platform easily. Porting is modifying a program so it runs on a different platform. Cross-platform means designed to run on multiple platforms.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is a platform? What do portable and porting mean?",
+  "id": "c9baf9d03e8c4584ab98b26160d9a2f5",
+  "lesson_id": "introduction-to-programming-languages",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-programming-languages/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

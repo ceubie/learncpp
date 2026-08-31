@@ -1,0 +1,17 @@
+{
+  "back": "Compiler extensions are compiler-specific extra behaviors that are not part of standard C++. They are often enabled by default.\n\nCode that uses them may not compile (or may not run correctly) on other compilers. They are never necessary. Disable them so you learn standard C++ and stay portable.\n\nTypical flags: MSVC /permissive- (Conformance mode), GCC/Clang -pedantic-errors.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What are compiler extensions, and why should you disable them?",
+  "id": "f97639827ae94b929b59dcad6752a10e",
+  "lesson_id": "configuring-your-compiler-compiler-extensions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-compiler-extensions/",
+  "tags": [
+    "vocab",
+    "best-practice"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

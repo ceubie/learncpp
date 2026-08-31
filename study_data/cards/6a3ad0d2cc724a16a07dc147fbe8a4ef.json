@@ -1,0 +1,16 @@
+{
+  "back": "Rule: something you must do. Breaking it generally means the program will not work.\n\nBest practice: something you should do because it is conventional or better than the alternatives.\n\nWarning: something you should not do, because it usually leads to unexpected results.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "In these tutorials, what is the difference between a rule, a best practice, and a warning?",
+  "id": "6a3ad0d2cc724a16a07dc147fbe8a4ef",
+  "lesson_id": "introduction-to-programming-languages",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-programming-languages/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "Building is the full process of turning source files into a runnable executable. A build is a specific executable produced by that process.\n\nTesting is checking whether the software behaves as expected. Debugging is finding and fixing the errors when it does not.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What do building and a build mean? How is testing different from debugging?",
+  "id": "d8bdc856a6724b4ab80f3121ec23ea3d",
+  "lesson_id": "introduction-to-the-compiler-linker-and-libraries",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-compiler-linker-and-libraries/",
+  "tags": [
+    "vocab",
+    "toolchain"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

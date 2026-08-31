@@ -1,0 +1,17 @@
+{
+  "back": "\"\\n\" is a newline character, whereas std::endl not only ends the line, but flushes the output buffer.",
+  "created_at": "2026-08-31T14:49:51Z",
+  "front": "What is the difference between using \"\\n\" and std::endl",
+  "id": "9b150ae4b42c408693a3edc42cd70c89",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "buffers",
+    "iostream"
+  ],
+  "updated_at": "2026-08-31T14:49:51Z"
+}

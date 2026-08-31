@@ -1,0 +1,17 @@
+{
+  "back": "Step 1 is the what: define the problem you want to solve.\nStep 2 is the how: decide how to solve it before you start coding. This is the step people skip, and jumping straight into code often produces a fragile solution.\n\nA bug is any programming error that prevents the program from operating correctly. Debugging is finding and removing bugs.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What are the first two steps of developing a program, and what is a bug?",
+  "id": "6cdf0f43dcce4c498c10b36c423f2bc4",
+  "lesson_id": "introduction-to-cpp-development",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-cpp-development/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

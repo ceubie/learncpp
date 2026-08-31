@@ -1,0 +1,17 @@
+{
+  "back": "Do not let them pile up. Resolve each one as you encounter it, as if it were an error, so a serious warning is not lost among noise.\n\nTurn warning levels up. Enable treat warnings as errors so a warning fails the build (/WX on MSVC, -Werror on GCC/Clang).",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "How should you treat compiler warnings while learning?",
+  "id": "b87bb707ae1c4f4bb37a316856564211",
+  "lesson_id": "configuring-your-compiler-warning-and-error-levels",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-warning-and-error-levels/",
+  "tags": [
+    "best-practice",
+    "errors"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "A computer program is a sequence of instructions that directs a computer to perform certain actions in a specified order.\n\nProgramming is the act of writing a program. A computer is running / executing a program when it is performing those instructions.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is a computer program? What is programming?",
+  "id": "cdb0a2d6488642719933f88be94708e7",
+  "lesson_id": "introduction-to-programming-languages",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-programming-languages/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

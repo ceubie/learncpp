@@ -1,0 +1,16 @@
+{
+  "back": "Hardware is the physical components of a computer (CPU, memory, keyboard, storage, etc.).\n\nSoftware broadly refers to the programs designed to be executed on that hardware.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is the difference between hardware and software?",
+  "id": "a6036784c66f49f3831f69018bf5b451",
+  "lesson_id": "introduction-to-programming-languages",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-programming-languages/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

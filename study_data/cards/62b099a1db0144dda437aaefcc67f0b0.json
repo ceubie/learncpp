@@ -1,0 +1,17 @@
+{
+  "back": "Hi!My name is Alex.",
+  "created_at": "2026-08-31T14:51:06Z",
+  "front": "What does the following program print?\n\n#include <iostream> // for std::cout\nint main()\n{\n std::cout << \"Hi!\";\n std::cout << \"My name is Alex.\";\n return 0;\n}",
+  "id": "62b099a1db0144dda437aaefcc67f0b0",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "iostream",
+    "code-analysis"
+  ],
+  "updated_at": "2026-08-31T14:51:06Z"
+}

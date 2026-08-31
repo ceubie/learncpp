@@ -1,0 +1,17 @@
+{
+  "back": "cout stands for “character output”\n\nIt allows us to send data to the console to be printed as text.",
+  "created_at": "2026-08-31T14:42:16Z",
+  "front": "What does cout stand for? What does it enable?",
+  "id": "57e290cb15f644bfb3a3c96d154df79d",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "the console. The io part of iostream stands for input/output.To use the functionality defined within the iostream library, we need to include the iostream header at the top of any code file that uses the content defined in iostream, like so:#include <iostream>\n// rest of code that uses iostream functionality here\nstd::coutThe iostream library contains a few predefined variables for us to use. One of the most useful is std::cout, which allows us to send data to the console to be printed as text.",
+  "source_suffix": ".As a reminder, here’s our Hello world program:#include <iostream> // for std::cout\nint main()\n{\n std::cout << \"Hello world!\"; // print Hello world! to console\n return 0;\n}\nIn this program, we have included iostream so that we have access to std::cout. Inside our main function, we use std::cout, along with the insertion operator (<<), to send the text Hello world! to the console to be printed.std::cout can not only print text, it can also print numbers:#include <iostream> // for std::cout\nint ma",
+  "source_text": "cout stands for “character output”",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "iostream",
+    "standard-library"
+  ],
+  "updated_at": "2026-08-31T14:42:34Z"
+}

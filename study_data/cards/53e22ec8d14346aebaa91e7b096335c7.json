@@ -1,0 +1,17 @@
+{
+  "back": "A build configuration (or build target) is a collection of project settings that control how the IDE builds the project: output name, search paths, debug info, optimization, etc.\n\nDebug turns optimizations off and keeps debugging information -- larger and slower, much easier to debug. Use this while developing.\n\nRelease optimizes for size and performance and strips debug info. Use this to ship a program or to measure performance.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is a build configuration? How do Debug and Release differ?",
+  "id": "53e22ec8d14346aebaa91e7b096335c7",
+  "lesson_id": "configuring-your-compiler-build-configurations",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-build-configurations/",
+  "tags": [
+    "vocab",
+    "ide"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

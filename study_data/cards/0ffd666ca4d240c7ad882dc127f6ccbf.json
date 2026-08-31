@@ -1,0 +1,17 @@
+{
+  "back": "Query the __cplusplus macro, which expands to a date code such as 201703L (C++17) or 202002L (C++20).\n\nVisual Studio does not report __cplusplus correctly unless you set an extra flag. On MSVC 2015+, use _MSVC_LANG instead.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "How can you check which C++ language standard your compiler is actually using?",
+  "id": "0ffd666ca4d240c7ad882dc127f6ccbf",
+  "lesson_id": "what-language-standard-is-my-compiler-using",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/what-language-standard-is-my-compiler-using/",
+  "tags": [
+    "standards",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

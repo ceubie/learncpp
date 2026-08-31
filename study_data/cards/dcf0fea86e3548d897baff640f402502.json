@@ -1,0 +1,17 @@
+{
+  "back": "1. Check that the code follows the rules of C++. If not, it reports an error (with a line number) and aborts.\n2. Translate the C++ into machine-language instructions.\n\nThose instructions are stored in an object file, typically name.o or name.obj, matching the .cpp file it came from. One .cpp file produces one object file.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What two jobs does a C++ compiler perform? What is an object file?",
+  "id": "dcf0fea86e3548d897baff640f402502",
+  "lesson_id": "introduction-to-the-compiler-linker-and-libraries",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-compiler-linker-and-libraries/",
+  "tags": [
+    "vocab",
+    "toolchain"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

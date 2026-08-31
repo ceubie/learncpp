@@ -1,0 +1,17 @@
+{
+  "back": "The C++ standard library is the extensive library that ships with C++. iostream (console input/output) is one of its most commonly used parts. Most linkers link it in by default.\n\nA third-party library is packaged precompiled code created by someone other than the C++ standard, used when you need capabilities the standard library does not provide.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is the C++ standard library? What is a third-party library?",
+  "id": "9ac3edc05a8a4dadbfe1d6e103827068",
+  "lesson_id": "introduction-to-the-compiler-linker-and-libraries",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-compiler-linker-and-libraries/",
+  "tags": [
+    "vocab",
+    "standard-library"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

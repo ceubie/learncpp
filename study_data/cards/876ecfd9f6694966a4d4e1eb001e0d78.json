@@ -1,0 +1,17 @@
+{
+  "back": "Low-level languages (machine code, assembly) provide little abstraction from the CPU. They are fast but not portable, require architecture knowledge, and are hard to write at scale.\n\nHigh-level languages (C, C++, Java, ...) abstract away the machine. They are easier to read/write, more portable, and take fewer instructions for the same work. C++ is sometimes called mid-level because you can work at both levels.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What is the difference between a low-level language and a high-level language?",
+  "id": "876ecfd9f6694966a4d4e1eb001e0d78",
+  "lesson_id": "introduction-to-programming-languages",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-programming-languages/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

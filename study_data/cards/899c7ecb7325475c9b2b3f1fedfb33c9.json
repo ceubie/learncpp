@@ -1,0 +1,17 @@
+{
+  "back": "A newline is an OS-specific character or sequence of characters that moves the cursor to the start of the next line.",
+  "created_at": "2026-08-31T14:52:14Z",
+  "front": "What is a newline?",
+  "id": "899c7ecb7325475c9b2b3f1fedfb33c9",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "ng std::endl to output a newlineWhat would you expect this program to print?#include <iostream> // for std::cout\nint main()\n{\n std::cout << \"Hi!\";\n std::cout << \"My name is Alex.\";\n return 0;\n}\nYou might be surprised at the result:Hi!My name is Alex.\nSeparate output statements don’t result in separate lines of output on the console.If we want to print separate lines of output to the console, we need to tell the console to move the cursor to the next line. We can do that by outputting a newline.",
+  "source_suffix": "One way to output a newline is to output std::endl (which stands for “end line”):#include <iostream> // for std::cout and std::endl\nint main()\n{\n std::cout << \"Hi!\" << std::endl; // std::endl will cause the cursor to move to the next line\n std::cout << \"My name is Alex.\" << std::endl;\n return 0;\n}\nThis prints:Hi!\nMy name is Alex.\nTipIn the above program, the second std::endl isn’t technically necessary, since the program ends immediately afterward. However, it serves a few useful purposes.First,",
+  "source_text": "A newline is an OS-specific character or sequence of characters that moves the cursor to the start of the next line.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "iostream",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T14:52:14Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "The linker cannot find a main() function. Every program needs exactly one.\n\nCheck that main exists and is spelled correctly, that the file containing main is actually part of the project and getting compiled, and that you created a console project rather than a GUI/WinMain project.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "What does an unresolved external symbol _main (or _WinMain) linker error usually mean?",
+  "id": "8e92d70e4a61463a92bff1c95a534c6b",
+  "lesson_id": "a-few-common-cpp-problems",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/a-few-common-cpp-problems/",
+  "tags": [
+    "errors",
+    "toolchain"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "Some operating systems do not output a newline before showing the command prompt after running an executable from the command line.",
+  "created_at": "2026-08-31T14:56:11Z",
+  "front": "Why is it best practice to program a newline whenever a line of output is complete",
+  "id": "d72a02629e5745b3a64115414462c583",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "best-practice",
+    "iostream"
+  ],
+  "updated_at": "2026-08-31T14:56:11Z"
+}

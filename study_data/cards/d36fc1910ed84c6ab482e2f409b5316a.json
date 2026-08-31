@@ -1,0 +1,17 @@
+{
+  "back": "Clean removes all cached object files and executables.\n\nThe next build will recompile every file and produce a new executable.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "In an IDE, what does Clean do?",
+  "id": "d36fc1910ed84c6ab482e2f409b5316a",
+  "lesson_id": "compiling-your-first-program",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/compiling-your-first-program/",
+  "tags": [
+    "vocab",
+    "ide"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}

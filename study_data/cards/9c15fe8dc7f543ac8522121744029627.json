@@ -1,0 +1,17 @@
+{
+  "back": "Dennis Ritchie created C in 1972 at Bell Labs as a systems programming language.\n\nBjarne Stroustrup created C++ starting in 1979 as an extension of C. C++ is often treated as a superset of C, though that is not strictly true. Its most notable addition over C is support for object-oriented programming.",
+  "created_at": "2026-08-31T15:03:42Z",
+  "front": "Who created C and C++, and how are the two languages related?",
+  "id": "9c15fe8dc7f543ac8522121744029627",
+  "lesson_id": "introduction-to-cplusplus",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-cplusplus/",
+  "tags": [
+    "history",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:03:42Z"
+}
