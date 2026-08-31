@@ -1,6 +1,8 @@
 # LearnCpp Study Companion
 
 Before using this, please make a donation to [LearnCpp.com](https://www.learncpp.com/about/#Support)
+I created this because I could not focus on the course with the advertisements on the website. The ads 
+help them pay for hosting the site. Scraping the content and making a donation is a fair trade. 
 
 This is a private, local study app for a generated copy of
 [LearnCpp.com](https://www.learncpp.com/). The generated course is disposable;
