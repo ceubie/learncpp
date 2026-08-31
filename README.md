@@ -2,7 +2,7 @@
 
 Before using this, please make a donation to [LearnCpp.com](https://www.learncpp.com/about/#Support)
 
-A private, local study layer for a generated copy of
+This is a private, local study app for a generated copy of
 [LearnCpp.com](https://www.learncpp.com/). The generated course is disposable;
 your Markdown notes, flashcards, progress, and review markers are ordinary files
 under `study_data/` that can be synchronized with Git.
