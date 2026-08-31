@@ -1,0 +1,17 @@
+{
+  "back": "= is the assignment operator: copy a value into a variable.\n\n== is the equality operator: test whether two operands have the same value.\n\nConfusing the two is one of the most common beginner mistakes.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is the difference between = and ==?",
+  "id": "46781fd77d1e414e822f6a78dc7f55ff",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "operators",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "Data is any information a computer can move, process, or store.\n\nA value is a single piece of data: a number (5), a character ('H'), text (\"Hello\"), etc.\n\nA literal is a value written directly in the source code. Literals are read-only.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is data? What is a value? What is a literal?",
+  "id": "badd4a7f41a848f597a335b74cf448b4",
+  "lesson_id": "introduction-to-objects-and-variables",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

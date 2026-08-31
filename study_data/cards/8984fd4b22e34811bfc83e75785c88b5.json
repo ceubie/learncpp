@@ -1,0 +1,17 @@
+{
+  "back": "Single quotes: a character value. Only one symbol, e.g. 'H'.\nDouble quotes: a text value. Zero or more characters, e.g. \"Hello\" or \"H\".\nNo quotes: a numeric value, e.g. 5 or -6.7.\n\nIf a character or text value is not quoted, the compiler treats it as code and you almost always get a compile error.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "How do single quotes, double quotes, and no quotes change how the compiler reads a value?",
+  "id": "8984fd4b22e34811bfc83e75785c88b5",
+  "lesson_id": "introduction-to-objects-and-variables",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/",
+  "tags": [
+    "vocab",
+    "literals"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

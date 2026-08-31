@@ -1,0 +1,16 @@
+{
+  "back": "Instantiation means a variable has been created (storage allocated) and initialized. Default-initialization counts.\n\nThe resulting object is an instance. You will hear the term most often with class types.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What does instantiation mean?",
+  "id": "c91a5acabf5a408196ce8497b3b534fa",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

@@ -1,0 +1,16 @@
+{
+  "back": "#include <iostream> is a preprocessor directive that pulls in the iostream library so std::cout is known.\n\nint main() defines the required main function. It returns an int. The body is everything between { }.\n\nreturn 0; sends 0 to the operating system, meaning the program finished successfully.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "In the Hello world program, what do #include <iostream>, int main(), and return 0; each do?",
+  "id": "f0bb738a8e594f8198c5b6e5acfc5bfe",
+  "lesson_id": "statements-and-the-structure-of-a-program",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

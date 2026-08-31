@@ -1,0 +1,17 @@
+{
+  "back": "What — at the library, program, or function level (what this unit does).\nHow — inside that unit, if the approach is not obvious.\nWhy — at the statement level. Do not comment what the line already says. If you need a comment to explain what a statement does, rewrite the statement.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "At the program/function level, inside a function, and at the statement level — what should comments describe?",
+  "id": "1afd7ef699e049e5929c7379e6d9322c",
+  "lesson_id": "comments",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/comments/",
+  "tags": [
+    "best-practice",
+    "comments"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

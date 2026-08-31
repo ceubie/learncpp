@@ -1,0 +1,17 @@
+{
+  "back": "The compiler reports the line it was compiling when it noticed the problem, not always the line where you would conventionally put the missing token.\n\nA missing semicolon is the classic case: some compilers flag the next line (e.g. return) instead of the statement that needed the semicolon. If the marked line looks fine, check the previous line.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "Why might a compiler report a syntax error on the line after the one you actually need to fix?",
+  "id": "2303aef2895a4a1599b5e3b38cefb816",
+  "lesson_id": "statements-and-the-structure-of-a-program",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/",
+  "tags": [
+    "errors",
+    "toolchain"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

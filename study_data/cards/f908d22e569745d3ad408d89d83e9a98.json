@@ -1,0 +1,17 @@
+{
+  "back": "int x{ 0 }; when you are actually going to use that 0.\n\nint x{}; when the value is temporary and will be replaced right away (for example std::cin >> x;). An explicit 0 would be meaningless there.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "When should you write int x{ 0 }; versus int x{};?",
+  "id": "f908d22e569745d3ad408d89d83e9a98",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "best-practice"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

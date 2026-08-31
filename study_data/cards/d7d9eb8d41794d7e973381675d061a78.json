@@ -1,0 +1,17 @@
+{
+  "back": "int a;        default-initialization (no initializer)\nint b = 5;    copy-initialization\nint c(6);     direct-initialization\nint d{ 7 };   direct-list-initialization\nint e{};      value-initialization\n\nPrefer the last two in modern C++.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "Name the five common forms of initialization and give the syntax for each.",
+  "id": "d7d9eb8d41794d7e973381675d061a78",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

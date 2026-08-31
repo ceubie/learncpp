@@ -1,0 +1,17 @@
+{
+  "back": "An object is a region of storage (typically RAM or a CPU register) that can hold a value.\n\nA variable is an object that has a name (an identifier). Naming it lets you refer to that storage again later.\n\nIn C++, “object” does not include functions.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is an object? What is a variable?",
+  "id": "0a5ea83f48824ba9b40cf46c95bd341c",
+  "lesson_id": "introduction-to-objects-and-variables",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

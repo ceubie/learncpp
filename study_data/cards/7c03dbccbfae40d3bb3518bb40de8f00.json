@@ -1,0 +1,17 @@
+{
+  "back": "A narrowing conversion loses information, e.g. 4.5 stored in an int becomes 4 (the fraction is dropped).\n\nint x{ 4.5 };   list-init: required diagnostic (usually an error)\nint x = 4.5;    copy-init: compiles, silently becomes 4\nint x(4.5);     direct-init: compiles, silently becomes 4\n\nLater assignment still allows narrowing: after a list-init, x = 4.5; is legal.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is a narrowing conversion, and how do the initialization forms treat int x = 4.5 vs int x(4.5) vs int x{ 4.5 }?",
+  "id": "7c03dbccbfae40d3bb3518bb40de8f00",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "errors"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

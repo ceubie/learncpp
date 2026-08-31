@@ -1,0 +1,17 @@
+{
+  "back": "C++17 attribute that tells the compiler you are okay with a variable not being used, so it will not emit an unused-variable warning.\n\nUse it only when there is a real reason (e.g. a shared list of named constants where this program only needs some of them). Otherwise delete the unused variable.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What does the [[maybe_unused]] attribute do?",
+  "id": "8e23132b1b7f4dcf980d72a5408a6566",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "vocab",
+    "attributes"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

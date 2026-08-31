@@ -1,0 +1,17 @@
+{
+  "back": "The default meaning of = after a variable already exists: the value on the right is copied into the variable on the left, replacing the previous value.\n\nint width;\nwidth = 5;   // copy-assignment\nwidth = 7;   // 5 is overwritten",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is copy-assignment?",
+  "id": "e4913cda1dbe4d3b92caca37cc3bb6c8",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "vocab",
+    "assignment"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

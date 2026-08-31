@@ -1,0 +1,16 @@
+{
+  "back": "Best practice: one variable per statement, on its own line, with a comment about what it is for. Avoid int a, b; even though it is legal for the same type.\n\nWrong: int a, int b; (type repeated).\nWrong: int a, double b; (mixed types in one statement).\nThose are compile errors.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "How should you define multiple variables? What mistakes does the compiler catch?",
+  "id": "73f1b45fc436400dbc2b2a22b90b9286",
+  "lesson_id": "introduction-to-objects-and-variables",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/",
+  "tags": [
+    "best-practice"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

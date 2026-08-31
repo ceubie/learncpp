@@ -1,0 +1,17 @@
+{
+  "back": "A definition (e.g. int x;) tells the compiler we want a variable with that name and type. That happens at compile time.\n\nCreation happens at runtime. Allocation reserves actual storage for the object. Once that storage exists, the object has been created and can be used.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What does a variable definition do, and when is the object actually created?",
+  "id": "7d5acca646654514ae6e20556327ab7a",
+  "lesson_id": "introduction-to-objects-and-variables",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

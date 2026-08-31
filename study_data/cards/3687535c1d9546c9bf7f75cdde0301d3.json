@@ -1,0 +1,17 @@
+{
+  "back": "If normal comments are always //, you can wrap a whole block in /* */ to comment it out without a nesting conflict.\n\nIf your documentation already uses /* */, commenting out a block that contains those comments is harder (the first */ ends the outer comment).",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "Why prefer // for ordinary comments instead of /* */?",
+  "id": "3687535c1d9546c9bf7f75cdde0301d3",
+  "lesson_id": "comments",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/comments/",
+  "tags": [
+    "best-practice",
+    "comments"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

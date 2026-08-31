@@ -1,0 +1,17 @@
+{
+  "back": "Value-initialization uses empty braces: int width{};\n\nFor int and most built-in types this zero-initializes the variable (sets it to 0, or the closest thing to zero for that type). That zeroing case is called zero-initialization.\n\nFor class types, value-initialization may use a predefined default that is not zero.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is value-initialization? How is it related to zero-initialization?",
+  "id": "7c009823d3a3425dbc12a14ddb533404",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

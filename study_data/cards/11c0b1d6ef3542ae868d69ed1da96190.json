@@ -1,0 +1,18 @@
+{
+  "back": "Buffer is a generic term that means different things in different contexts. In general, we can say that a buffer is a tool that mitigates the effects of fluctuations in supply and demand.\n\nIn computer science, a buffer is temporary storage we use when one component feeds data to the other, but their speeds aren’t the same. There can be multiple producers and consumers.\n\nMost operating systems come with predefined buffers used for various purposes. For example, data transfers between a fast CPU and a slow external device are impossible without a buffer in between them.\n\nWe can also make our custom buffers when developing our applications.",
+  "created_at": "2026-08-31T15:11:15Z",
+  "front": "What is a buffer",
+  "id": "11c0b1d6ef3542ae868d69ed1da96190",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "the buffer is flushed, meaning all of the data collected in the buffer is transferred to its destination (in this case, the console).Author’s noteTo use another analogy, flushing a buffer is kind of like flushing a toilet. All of your collected “output” is transferred to … wherever it goes next. Eew.This also means that if your program crashes, aborts, or is paused (e.g. for debugging purposes) before the buffer is flushed, any output still waiting in the buffer will not be displayed.Key insight",
+  "source_suffix": "std::endl vs \\nUsing std::endl is often inefficient, as it actually does two jobs: it outputs a newline (moving the cursor to the next line of the console), and it flushes the buffer (which is slow). If we output multiple lines of text ending with std::endl, we will get multiple flushes, which is slow and probably unnecessary.When outputting text to the console, we typically don’t need to explicitly flush the buffer ourselves. C++’s output system is designed to self-flush periodically, and it’s",
+  "source_text": "The opposite of buffered output is unbuffered output. With unbuffered output, each individual output request is sent directly to the output device.\n\nWriting data to a buffer is typically fast, whereas transferring a batch of data to an output device is comparatively slow. Buffering can significantly increase performance by batching multiple output requests together to minimize the number of times output has to be sent to the output device.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "iostream"
+  ],
+  "updated_at": "2026-08-31T15:11:15Z"
+}

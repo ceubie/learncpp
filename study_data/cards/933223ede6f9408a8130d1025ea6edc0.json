@@ -1,0 +1,17 @@
+{
+  "back": "A data type (or type) determines what kind of value an object stores. The type must be known at compile time and cannot change without recompiling.\n\nAn integer is a number with no fractional part: 4, 27, 0, -2. int is the type for an integer variable.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is a data type? What is an integer?",
+  "id": "933223ede6f9408a8130d1025ea6edc0",
+  "lesson_id": "introduction-to-objects-and-variables",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/",
+  "tags": [
+    "vocab",
+    "types"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

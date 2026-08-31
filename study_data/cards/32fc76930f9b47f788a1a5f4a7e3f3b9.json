@@ -1,0 +1,17 @@
+{
+  "back": "List-initialization (also called uniform initialization or brace initialization) uses curly braces. If you see {}, you are list-initializing.\n\nDirect-list-initialization: int width{ 5 };   (preferred)\nCopy-list-initialization:   int height = { 6 };   (rarely used)\n\nIt works in almost all cases, is unambiguous, can take a list of values, and disallows narrowing conversions.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is list-initialization? What are its two forms?",
+  "id": "32fc76930f9b47f788a1a5f4a7e3f3b9",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "Default-initialization is when you define a variable with no initializer: int a;\n\nFor int and most built-in types this often performs no initialization at all. The variable is left with an indeterminate (garbage) value. Prefer value-initialization (int a{};) instead.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is default-initialization, and what happens for an int?",
+  "id": "d82cb9ded3e8406997e0ac0c382dce27",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

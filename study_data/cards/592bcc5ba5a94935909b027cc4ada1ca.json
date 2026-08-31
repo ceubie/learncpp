@@ -1,0 +1,16 @@
+{
+  "back": "An identifier is the name of a function, object, type, template, or similar named entity.\n\nWriting main() (with empty parentheses) is shorthand for “the function named main,” so it is not confused with a variable.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is an identifier?",
+  "id": "592bcc5ba5a94935909b027cc4ada1ca",
+  "lesson_id": "statements-and-the-structure-of-a-program",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

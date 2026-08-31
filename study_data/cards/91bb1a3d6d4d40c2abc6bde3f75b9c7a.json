@@ -1,0 +1,17 @@
+{
+  "back": "Initialization gives a variable an initial value at the moment it is created.\n\nAssignment gives a variable a value in a later statement, after it already exists. Assignment overwrites whatever was there.\n\nA normal variable holds only one value at a time.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is the difference between initialization and assignment?",
+  "id": "91bb1a3d6d4d40c2abc6bde3f75b9c7a",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "vocab",
+    "initialization"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

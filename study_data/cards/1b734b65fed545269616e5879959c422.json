@@ -1,0 +1,17 @@
+{
+  "back": "Single quotes are used to represent single characters, and double quotes are used to represent text.",
+  "created_at": "2026-08-31T15:13:00Z",
+  "front": "What is the difference in using single quotes and double quotes in C++",
+  "id": "1b734b65fed545269616e5879959c422",
+  "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+  "tags": [
+    "fundamentals",
+    "syntax"
+  ],
+  "updated_at": "2026-08-31T15:13:13Z"
+}

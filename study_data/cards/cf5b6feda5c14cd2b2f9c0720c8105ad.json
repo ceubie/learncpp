@@ -1,0 +1,17 @@
+{
+  "back": "Prefer direct-list-initialization (int x{ 5 };) when you have a specific initial value, and value-initialization (int x{};) when you do not.\n\nReasons: one consistent syntax, unambiguous braces, no narrowing, and later support for initializing with a list of values.\n\nAlso: initialize every variable when you create it.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "Which form of initialization should you prefer, and why?",
+  "id": "cf5b6feda5c14cd2b2f9c0720c8105ad",
+  "lesson_id": "variable-assignment-and-initialization",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/",
+  "tags": [
+    "initialization",
+    "best-practice"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}

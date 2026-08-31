@@ -1,0 +1,16 @@
+{
+  "back": "A comment is a programmer-readable note in the source. The compiler ignores it.\n\n// starts a single-line comment: everything to the end of that line is ignored.\n/* ... */ is a multi-line (C-style) comment: everything between the markers is ignored.",
+  "created_at": "2026-08-31T15:28:36Z",
+  "front": "What is a comment? What are the two comment styles in C++?",
+  "id": "36a1860cfd0a4e32a3ce309fb657e1cb",
+  "lesson_id": "comments",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/comments/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-08-31T15:28:36Z"
+}
