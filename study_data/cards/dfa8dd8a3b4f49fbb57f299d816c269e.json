@@ -1,0 +1,18 @@
+{
+  "back": "Value-returning function. A function is value-returning if the return type is anything other than void.",
+  "created_at": "2026-09-01T14:40:18Z",
+  "front": "What is a function that returns a value called?",
+  "id": "dfa8dd8a3b4f49fbb57f299d816c269e",
+  "lesson_id": "function-return-values-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "y a return code). The status code is used to signal whether your program was successful or not.By convention, a status code of 0 means the program ran normally (meaning the program executed and behaved as expected).Best practiceYour main function should return the value 0 if the program ran normally.A non-zero status code is often used to indicate some kind of failure (and while this works fine on most operating systems, strictly speaking, it’s not guaranteed to be portable).For advanced readers",
+  "source_suffix": "We cover the preprocessor and preprocessor macros in lesson 2.10 -- Introduction to the preprocessor.As an aside…The status code is passed back to the operating system. The OS will typically make the status code available to whichever program launched the program returning the status code. This provides a crude mechanism for any program launching another program to determine whether the launched program ran successfully or not.A value-returning function that does not return a value will produce",
+  "source_text": "The C++ standard only defines the meaning of 3 status codes: 0, EXIT_SUCCESS, and EXIT_FAILURE. 0 and EXIT_SUCCESS both mean the program executed successfully. EXIT_FAILURE means the program did not execute successfully.\n\nEXIT_SUCCESS and EXIT_FAILURE are preprocessor macros defined in the <cstdlib> header:\n\n#include <cstdlib> // for EXIT_SUCCESS and EXIT_FAILURE\nint main()\n{\n return EXIT_SUCCESS;\n}\nIf you want to maximize portability, you should only use 0 or EXIT_SUCCESS to indicate a successful termination, or EXIT_FAILURE to indicate an unsuccessful termination.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "functions",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T14:40:18Z"
+}

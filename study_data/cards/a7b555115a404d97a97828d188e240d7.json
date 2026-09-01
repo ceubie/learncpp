@@ -1,0 +1,19 @@
+{
+  "back": "Local variables are destroyed in the opposite order of creation at the end of the set of curly braces in which it is defined (or for a function parameter, at the end of the function).",
+  "created_at": "2026-09-01T16:06:31Z",
+  "front": "When is a local variable destroyed?",
+  "id": "a7b555115a404d97a97828d188e240d7",
+  "lesson_id": "introduction-to-local-scope",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/",
+  "tags": [
+    "fundamentals",
+    "functions",
+    "scope",
+    "lifetime"
+  ],
+  "updated_at": "2026-09-01T16:06:31Z"
+}

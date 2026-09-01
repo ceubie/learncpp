@@ -1,0 +1,17 @@
+{
+  "back": "False",
+  "created_at": "2026-09-01T13:57:41Z",
+  "front": "True or False: nested functions are supported in C++.",
+  "id": "4cd5b86923d54d5d81e620592ce8386e",
+  "lesson_id": "introduction-to-functions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T13:57:41Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "The function initiating the function call is the caller, and the function being called (executed) is the callee. A function call is also sometimes called an invocation, with the caller invoking the callee.",
+  "created_at": "2026-09-01T13:50:50Z",
+  "front": "What is the difference between a function caller and a function callee?",
+  "id": "241a26413bcb4db1ae99f1fbe8303092",
+  "lesson_id": "introduction-to-functions",
+  "schema_version": 1,
+  "source_prefix": "here you left off.C++ programs can work the same way (and borrow some of the same nomenclature). A program will be executing statements sequentially inside one function when it encounters a function call. A function call tells the CPU to interrupt the current function and execute another function. The CPU essentially “puts a bookmark” at the current point of execution, executes the function named in the function call, and then returns to the point it bookmarked and resumes execution.Nomenclature",
+  "source_suffix": "An example of a user-defined functionFirst, let’s start with the most basic syntax to define a user-defined function. For the next few lessons, all user-defined functions will take the following form:returnType functionName() // This is the function header (tells the compiler about the existence of the function)\n{\n // This is the function body (tells the compiler what the function does)\n}\nThe first line is informally called the function header, and it tells the compiler about the existence of a",
+  "source_text": "The function initiating the function call is the caller, and the function being called (executed) is the callee. A function call is also sometimes called an invocation, with the caller invoking the callee.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T13:57:52Z"
+}

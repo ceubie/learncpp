@@ -1,0 +1,16 @@
+{
+  "back": "an observable effect of an operator or function beyond producing a return value.",
+  "created_at": "2026-09-01T12:55:26Z",
+  "front": "What is a side effect in C++ ?",
+  "id": "6a7d9f303f744c6197c7a74bff144a4b",
+  "lesson_id": "introduction-to-literals-and-operators",
+  "schema_version": 1,
+  "source_prefix": "console even after std::cout << 5 has finished executing.NomenclatureIn common language, the term “side effect” is typically used to mean a secondary (often negative or unexpected) result of some other thing happening (such as taking medicine). For example, a common side effect of taking oral antibiotics is diarrhea. As such, we often think of side effects as things we want to avoid, or things that are incidental to the primary goal.In C++, the term “side effect” has a different meaning: it is",
+  "source_suffix": "Since assignment has the observable effect of changing the value of an object, this is considered a side effect. We use certain operators (e.g. the assignment operator) primarily for their side effects (rather than the return value those operators produce). In such cases, the side effect is both beneficial and predictable (and it is the return value that is often incidental).For advanced readersFor the operators that we call primarily for their return values (e.g. operator+ or operator*), it’s u",
+  "source_text": "an observable effect of an operator or function beyond producing a return value.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-literals-and-operators/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-01T12:55:26Z"
+}

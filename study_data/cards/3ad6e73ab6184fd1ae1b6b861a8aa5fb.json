@@ -1,0 +1,16 @@
+{
+  "back": "True",
+  "created_at": "2026-08-31T16:43:19Z",
+  "front": "True or false: C++ is case sensitive",
+  "id": "3ad6e73ab6184fd1ae1b6b861a8aa5fb",
+  "lesson_id": "keywords-and-naming-identifiers",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/keywords-and-naming-identifiers/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T16:43:19Z"
+}

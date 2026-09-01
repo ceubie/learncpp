@@ -1,0 +1,17 @@
+{
+  "back": "Undefined behavior",
+  "created_at": "2026-09-01T14:42:12Z",
+  "front": "What happens when a value-returning function fails to return a value or returns the wrong type of value?",
+  "id": "d50332ba99bd40b7929260ea085641f2",
+  "lesson_id": "function-return-values-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T14:42:12Z"
+}

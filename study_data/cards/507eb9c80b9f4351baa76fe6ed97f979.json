@@ -1,0 +1,18 @@
+{
+  "back": "Return by value",
+  "created_at": "2026-09-01T14:27:04Z",
+  "front": "What is the process of returning a copied value back to the function caller named?",
+  "id": "507eb9c80b9f4351baa76fe6ed97f979",
+  "lesson_id": "function-return-values-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "functions",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T14:27:04Z"
+}

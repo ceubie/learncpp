@@ -1,0 +1,18 @@
+{
+  "back": "Whatever value happens to already be in the memory address assigned to the variable",
+  "created_at": "2026-08-31T16:24:42Z",
+  "front": "What is the default value of an uninitialized variable?",
+  "id": "1e2db980a9794331babdcadf105018cb",
+  "lesson_id": "uninitialized-variables-and-undefined-behavior",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/",
+  "tags": [
+    "initialization",
+    "variables",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T16:24:42Z"
+}

@@ -1,0 +1,1 @@
+1. Literals are compiled directly into the executable, as opposed to using variables which take a literal value and copies it into the memory location is given to it. 

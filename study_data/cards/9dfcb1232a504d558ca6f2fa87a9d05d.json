@@ -1,0 +1,17 @@
+{
+  "back": "A forward declaration allows us to tell the compiler about the existence of an identifier before actually defining the identifier.",
+  "created_at": "2026-09-01T16:50:18Z",
+  "front": "What is the benefit of using a forward declaration?",
+  "id": "9dfcb1232a504d558ca6f2fa87a9d05d",
+  "lesson_id": "forward-declarations",
+  "schema_version": 1,
+  "source_prefix": "edefinition; previous definition was 'formerly unknown identifier'\nThis is somewhat misleading, given that add wasn’t ever defined in the first place. Despite this, it’s useful to generally note that it is fairly common for a single error to produce many redundant or related errors or warnings. It can sometimes be hard to tell whether any error or warning beyond the first is a consequence of the first issue, or whether it is an independent issue that needs to be resolved separately.Best practice",
+  "source_suffix": "To fix this problem, we need to address the fact that the compiler doesn’t know what add is. There are two common ways to address the issue.Option 1: Reorder the function definitionsOne way to address the issue is to reorder the function definitions so add is defined before main:#include <iostream>\nint add(int x, int y)\n{\n return x + y;\n}\nint main()\n{\n std::cout << \"The sum of 3 and 4 is: \" << add(3, 4) << '\\n';\n return 0;\n}\nThat way, by the time main calls add, the compiler will already know wh",
+  "source_text": "When addressing compilation errors or warnings in your programs, resolve the first issue listed and then compile again.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/forward-declarations/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T16:50:18Z"
+}

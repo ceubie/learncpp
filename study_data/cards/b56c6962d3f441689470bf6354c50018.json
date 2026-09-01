@@ -1,0 +1,18 @@
+{
+  "back": "Functions that you write yourself are called user-defined functions.",
+  "created_at": "2026-09-01T13:49:01Z",
+  "front": "What are user-defined functions?",
+  "id": "b56c6962d3f441689470bf6354c50018",
+  "lesson_id": "introduction-to-functions",
+  "schema_version": 1,
+  "source_prefix": "n() (which is where the program starts execution when it is run). However, as programs start to get longer and longer, putting all the code inside the main() function becomes increasingly hard to manage. Functions provide a way for us to split our programs into small, modular chunks that are easier to organize, test, and use. Most programs use many functions. The C++ standard library comes with plenty of already-written functions for you to use -- however, it’s just as common to write your own.",
+  "source_suffix": "Consider a case that might occur in real life: you’re reading a book, when you remember you need to make a phone call. You put a bookmark in your book, make the phone call, and when you are done with the phone call, you return to the place you bookmarked and continue your book precisely where you left off.C++ programs can work the same way (and borrow some of the same nomenclature). A program will be executing statements sequentially inside one function when it encounters a function call. A func",
+  "source_text": "Functions that you write yourself are called user-defined functions.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-functions/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T13:58:02Z"
+}

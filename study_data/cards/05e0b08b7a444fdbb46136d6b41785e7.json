@@ -1,0 +1,18 @@
+{
+  "back": "False, lifetime is a runtime property - objects are created and destroyed while the program is running. Scope is a compile-time property of identifiers.",
+  "created_at": "2026-09-01T16:19:48Z",
+  "front": "True or False: lifetime is a compile-time property, and scope is a runtime property",
+  "id": "05e0b08b7a444fdbb46136d6b41785e7",
+  "lesson_id": "introduction-to-local-scope",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/",
+  "tags": [
+    "fundamentals",
+    "scope",
+    "lifetime"
+  ],
+  "updated_at": "2026-09-01T16:32:17Z"
+}

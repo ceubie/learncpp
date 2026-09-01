@@ -1,0 +1,17 @@
+{
+  "back": "A declaration tells the compiler about the existence of an identifier and its associated type information. \n\nA definition is a declaration that actually implements (for functions and types) or instantiates (for variables) the identifier.",
+  "created_at": "2026-09-01T17:01:47Z",
+  "front": "What is the difference between a declaration and a definition?",
+  "id": "aebff3bef9c845b5a90b2e18816bfed4",
+  "lesson_id": "forward-declarations",
+  "schema_version": 1,
+  "source_prefix": "nderstand what the function parameters are just by looking at the declaration. For example, if you were to see the declaration void doSomething(int, int, int), you may think you remember what each of the parameters represent, but you may also get it wrong.Also many automated documentation generation tools will generate documentation from the content of header files, which is where declarations are often placed. We discuss header files and declarations in lesson 2.11 -- Header files.Best practice",
+  "source_suffix": "TipYou can easily create function declarations by copy/pasting your function’s header and adding a semicolon.Why forward declarations?You may be wondering why we would use a forward declaration if we could just reorder the functions to make our programs work.Most often, forward declarations are used to tell the compiler about the existence of some function that has been defined in a different code file. Reordering isn’t possible in this scenario because the caller and the callee are in completel",
+  "source_text": "Keep the parameter names in your function declarations.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/forward-declarations/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T17:01:47Z"
+}

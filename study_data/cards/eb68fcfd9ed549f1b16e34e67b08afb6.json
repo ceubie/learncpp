@@ -1,0 +1,17 @@
+{
+  "back": "In general programming, an expression is a non-empty sequence of literals, variables, operators, and function calls that calculates a value. The process of executing an expression is called evaluation, and the resulting value produced is called the result of the expression (also sometimes called the return value).",
+  "created_at": "2026-09-01T13:00:06Z",
+  "front": "What is the difference between an expression, an evaluation, and a result?",
+  "id": "eb68fcfd9ed549f1b16e34e67b08afb6",
+  "lesson_id": "introduction-to-expressions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-expressions/",
+  "tags": [
+    "fundamentals",
+    "expressions"
+  ],
+  "updated_at": "2026-09-01T13:00:16Z"
+}

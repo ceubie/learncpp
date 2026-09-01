@@ -1,0 +1,18 @@
+{
+  "back": "You write the function header, followed by a semicolon, with no function body.",
+  "created_at": "2026-09-01T16:56:36Z",
+  "front": "How do you write a forward declaration?",
+  "id": "4aeeb4e1ac9e49238402bd1c0ed17c98",
+  "lesson_id": "forward-declarations",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/forward-declarations/",
+  "tags": [
+    "functions",
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T16:56:36Z"
+}

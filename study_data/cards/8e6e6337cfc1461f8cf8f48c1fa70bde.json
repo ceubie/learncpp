@@ -1,0 +1,18 @@
+{
+  "back": "It is a double colon - \" :: \"\n\nThe identifier to the left of the :: symbol identifies the namespace that the name to the right of the :: symbol is contained within. If no identifier to the left of the :: symbol is provided, the global namespace is assumed.",
+  "created_at": "2026-09-01T18:07:37Z",
+  "front": "What is the scope resolution operator?",
+  "id": "8e6e6337cfc1461f8cf8f48c1fa70bde",
+  "lesson_id": "naming-collisions-and-an-introduction-to-namespaces",
+  "schema_version": 1,
+  "source_prefix": "l the compiler that the identifier lives inside the namespace.”There are a few different ways to do this.Explicit namespace qualifier std::The most straightforward way to tell the compiler that we want to use cout from the std namespace is by explicitly using the std:: prefix. For example:#include <iostream>\nint main()\n{\n std::cout << \"Hello world!\"; // when we say cout, we mean the cout defined in the std namespace\n return 0;\n}\nThe :: symbol is an operator called the scope resolution operator.",
+  "source_suffix": "So when we say std::cout we’re saying “the cout that is declared in namespace std“.This is the safest way to use cout, because there’s no ambiguity about which cout we’re referencing (the one in the std namespace).Best practiceUse explicit namespace prefixes to access identifiers defined in a namespace.When an identifier includes a namespace prefix, the identifier is called a qualified name.Using namespace std (and why to avoid it)Another way to access identifiers inside a namespace is to use a",
+  "source_text": "The identifier to the left of the :: symbol identifies the namespace that the name to the right of the :: symbol is contained within. If no identifier to the left of the :: symbol is provided, the global namespace is assumed.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/naming-collisions-and-an-introduction-to-namespaces/",
+  "tags": [
+    "fundamentals",
+    "operators",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T18:07:37Z"
+}

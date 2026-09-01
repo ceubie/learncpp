@@ -1,0 +1,17 @@
+{
+  "back": "Statements are used when we want the program to perform an action. Expressions are used when we want the program to calculate a value.",
+  "created_at": "2026-09-01T13:10:32Z",
+  "front": "What is the difference between a statement and an expression?",
+  "id": "5a41ed8f566a4d838a8207efe1d6adfb",
+  "lesson_id": "introduction-to-expressions",
+  "schema_version": 1,
+  "source_prefix": "4 + 5 are 4 and 5.A full expression is an expression that is not a subexpression. All three expressions above (2, 2 + 3, and x = 4 + 5) are full expressions.In casual language, a compound expression is an expression that contains two or more uses of operators. x = 4 + 5 is a compound expression because it contains two uses of operators (operator= and operator+). 2 and 2 + 3 are not compound expressions.Quiz timeQuestion #1What is the difference between a statement and an expression?Show solution",
+  "source_suffix": "Question #2Indicate whether each of the following lines are statements that do not contain expressions, statements that contain expressions, or are expression statements.a)int x;\nShow solutionStatement does not contain an expression. This is a variable definition statement. x is not an expression in this context because it is being defined, not evaluated.b)int x = 5;\nShow solutionStatement contains an expression. int x is a variable definition. The = is part of the syntax for copy initialization",
+  "source_text": "Statements are used when we want the program to perform an action. Expressions are used when we want the program to calculate a value.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-expressions/",
+  "tags": [
+    "fundamentals",
+    "expressions"
+  ],
+  "updated_at": "2026-09-01T13:10:32Z"
+}

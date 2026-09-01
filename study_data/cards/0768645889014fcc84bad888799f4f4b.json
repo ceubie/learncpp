@@ -1,0 +1,18 @@
+{
+  "back": "For functions, a function declaration/prototype serves as a forward declaration.",
+  "created_at": "2026-09-01T17:13:44Z",
+  "front": "How do we declare a forward declaration for functions?",
+  "id": "0768645889014fcc84bad888799f4f4b",
+  "lesson_id": "forward-declarations",
+  "schema_version": 1,
+  "source_prefix": "solutionA function prototype is a declaration statement that includes a function’s name, return type, parameter types, and optionally the parameter names. It does not include the function body. It tells the compiler about the existence of a function before it is defined.Question #2What is a forward declaration?Show solutionA forward declaration tells the compiler that an identifier exists before it is actually defined.Question #3How do we declare a forward declaration for functions?Show solution",
+  "source_suffix": "Question #4Write the function declaration for this function (use the preferred form with names):int doMath(int first, int second, int third, int fourth)\n{\n return first + second * third / fourth;\n}\nShow solution// Do not forget the semicolon at the end, since these are statements.\nint doMath(int first, int second, int third, int fourth);\nQuestion #5For each of the following programs, state whether they fail to compile, fail to link, or compile and link successfully. If you are not sure, try comp",
+  "source_text": "For functions, a function declaration/prototype serves as a forward declaration.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/forward-declarations/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T17:13:44Z"
+}

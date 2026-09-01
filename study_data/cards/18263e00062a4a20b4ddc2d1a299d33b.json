@@ -1,0 +1,17 @@
+{
+  "back": "The type that is defined before a function’s name\n\ne.g. int",
+  "created_at": "2026-09-01T14:22:55Z",
+  "front": "What is a return type?",
+  "id": "18263e00062a4a20b4ddc2d1a299d33b",
+  "lesson_id": "function-return-values-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "prints the answer 0.What we’re missing is some way for getValueFromUser to return the value the user entered back to main so that main can make use of that data.Return valuesWhen you write a user-defined function, you get to determine whether your function will return a value back to the caller or not. To return a value back to the caller, two things are needed.First, your function has to indicate what type of value will be returned. This is done by setting the function’s return type, which is",
+  "source_suffix": ". In the example above, function getValueFromUser has a return type of void (meaning no value will be returned to the caller), and function main has a return type of int (meaning a value of type int will be returned to the caller). Note that this doesn’t determine what specific value is returned -- it only determines what type of value will be returned.Related contentWe explore functions that return void further in the next lesson (2.3 -- Void functions (non-value returning functions)).Second, i",
+  "source_text": "the type that is defined before the function’s name",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T14:22:55Z"
+}

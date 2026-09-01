@@ -1,0 +1,18 @@
+{
+  "back": "A forward declaration tells the compiler that an identifier exists before it is actually defined.",
+  "created_at": "2026-09-01T17:13:19Z",
+  "front": "What is a forward declaration?",
+  "id": "9daa690d1fee4a508f8bd1189b818948",
+  "lesson_id": "forward-declarations",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/forward-declarations/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T17:13:19Z"
+}

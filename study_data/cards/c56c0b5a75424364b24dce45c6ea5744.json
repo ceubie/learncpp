@@ -1,0 +1,17 @@
+{
+  "back": "The function main() is the only exception - it will implicitly return the value 0 if no return statement is provided.",
+  "created_at": "2026-09-01T14:43:21Z",
+  "front": "What is the only exception to the rule that a value-returning function must return a value via a return statement? What happens?",
+  "id": "c56c0b5a75424364b24dce45c6ea5744",
+  "lesson_id": "function-return-values-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "ect if you’ve forgotten to return a value. However, in some complicated cases, the compiler may not be able to properly determine whether your function returns a value or not in all cases, so you should not rely on this.Best practiceMake sure your functions with non-void return types return a value in all cases.Failure to return a value from a value-returning function will cause undefined behavior.Function main will implicitly return 0 if no return statement is providedThe only exception to the",
+  "source_suffix": "is for function main(). The function main() will implicitly return the value 0 if no return statement is provided. That said, it is best practice to explicitly return a value from main, both to show your intent, and for consistency with other functions (which will exhibit undefined behavior if a return value is not specified).Functions can only return a single valueA value-returning function can only return a single value back to the caller each time it is called.Note that the value provided in",
+  "source_text": "rule that a value-returning function must return a value via a return statement",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T14:43:21Z"
+}

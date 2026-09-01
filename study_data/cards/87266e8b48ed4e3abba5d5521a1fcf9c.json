@@ -1,0 +1,16 @@
+{
+  "back": "A literal is a fixed value that has been inserted directly into source code.",
+  "created_at": "2026-09-01T00:09:31Z",
+  "front": "What is a literal, also known as a literal constant?",
+  "id": "87266e8b48ed4e3abba5d5521a1fcf9c",
+  "lesson_id": "introduction-to-literals-and-operators",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-literals-and-operators/",
+  "tags": [
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T00:09:42Z"
+}

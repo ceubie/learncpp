@@ -1,0 +1,17 @@
+{
+  "back": "The function body",
+  "created_at": "2026-09-01T13:59:38Z",
+  "front": "In a function definition, what are the curly braces and statements in-between called?",
+  "id": "6684ed9321c840b1a7eaedb08b023cf0",
+  "lesson_id": "introduction-to-functions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-functions/",
+  "tags": [
+    "functions",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-01T13:59:38Z"
+}

@@ -1,0 +1,14 @@
+{
+  "back": "A specific compiler and the associated standard library it comes with are called an implementation (as these are what actually implements the C++ language).",
+  "created_at": "2026-08-31T16:36:43Z",
+  "front": "What is an implementation?",
+  "id": "126b89676a6943e4b64589c82ae6c808",
+  "lesson_id": "uninitialized-variables-and-undefined-behavior",
+  "schema_version": 1,
+  "source_prefix": "Y work even if you don’t do X first. This shouldn’t affect the operation of correctly written programs, but may cause incorrectly written programs to work anyway. So an alternate answer to the above question is that your compiler may simply be not following the standard! It happens. You can avoid much of this by making sure you’ve turned compiler extensions off, as described in lesson 0.10 -- Configuring your compiler: Compiler extensions.Implementation-defined behavior and unspecified behavior",
+  "source_suffix": "In some cases, the C++ language standard allows the implementation to determine how some aspect of the language will behave, so that the compiler can choose a behavior that is efficient for a given platform. Behavior that is defined by the implementation is called implementation-defined behavior. Implementation-defined behavior must be documented and consistent for a given implementation.Let’s look at a simple example of implementation-defined behavior:#include <iostream>\nint main()\n{\n std::cou",
+  "source_text": "A specific compiler and the associated standard library it comes with are called an implementation (as these are what actually implements the C++ language).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/",
+  "tags": [],
+  "updated_at": "2026-08-31T16:36:43Z"
+}

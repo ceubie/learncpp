@@ -1,0 +1,17 @@
+{
+  "back": "The number of operands that an operator takes as input is called the operator’s arity.",
+  "created_at": "2026-09-01T12:49:28Z",
+  "front": "What is arity?",
+  "id": "93f057c794db4b98b8e62b89e4c29879",
+  "lesson_id": "introduction-to-literals-and-operators",
+  "schema_version": 1,
+  "source_prefix": "nsertion (<<), extraction (>>), and equality (==). While most operators have symbols for names (e.g. +, or ==), there are also a number of operators that are keywords (e.g. new, delete, and throw).Author’s noteFor reasons that will become clear when we discuss operators in more detail, for operators that are symbols, it is common to append the operator’s symbol to the word operator.For example, the plus operator would be written operator+, and the extraction operator would be written operator>>.",
+  "source_suffix": "Few people know what this word means, so don’t drop it in a conversation and expect anybody to have any idea what you’re talking about. Operators in C++ come in four different arities:Unary operators act on one operand. An example of a unary operator is the - operator. For example, given -5, operator- takes literal operand 5 and flips its sign to produce new output value -5.Binary operators act on two operands (often called left and right, as the left operand appears on the left side of the ope",
+  "source_text": "The number of operands that an operator takes as input is called the operator’s arity.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-literals-and-operators/",
+  "tags": [
+    "fundamentals",
+    "math"
+  ],
+  "updated_at": "2026-09-01T12:49:28Z"
+}

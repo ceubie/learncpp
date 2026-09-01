@@ -1,0 +1,17 @@
+{
+  "back": "Block scope",
+  "created_at": "2026-09-01T16:14:50Z",
+  "front": "What is the technical name for local scope?",
+  "id": "3516a8f9c14949c6a36d68ccc45ac8f1",
+  "lesson_id": "introduction-to-local-scope",
+  "schema_version": 1,
+  "source_prefix": "on 15.4 -- Introduction to destructors.Any use of an object after it has been destroyed will result in undefined behavior.At some point after destruction, the memory used by the object will be deallocated (freed up for reuse).Local scope (block scope)An identifier’s scope determines where the identifier can be seen and used within the source code. When an identifier can be seen and used, we say it is in scope. When an identifier can not be seen, we can not use it, and we say it is out of scope.",
+  "source_suffix": "The identifier of a local variable has local scope. An identifier with local scope (technically called block scope) is usable from the point of definition to the end of the innermost pair of curly braces containing the identifier (or for function parameters, at the end of the function). This ensures local variables cannot be used before the point of definition (even if the compiler opts to create them before then) or after they are destroyed. Local variables defined in one function are also not",
+  "source_text": "Scope is a compile-time property, and trying to use an identifier when it is not in scope will result in a compile error.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-01T16:14:50Z"
+}

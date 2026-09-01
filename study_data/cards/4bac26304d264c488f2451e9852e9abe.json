@@ -1,0 +1,18 @@
+{
+  "back": "An error that is produced when the compiler or linker cannot tell multiple identical identifiers within a program apart.",
+  "created_at": "2026-09-01T17:44:02Z",
+  "front": "What is a naming collision (otherwise known as a naming conflict)?",
+  "id": "4bac26304d264c488f2451e9852e9abe",
+  "lesson_id": "naming-collisions-and-an-introduction-to-namespaces",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/naming-collisions-and-an-introduction-to-namespaces/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "errors"
+  ],
+  "updated_at": "2026-09-01T17:44:02Z"
+}

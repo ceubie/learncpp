@@ -1,0 +1,17 @@
+{
+  "back": "When a function is called, all of the parameters of the function are created as variables, and the value of each of the arguments is copied into the matching parameter (using copy initialization). This process is called pass by value. Function parameters that utilize pass by value are called value parameters.",
+  "created_at": "2026-09-01T15:15:17Z",
+  "front": "What is pass by value? What are function parameters called that use pass by value?",
+  "id": "c292b5dc136b4e4581bd92face6990df",
+  "lesson_id": "introduction-to-function-parameters-and-arguments",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/",
+  "tags": [
+    "functions",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-01T15:15:17Z"
+}

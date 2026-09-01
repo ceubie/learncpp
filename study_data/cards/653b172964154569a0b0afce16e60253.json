@@ -1,0 +1,18 @@
+{
+  "back": "Initialized = The object is given a known value at the point of definition.\n\nAssignment = The object is given a known value beyond the point of definition.\n\nUninitialized = The object has not been given a known value yet.",
+  "created_at": "2026-08-31T16:26:05Z",
+  "front": "What is the difference between initialized, assigned, uninitialized?",
+  "id": "653b172964154569a0b0afce16e60253",
+  "lesson_id": "uninitialized-variables-and-undefined-behavior",
+  "schema_version": 1,
+  "source_prefix": "menclatureMany readers expect the terms “initialized” and “uninitialized” to be strict opposites, but they aren’t quite! In common language, “initialized” means the object was provided with an initial value at the point of definition. “Uninitialized” means the object has not been given a known value yet (through any means, including assignment). Therefore, an object that is not initialized but is then assigned a value is no longer uninitialized (because it has been given a known value).To recap:",
+  "source_suffix": "Relatedly, consider this variable definition:int x;\nIn lesson 1.4 -- Variable assignment and initialization, we noted that when no initializer is provided, the variable is default-initialized. In most cases (such as this one), default-initialization performs no actual initialization. Thus we’d say x is uninitialized. We’re focused on the outcome (the object has not been given a known value), not the process.As an aside…This lack of initialization is a performance optimization inherited from C, b",
+  "source_text": "Initialized = The object is given a known value at the point of definition.\nAssignment = The object is given a known value beyond the point of definition.\nUninitialized = The object has not been given a known value yet.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/",
+  "tags": [
+    "initialization",
+    "variables",
+    "fundamentals"
+  ],
+  "updated_at": "2026-08-31T16:26:05Z"
+}

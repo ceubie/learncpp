@@ -1,0 +1,18 @@
+{
+  "back": "A function prototype is a declaration statement that includes a function’s name, return type, parameter types, and optionally the parameter names. It does not include the function body. It tells the compiler about the existence of a function before it is defined.",
+  "created_at": "2026-09-01T17:13:08Z",
+  "front": "What is a function prototype?",
+  "id": "1c6ff4fbf22d4bd0888dee78d22e3c68",
+  "lesson_id": "forward-declarations",
+  "schema_version": 1,
+  "source_prefix": "tion named \"add\" that takes two int parameters and returns an int.  No body!\nint x; // tells the compiler about an integer variable named x\nA definition is a declaration that actually implements (for functions and types) or instantiates (for variables) the identifier.Here are some examples of definitions:// because this function has a body, it is an implementation of function add()\nint add(int x, int y)\n{\n int z{ x + y }; // instantiates variable z\n return z;\n}\nint x; // instantiates variable x",
+  "source_suffix": "NomenclatureIn common language, the term “declaration” is typically used to mean “a pure declaration”, and “definition” is used to mean “a definition that also serves as a declaration”. Thus, we’d typically call int x; a definition, even though it is both a definition and a declaration.When the compiler encounters an identifier, it will check to ensure use of that identifier is valid (e.g. that the identifier is in scope, that it is used in a syntactically valid manner, etc…).In most cases, a de",
+  "source_text": "In C++, all definitions are declarations. Therefore int x; is both a definition and a declaration.\n\nConversely, not all declarations are definitions. Declarations that aren’t definitions are called pure declarations. Types of pure declarations include forward declarations for function, variables, and types.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/forward-declarations/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T17:13:08Z"
+}

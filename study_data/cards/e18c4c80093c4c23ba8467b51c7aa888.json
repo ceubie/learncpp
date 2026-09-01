@@ -1,0 +1,17 @@
+{
+  "back": "Variables defined inside the body of a function are called local variables.",
+  "created_at": "2026-09-01T15:32:43Z",
+  "front": "What are local variables?",
+  "id": "e18c4c80093c4c23ba8467b51c7aa888",
+  "lesson_id": "introduction-to-local-scope",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/",
+  "tags": [
+    "vocab",
+    "scope"
+  ],
+  "updated_at": "2026-09-01T15:32:43Z"
+}

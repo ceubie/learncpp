@@ -1,0 +1,17 @@
+{
+  "back": "A function call tells the CPU to interrupt the current function and execute another function. The CPU essentially “puts a bookmark” at the current point of execution, executes the function named in the function call, and then returns to the point it bookmarked and resumes execution.",
+  "created_at": "2026-09-01T13:50:10Z",
+  "front": "What happens when a program encounters a function call?",
+  "id": "2d7c86883aac4f8992c7eeaf9463768c",
+  "lesson_id": "introduction-to-functions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T13:58:10Z"
+}

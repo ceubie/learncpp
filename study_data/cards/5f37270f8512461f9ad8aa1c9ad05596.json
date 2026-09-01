@@ -1,0 +1,17 @@
+{
+  "back": "main() is required to return an int.\nExplicit function calls to main() are disallowed.",
+  "created_at": "2026-09-01T14:35:17Z",
+  "front": "In C++, there are two special requirements for main()\n\nWhat are they?",
+  "id": "5f37270f8512461f9ad8aa1c9ad05596",
+  "lesson_id": "function-return-values-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "this program yourself and run it a few times to prove to yourself that it works.Revisiting main()You now have the conceptual tools to understand how the main() function actually works. When the program is executed, the operating system makes a function call to main(). Execution then jumps to the top of main(). The statements in main() are executed sequentially. Finally, main() returns an integer value (usually 0), and your program terminates.In C++, there are two special requirements for main():",
+  "source_suffix": "void foo()\n{\n main(); // Compile error: main not allowed to be called explicitly\n}\nvoid main() // Compile error: main not allowed to have non-int return type\n{\n foo();\n}\nKey insightC does allow main() to be called explicitly, so some C++ compilers will allow this for compatibility reasons.For now, you should also define your main() function at the bottom of your code file, below other functions, and avoid calling it explicitly.For advanced readersIt is a common misconception that main is always",
+  "source_text": "main() is required to return an int.\nExplicit function calls to main() are disallowed.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T14:35:17Z"
+}

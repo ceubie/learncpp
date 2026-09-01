@@ -1,0 +1,17 @@
+{
+  "back": "A scope region is an area of source code where all declared identifiers are considered distinct from names declared in other scopes. Two identifiers with the same name can be declared in separate scope regions without causing a naming conflict. However, within a given scope region, all identifiers must be unique, otherwise a naming collision will result.",
+  "created_at": "2026-09-01T17:51:14Z",
+  "front": "What is a scope region?",
+  "id": "2adfc49c484a4964a8856b5072f4de10",
+  "lesson_id": "naming-collisions-and-an-introduction-to-namespaces",
+  "schema_version": 1,
+  "source_prefix": "ith each other?Scope regionsBack to our address analogy for a moment, having two Front Streets was only problematic because those streets existed within the same city. On the other hand, if you had to deliver mail to two addresses, one at 245 Front Street in Mill City, and another address at 245 Front Street in Jonesville, there would be no confusion about where to go. Put another way, cities provide groupings that allow us to disambiguate addresses that might otherwise conflict with each other.",
+  "source_suffix": "The body of a function is one example of a scope region. Two identically-named identifiers can be defined in separate functions without issue -- because each function provides a separate scope region, there is no collision. However, if you try to define two identically-named identifiers within the same function, a naming collision will result, and the compiler will complain.NamespacesA namespace provides another type of scope region (called namespace scope) that allows you to declare or define n",
+  "source_text": "A scope region is an area of source code where all declared identifiers are considered distinct from names declared in other scopes (much like the cities in our analogy). Two identifiers with the same name can be declared in separate scope regions without causing a naming conflict. However, within a given scope region, all identifiers must be unique, otherwise a naming collision will result.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/naming-collisions-and-an-introduction-to-namespaces/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-01T17:51:14Z"
+}

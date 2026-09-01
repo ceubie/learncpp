@@ -1,0 +1,18 @@
+{
+  "back": "A non-value returning function (or a void function).",
+  "created_at": "2026-09-01T14:52:12Z",
+  "front": "What is a function that does not return a value called?",
+  "id": "89786820b4af4eec906b978fa3d6050e",
+  "lesson_id": "void-functions-non-value-returning-functions",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/void-functions-non-value-returning-functions/",
+  "tags": [
+    "fundamentals",
+    "vocab",
+    "functions"
+  ],
+  "updated_at": "2026-09-01T14:52:12Z"
+}
