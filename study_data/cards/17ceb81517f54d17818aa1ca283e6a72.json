@@ -1,0 +1,16 @@
+{
+  "back": "Object-like macros with substitution text were used (in C. ) as a way to assign names to literals. This is no longer necessary, as better methods are available in C++. Object-like macros with substitution text are now mostly seen in legacy code, and we recommend avoiding them whenever possible.",
+  "created_at": "2026-09-01T23:56:37Z",
+  "front": "Where do object-like macros with substitution originate?",
+  "id": "17ceb81517f54d17818aa1ca283e6a72",
+  "lesson_id": "introduction-to-the-preprocessor",
+  "schema_version": 1,
+  "source_prefix": "< '\\n';\n return 0;\n}\nThe preprocessor converts the above into the following:// The contents of iostream are inserted here\nint main()\n{\n std::cout << \"My name is: \" << \"Alex\" << '\\n';\n return 0;\n}\nWhich, when run, prints the output My name is: Alex.Object-like macros with substitution text were used (in C) as a way to assign names to literals. This is no longer necessary, as better methods are available in C++ (see 7.10 -- Sharing global constants across multiple files (using inline variables)).",
+  "source_suffix": "Best practiceAvoid macros with substitution text unless no viable alternatives exist.Object-like macros without substitution textObject-like macros can also be defined without substitution text.For example:#define USE_YEN\nMacros of this form work like you might expect: most further occurrences of the identifier is removed and replaced by nothing!This might seem pretty useless, and it is useless for doing text substitution. However, that’s not what this form of the directive is generally used for",
+  "source_text": "Object-like macros with substitution text are now mostly seen in legacy code, and we recommend avoiding them whenever possible.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/",
+  "tags": [
+    "macros"
+  ],
+  "updated_at": "2026-09-01T23:56:37Z"
+}

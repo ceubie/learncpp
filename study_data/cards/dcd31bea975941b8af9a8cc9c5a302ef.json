@@ -1,0 +1,17 @@
+{
+  "back": "The entire process of preprocessing, compiling, and linking is called translation.",
+  "created_at": "2026-09-01T23:45:17Z",
+  "front": "What is translation?",
+  "id": "dcd31bea975941b8af9a8cc9c5a302ef",
+  "lesson_id": "introduction-to-the-preprocessor",
+  "schema_version": 1,
+  "source_prefix": "built right into the compiler itself.Most of what the preprocessor does is fairly uninteresting. For example, it strips out comments, and ensures each code file ends in a newline. However, the preprocessor does have one very important role: it is what processes #include directives (which we’ll discuss more in a moment).When the preprocessor has finished processing a code file, the result is called a translation unit. This translation unit is what is then compiled by the compiler.Related content",
+  "source_suffix": "If you’re curious, here is a list of translation phases. As of the time of writing, preprocessing encompasses phases 1 through 4, and compilation is phases 5 through 7.Preprocessor directivesWhen the preprocessor runs, it scans through the code file (from top to bottom), looking for preprocessor directives. Preprocessor directives (often just called directives) are instructions that start with a # symbol and end with a newline (NOT a semicolon). These directives tell the preprocessor to perform",
+  "source_text": "The entire process of preprocessing, compiling, and linking is called translation.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-01T23:45:17Z"
+}

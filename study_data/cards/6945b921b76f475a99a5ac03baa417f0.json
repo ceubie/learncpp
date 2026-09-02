@@ -1,0 +1,17 @@
+{
+  "back": "In C++, a macro is a rule that defines how input text is converted into replacement output text.\n\nThe two basic types of macros are object-like macros, and function-like macros.",
+  "created_at": "2026-09-01T23:50:14Z",
+  "front": "What is a macro? What are the two basic types?",
+  "id": "6945b921b76f475a99a5ac03baa417f0",
+  "lesson_id": "introduction-to-the-preprocessor",
+  "schema_version": 1,
+  "source_prefix": "is preprocessed.Consider the following program:#include <iostream>\nint main()\n{\n std::cout << \"Hello, world!\\n\";\n return 0;\n}\nWhen the preprocessor runs on this program, the preprocessor will replace #include <iostream> with the contents of the file named “iostream” and then preprocess the included content and the rest of the file.Since #include is almost exclusively used to include header files, we’ll discuss #include in more detail in the next lesson (when we discuss header files).Key insight",
+  "source_suffix": "Macro definesThe #define directive can be used to create a macro. In C++, a macro is a rule that defines how input text is converted into replacement output text.There are two basic types of macros: object-like macros, and function-like macros.Function-like macros act like functions, and serve a similar purpose. Their use is generally considered unsafe, and almost anything they can do can be done by a normal function.Object-like macros can be defined in one of two ways:#define IDENTIFIER\n#define",
+  "source_text": "Each translation unit typically consists of a single code (.cpp) file and all header files it #includes (applied recursively, since header files can #include other header files).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-01T23:52:05Z"
+}

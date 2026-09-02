@@ -1,0 +1,16 @@
+{
+  "back": "When the preprocessor has finished processing a code file, the result is called a *translation unit*. This translation unit is what is then compiled by the compiler.",
+  "created_at": "2026-09-01T23:42:59Z",
+  "front": "What does the preprocessor output after processing a code file?",
+  "id": "c55eaa61779d4c2b988258d038e993f8",
+  "lesson_id": "introduction-to-the-preprocessor",
+  "schema_version": 1,
+  "source_prefix": "When you compile your project, you might expect that the compiler compiles each code file exactly as you’ve written it. This actually isn’t the case.Instead, prior to compilation, each code (.cpp) file goes through a preprocessing phase. In this phase, a program called the preprocessor makes various changes to the text of the code file.",
+  "source_suffix": "As an aside…Historically, the preprocessor was a separate program from the compiler, but in modern compilers, the preprocessor may be built right into the compiler itself.Most of what the preprocessor does is fairly uninteresting. For example, it strips out comments, and ensures each code file ends in a newline. However, the preprocessor does have one very important role: it is what processes #include directives (which we’ll discuss more in a moment).When the preprocessor has finished processing",
+  "source_text": "The preprocessor does not actually modify the original code files in any way -- rather, all changes made by the preprocessor happen either temporarily in-memory or using temporary files.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/",
+  "tags": [
+    "preprocessor"
+  ],
+  "updated_at": "2026-09-01T23:43:17Z"
+}

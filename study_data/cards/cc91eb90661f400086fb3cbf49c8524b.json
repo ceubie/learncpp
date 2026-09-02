@@ -1,0 +1,16 @@
+{
+  "back": "Code that exists between #if 0 and #endif excludes a block of code from being compiled as if it were inside a comment block.\n\nYou can change #if 0 to #if one to temporarily re-enable compilation of the conditional block.",
+  "created_at": "2026-09-02T00:04:38Z",
+  "front": "What is the purpose of #if 0 and #if 1",
+  "id": "cc91eb90661f400086fb3cbf49c8524b",
+  "lesson_id": "introduction-to-the-preprocessor",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/",
+  "tags": [
+    "conditional-compilation"
+  ],
+  "updated_at": "2026-09-02T00:05:54Z"
+}

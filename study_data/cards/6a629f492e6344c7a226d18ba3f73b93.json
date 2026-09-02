@@ -1,0 +1,16 @@
+{
+  "back": "These are conditional compilation preprocessor directives. They allow you to specify under what conditions something will or will not compile. \n\n#endif is placed at the end of the conditional. \n\n#ifdef allows the preprocessor to check whether an identifier has been previously defined via #define - if so, the code between the conditional is compiled. \n\n#ifndef is the opposite NOT of #ifdef",
+  "created_at": "2026-09-02T00:02:46Z",
+  "front": "Explain #ifdef, #ifndef, and #endif.",
+  "id": "6a629f492e6344c7a226d18ba3f73b93",
+  "lesson_id": "introduction-to-the-preprocessor",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/",
+  "tags": [
+    "conditional-compilation"
+  ],
+  "updated_at": "2026-09-02T00:02:46Z"
+}
