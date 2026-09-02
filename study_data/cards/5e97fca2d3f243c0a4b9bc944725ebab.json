@@ -1,0 +1,17 @@
+{
+  "back": "#ifndef SQUARE_H\n#define SQUARE_H\n// code\n#endif",
+  "created_at": "2026-09-02T16:16:33Z",
+  "front": "How would you write a header guard for a header file named square.h",
+  "id": "5e97fca2d3f243c0a4b9bc944725ebab",
+  "lesson_id": "header-guards",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-guards/",
+  "tags": [
+    "syntax",
+    "header-guards"
+  ],
+  "updated_at": "2026-09-02T16:16:33Z"
+}

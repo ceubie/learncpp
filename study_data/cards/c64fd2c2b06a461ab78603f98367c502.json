@@ -1,0 +1,17 @@
+{
+  "back": "This allows the compiler to catch certain kinds of errors at compile time instead of link time.\n\nSay the compiler reaches the definition of a function that does not match the return type of it's paired header file's function prototype. The compiler will note that the return types of the forward declaration and the definition don’t match. Because functions can’t differ by only a return type, the compiler will error and abort compilation immediately. In a larger project, this can save a lot of time and help pinpoint where the issue is.",
+  "created_at": "2026-09-02T15:11:33Z",
+  "front": "Why is it best practice for code files to #include their paired header file?",
+  "id": "c64fd2c2b06a461ab78603f98367c502",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "e'll cover header guards in the next lesson)\nint add(int x, int y);\nmain.cpp:#include \"add.h\"\n#include <iostream>\nint main()\n{\n std::cout << \"The sum of 3 and 4 is \" << add(3, 4) << '\\n';\n return 0;\n}\nadd.cpp:#include \"add.h\"         // copies forward declaration from add.h here\ndouble add(int x, int y) // oops, return type is double instead of int\n{\n return x + y;\n}\nWhen add.cpp is compiled, the forward declaration int add(int x, int y) will be copied into add.cpp at the point of the #include.",
+  "source_suffix": "As an aside…Unfortunately, this doesn’t work if it is a parameter with a different type instead of a return type. This is because C++ supports overloaded functions (functions with the same name but different parameter types), so the compiler will assume a function with a mismatched parameter type is a different overload. Can’t win em all.If the #include \"add.h\" is not present, the compiler won’t catch the issue because it doesn’t see the mismatch. We have to wait until link time for the issue to",
+  "source_text": "When the compiler reaches the definition double add(int x, int y), it will note that the return types of the forward declaration and the definition don’t match. Because functions can’t differ by only a return type, the compiler will error and abort compilation immediately. In a larger project, this can save a lot of time and help pinpoint where the issue is.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "header-files",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-02T15:11:33Z"
+}

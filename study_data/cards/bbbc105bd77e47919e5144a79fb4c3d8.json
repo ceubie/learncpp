@@ -1,0 +1,16 @@
+{
+  "back": "It violates the one-defintion rule, and can result in a multiple definition error when the linker tries to link compiled files.",
+  "created_at": "2026-09-02T15:07:32Z",
+  "front": "What is the case against including function definitions in header files?",
+  "id": "bbbc105bd77e47919e5144a79fb4c3d8",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-02T15:07:32Z"
+}

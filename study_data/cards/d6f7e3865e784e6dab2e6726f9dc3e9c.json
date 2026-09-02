@@ -1,0 +1,16 @@
+{
+  "back": "Best practice is that you do NOT use transitive includes in your source code, but rather each file should explicitly #include all of the header files it needs to compile. Do not rely on headers included transitively from other headers.\n\nThe implementation of header files may change over time, or be different across different systems. If that happens, your code may only compile on certain systems, or may compile now but not in the future. This is easily avoided by explicitly including all of the header files the content of your code file requires.",
+  "created_at": "2026-09-02T15:32:30Z",
+  "front": "What is best practice for using transitive includes header files in your source code?",
+  "id": "d6f7e3865e784e6dab2e6726f9dc3e9c",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "t any other header files that are #included by that header (and any header files those include, and so on). These additional header files are sometimes called transitive includes, as they’re included implicitly rather than explicitly.The content of these transitive includes are available for use in your code file. However, you generally should not rely on the content of headers that are included transitively (unless reference documentation indicates that those transitive includes are required).",
+  "source_suffix": "Best practiceEach file should explicitly #include all of the header files it needs to compile. Do not rely on headers included transitively from other headers.Unfortunately, there is no easy way to detect when your code file is accidentally relying on content of a header file that has been included by another header file.Q: I didn’t include <someheader> and my program worked anyway! Why?This is one of the most commonly asked questions on this site. The answer is: it’s likely working, because you",
+  "source_text": "The implementation of header files may change over time, or be different across different systems. If that happens, your code may only compile on certain systems, or may compile now but not in the future. This is easily avoided by explicitly including all of the header files the content of your code file requires.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-02T15:32:30Z"
+}

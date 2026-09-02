@@ -1,0 +1,16 @@
+{
+  "back": "Requirements is a fancy word for both the constraints that your solution needs to abide by (e.g. budget, timeline, space, memory, etc…), as well as the capabilities that the program must exhibit in order to meet the users’ needs. Note that your requirements should similarly be focused on the “what”, not the “how”.\n\nFor example:\n\nPhone numbers should be saved, so they can be recalled later.\nThe randomized dungeon should always contain a way to get from the entrance to an exit.\nThe stock recommendations should leverage historical pricing data.\nThe user should be able to enter the height of the tower.\nWe need a testable version within 7 days.\nThe program should produce results within 10 seconds of the user submitting their request.\nThe program should crash in less than 0.1% of user sessions.\nA single problem may yield many requirements, and the solution isn’t “done” until it satisfies all of them.",
+  "created_at": "2026-09-02T17:25:17Z",
+  "front": "What are requirements in application/program development?",
+  "id": "b7105662606a45b6b4ad014701164737",
+  "lesson_id": "how-to-design-your-first-programs",
+  "schema_version": 1,
+  "source_prefix": "g looking caverns.Generate a list of stock recommendations for stocks that have high dividends.Model how long it takes for a ball dropped off a tower to hit the ground.Although this step seems obvious, it’s also highly important. The worst thing you can do is write a program that doesn’t actually do what you (or your boss) wanted!Design step 2: Define requirementsWhile defining your problem helps you determine what outcome you want, it’s still vague. The next step is to think about requirements.",
+  "source_suffix": "Design step 3: Define your tools, targets, and backup planWhen you are an experienced programmer, there are many other steps that typically would take place at this point, including:Defining what target architecture and/or OS your program will run on.Determining what set of tools you will be using.Determining whether you will write your program alone or as part of a team.Defining your testing/feedback/release strategy.Determining how you will back up your code.However, as a new programmer, the a",
+  "source_text": "Requirements is a fancy word for both the constraints that your solution needs to abide by (e.g. budget, timeline, space, memory, etc…), as well as the capabilities that the program must exhibit in order to meet the users’ needs. Note that your requirements should similarly be focused on the “what”, not the “how”.\n\nFor example:\n\nPhone numbers should be saved, so they can be recalled later.\nThe randomized dungeon should always contain a way to get from the entrance to an exit.\nThe stock recommendations should leverage historical pricing data.\nThe user should be able to enter the height of the tower.\nWe need a testable version within 7 days.\nThe program should produce results within 10 seconds of the user submitting their request.\nThe program should crash in less than 0.1% of user sessions.\nA single problem may yield many requirements, and the solution isn’t “done” until it satisfies all of them.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/how-to-design-your-first-programs/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-02T17:25:17Z"
+}

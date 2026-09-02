@@ -1,0 +1,17 @@
+{
+  "back": "A header guard is a conditional compilation directive which can prevent multiple definition errors.",
+  "created_at": "2026-09-02T16:09:33Z",
+  "front": "What is a header guard?",
+  "id": "662a303cfe0c43d988e05b8f15217257",
+  "lesson_id": "header-guards",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-guards/",
+  "tags": [
+    "vocab",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-02T16:09:33Z"
+}

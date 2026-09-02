@@ -1,0 +1,17 @@
+{
+  "back": "Although the preprocessor will happily do so, you should generally not #include .cpp files. These should be added to your project and compiled.\n\nThere are number of reasons for this:\n\n1. Doing so can cause naming collisions between source files.\n2. In a large project it can be hard to avoid one definition rules (ODR) issues.\n3. Any change to such a .cpp file will cause both the .cpp file and any other .cpp file that includes it to recompile, which can take a long time. Headers tend to change less often than source files.\n4. It is non-conventional to do so.",
+  "created_at": "2026-09-02T15:22:22Z",
+  "front": "Why don't we #include .cpp files?",
+  "id": "048538b5d89c41b49dde31f33a831e6c",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "ype is a different overload. Can’t win em all.If the #include \"add.h\" is not present, the compiler won’t catch the issue because it doesn’t see the mismatch. We have to wait until link time for the issue to surface.We will also see many examples in future lessons where content required by the source file is defined in the paired header. In such cases, including the header is a necessity.Best practiceSource files should #include their paired header file (if one exists).Do not #include .cpp files",
+  "source_suffix": "Best practiceAvoid #including .cpp files.TipIf your project doesn’t compile unless you #include .cpp files, that means those .cpp files are not being compiled as part of your project. Add them to your project or command line so they get compiled.TroubleshootingIf you get a compiler error indicating that add.h isn’t found, make sure the file is really named add.h. Depending on how you created and named it, it’s possible the file could have been named something like add (no extension) or add.h.txt",
+  "source_text": "Although the preprocessor will happily do so, you should generally not #include .cpp files. These should be added to your project and compiled.\n\nThere are number of reasons for this:\n\nDoing so can cause naming collisions between source files.\nIn a large project it can be hard to avoid one definition rules (ODR) issues.\nAny change to such a .cpp file will cause both the .cpp file and any other .cpp file that includes it to recompile, which can take a long time. Headers tend to change less often than source files.\nIt is non-conventional to do so.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals",
+    "directives"
+  ],
+  "updated_at": "2026-09-02T15:22:22Z"
+}

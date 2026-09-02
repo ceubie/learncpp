@@ -1,0 +1,17 @@
+{
+  "back": "To maximize the chance that missing includes will be flagged by compiler, order your #includes as follows (skipping any that are not relevant):\n\nThe paired header file for this code file (e.g. add.cpp should #include \"add.h\")\n\nOther headers from the same project (e.g. #include \"mymath.h\")\n\n3rd party library headers (e.g. #include <boost/tuple/tuple.hpp>)\n\nStandard library headers (e.g. #include <iostream>)\n\nThe headers for each grouping should be sorted alphabetically (unless the documentation for a 3rd party library instructs you to do otherwise).",
+  "created_at": "2026-09-02T15:35:13Z",
+  "front": "What is best practice for ordering #includes for header files?",
+  "id": "2ee8e833d62b41be94c1665ea1f47c11",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "it. In our code file, if we include header B before header A, our code will still compile! This is because the compiler will compile all the declarations from B before it compiles the code from A that depends on those declarations.However, if we include header A first, then the compiler will complain because the code from A will be compiled before the compiler has seen the declarations from B. This is actually preferable, because the error has been surfaced, and we can then fix it.Best practice",
+  "source_suffix": "That way, if one of your user-defined headers is missing an #include for a 3rd party library or standard library header, it’s more likely to cause a compile error so you can fix it.Header file best practicesHere are a few more recommendations for creating and using header files.Always include header guards (we’ll cover these next lesson).Do not define variables and functions in header files (for now).Give a header file the same name as the source file it’s associated with (e.g. grades.h is paire",
+  "source_text": "To maximize the chance that missing includes will be flagged by compiler, order your #includes as follows (skipping any that are not relevant):\n\nThe paired header file for this code file (e.g. add.cpp should #include \"add.h\")\nOther headers from the same project (e.g. #include \"mymath.h\")\n3rd party library headers (e.g. #include <boost/tuple/tuple.hpp>)\nStandard library headers (e.g. #include <iostream>)\nThe headers for each grouping should be sorted alphabetically (unless the documentation for a 3rd party library instructs you to do otherwise).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals",
+    "header-files"
+  ],
+  "updated_at": "2026-09-02T15:35:13Z"
+}

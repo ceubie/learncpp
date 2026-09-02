@@ -1,0 +1,17 @@
+{
+  "back": "If a header file is paired with a code file, they should both have the same base name, such as:\n\nadd.cpp\nadd.h",
+  "created_at": "2026-09-02T14:32:18Z",
+  "front": "What is the naming convention for header files?",
+  "id": "2a67af60513d49e687459bce6858abf3",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals",
+    "conventions"
+  ],
+  "updated_at": "2026-09-02T14:32:18Z"
+}

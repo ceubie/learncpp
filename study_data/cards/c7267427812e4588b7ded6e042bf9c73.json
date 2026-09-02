@@ -1,0 +1,17 @@
+{
+  "back": "Use double quotes to include header files that you’ve written or are expected to be found in the current directory. Use angled brackets to include headers that come with your compiler, OS, or third-party libraries you’ve installed elsewhere on your system.",
+  "created_at": "2026-09-02T15:25:06Z",
+  "front": "When using #include, when do we use double quotes vs. angled brackets",
+  "id": "c7267427812e4588b7ded6e042bf9c73",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals",
+    "header-files"
+  ],
+  "updated_at": "2026-09-02T15:25:06Z"
+}

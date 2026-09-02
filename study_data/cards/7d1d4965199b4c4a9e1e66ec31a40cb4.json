@@ -1,0 +1,16 @@
+{
+  "back": "In Visual Studio, right click on your project in the Solution Explorer, and choose Properties, then the VC++ Directories tab. From here, you will see a line called Include Directories. Add the directories you’d like the compiler to search for additional headers there.\n\nThis way, if you ever change your directory structure, you only have to change a single compiler or IDE setting instead of every code file.",
+  "created_at": "2026-09-02T15:29:37Z",
+  "front": "What is the proper way to include header files from external directories?",
+  "id": "7d1d4965199b4c4a9e1e66ec31a40cb4",
+  "lesson_id": "header-files",
+  "schema_version": 1,
+  "source_prefix": "s there.For gcc usersUsing g++, you can use the -I option to specify an alternate include directory:g++ -o main -I./source/includes main.cppThere is no space after the -I. For a full path (rather than a relative path), remove the . after -I.For VS Code usersIn your tasks.json configuration file, add a new line in the “Args” section:\"-I./source/includes\",There is no space after the -I. For a full path (rather than a relative path), remove the . after -I.The nice thing about this approach is that",
+  "source_suffix": "Headers may include other headersIt’s common that the content of a header file will make use of something that is declared (or defined) in another header file. When this happens, the header file should #include the other header file containing the declaration (or definition) that it needs.Foo.h:#include <string_view> // required to use std::string_view\nstd::string_view getApplicationName(); // std::string_view used here\nTransitive includes When your source (.cpp) file #includes a header file, yo",
+  "source_text": "if you ever change your directory structure, you only have to change a single compiler or IDE setting instead of every code file.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/header-files/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-02T15:29:37Z"
+}
