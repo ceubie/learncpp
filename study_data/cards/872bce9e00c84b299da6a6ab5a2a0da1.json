@@ -1,0 +1,17 @@
+{
+  "back": "The step over command is a debugging command that executes the next statement in the normal execution path of the program. However, whereas step into will enter function calls and execute them line by line, step over will execute an entire function without stopping and return control to you after the function has been executed.",
+  "created_at": "2026-09-03T16:35:33Z",
+  "front": "What is a step over command? How is it different than a step into command?",
+  "id": "872bce9e00c84b299da6a6ab5a2a0da1",
+  "lesson_id": "using-an-integrated-debugger-stepping",
+  "schema_version": 1,
+  "source_prefix": "dio, this is under Debug > Stop Debugging).Note that Stop Debugging can be used at any point in the debugging process to end the debugging session.Congratulations, you’ve now stepped through a program and watched every line execute!TipIn future lessons, we’ll explore other debugger commands, some of which may not be available unless the debugger is already running. If the desired debugging command is not available, step into your code to start the debugger and try again.Step overLike step into,",
+  "source_suffix": "For Visual Studio usersIn Visual Studio, the step over command can be accessed via Debug menu > Step Over, or by pressing the F10 shortcut key.For Code::Blocks usersIn Code::Blocks, the step over command is called Next line instead, and can be accessed via Debug menu > Next line, or by pressing the F7 shortcut key.For VS Code usersIn VS Code, the step over command can be accessed via Run > Step Over, or by pressing the F10 shortcut key.Let’s take a look at an example where we step over the funct",
+  "source_text": "The step over command executes the next statement in the normal execution path of the program. However, whereas step into will enter function calls and execute them line by line, step over will execute an entire function without stopping and return control to you after the function has been executed.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T16:35:33Z"
+}

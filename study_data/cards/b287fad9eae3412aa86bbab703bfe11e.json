@@ -1,0 +1,17 @@
+{
+  "back": "The set next statement command allows us to change the point of execution to some other statement (sometimes informally called jumping). This can be used to jump the point of execution forwards and skip some code that would otherwise execute, or backwards and have something that already executed run again.\n\nThe set next statement command will change the point of execution, but will not otherwise change the program state. Your variables will retain whatever values they had before the jump. As a result, jumping may cause your program to produce different values, results, or behaviors than it would otherwise. Use this capability judiciously (especially jumping backwards).\nYou should not use set next statement to change the point of execution to a different function. This may result in undefined behavior, and likely a crash.",
+  "created_at": "2026-09-03T17:23:36Z",
+  "front": "What is the set next statement command?",
+  "id": "b287fad9eae3412aa86bbab703bfe11e",
+  "lesson_id": "using-an-integrated-debugger-running-and-breakpoints",
+  "schema_version": 1,
+  "source_prefix": "e, run to cursor to line 12. Then set next statement on line 11, and continue. The program’s output should be:5\n6\n6\n7\nWarningThe set next statement command will change the point of execution, but will not otherwise change the program state. Your variables will retain whatever values they had before the jump. As a result, jumping may cause your program to produce different values, results, or behaviors than it would otherwise. Use this capability judiciously (especially jumping backwards).Warning",
+  "source_suffix": "“Step back” vs jumping backwards via “Set next statement”“Step back” rewinds the state of everything, as if you’d never gone past that point in the first place. Any changes to variable values or other program state is undone. This is essentially an “undo” command for stepping.“Set next statement” when used to jump backwards only changes the point of execution. Any changes to variable values or other program state are not undone.ConclusionYou now learned the major ways that you can use an integra",
+  "source_text": "You should not use set next statement to change the point of execution to a different function. This may result in undefined behavior, and likely a crash.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-running-and-breakpoints/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T17:23:36Z"
+}

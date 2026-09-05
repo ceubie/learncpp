@@ -1,0 +1,18 @@
+{
+  "back": "Syntax errors are errors that occur when you write a statement that is not valid according to the grammar of the language you are using. \n\nSemantic errors, or logic errors, are errors in meaning. These occur when a statement is syntactically valid, but either violates the other rules of the language, or does not do what the programmer intended.",
+  "created_at": "2026-09-03T15:26:58Z",
+  "front": "What is the difference between syntax errors and semantic errors",
+  "id": "d5bbf4fd99304aaca921534d0d16d934",
+  "lesson_id": "syntax-and-semantic-errors",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/syntax-and-semantic-errors/",
+  "tags": [
+    "fundamentals",
+    "errors",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T15:26:58Z"
+}

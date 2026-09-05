@@ -1,0 +1,17 @@
+{
+  "back": "A breakpoint is a special marker that tells the debugger to stop execution of the program at the breakpoint when running in debug mode.",
+  "created_at": "2026-09-03T17:21:04Z",
+  "front": "What is a breakpoint?",
+  "id": "1817205b8c6a41c1928e38aee56568b5",
+  "lesson_id": "using-an-integrated-debugger-running-and-breakpoints",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-running-and-breakpoints/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T17:21:04Z"
+}

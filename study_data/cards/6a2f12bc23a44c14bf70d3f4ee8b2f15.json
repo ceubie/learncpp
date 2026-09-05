@@ -1,0 +1,17 @@
+{
+  "back": "Defensive programming is a practice whereby the programmer tries to anticipate all of the ways the software could be misused, either by end-users, or by other developers (including the programmer themselves) using the code. These misuses can often be detected and then mitigated (e.g. by asking a user who entered bad input to try again).",
+  "created_at": "2026-09-03T18:17:51Z",
+  "front": "What is defensive programming?",
+  "id": "6a2f12bc23a44c14bf70d3f4ee8b2f15",
+  "lesson_id": "finding-issues-before-they-become-problems",
+  "schema_version": 1,
+  "source_prefix": "time tends to lead to more errors as well as errors that are harder to find.An introduction to defensive programmingErrors can be not only of your own making (e.g. incorrect logic), but also occur when your users use the application in a way that you did not anticipate. For example, if you ask the user to enter an integer, and they enter a letter instead, how does your program behave in such a case? Unless you anticipated this, and added some error handling for this case, probably not very well.",
+  "source_suffix": "We’ll explore topics related to error handling in future lessons.Finding errors fastSince not making errors is difficult in large programs, the next best thing is to catch errors you do make quickly.The best way to do this is to program a little bit at a time, and then test your code and make sure it works.However, there are a few other techniques we can also use.An introduction to testing functionsOne common way to help uncover issues with your program is to write testing functions to “exercise",
+  "source_text": "Defensive programming is a practice whereby the programmer tries to anticipate all of the ways the software could be misused, either by end-users, or by other developers (including the programmer themselves) using the code. These misuses can often be detected and then mitigated (e.g. by asking a user who entered bad input to try again).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/finding-issues-before-they-become-problems/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-03T18:17:51Z"
+}

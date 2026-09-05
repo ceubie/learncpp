@@ -1,0 +1,1 @@
+1. An alternate approach to repeatedly adding/removing or uncommenting/commenting debug statements is to use a 3rd party library that will let you leave debug statements in your code but compile them out in release mode via a preprocessor macro. dbg is one such header-only library that exists to help facilitate this (via the DBG_MACRO_DISABLE preprocessor macro).

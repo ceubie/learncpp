@@ -1,0 +1,18 @@
+{
+  "back": "std::clog",
+  "created_at": "2026-09-03T15:54:20Z",
+  "front": "What output stream is intended to be used for writing logging information?",
+  "id": "1ec800b615ae43d599ccca6d594a120b",
+  "lesson_id": "more-debugging-tactics",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/more-debugging-tactics/",
+  "tags": [
+    "fundamentals",
+    "errors",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T15:54:20Z"
+}

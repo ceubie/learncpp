@@ -1,0 +1,18 @@
+{
+  "back": "Be able to reproduce the problem.",
+  "created_at": "2026-09-03T15:35:42Z",
+  "front": "What is the first and most important step of solving problems with your code?",
+  "id": "6ce1da16f01b442381b9483f8ab15514",
+  "lesson_id": "a-strategy-for-debugging",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/a-strategy-for-debugging/",
+  "tags": [
+    "fundamentals",
+    "errors",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T15:35:42Z"
+}

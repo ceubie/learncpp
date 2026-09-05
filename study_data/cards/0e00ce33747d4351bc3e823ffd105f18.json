@@ -1,0 +1,17 @@
+{
+  "back": "The step into command is a debugging command that executes the next statement in the normal execution path of the program, and then pauses execution of the program so we can examine the program’s state using the debugger. If the statement being executed contains a function call, step into causes the program to jump to the top of the function being called, where it will pause.",
+  "created_at": "2026-09-03T16:27:31Z",
+  "front": "What is a step into command?",
+  "id": "0e00ce33747d4351bc3e823ffd105f18",
+  "lesson_id": "using-an-integrated-debugger-stepping",
+  "schema_version": 1,
+  "source_prefix": "n main.cpp and start debugging by pressing F5 or by pressing Ctrl+Shift+P and selecting “Debug: Start Debugging and Stop on Entry”.SteppingWe’re going to start our exploration of the debugger by first examining some of the debugging tools that allow us to control the way a program executes.Stepping is the name for a set of related debugger features that let us execute (step through) our code statement by statement.There are a number of related stepping commands that we’ll cover in turn.Step into",
+  "source_suffix": "Let’s take a look at a very simple program:#include <iostream>\nvoid printValue(int value)\n{\n std::cout << value << '\\n';\n}\nint main()\n{\n printValue(5);\n return 0;\n}\nLet’s debug this program using the step into command.First, locate and then execute the step into debug command once.For Visual Studio usersIn Visual Studio, the step into command can be accessed via Debug menu > Step Into, or by pressing the F11 shortcut key.For Code::Blocks usersIn Code::Blocks, the step into command can be accesse",
+  "source_text": "The step into command executes the next statement in the normal execution path of the program, and then pauses execution of the program so we can examine the program’s state using the debugger. If the statement being executed contains a function call, step into causes the program to jump to the top of the function being called, where it will pause.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T16:27:31Z"
+}

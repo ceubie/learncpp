@@ -1,0 +1,18 @@
+{
+  "back": "Reproduction steps are a list of clear and precise steps that can be followed to cause an issue to recur with a high level of predictability",
+  "created_at": "2026-09-03T15:36:18Z",
+  "front": "What are reproduction steps?",
+  "id": "bb35fbcd0e0a41d7834456ee7127e729",
+  "lesson_id": "a-strategy-for-debugging",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/a-strategy-for-debugging/",
+  "tags": [
+    "fundamentals",
+    "errors",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T15:36:18Z"
+}

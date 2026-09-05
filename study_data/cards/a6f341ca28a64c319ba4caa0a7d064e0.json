@@ -1,0 +1,18 @@
+{
+  "back": "When printing information for debugging purposes, use std::cerr instead of std::cout. One reason for this is that std::cout may be buffered, which means a bit of time may pass between when you ask std::cout to output text and when it actually does. If you output using std::cout and then your program crashes immediately afterward, std::cout may or may not have actually output yet. This can mislead you about where the issue is. On the other hand, std::cerr is unbuffered, which means anything you send to it will output immediately. This helps ensure all debug output appears as soon as possible (at the cost of some performance, which we usually don’t care about when debugging).\n\nUsing std::cerr also helps make clear that the information being output is for an error case rather than a normal case.",
+  "created_at": "2026-09-03T15:44:58Z",
+  "front": "What should you use to print information for debugging purposes?",
+  "id": "a6f341ca28a64c319ba4caa0a7d064e0",
+  "lesson_id": "basic-debugging-tactics",
+  "schema_version": 1,
+  "source_prefix": "DBG_MACRO_DISABLE preprocessor macro).We discuss header-only libraries in lesson 7.9 -- Inline functions and variables.Debugging tactic #2: Validating your code flowAnother problem common in more complex programs is that the program is calling a function too many or too few times (including not at all).In such cases, it can be helpful to place statements at the top of your functions to print the function’s name. That way, when the program runs, you can see which functions are getting called.Tip",
+  "source_suffix": "We discuss when to use std::cout vs std::cerr further in lesson 9.4 -- Detecting and handling errors.Consider the following simple program that doesn’t work correctly:#include <iostream>\nint getValue()\n{\n return 4;\n}\nint main()\n{\n std::cout << getValue << '\\n';\n return 0;\n}\nYou may need to disable “Treat warnings as errors” for the above to compile.Although we expect this program to print the value 4, it should print the value:1\nOn Visual Studio (and possibly some other compilers), it may print",
+  "source_text": "When printing information for debugging purposes, use std::cerr instead of std::cout. One reason for this is that std::cout may be buffered, which means a bit of time may pass between when you ask std::cout to output text and when it actually does. If you output using std::cout and then your program crashes immediately afterward, std::cout may or may not have actually output yet. This can mislead you about where the issue is. On the other hand, std::cerr is unbuffered, which means anything you send to it will output immediately. This helps ensure all debug output appears as soon as possible (at the cost of some performance, which we usually don’t care about when debugging).\n\nUsing std::cerr also helps make clear that the information being output is for an error case rather than a normal case.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/basic-debugging-tactics/",
+  "tags": [
+    "fundamentals",
+    "errors",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T15:44:58Z"
+}

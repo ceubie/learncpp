@@ -1,0 +1,17 @@
+{
+  "back": "The start command performs the same action as continue, just starting from the beginning of the program. It can only be invoked when not already in a debug session.",
+  "created_at": "2026-09-03T17:20:14Z",
+  "front": "What is the start command?",
+  "id": "f61449e3d57742d4a5141528068bc3c1",
+  "lesson_id": "using-an-integrated-debugger-running-and-breakpoints",
+  "schema_version": 1,
+  "source_prefix": "program via Debug menu > Start / Continue, or by pressing the F8 shortcut key.For VS Code usersIn VS Code, the continue command can be accessed while already debugging a program via Run menu > Continue, or by pressing the F5 shortcut key.Let’s test out the continue command. If your execution marker isn’t already on line 5, run to cursor to line 5. Then choose continue from this point. Your program will finish executing and then terminate.StartThe continue command has a twin brother named start.",
+  "source_suffix": "For Visual Studio usersIn Visual Studio, the start command can be accessed while not debugging a program via Debug menu > Start Debugging, or by pressing the F5 shortcut key.For Code::Blocks usersIn Code::Blocks, the start command can be accessed while not debugging a program via Debug menu > Start / Continue, or by pressing the F8 shortcut key.For VS Code usersIn VS Code, the start command can be accessed while not debugging a program via Run menu > Start Debugging, or by pressing the F5 shortc",
+  "source_text": "The start command performs the same action as continue, just starting from the beginning of the program. It can only be invoked when not already in a debug session.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-running-and-breakpoints/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T17:20:14Z"
+}

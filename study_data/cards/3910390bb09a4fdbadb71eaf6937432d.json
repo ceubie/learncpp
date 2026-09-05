@@ -1,0 +1,17 @@
+{
+  "back": "Step out is a debugging command that does not just execute the next line of code. Instead, it executes all remaining code in the function currently being executed, and then returns control to you when the function has returned.\n\nThis command is most useful when you’ve accidentally stepped into a function that you don’t want to debug.",
+  "created_at": "2026-09-03T16:36:40Z",
+  "front": "What is a step out command? How is it different from step into and step over?",
+  "id": "3910390bb09a4fdbadb71eaf6937432d",
+  "lesson_id": "using-an-integrated-debugger-stepping",
+  "schema_version": 1,
+  "source_prefix": "nt main()\n{\n printValue(5);\n return 0;\n}\nFirst, use step into on your program until the execution marker is on line 10:Now, choose step over. The debugger will execute the function (which prints the value 5 in the console output window) and then return control to you on the next statement (line 12).The step over command provides a convenient way to skip functions when you are sure they already work or are not interested in debugging them right now.Step outUnlike the other two stepping commands,",
+  "source_suffix": "For Visual Studio usersIn Visual Studio, the step out command can be accessed via Debug menu > Step Out, or by pressing the Shift-F11 shortcut combo.For Code::Blocks usersIn Code::Blocks, the step out command can be accessed via Debug menu > Step out, or by pressing the ctrl-F7 shortcut combo.For VS Code usersIn VS Code, the step out command can be accessed via Run > Step Out, or by pressing the shift+F11 shortcut combo.Let’s take a look at an example of this using the same program as above:#inc",
+  "source_text": "Step out does not just execute the next line of code. Instead, it executes all remaining code in the function currently being executed, and then returns control to you when the function has returned.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T16:37:30Z"
+}

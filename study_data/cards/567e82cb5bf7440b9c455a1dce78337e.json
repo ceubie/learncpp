@@ -1,0 +1,17 @@
+{
+  "back": "A debugger is a computer program that allows the programmer to control how another program executes and examine the program state while that program is running.",
+  "created_at": "2026-09-03T16:18:48Z",
+  "front": "What is a debugger?",
+  "id": "567e82cb5bf7440b9c455a1dce78337e",
+  "lesson_id": "using-an-integrated-debugger-stepping",
+  "schema_version": 1,
+  "source_prefix": "ter your code, making the existing code harder to understand.Behind the techniques we’ve shown so far is an unstated assumption: that once we run the code, it will run to completion (only pausing to accept input) with no opportunity for us to intervene and inspect the results of the program at whatever point we want.However, what if we were able to remove this assumption? Fortunately, most modern IDEs come with an integrated tool called a debugger that is designed to do exactly this.The debugger",
+  "source_suffix": "For example, the programmer can use a debugger to execute a program line by line, examining the value of variables along the way. By comparing the actual value of variables to what is expected, or watching the path of execution through the code, the debugger can help immensely in tracking down semantic (logic) errors.The power behind the debugger is twofold: the ability to precisely control execution of the program, and the ability to view (and modify, if desired) the program’s state.Initially,",
+  "source_text": "A debugger is a computer program that allows the programmer to control how another program executes and examine the program state while that program is running.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T16:18:48Z"
+}

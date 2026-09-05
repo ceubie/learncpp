@@ -1,0 +1,17 @@
+{
+  "back": "A software testing method by which small units of source code are tested to determine whether they are correct.",
+  "created_at": "2026-09-03T18:19:05Z",
+  "front": "What is unit testing?",
+  "id": "ddd78348987d4bb7a4c6d8f0dc50c1ba",
+  "lesson_id": "finding-issues-before-they-become-problems",
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/finding-issues-before-they-become-problems/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-03T18:19:05Z"
+}

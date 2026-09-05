@@ -1,0 +1,17 @@
+{
+  "back": "A debugger that uses the same interface as the code editor, so you can debug using the same environment that you use to write your code. \n\nHistorically, debuggers were separate programs that had command-line interfaces. Later, debuggers were still separate, but supplied a graphical front end to make working with them easier.\n\nWhile integrated debuggers are highly convenient and recommended for beginners, command line debuggers are well supported and still commonly used in environments that do not support graphical interfaces (e.g. embedded systems).",
+  "created_at": "2026-09-03T16:21:30Z",
+  "front": "What is an integrated debugger?",
+  "id": "14fc77ce4626474fbd4c9f0f006c5a2d",
+  "lesson_id": "using-an-integrated-debugger-stepping",
+  "schema_version": 1,
+  "source_prefix": "ntrol execution of the program, and the ability to view (and modify, if desired) the program’s state.Initially, debuggers (such as gdb) were separate programs that had command-line interfaces, where the programmer had to type arcane commands to make them work. Later debuggers (such as early versions of Borland’s turbo debugger) were still separate programs, but supplied a “graphical” front end to make working with them easier. These days, many modern IDEs have an integrated debugger -- that is,",
+  "source_suffix": "(rather than having to switch programs).While integrated debuggers are highly convenient and recommended for beginners, command line debuggers are well supported and still commonly used in environments that do not support graphical interfaces (e.g. embedded systems).Nearly all modern debuggers contain the same standard set of basic features -- however, there is little consistency in terms of how the menus to access these features are arranged, and even less consistency in the keyboard shortcuts",
+  "source_text": "a debugger that uses the same interface as the code editor, so you can debug using the same environment that you use to write your code",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T16:21:55Z"
+}

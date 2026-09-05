@@ -1,0 +1,17 @@
+{
+  "back": "The process of making structural changes to your code without changing its behavior is called refactoring. The goal of refactoring is to make your program less complex by increasing its organization and modularity.",
+  "created_at": "2026-09-03T18:15:39Z",
+  "front": "What is refactoring?",
+  "id": "efdbafa15bdc47a4af5c3f354e9e5841",
+  "lesson_id": "finding-issues-before-they-become-problems",
+  "schema_version": 1,
+  "source_prefix": "program in the first place. So if you’re as clever as you can be when you write it, how will you ever debug it?—Brian Kernighan, “The Elements of Programming Style”, 2nd editionRefactoring your codeAs you add new capabilities to your programs (“behavioral changes”), you will find that some of your functions grow in length. As functions get longer, they get both more complex and harder to understand.One way to address this is to break a single long function into multiple shorter functions. This",
+  "source_suffix": "So how long is too long for a function? A function that takes up one vertical screen worth of code is generally regarded as too long -- if you have to scroll to read the whole function, the function’s comprehensibility drops significantly. Ideally, a function should be less than ten lines. Functions that are less than five lines are even better.Remember that the goal here is to maximize comprehension and maintainability, not to minimize function length -- abandoning best practices or using obscu",
+  "source_text": "process of making structural changes to your code without changing its behavior is called refactoring. The goal of refactoring is to make your program less complex by increasing its organization and modularity.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/finding-issues-before-they-become-problems/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-03T18:15:39Z"
+}

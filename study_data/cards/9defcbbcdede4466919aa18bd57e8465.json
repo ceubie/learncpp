@@ -1,0 +1,17 @@
+{
+  "back": "The continue debug command simply continues running the program as per normal, either until the program terminates, or until something triggers control to return back to you again (such as a breakpoint).",
+  "created_at": "2026-09-03T17:17:35Z",
+  "front": "What is the continue command?",
+  "id": "9defcbbcdede4466919aa18bd57e8465",
+  "lesson_id": "using-an-integrated-debugger-running-and-breakpoints",
+  "schema_version": 1,
+  "source_prefix": "just selected. Your program has executed up to this point and is now waiting for your further debugging commands. From here, you can step through your program, run to cursor to a different location, etc…If you run to cursor to a location that doesn’t execute, run to cursor will simply run your program until termination.ContinueOnce you’re in the middle of a debugging session, you may want to just run the program from that point forward. The easiest way to do this is to use the continue command.",
+  "source_suffix": "For Visual Studio usersIn Visual Studio, the continue command can be accessed while already debugging a program via Debug menu > Continue, or by pressing the F5 shortcut key.For Code::Blocks usersIn Code::Blocks, the continue command can be accessed while already debugging a program via Debug menu > Start / Continue, or by pressing the F8 shortcut key.For VS Code usersIn VS Code, the continue command can be accessed while already debugging a program via Run menu > Continue, or by pressing the F5",
+  "source_text": "The continue debug command simply continues running the program as per normal, either until the program terminates, or until something triggers control to return back to you again (such as a breakpoint, which we’ll cover later in this lesson).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-running-and-breakpoints/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T17:17:35Z"
+}

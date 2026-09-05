@@ -1,0 +1,17 @@
+{
+  "back": "Run to cursor command executes the program until execution reaches the statement selected by your cursor. Then it returns control to you so you can debug starting at that point.",
+  "created_at": "2026-09-03T17:11:58Z",
+  "front": "What is the run to cursor command?",
+  "id": "9aebcbd7a624455dad82d610b10aa6c4",
+  "lesson_id": "using-an-integrated-debugger-running-and-breakpoints",
+  "schema_version": 1,
+  "source_prefix": "debugger: Stepping) is useful for examining each individual line of your code in isolation, in a large program, it can take a long time to step through your code to even get to the point where you want to examine in more detail.Fortunately, modern debuggers provide more tools to help us efficiently debug our programs. In this lesson, we’ll look at some of the debugger features that let us more quickly navigate our code.Run to cursorThe first useful command is commonly called Run to cursor. This",
+  "source_suffix": "This makes for an efficient way to start debugging at a particular point in your code, or if already debugging, to move straight to some place you want to examine further.For Visual Studio usersIn Visual Studio, the run to cursor command can be accessed by right clicking a statement in your code and choosing Run to Cursor from the context menu, or by pressing the ctrl-F10 keyboard combo.For Code::Blocks usersIn Code::Blocks, the run to cursor command can be accessed by right clicking a statemen",
+  "source_text": "Run to cursor command executes the program until execution reaches the statement selected by your cursor. Then it returns control to you so you can debug starting at that point.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-running-and-breakpoints/",
+  "tags": [
+    "fundamentals",
+    "debugging"
+  ],
+  "updated_at": "2026-09-03T17:11:58Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "Program state is the state of an executing program at a point in time. It represents a combination of information, which is tracked during the execution of a program, at a point in time. \n\nThis information includes the variables you’re using, which functions have been called (so that when those functions return, the program will know where to go back to), and the current point of execution within the program (so it knows which statement to execute next).",
+  "created_at": "2026-09-03T16:16:51Z",
+  "front": "What is program state?",
+  "id": "9c1b2d7704b140ad97a99b77d57c7fc7",
+  "lesson_id": "using-an-integrated-debugger-stepping",
+  "schema_version": 1,
+  "source_prefix": "When you run your program, execution begins at the top of the main function, and then proceeds sequentially statement by statement, until the program ends. At any point in time while your program is running, the program is keeping track of a lot of things: the value of",
+  "source_suffix": "All of this tracked information is called your program state (or just state, for short).In previous lessons, we explored various ways to alter your code to help with debugging, including printing diagnostic information or using a logger. These are simple methods for examining the state of a program while it is running. Although these can be effective if used properly, they still have downsides: they require altering your code, which takes time and can introduce new bugs, and they clutter your c",
+  "source_text": "the variables you’re using, which functions have been called (so that when those functions return, the program will know where to go back to), and the current point of execution within the program (so it knows which statement to execute next).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-03T16:16:51Z"
+}
