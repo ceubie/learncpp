@@ -1,0 +1,17 @@
+{
+  "back": "A byte is a group of bits that are operated on as a unit. The modern standard is that a byte is comprised of 8 sequential bits.",
+  "created_at": "2026-09-05T14:56:09Z",
+  "front": "what is a byte?",
+  "id": "520f5388964c4981a78f6d1b267f089e",
+  "lesson_id": "introduction-to-fundamental-data-types",
+  "schema_version": 1,
+  "source_prefix": "l units called memory addresses (or addresses for short). Similar to how a street address can be used to find a given house on a street, the memory address allows us to find and access the contents of memory at a particular location.Perhaps surprisingly, in modern computer architectures, each bit does not get its own unique memory address. This is because the number of memory addresses is limited, and the need to access data bit-by-bit is rare. Instead, each memory address holds 1 byte of data.",
+  "source_suffix": "Key insightIn C++, we typically work with “byte-sized” chunks of data.The following picture shows some sequential memory addresses, along with the corresponding byte of data:As an aside…Some older or non-standard machines may have bytes of a different size (from 1 to 48 bits) -- however, we generally need not worry about these, as the modern de-facto standard is that a byte is 8 bits. For these tutorials, we’ll assume a byte is 8 bits.Data typesBecause all data on a computer is just a sequence o",
+  "source_text": "A byte is a group of bits that are operated on as a unit. The modern standard is that a byte is comprised of 8 sequential bits.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-05T14:56:09Z"
+}

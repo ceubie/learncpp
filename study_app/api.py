@@ -153,6 +153,7 @@ def list_cards() -> Response:
         if normalized not in {"true", "false"}:
             raise StudyValidationError("needs_review must be true or false.")
         needs_review = normalized == "true"
+    sort = request.args.get("sort", "created")
     return jsonify(
         cards=_storage().list_cards(
             lesson_id=request.args.get("lesson_id"),
@@ -160,6 +161,7 @@ def list_cards() -> Response:
             tag=request.args.get("tag"),
             needs_review=needs_review,
             query=request.args.get("q", ""),
+            sort=sort,
         )
     )
 
@@ -184,6 +186,15 @@ def update_card(card_id: str) -> Response:
 def delete_card(card_id: str) -> Response:
     _storage().delete_card(card_id)
     return Response(status=204)
+
+
+@api_blueprint.post("/reviews/<card_id>")
+def record_review(card_id: str) -> Response:
+    value = _payload()
+    needs_review = value.get("needs_review")
+    if not isinstance(needs_review, bool):
+        raise StudyValidationError("needs_review must be a boolean.")
+    return jsonify(_storage().record_review(card_id, needs_review))
 
 
 @api_blueprint.put("/reviews/<card_id>")

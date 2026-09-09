@@ -1,0 +1,18 @@
+{
+  "back": "Prefer int when the size of the integer doesn’t matter (e.g. the number will always fit within the range of a 2-byte signed integer). For example, if you’re asking the user to enter their age, or counting from 1 to 10, it doesn’t matter whether int is 16-bits or 32-bits (the numbers will fit either way). This will cover the vast majority of the cases you’re likely to run across.\nPrefer std::int#_t when storing a quantity that needs a guaranteed range.\nPrefer std::uint#_t when doing bit manipulation or well-defined wrap-around behavior is required (e.g. for cryptography or random number generation).\nAvoid the following when possible:\n\nshort and long integers (prefer a fixed-width integer type instead).\nThe fast and least integral types (prefer a fixed-width integer type instead).\nUnsigned types for holding quantities (prefer a signed integer type instead).\nThe 8-bit fixed-width integer types (prefer a 16-bit fixed-width integer type instead).\nAny compiler-specific fixed-width integers (for example, Visual Studio defines __int8, __int16, etc…)",
+  "created_at": "2026-09-07T14:13:01Z",
+  "front": "Best practices for integral types?",
+  "id": "51cb54e402674b0e998f61c4192bd6e7",
+  "lesson_id": "fixed-width-integers-and-size-t",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "viors on architectures where they resolve to different sizes. For example:#include <cstdint>\n#include <iostream>\nint main()\n{\n std::uint_fast16_t sometype { 0 };\n sometype = sometype - 1; // intentionally overflow to invoke wraparound behavior\n std::cout << sometype << '\\n';\n return 0;\n}\nThis code will produce different results depending on whether std::uint_fast16_t is 16, 32, or 64 bits! This is exactly what we were trying to avoid by using fixed-width integers in the first place!Best practice",
+  "source_suffix": "Best practices for integral typesGiven the various pros and cons of the fundamental integral types, the fixed-width integral types, the fast/least integral types, and signed/unsigned challenges, there is little consensus on integral best practices.Our stance is that it’s better to be correct than fast, and better to fail at compile time than runtime. Therefore, if you need an integral type with a guaranteed range, we recommend avoiding the fast/least types in favor of the fixed-width types. If y",
+  "source_text": "Avoid the fast and least integral types because they may exhibit different behaviors on architectures where they resolve to different sizes.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-07T14:13:01Z"
+}

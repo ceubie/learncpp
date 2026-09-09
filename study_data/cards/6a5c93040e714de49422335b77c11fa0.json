@@ -1,0 +1,17 @@
+{
+  "back": "It is an incomplete type, which is a type that has been declared but not yet defined. The compiler knows about the existence of such types, but does not have enough information to determine how much memory to allocate for objects of that type. void is intentionally incomplete since it represents the lack of a type, and thus cannot be defined.",
+  "created_at": "2026-09-05T15:17:14Z",
+  "front": "What type is void?",
+  "id": "6a5c93040e714de49422335b77c11fa0",
+  "lesson_id": "void",
+  "schema_version": 1,
+  "source_prefix": "Void is the easiest of the data types to explain. Basically, void means “no type”!Void is our first example of an incomplete type. An incomplete type",
+  "source_suffix": "Incomplete types can not be instantiated:void value; // won't work, variables can't be defined with incomplete type void\nVoid is typically used in several different contexts.Functions that do not return a valueMost commonly, void is used to indicate that a function does not return a value:void writeValue(int x) // void here means no return value\n{\n std::cout << \"The value of x is: \" << x << '\\n';\n // no return statement, because this function doesn't return a value\n}\nIf you use a return statemen",
+  "source_text": "is a type that has been declared but not yet defined. The compiler knows about the existence of such types, but does not have enough information to determine how much memory to allocate for objects of that type. void is intentionally incomplete since it represents the lack of a type, and thus cannot be defined.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/void/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-05T15:17:14Z"
+}

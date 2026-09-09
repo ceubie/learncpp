@@ -1,0 +1,17 @@
+{
+  "back": "sizeof returns a value of type std::size_t which is an alias for an implementation-defined unsigned integral type.",
+  "created_at": "2026-09-07T14:15:31Z",
+  "front": "What does sizeof actually return?",
+  "id": "829b56168f544281be4accb480785eba",
+  "lesson_id": "fixed-width-integers-and-size-t",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-07T14:15:31Z"
+}

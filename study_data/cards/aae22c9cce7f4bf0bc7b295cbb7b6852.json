@@ -1,0 +1,17 @@
+{
+  "back": "A Boolean value.",
+  "created_at": "2026-09-09T18:01:08Z",
+  "front": "What does a condition (conditional expression) evaluate to?",
+  "id": "aae22c9cce7f4bf0bc7b295cbb7b6852",
+  "lesson_id": "introduction-to-if-statements",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-if-statements/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-09T18:01:08Z"
+}

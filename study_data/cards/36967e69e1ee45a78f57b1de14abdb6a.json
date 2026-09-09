@@ -1,0 +1,18 @@
+{
+  "back": "std::noboolalpha",
+  "created_at": "2026-09-08T18:24:53Z",
+  "front": "How do you turn off std::boolalpha?",
+  "id": "36967e69e1ee45a78f57b1de14abdb6a",
+  "lesson_id": "boolean-values",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/boolean-values/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-08T18:24:53Z"
+}

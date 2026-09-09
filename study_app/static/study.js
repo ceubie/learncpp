@@ -991,15 +991,23 @@
         return result;
     }
 
+    function reviewCountLabel(count) {
+        const reviews = Number.isInteger(count) && count > 0 ? count : 0;
+        return reviews === 1 ? "Reviewed 1 time" : `Reviewed ${reviews} times`;
+    }
+
     async function initializeReview() {
         const scope = document.querySelector("#study-review-scope");
         const targetField = document.querySelector("#study-review-target-field");
         const targetLabel = document.querySelector("#study-review-target-label");
         const target = document.querySelector("#study-review-target");
+        const orderField = document.querySelector("#study-review-order-field");
+        const order = document.querySelector("#study-review-order");
         const start = document.querySelector("#study-review-start");
         const empty = document.querySelector("#study-review-empty");
         const session = document.querySelector("#study-review-session");
         const position = document.querySelector("#study-review-position");
+        const reviewCount = document.querySelector("#study-review-count");
         const lessonName = document.querySelector("#study-review-lesson");
         const front = document.querySelector("#study-review-front");
         const back = document.querySelector("#study-review-back");
@@ -1021,7 +1029,9 @@
 
         function updateTargets() {
             const needsTarget = ["chapter", "lesson"].includes(scope.value);
+            const usesReviewOrder = ["all", "chapter", "lesson"].includes(scope.value);
             targetField.hidden = !needsTarget;
+            orderField.hidden = !usesReviewOrder;
             target.replaceChildren();
             if (!needsTarget || !state.catalog) {
                 return;
@@ -1072,6 +1082,7 @@
             empty.hidden = true;
             session.hidden = false;
             position.textContent = `${state.index + 1} / ${state.queue.length}`;
+            reviewCount.textContent = reviewCountLabel(card.review_count);
             lessonName.textContent = card.lesson_title;
             front.textContent = card.front;
             back.textContent = card.back;
@@ -1093,8 +1104,14 @@
                 } else if (scope.value === "chapter") {
                     parameters.set("chapter_id", target.value);
                 }
+                const orderByReviewCount =
+                    ["all", "chapter", "lesson"].includes(scope.value) &&
+                    order.value === "least-reviewed";
+                if (orderByReviewCount) {
+                    parameters.set("sort", "review_count");
+                }
                 const payload = await apiRequest(`/api/cards?${parameters}`);
-                state.queue = shuffle(payload.cards);
+                state.queue = orderByReviewCount ? payload.cards : shuffle(payload.cards);
                 state.index = 0;
                 renderCard();
             } catch (error) {
@@ -1110,11 +1127,12 @@
                 return;
             }
             try {
-                await apiRequest(`/api/reviews/${encodeURIComponent(card.id)}`, {
-                    method: needsReview ? "PUT" : "DELETE",
-                    body: {},
+                const result = await apiRequest(`/api/reviews/${encodeURIComponent(card.id)}`, {
+                    method: "POST",
+                    body: { needs_review: needsReview },
                 });
-                card.needs_review = needsReview;
+                card.needs_review = result.needs_review;
+                card.review_count = result.review_count;
                 if (state.index + 1 < state.queue.length) {
                     state.index += 1;
                     renderCard();
@@ -1179,6 +1197,10 @@
             const requestedScope = parameters.get("scope");
             if (["again", "all", "chapter", "lesson"].includes(requestedScope)) {
                 scope.value = requestedScope;
+            }
+            const requestedOrder = parameters.get("order");
+            if (["random", "least-reviewed"].includes(requestedOrder)) {
+                order.value = requestedOrder;
             }
             updateTargets();
             const lessonId = parameters.get("lesson_id");

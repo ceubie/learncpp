@@ -1,0 +1,18 @@
+{
+  "back": "An alternate set of integer types that are guaranteed to be the same size on any architecture.",
+  "created_at": "2026-09-07T13:58:59Z",
+  "front": "What are fixed width integers?",
+  "id": "a594f442b22649f19ac7d1a32ff46850",
+  "lesson_id": "fixed-width-integers-and-size-t",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "pted to intentionally leave the size of an integer open so that the compiler implementers could pick a size for int that performs best on the target computer architecture. That way, programmers could just use int without having to worry about whether they could be using something more performant.By modern standards, the lack of consistent ranges for the various integral types sucks (especially in a language designed to be portable).Fixed-width integersTo address the above issues, C++11 provides",
+  "source_suffix": "Because the size of these integers is fixed, they are called fixed-width integers.The fixed-width integers are defined (in the <cstdint>\\ header) as follows:NameFixed SizeFixed RangeNotesstd::int8_t1 byte signed-128 to 127Treated like a signed char on many systems. See note below.std::uint8_t1 byte unsigned0 to 255Treated like an unsigned char on many systems. See note below.std::int16_t2 byte signed-32,768 to 32,767std::uint16_t2 byte unsigned0 to 65,535std::int32_t4 byte signed-2,147,483,648",
+  "source_text": "an alternate set of integer types that are guaranteed to be the same size on any architecture.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/",
+  "tags": [
+    "data-types",
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-07T13:58:59Z"
+}

@@ -1,0 +1,18 @@
+{
+  "back": "Due to an oversight in the C++ specification, modern compilers typically treat std::int8_t and std::uint8_t the same as signed char and unsigned char respectively. Thus on most modern systems, the 8-bit fixed-width integral types will behave like char types.",
+  "created_at": "2026-09-07T14:03:00Z",
+  "front": "What is unique about std::int8_t and std::uint8_t",
+  "id": "2dc2a63d850e48e09d19be2b3811820c",
+  "lesson_id": "fixed-width-integers-and-size-t",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": ":int32_t x { 32767 }; // x is always a 32-bit integer\n x = x + 1; // so 32768 will always fit\n std::cout << x << '\\n';\n return 0;\n}\nBest practiceUse a fixed-width integer type when you need an integral type that has a guaranteed range.Warning: std::int8_t and std::uint8_t typically behave like charsDue to an oversight in the C++ specification, modern compilers typically treat std::int8_t and std::uint8_t (and the corresponding fast and least fixed-width types, which we’ll introduce in a moment)",
+  "source_suffix": "As a quick teaser:#include <cstdint> // for fixed-width integers\n#include <iostream>\nint main()\n{\n std::int8_t x { 65 }; // initialize 8-bit integral type with value 65\n std::cout << x << '\\n'; // You're probably expecting this to print 65\n return 0;\n}\nAlthough you’re probably expecting the above program to print 65, it most likely won’t.We discuss what this example actually prints (and how to ensure it always prints 65) in lesson 4.12 -- Introduction to type conversion and static_cast, after we",
+  "source_text": "the same as signed char and unsigned char respectively. Thus on most modern systems, the 8-bit fixed-width integral types will behave like char types.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-07T14:03:00Z"
+}

@@ -1,0 +1,17 @@
+{
+  "back": "True",
+  "created_at": "2026-09-08T16:47:07Z",
+  "front": "True or False: Floating point data types are always signed.",
+  "id": "12f1299ecd0642249f6a223ba03fef01",
+  "lesson_id": "floating-point-numbers",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/floating-point-numbers/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-08T16:47:07Z"
+}

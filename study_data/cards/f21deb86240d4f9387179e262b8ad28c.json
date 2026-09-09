@@ -1,0 +1,18 @@
+{
+  "back": "Range is the set of specific values that a data type can hold.",
+  "created_at": "2026-09-05T15:37:37Z",
+  "front": "What is range?",
+  "id": "f21deb86240d4f9387179e262b8ad28c",
+  "lesson_id": "signed-integers",
+  "review_count": 1,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/signed-integers/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-05T15:37:37Z"
+}

@@ -1,0 +1,18 @@
+{
+  "back": "std::boolalpha",
+  "created_at": "2026-09-08T18:36:55Z",
+  "front": "How do you manipulate std::cin to accept the words false and true as inputs?",
+  "id": "f6945feca5ed4e60aaa1a33c99f64e5a",
+  "lesson_id": "boolean-values",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/boolean-values/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-08T18:36:55Z"
+}

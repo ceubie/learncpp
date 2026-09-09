@@ -4,6 +4,7 @@
   "front": "What language are CPUs capable of processing? What is the set of possible instructions a given CPU can understand called?",
   "id": "03d61740c8954495b71dda938e56aab7",
   "lesson_id": "introduction-to-programming-languages",
+  "review_count": 1,
   "schema_version": 1,
   "source_prefix": "d cannot be run on other platforms without modification. A program that can be easily transferred from one platform to another is said to be portable. The act of modifying a program so that it runs on a different platform is called porting.Now that we’ve talked about programs, let’s discuss programming languages. This isn’t just a history lesson, we’ll also be introducing terminology that will come up in future lessons.Machine LanguageA computer’s CPU is incapable of understanding C++. Instead,",
   "source_suffix": "Here is a sample machine language instruction: 10110000 01100001.Each instruction is understood by the CPU as a command to do a very specific job, such as “compare these two numbers”, or “copy this number into that memory location”. Back when computers were first invented, programmers had to write programs directly in machine language, which was a very difficult and time-consuming thing to do.How these instructions are organized and interpreted is beyond the scope of this tutorial series, but it",

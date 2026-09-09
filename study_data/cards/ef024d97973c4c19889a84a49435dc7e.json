@@ -1,0 +1,18 @@
+{
+  "back": "float - 4 bytes \ndouble - 8 bytes\nlong double - 8, 12, or 16 bytes\n\nAs with integers, C++ does not define the actual size of these types",
+  "created_at": "2026-09-08T18:00:37Z",
+  "front": "What are the 3 floating point data types in C++ and what are their typical sizes?",
+  "id": "ef024d97973c4c19889a84a49435dc7e",
+  "lesson_id": "floating-point-numbers",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/floating-point-numbers/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-08T18:00:37Z"
+}

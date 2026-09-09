@@ -1,0 +1,18 @@
+{
+  "back": "0 is false, any other integer is true",
+  "created_at": "2026-09-08T18:25:49Z",
+  "front": "How do integers represent boolean values?",
+  "id": "12b32d5b99274d3cb70f9ae1fbf4ead8",
+  "lesson_id": "boolean-values",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/boolean-values/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-08T18:25:49Z"
+}

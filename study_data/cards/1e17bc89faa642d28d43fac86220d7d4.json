@@ -1,0 +1,18 @@
+{
+  "back": "Use std::boolalpha\n\nThis does not output anything, rather it manipulates the way std::cout outputs bool values.",
+  "created_at": "2026-09-08T18:24:31Z",
+  "front": "How do you have cout print true or false instead of 1 or 0",
+  "id": "1e17bc89faa642d28d43fac86220d7d4",
+  "lesson_id": "boolean-values",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/boolean-values/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-08T18:24:31Z"
+}

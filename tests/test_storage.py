@@ -92,6 +92,7 @@ def test_card_crud_filters_and_deterministic_json(tmp_path: Path) -> None:
     )
 
     assert first["tags"] == ["basics", "active-recall"]
+    assert first["review_count"] == 0
     assert [card["id"] for card in storage.list_cards(tag="basics")] == [
         first["id"]
     ]
@@ -142,6 +143,82 @@ def test_progress_hash_and_review_marker_semantics(tmp_path: Path) -> None:
     assert not marker.exists()
     restarted.set_progress("first", False)
     assert not (tmp_path / "progress" / "first.json").exists()
+
+
+def test_review_count_increments_on_recorded_reviews_only(tmp_path: Path) -> None:
+    storage = StudyStorage(tmp_path, _manifest())
+    first = storage.create_card(
+        {
+            "lesson_id": "first",
+            "front": "First?",
+            "back": "One",
+        }
+    )
+    second = storage.create_card(
+        {
+            "lesson_id": "second",
+            "front": "Second?",
+            "back": "Two",
+        }
+    )
+    third = storage.create_card(
+        {
+            "lesson_id": "first",
+            "front": "Third?",
+            "back": "Three",
+        }
+    )
+
+    storage.mark_again(first["id"])
+    storage.mark_got_it(first["id"])
+    assert storage.get_card(first["id"])["review_count"] == 0
+
+    storage.record_review(second["id"], True)
+    storage.record_review(second["id"], False)
+    storage.record_review(third["id"], True)
+
+    assert storage.get_card(first["id"])["review_count"] == 0
+    assert storage.get_card(second["id"])["review_count"] == 2
+    assert storage.get_card(second["id"])["needs_review"] is False
+    assert storage.get_card(third["id"])["review_count"] == 1
+    assert storage.get_card(third["id"])["needs_review"] is True
+
+    ordered = storage.list_cards(sort="review_count")
+    assert [card["id"] for card in ordered] == [first["id"], third["id"], second["id"]]
+
+    lesson_ordered = storage.list_cards(lesson_id="first", sort="review_count")
+    assert [card["id"] for card in lesson_ordered] == [first["id"], third["id"]]
+
+    chapter_ordered = storage.list_cards(chapter_id="chapter-0", sort="review_count")
+    assert [card["id"] for card in chapter_ordered] == [
+        first["id"],
+        third["id"],
+        second["id"],
+    ]
+
+    with pytest.raises(StudyValidationError):
+        storage.list_cards(sort="newest")
+
+
+def test_missing_review_count_is_treated_as_zero(tmp_path: Path) -> None:
+    storage = StudyStorage(tmp_path, _manifest())
+    card = storage.create_card(
+        {
+            "lesson_id": "first",
+            "front": "Question?",
+            "back": "Answer",
+        }
+    )
+    path = tmp_path / "cards" / f"{card['id']}.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload.pop("review_count")
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+    loaded = storage.get_card(card["id"])
+    assert loaded["review_count"] == 0
+    recorded = storage.record_review(card["id"], False)
+    assert recorded["review_count"] == 1
+    assert storage.get_card(card["id"])["review_count"] == 1
 
 
 def test_deleting_card_removes_its_review_marker(tmp_path: Path) -> None:

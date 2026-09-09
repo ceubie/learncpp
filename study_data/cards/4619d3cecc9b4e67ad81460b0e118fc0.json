@@ -1,0 +1,15 @@
+{
+  "back": "Using an output manipulator, such as std::setprecision()\n\nOutput manipulators are defined in the <iomanip> header.",
+  "created_at": "2026-09-08T18:13:38Z",
+  "front": "How do you alter default precision to change how data is output?",
+  "id": "4619d3cecc9b4e67ad81460b0e118fc0",
+  "lesson_id": "floating-point-numbers",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "present any number with up to 6 significant digits. A number with 7 to 9 significant digits may or may not be represented exactly depending on the specific value. And a number with more than 9 digits of precision will definitely not be represented exactly.Double values have between 15 and 18 digits of precision, with most double values having at least 16 significant digits. Long double has a minimum precision of 15, 18, or 33 significant digits depending on how many bytes it occupies.Key insight",
+  "source_suffix": "Outputting floating point valuesWhen outputting floating point numbers, std::cout has a default precision of 6 -- that is, it assumes all floating point variables are only significant to 6 digits (the minimum precision of a float), and hence it will truncate anything after that.The following program shows std::cout truncating to 6 digits:#include <iostream>\nint main()\n{\n std::cout << 9.87654321f << '\\n';\n std::cout << 987.654321f << '\\n';\n std::cout << 987654.321f << '\\n';\n std::cout << 9876543.",
+  "source_text": "A floating point type can only precisely represent a certain number of significant digits. Using a value with more significant digits than the minimum may result in the value being stored inexactly.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/floating-point-numbers/",
+  "tags": [],
+  "updated_at": "2026-09-08T18:13:38Z"
+}

@@ -1,0 +1,18 @@
+{
+  "back": "Favor double over float unless space is at a premium, as the lack of precision in a float will often lead to inaccuracies.",
+  "created_at": "2026-09-08T18:16:58Z",
+  "front": "Is it best practice to favor a double or a float? Why?",
+  "id": "6d1c19fc5eba430fa226b370f8787700",
+  "lesson_id": "floating-point-numbers",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "turn 0;\n}\nOutput:123456792\n123456792 is greater than 123456789. The value 123456789.0 has 10 significant digits, but float values typically have 7 digits of precision (and the result of 123456792 is precise only to 7 significant digits). We lost some precision! When precision is lost because a number can’t be stored precisely, this is called a rounding error.Consequently, one has to be careful when using floating point numbers that require more precision than the variables can hold.Best practice",
+  "source_suffix": "Rounding errors make floating point comparisons trickyFloating point numbers are tricky to work with due to non-obvious differences between binary (how data is stored) and decimal (how we think) numbers. Consider the fraction 1/10. In decimal, this is easily represented as 0.1, and we are used to thinking of 0.1 as an easily representable number with 1 significant digit. However, in binary, decimal value 0.1 is represented by the infinite sequence: 0.00011001100110011… Because of this, when we a",
+  "source_text": "Favor double over float unless space is at a premium, as the lack of precision in a float will often lead to inaccuracies.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/floating-point-numbers/",
+  "tags": [
+    "fundamentals",
+    "data-types"
+  ],
+  "updated_at": "2026-09-08T18:16:58Z"
+}

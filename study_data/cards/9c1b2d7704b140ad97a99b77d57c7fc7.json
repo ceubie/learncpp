@@ -4,6 +4,7 @@
   "front": "What is program state?",
   "id": "9c1b2d7704b140ad97a99b77d57c7fc7",
   "lesson_id": "using-an-integrated-debugger-stepping",
+  "review_count": 1,
   "schema_version": 1,
   "source_prefix": "When you run your program, execution begins at the top of the main function, and then proceeds sequentially statement by statement, until the program ends. At any point in time while your program is running, the program is keeping track of a lot of things: the value of",
   "source_suffix": "All of this tracked information is called your program state (or just state, for short).In previous lessons, we explored various ways to alter your code to help with debugging, including printing diagnostic information or using a logger. These are simple methods for examining the state of a program while it is running. Although these can be effective if used properly, they still have downsides: they require altering your code, which takes time and can introduce new bugs, and they clutter your c",

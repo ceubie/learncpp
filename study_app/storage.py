@@ -272,6 +272,7 @@ class StudyStorage:
             ),
             "created_at": timestamp,
             "updated_at": timestamp,
+            "review_count": 0,
         }
         with self._lock:
             self._atomic_write_json(
@@ -305,6 +306,7 @@ class StudyStorage:
                 "chapter_label": lesson.chapter_label,
                 "lesson_url": f"/course/{lesson.filename}",
                 "needs_review": self.needs_review(str(card["id"])),
+                "review_count": self._review_count(card),
             }
         )
         return enriched
@@ -320,7 +322,10 @@ class StudyStorage:
         tag: str | None = None,
         needs_review: bool | None = None,
         query: str = "",
+        sort: str = "created",
     ) -> list[dict[str, Any]]:
+        if sort not in {"created", "review_count"}:
+            raise StudyValidationError("sort must be created or review_count.")
         if lesson_id is not None:
             self._lesson(lesson_id)
         if not self.cards_directory.is_dir():
@@ -352,7 +357,16 @@ class StudyStorage:
                 if normalized_query not in haystack:
                     continue
             cards.append(card)
-        cards.sort(key=lambda card: (str(card["created_at"]), str(card["id"])))
+        if sort == "review_count":
+            cards.sort(
+                key=lambda card: (
+                    int(card["review_count"]),
+                    str(card["created_at"]),
+                    str(card["id"]),
+                )
+            )
+        else:
+            cards.sort(key=lambda card: (str(card["created_at"]), str(card["id"])))
         return cards
 
     def update_card(
@@ -447,9 +461,22 @@ class StudyStorage:
             if (progress := self.get_progress(lesson.id))["completed"]
         ]
 
+    def _review_count(self, card: dict[str, Any]) -> int:
+        value = card.get("review_count", 0)
+        if isinstance(value, bool) or not isinstance(value, int):
+            return 0
+        return max(value, 0)
+
     def needs_review(self, card_id: str) -> bool:
         card_id = self._card_id(card_id)
         return (self.reviews_directory / f"{card_id}.json").is_file()
+
+    def _review_result(self, card: dict[str, Any], needs_review: bool) -> dict[str, Any]:
+        return {
+            "card_id": card["id"],
+            "needs_review": needs_review,
+            "review_count": self._review_count(card),
+        }
 
     def mark_again(self, card_id: str) -> dict[str, Any]:
         card = self._read_card(card_id)
@@ -462,13 +489,36 @@ class StudyStorage:
                 self.reviews_directory / f"{card['id']}.json",
                 marker,
             )
-        return {"card_id": card["id"], "needs_review": True}
+        return self._review_result(card, True)
 
     def mark_got_it(self, card_id: str) -> dict[str, Any]:
         card = self._read_card(card_id)
         with self._lock:
             (self.reviews_directory / f"{card['id']}.json").unlink(missing_ok=True)
-        return {"card_id": card["id"], "needs_review": False}
+        return self._review_result(card, False)
+
+    def record_review(self, card_id: str, needs_review: bool) -> dict[str, Any]:
+        if not isinstance(needs_review, bool):
+            raise StudyValidationError("needs_review must be a boolean.")
+        with self._lock:
+            card = self._read_card(card_id)
+            card["review_count"] = self._review_count(card) + 1
+            self._atomic_write_json(
+                self.cards_directory / f"{card['id']}.json",
+                card,
+            )
+            marker_path = self.reviews_directory / f"{card['id']}.json"
+            if needs_review:
+                self._atomic_write_json(
+                    marker_path,
+                    {
+                        "schema_version": SCHEMA_VERSION,
+                        "card_id": card["id"],
+                    },
+                )
+            else:
+                marker_path.unlink(missing_ok=True)
+        return self._review_result(card, needs_review)
 
     def dashboard_summary(self) -> dict[str, Any]:
         progress = self.list_progress()

@@ -112,7 +112,51 @@ def test_page_routes_handle_redirects_and_unknown_lessons(tmp_path: Path) -> Non
     assert client.get("/course/nope.html").status_code == 404
     assert client.get("/notes").status_code == 200
     assert client.get("/cards").status_code == 200
-    assert client.get("/review").status_code == 200
+    review_page = client.get("/review")
+    assert review_page.status_code == 200
+    assert b'id="study-review-order"' in review_page.data
+
+
+def test_recorded_reviews_sort_least_reviewed_first(tmp_path: Path) -> None:
+    app, _ = _application(tmp_path)
+    client = app.test_client()
+    first = client.post(
+        "/api/cards",
+        json={"lesson_id": "first", "front": "One?", "back": "A"},
+        headers={"X-Study-Request": "1"},
+    ).get_json()
+    second = client.post(
+        "/api/cards",
+        json={"lesson_id": "second", "front": "Two?", "back": "B"},
+        headers={"X-Study-Request": "1"},
+    ).get_json()
+
+    assert first["review_count"] == 0
+    recorded = client.post(
+        f"/api/reviews/{second['id']}",
+        json={"needs_review": False},
+        headers={"X-Study-Request": "1"},
+    )
+    assert recorded.status_code == 200
+    assert recorded.get_json()["review_count"] == 1
+
+    unmarked = client.put(
+        f"/api/reviews/{first['id']}",
+        json={},
+        headers={"X-Study-Request": "1"},
+    ).get_json()
+    assert unmarked["review_count"] == 0
+
+    ordered = client.get("/api/cards?sort=review_count").get_json()["cards"]
+    assert [card["id"] for card in ordered] == [first["id"], second["id"]]
+
+    lesson_ordered = client.get(
+        "/api/cards?lesson_id=first&sort=review_count"
+    ).get_json()["cards"]
+    assert [card["id"] for card in lesson_ordered] == [first["id"]]
+
+    invalid = client.get("/api/cards?sort=newest")
+    assert invalid.status_code == 400
 
 
 def test_missing_manifest_renders_setup_instead_of_traceback(

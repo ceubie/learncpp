@@ -1078,6 +1078,7 @@ body.study-app-page {
 .study-review-filters {
     display: flex;
     align-items: end;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -1108,6 +1109,12 @@ body.study-app-page {
     margin-bottom: 10px;
     color: var(--study-muted);
     font-size: 0.85rem;
+}
+
+.study-review-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .study-review-card {

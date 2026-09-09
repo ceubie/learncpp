@@ -1,0 +1,17 @@
+{
+  "back": "The sizeof operator is a unary operator that takes either a type or a variable, and returns the size of an object of of that type in bytes.",
+  "created_at": "2026-09-05T15:29:11Z",
+  "front": "What is the sizeof operator?",
+  "id": "fce47349d4794a2b93453a706718f390",
+  "lesson_id": "object-sizes-and-the-sizeof-operator",
+  "schema_version": 1,
+  "source_prefix": ", int, long, and long long have a minimum size of 8, 16, 16, 32, and 64 bits respectively.char and char8_t are exactly 1 byte (at least 8 bits).NomenclatureWhen we talk about the size of a type, we really mean the size of an instantiated object of that type.In this tutorial series, we will present a simplified view, by making some reasonable assumptions that are generally true for modern architectures:A byte is 8 bits.Memory is byte addressable (we can access every byte of memory independently).",
+  "source_suffix": "We are on a 32-bit or 64-bit architecture.Given the above assumptions, we can reasonably state the following:CategoryTypeMinimum SizeTypical SizeBooleanbool1 byte1 byteCharacterchar1 byte (exactly)1 bytewchar_t1 byte2 or 4 byteschar8_t1 byte1 bytechar16_t2 bytes2 byteschar32_t4 bytes4 bytesIntegralshort2 bytes2 bytesint2 bytes4 byteslong4 bytes4 or 8 byteslong long8 bytes8 bytesFloating pointfloat4 bytes4 bytesdouble8 bytes8 byteslong double8 bytes8, 12, or 16 bytesPointerstd::nullptr_t4 bytes4",
+  "source_text": "Floating point support is IEEE-754 compliant.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/object-sizes-and-the-sizeof-operator/",
+  "tags": [
+    "fundamentals",
+    "vocab"
+  ],
+  "updated_at": "2026-09-05T15:29:11Z"
+}

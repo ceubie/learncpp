@@ -1,0 +1,12 @@
+In most cases, we only instantiate a small number of int variables at a time, and these are typically destroyed at the end of the function in which they are created. In such cases, wasting 2 bytes of memory per variable isn’t a concern (the limited range is a bigger issue). However, in cases where our program allocates millions of int variables, wasting 2 bytes of memory per variable can have a significant impact on the program’s overall memory usage.
+
+Use a fixed-width integer type when you need an integral type that has a guaranteed range.
+
+The fixed-width integers actually don’t define new types -- they are just aliases for existing integral types with the desired size. For each fixed-width type, the implementation (the compiler and standard library) gets to determine which existing type is aliased. As an example, on a platform where int is 32-bits, std::int32_t will be an alias for int. On a system where int is 16-bits (and long is 32-bits), std::int32_t will be an alias for long instead.
+So what about the 8-bit fixed-width types?
+In most cases, std::int8_t is an alias for signed char because it is the only available 8-bit signed integral type (bool and char are not considered to be signed integral types). And when this is the case, std::int8_t will behave just like a char on that platform.
+However, in rare cases, if a platform has an implementation-specific 8-bit signed integral type, the implementation may decide to make std::int8_t an alias for that type instead. In that case, std::int8_t will behave like that type, which may be more like an int than a char.
+std::uint8_t behaves similarly.
+
+fast and least integers have their own downsides. First, not many programmers actually use them, and a lack of familiarity can lead to errors. Then the fast types can also lead to memory wastage, as their actual size may be significantly larger than indicated by their name.
+Most seriously, because the size of the fast/least integers is implementation-defined, your program may exhibit different behaviors on architectures where they resolve to different sizes. Avoid the fast and least integral types because they may exhibit different behaviors on architectures where they resolve to different sizes.

@@ -1,0 +1,17 @@
+{
+  "back": "- short int = 16 bits\n- int = 16 bits (but typically 32 bits on modern architectures)\n- long int = 32 bits\n- long long int = 64 bits",
+  "created_at": "2026-09-05T15:34:44Z",
+  "front": "What are the 4 primary fundamental integer types in C++, and what are their minimum sizes?",
+  "id": "79f6cf41e3c64974a203d2f7943b9e75",
+  "lesson_id": "signed-integers",
+  "review_count": 1,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/signed-integers/",
+  "tags": [
+    "data-types"
+  ],
+  "updated_at": "2026-09-05T15:34:44Z"
+}

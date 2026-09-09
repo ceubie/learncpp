@@ -1,0 +1,15 @@
+{
+  "back": "The fast types (e.g., std::int_fast#_t) provide the fastest integer type with a width of at least # bits. Fastest means the integral type that can be processed most quickly by the CPU. \n\nLeast types (e.g., std::int_least#t) provide the smallest signed or unsigned integer type with a width of at least # of bits.",
+  "created_at": "2026-09-07T14:09:22Z",
+  "front": "What are fast and least integral types?",
+  "id": "13e1964df2eb4e4281a7c087a5492743",
+  "lesson_id": "fixed-width-integers-and-size-t",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/",
+  "tags": [],
+  "updated_at": "2026-09-07T14:09:22Z"
+}

@@ -4,6 +4,7 @@
   "front": "If you write int a, b = 5; is a initialized to 5? Why or why not?",
   "id": "c229cddde4b5401baf552263a8b2ddc6",
   "lesson_id": "variable-assignment-and-initialization",
+  "review_count": 1,
   "schema_version": 1,
   "source_prefix": "",
   "source_suffix": "",

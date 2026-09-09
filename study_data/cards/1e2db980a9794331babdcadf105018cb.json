@@ -4,6 +4,7 @@
   "front": "What is the default value of an uninitialized variable?",
   "id": "1e2db980a9794331babdcadf105018cb",
   "lesson_id": "uninitialized-variables-and-undefined-behavior",
+  "review_count": 1,
   "schema_version": 1,
   "source_prefix": "",
   "source_suffix": "",
