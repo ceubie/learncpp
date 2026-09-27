@@ -1,0 +1,15 @@
+{
+  "back": "Manifestly constant-evaluated expression. You will likely only encounter this term in technical documentation.",
+  "created_at": "2026-09-24T13:33:46Z",
+  "front": "What is the technical name for an expression that must be evaluated at compile-time?",
+  "id": "c94a5973d1da4ce29f649e44ba13d84a",
+  "lesson_id": "constant-expressions",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "ral variable)\nWhen constant expressions are evaluated at compile-timeSince constant expressions are always capable of being evaluated at compile-time, you may have assumed that constant expressions will always be evaluated at compile-time. Counterintuitively, this is not the case.The compiler is only required to evaluate constant expressions at compile-time in contexts that require a constant expression.NomenclatureThe technical name for an expression that must be evaluated at compile-time is a",
+  "source_suffix": "In contexts that do not require a constant expression, the compiler may choose whether to evaluate a constant expression at compile-time or at runtime.const int x { 3 + 4 }; // constant expression 3 + 4 must be evaluated at compile-time\nint y { 3 + 4 }; // constant expression 3 + 4 may be evaluated at compile-time or runtime\nVariable x has type const int and a constant expression initializer, x is usable in a constant expression. Its initializer must be evaluated at compile-time (otherwise the v",
+  "source_text": "manifestly constant-evaluated expression. You will likely only encounter this term in technical documentation.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/constant-expressions/",
+  "tags": [],
+  "updated_at": "2026-09-24T13:33:46Z"
+}

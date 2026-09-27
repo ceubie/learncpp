@@ -1,0 +1,15 @@
+{
+  "back": "A program that optimizes another program is called an optimizer. Optimizers typically work at a low-level, looking for ways to improve statements or expressions by rewriting, reordering, or eliminating them.",
+  "created_at": "2026-09-23T12:12:25Z",
+  "front": "What is an optimizer?",
+  "id": "0406762fd4ee457f8a455adef09062fb",
+  "lesson_id": "the-as-if-rule-and-compile-time-optimization",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "g various parts of the program are taking to run, and which are impacting overall performance. The programmer can then look for ways to alleviate those performance issues. Because hand-optimization is slow, programmers typically focuses on making high-level improvements that will have a large impact (such as choosing more performant algorithms, optimizing data storage and access, reducing resource utilization, parallelizing tasks, etc…)Other kinds of optimization can be performed automatically.",
+  "source_suffix": "For example, when you write i = i * 2;, the optimizer might rewrite this as i *= 2;, i += i;, or i <<= 1;. For integral values, all of these produce the same result, but one might be faster than the others on a given architecture. A programmer would probably not know which is the most performant choice (and the answer might vary based on architecture), but an optimizer for a given system would. Individual low-level optimizations may only yield small performance gains, but their cumulative effec",
+  "source_text": "A program that optimizes another program is called an optimizer. Optimizers typically work at a low-level, looking for ways to improve statements or expressions by rewriting, reordering, or eliminating them.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/the-as-if-rule-and-compile-time-optimization/",
+  "tags": [],
+  "updated_at": "2026-09-23T12:12:25Z"
+}

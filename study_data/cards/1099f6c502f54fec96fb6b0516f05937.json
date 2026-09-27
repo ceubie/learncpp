@@ -4,6 +4,7 @@
   "front": "What does ill-formed mean? What is the difference between a diagnostic error and a warning?",
   "id": "1099f6c502f54fec96fb6b0516f05937",
   "lesson_id": "configuring-your-compiler-warning-and-error-levels",
+  "review_count": 1,
   "schema_version": 1,
   "source_prefix": "",
   "source_suffix": "",

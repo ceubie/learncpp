@@ -1,0 +1,15 @@
+{
+  "back": "By using an s suffix after the double-quoted string literal. The s must be lower case.\n\nstd::cout << \"goo\\n\"s;",
+  "created_at": "2026-09-27T15:36:59Z",
+  "front": "How do you create string literals with type std::string?",
+  "id": "93d98701ed724c02846650c4fb9a550c",
+  "lesson_id": "introduction-to-stdstring",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "Access functions.Literals for std::stringDouble-quoted string literals (like “Hello, world!”) are C-style strings by default (and thus, have a strange type).We can create string literals with type std::string by using a s suffix after the double-quoted string literal. The s must be lower case.#include <iostream>\n#include <string> // for std::string\nint main()\n{\n using namespace std::string_literals; // easy access to the s suffix\n std::cout << \"foo\\n\"; // no suffix is a C-style string literal",
+  "source_suffix": "// s suffix is a std::string literal\n return 0;\n}\nTipThe “s” suffix lives in the namespace std::literals::string_literals.The most concise way to access the literal suffixes is via using-directive using namespace std::literals. However, this imports all of the standard library literals into the scope of the using-directive, which brings in a bunch of stuff you probably aren’t going to use.We recommend using namespace std::string_literals, which imports only the literals for std::string.We discu",
+  "source_text": "std::cout << \"goo\\n\"s;",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/",
+  "tags": [],
+  "updated_at": "2026-09-27T15:36:59Z"
+}

@@ -1,0 +1,15 @@
+{
+  "back": "It will request additional memory at runtime using a form of memory allocation known as dynamic memory allocation.",
+  "created_at": "2026-09-27T14:39:07Z",
+  "front": "If std::string does not have enough memory to store a string, what happens?",
+  "id": "aee703e46af644e890d98795c31e18ae",
+  "lesson_id": "introduction-to-stdstring",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/",
+  "tags": [],
+  "updated_at": "2026-09-27T14:39:07Z"
+}

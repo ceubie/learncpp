@@ -1,0 +1,17 @@
+{
+  "back": "a constant is a value that may not be changed during the program’s execution.",
+  "created_at": "2026-09-20T12:26:12Z",
+  "front": "What is a constant?",
+  "id": "41cb0fe7ad6c47b792bdd01e0efd1871",
+  "lesson_id": "constant-variables-named-constants",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "Introduction to constantsIn programming,",
+  "source_suffix": "C++ supports two different kinds of constants:Named constants are constant values that are associated with an identifier. These are also sometimes called symbolic constants.Literal constants are constant values that are not associated with an identifier.We’ll start our coverage of constants by looking at named constants. We will then cover literal constants (in upcoming lesson 5.2 -- Literals).Types of named constantsThere are three ways to define a named constant in C++:Constant variables (cove",
+  "source_text": "a constant is a value that may not be changed during the program’s execution.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-20T12:26:12Z"
+}

@@ -1,0 +1,15 @@
+{
+  "back": "When a std::string is passed to a function by value, the std::string function parameter must be instantiated and initialized with the argument. This results in an expensive copy.",
+  "created_at": "2026-09-27T15:28:00Z",
+  "front": "Why don't you pass std::string by value?",
+  "id": "5619c2044a84407b92685dade81bd7f9",
+  "lesson_id": "introduction-to-stdstring",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "< \" characters\\n\";\n return 0;\n}\nSince a ptrdiff_t may be larger than an int, if you want to store the result of std::ssize() in an int variable, you should static_cast the result to an int:int len { static_cast<int>(std::ssize(name)) };\nInitializing a std::string is expensiveWhenever a std::string is initialized, a copy of the string used to initialize it is made. Making copies of strings is expensive, so care should be taken to minimize the number of copies made.Do not pass std::string by value",
+  "source_suffix": "We’ll discuss what to do instead (use std::string_view) in lesson 5.8 -- Introduction to std::string_view.Best practiceDo not pass std::string by value, as it makes an expensive copy.TipIn most cases, use a std::string_view parameter instead (covered in lesson 5.8 -- Introduction to std::string_view).Returning a std::stringWhen a function returns by value to the caller, the return value is normally copied from the function back to the caller. So you might expect that you should not return std::s",
+  "source_text": "When a std::string is passed to a function by value, the std::string function parameter must be instantiated and initialized with the argument. This results in an expensive copy.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/",
+  "tags": [],
+  "updated_at": "2026-09-27T15:28:00Z"
+}

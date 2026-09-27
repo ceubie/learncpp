@@ -1,0 +1,15 @@
+{
+  "back": "std::string::length() returns an unsigned integral value (most likely of type size_t). If you want to assign the length to an int variable, you should static_cast it to avoid compiler warnings about signed/unsigned conversions:",
+  "created_at": "2026-09-27T14:54:01Z",
+  "front": "What type does std::string::length() return?",
+  "id": "6d3ffccea41b4c1d97b5336be3fded94",
+  "lesson_id": "introduction-to-stdstring",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "we can ask a std::string object for its length. The syntax for doing this is different than you’ve seen before, but is pretty straightforward:#include <iostream>\n#include <string>\nint main()\n{\n std::string name{ \"Alex\" };\n std::cout << name << \" has \" << name.length() << \" characters\\n\";\n return 0;\n}\nThis prints:Alex has 4 characters\nAlthough std::string is required to be null-terminated (as of C++11), the returned length of a std::string does not include the implicit null-terminator character.",
+  "source_suffix": "We’ll cover member functions, including how to write your own, in more detail later.Key insightWith normal functions, we call function(object). With member functions, we call object.function().Also note that std::string::length() returns an unsigned integral value (most likely of type size_t). If you want to assign the length to an int variable, you should static_cast it to avoid compiler warnings about signed/unsigned conversions:int length { static_cast<int>(name.length()) };\nFor advanced read",
+  "source_text": "Note that instead of asking for the string length as length(name), we say name.length(). The length() function isn’t a normal standalone function -- it’s a special type of function that is nested within std::string called a member function. Because the length() member function is declared inside of std::string, it is sometimes written as std::string::length() in documentation.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/",
+  "tags": [],
+  "updated_at": "2026-09-27T14:54:01Z"
+}

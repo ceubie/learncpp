@@ -1,0 +1,15 @@
+{
+  "back": "In C++, compilers are given a lot of leeway to optimize programs. The as-if rule says that the compiler can modify a program however it likes in order to produce more optimized code, so long as those modifications do not affect a program’s “observable behavior”.",
+  "created_at": "2026-09-23T12:17:10Z",
+  "front": "What is the as-if rule?",
+  "id": "bfb895c53d9c42598d6fc203b84e03b9",
+  "lesson_id": "the-as-if-rule-and-compile-time-optimization",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "optimize, and what kind of optimizations they prioritize (e.g. speed vs size).Most compilers default to no optimization, so if you’re using a command-line compiler, you’ll need to enable optimization yourself. If you’re using an IDE, the IDE will likely automatically configure release builds to enable optimization and debug builds to disable optimization.For gcc and Clang usersSee 0.9 -- Configuring your compiler: Build configurations for information on how to enable optimization.The as-if rule",
+  "source_suffix": "For advanced readersThere is one notable exception to the as-if rule: unnecessary calls to a copy (or move) constructor can be elided (omitted) even if those constructors have observable behavior. We cover this topic in lesson 14.15 -- Class initialization and copy elision.Modern compilers employ a variety of different techniques in order to optimize a program effectively. Which techniques can be applied depends on the program and the quality of the compiler and optimizer.Related contentWikipedi",
+  "source_text": "In C++, compilers are given a lot of leeway to optimize programs. The as-if rule says that the compiler can modify a program however it likes in order to produce more optimized code, so long as those modifications do not affect a program’s “observable behavior”.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/the-as-if-rule-and-compile-time-optimization/",
+  "tags": [],
+  "updated_at": "2026-09-23T12:17:10Z"
+}

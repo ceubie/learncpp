@@ -1,0 +1,1 @@
+Every moving part in a system increases complexity and the risk of defect or failure. Non-constant variables are moving parts, while constant variables are not. Make variables constant whenever possible. Exception cases include by-value function parameters and by-value return types, which should generally not be made constant.

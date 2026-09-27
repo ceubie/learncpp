@@ -1,0 +1,1 @@
+To use an octal literal, prefix your literal with a 0 (zero). Octal is hardly ever used, and we recommend you avoid it.

@@ -1,0 +1,15 @@
+{
+  "back": "To declare a constant variable, we place the const keyword (called a “const qualifier”) adjacent to the object’s type: const double gravity { 9.8 };",
+  "created_at": "2026-09-20T12:33:33Z",
+  "front": "How do you declare a constant variable?",
+  "id": "cf745ce00e664dcabe67627753c7fc1e",
+  "lesson_id": "constant-variables-named-constants",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "oes, you’ve likely got bigger problems than learning C++). Defining this value as a constant helps ensure that this value isn’t accidentally changed. Constants also have other benefits that we’ll explore in subsequent lessons.Although it is a well-known oxymoron, a variable whose value cannot be changed after initialization is called a constant variable.Declaring a const variableTo declare a constant variable, we place the const keyword (called a “const qualifier”) adjacent to the object’s type:",
+  "source_suffix": "// preferred use of const before type\nint const sidesInSquare { 4 }; // \"east const\" style, okay but not preferred\nAlthough C++ will accept the const qualifier either before or after the type, it’s much more common to use const before the type because it better follows standard English language convention where modifiers come before the object being modified (e.g. a “a green ball”, not a “a ball green”).As an aside…Due to the way that the compiler parses more complex declarations, some develope",
+  "source_text": "const double gravity { 9.8 };",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/",
+  "tags": [],
+  "updated_at": "2026-09-20T12:33:33Z"
+}

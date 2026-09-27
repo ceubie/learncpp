@@ -1,0 +1,15 @@
+{
+  "back": "It turns out that when using operator>> to extract a string from std::cin, operator>> only returns characters up to the first whitespace it encounters. Any other characters are left inside std::cin, waiting for the next extraction.\n\nUse std::getline() to input text.",
+  "created_at": "2026-09-25T15:47:37Z",
+  "front": "Why can't we use \"std::cin >>\" by itself to assign a value to an identifier? What do we use instead?",
+  "id": "17b58ecb774a4b0ea19d067389a190a3",
+  "lesson_id": "introduction-to-stdstring",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": ": \";\n std::string name{};\n std::cin >> name; // this won't work as expected since std::cin breaks on whitespace\n std::cout << \"Enter your favorite color: \";\n std::string color{};\n std::cin >> color;\n std::cout << \"Your name is \" << name << \" and your favorite color is \" << color << '\\n';\n return 0;\n}\nHere’s the results from a sample run of this program:Enter your full name: John Doe\nEnter your favorite color: Your name is John and your favorite color is Doe\nHmmm, that isn’t right! What happened?",
+  "source_suffix": "So when we used operator>> to extract input into variable name, only \"John\" was extracted, leaving \" Doe\" inside std::cin. When we then used operator>> to get extract input into variable color, it extracted \"Doe\" instead of waiting for us to input an color. Then the program ends.Use std::getline() to input textTo read a full line of input into a string, you’re better off using the std::getline() function instead. std::getline() requires two arguments: the first is std::cin, and the second is you",
+  "source_text": "It turns out that when using operator>> to extract a string from std::cin, operator>> only returns characters up to the first whitespace it encounters. Any other characters are left inside std::cin, waiting for the next extraction.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/",
+  "tags": [],
+  "updated_at": "2026-09-25T15:47:37Z"
+}

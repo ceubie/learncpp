@@ -1,0 +1,15 @@
+{
+  "back": "Named constants are constant values that are associated with an identifier. These are also sometimes called symbolic constants.\n\nLiteral constants are constant values that are not associated with an identifier.",
+  "created_at": "2026-09-20T12:32:59Z",
+  "front": "Define the two different types of constants supported by the C++ language.",
+  "id": "25cd84e698ea429a8a102dd58979df85",
+  "lesson_id": "constant-variables-named-constants",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/",
+  "tags": [],
+  "updated_at": "2026-09-20T12:32:59Z"
+}

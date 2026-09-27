@@ -4,6 +4,7 @@
   "front": "What is the difference between using \"\\n\" and std::endl",
   "id": "9b150ae4b42c408693a3edc42cd70c89",
   "lesson_id": "introduction-to-iostream-cout-cin-and-endl",
+  "review_count": 1,
   "schema_version": 1,
   "source_prefix": "",
   "source_suffix": "",

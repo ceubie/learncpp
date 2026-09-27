@@ -1,0 +1,17 @@
+{
+  "back": "static_cast<new_type>(expression)",
+  "created_at": "2026-09-15T17:32:09Z",
+  "front": "How doo you use static cast to perform an explicit type conversion?",
+  "id": "baaa7e83a32743f1a743adb53fa362d4",
+  "lesson_id": "introduction-to-type-conversion-and-static_cast",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "ssion as input, and returns that value converted into the type specified by new_type (e.g. int, bool, char, double).Key insightWhenever you see C++ syntax (excluding the preprocessor) that makes use of angled brackets (<>), the thing between the angled brackets will most likely be a type. This is typically how C++ deals with code that need a parameterized type.Let’s update our prior program using static_cast:#include <iostream>\nvoid print(int x)\n{\n std::cout << x << '\\n';\n}\nint main()\n{\n print(",
+  "source_suffix": "); // explicitly convert double value 5.5 to an int\n return 0;\n}\nBecause we’re now explicitly requesting that double value 5.5 be converted to an int value, the compiler will not generate a warning about a possible loss of data upon compilation (meaning we can leave “treat warnings as errors” enabled).Related contentC++ supports other types of casts. We talk more about the different types of casts in future lesson 10.6 -- Explicit type conversion (casting) and static_cast.Using static_cast to c",
+  "source_text": "static_cast<int>(5.5)",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-type-conversion-and-static_cast/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-15T17:32:09Z"
+}

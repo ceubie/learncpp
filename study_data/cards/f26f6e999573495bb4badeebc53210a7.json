@@ -1,0 +1,15 @@
+{
+  "back": "When the expression of the return statement resolves to any of the following:\n\nA local variable of type std::string.\n\nA std::string that has been returned by value from another function call or operator.\n\nA std::string temporary that is created as part of the return statement.",
+  "created_at": "2026-09-27T15:36:17Z",
+  "front": "When is it okay to return a std::string by value?",
+  "id": "f26f6e999573495bb4badeebc53210a7",
+  "lesson_id": "introduction-to-stdstring",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "ue, as it makes an expensive copy.TipIn most cases, use a std::string_view parameter instead (covered in lesson 5.8 -- Introduction to std::string_view).Returning a std::stringWhen a function returns by value to the caller, the return value is normally copied from the function back to the caller. So you might expect that you should not return std::string by value, as doing so would return an expensive copy of a std::string.However, as a rule of thumb, it is okay to return a std::string by value",
+  "source_suffix": "A local variable of type std::string.A std::string that has been returned by value from another function call or operator.A std::string temporary that is created as part of the return statement.For advanced readersstd::string supports a capability called move semantics, which allows an object that will be destroyed at the end of the function to instead be returned by value without making a copy. How move semantics works is beyond the scope of this introductory article, but is something we introd",
+  "source_text": "when the expression of the return statement resolves to any of the following:",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/",
+  "tags": [],
+  "updated_at": "2026-09-27T15:36:17Z"
+}

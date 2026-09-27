@@ -1,0 +1,15 @@
+{
+  "back": "Modern C++ compilers are capable of fully or partially evaluating certain expressions at compile-time (rather than at runtime). When the compiler fully or partially evaluates an expression at compile-time, this is called compile-time evaluation.\n\nCompile-time evaluation allows the compiler to do work at compile-time that would otherwise be done at runtime. Because such expressions no longer need to be evaluated at runtime, the resulting executables are faster and smaller (at the cost of slightly slower compilation times).",
+  "created_at": "2026-09-23T12:21:59Z",
+  "front": "What is compile-time evaluation? Why is it useful?",
+  "id": "92f5bd4fa0ec443a9aab7c98935044fc",
+  "lesson_id": "the-as-if-rule-and-compile-time-optimization",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "4 would be evaluated a million times, and the resulting value of 7 produced a million times.Because the result of 3 + 4 never changes (it is always 7), re-calculating this result every time the program is run is wasteful.Compile-time evaluationModern C++ compilers are capable of fully or partially evaluating certain expressions at compile-time (rather than at runtime). When the compiler fully or partially evaluates an expression at compile-time, this is called compile-time evaluation.Key insight",
+  "source_suffix": "For illustrative purposes, in this lesson we will look at some simple optimization techniques that make use of compile-time evaluation. Then, we’ll continue our discussion of compile-time evaluation in subsequent lessons.Constant foldingOne of the original forms of compile-time evaluation is called “constant folding”. Constant folding is an optimization technique where the compiler replaces expressions that have literal operands with the result of the expression. Using constant folding, the comp",
+  "source_text": "Compile-time evaluation allows the compiler to do work at compile-time that would otherwise be done at runtime. Because such expressions no longer need to be evaluated at runtime, the resulting executables are faster and smaller (at the cost of slightly slower compilation times).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/the-as-if-rule-and-compile-time-optimization/",
+  "tags": [],
+  "updated_at": "2026-09-23T12:21:59Z"
+}

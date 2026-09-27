@@ -1,0 +1,15 @@
+{
+  "back": "const means that the value of an object cannot be changed after initialization. The value of the initializer may be known at compile-time or runtime. The const object can be evaluated at runtime.\n\nconstexpr means that the object can be used in a constant expression. The value of the initializer must be known at compile-time. The constexpr object can be evaluated at runtime or compile-time.\n\nConstexpr variables are implicitly const. Const variables are not implicitly constexpr (except for const integral variables with a constant expression initializer).",
+  "created_at": "2026-09-24T14:36:06Z",
+  "front": "What is the meaning of const vs constexpr for variables?",
+  "id": "708b565fa4674a409eaddf8b3ae1a151",
+  "lesson_id": "constexpr-variables",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "1.2 }; // d can be used in constant expressions!\nThe meaning of const vs constexpr for variablesFor variables:const means that the value of an object cannot be changed after initialization. The value of the initializer may be known at compile-time or runtime. The const object can be evaluated at runtime.constexpr means that the object can be used in a constant expression. The value of the initializer must be known at compile-time. The constexpr object can be evaluated at runtime or compile-time.",
+  "source_suffix": "Although a variable can be defined as both constexpr and const, in most cases this is redundant, and we only need to use either const or constexpr.Unlike const, constexpr is not part of an object’s type. Therefore a variable defined as constexpr int actually has type const int (due to the implicit const that constexpr provides for objects).Best practiceAny constant variable whose initializer is a constant expression should be declared as constexpr.Any constant variable whose initializer is not",
+  "source_text": "Constexpr variables are implicitly const. Const variables are not implicitly constexpr (except for const integral variables with a constant expression initializer).",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/constexpr-variables/",
+  "tags": [],
+  "updated_at": "2026-09-24T14:36:06Z"
+}

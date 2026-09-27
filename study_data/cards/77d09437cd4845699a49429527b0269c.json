@@ -1,0 +1,15 @@
+{
+  "back": "A compile-time constant is a constant whose value is known at compile-time. Examples include:\n\nLiterals.\nConstant objects whose initializers are compile-time constants.\n\nA runtime constant is a constant whose value is determined in a runtime context. Examples include:\n\nConstant function parameters.\nConstant objects whose initializers are non-constants or runtime constants.",
+  "created_at": "2026-09-23T13:23:46Z",
+  "front": "What are compile-time constants and runtime constants?",
+  "id": "77d09437cd4845699a49429527b0269c",
+  "lesson_id": "the-as-if-rule-and-compile-time-optimization",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "onstant variables wherever possible. For example:#include <iostream>\nint main()\n{\n const int x { 7 }; // x is now const\n std::cout << x << '\\n';\n return 0;\n}\nBecause x is now const, the compiler has a guarantee that x can’t be changed after initialization. This makes it more likely the compiler will apply constant propagation, and then optimize the variable out entirely.Key insightUsing const variables can help the compiler optimize more effectively.Optimization can make programs harder to debug",
+  "source_suffix": "Author’s noteCompile-time debugging is an underdeveloped area. As of C++23, there are a number of papers under consideration for future language standards (such as this one) that (if approved) will add capabilities to the language that will help.Nomenclature: Compile-time constants vs runtime constantsConstants in C++ are sometimes divided into two informal categories.A compile-time constant is a constant whose value is known at compile-time. Examples include:Literals.Constant objects whose init",
+  "source_text": "If optimization makes our programs faster, why isn’t it turned on by default?\n\nWhen the compiler optimizes a program, the result is that variables, expressions, statements, and function calls may be rearranged, modified, replaced, or removed entirely. Such changes can make it hard to debug a program effectively.\n\nAt runtime, it can be hard to debug compiled code that no longer correlates very well with the original source code. For example, if you try to watch a variable that has been optimized out, the debugger won’t be able to locate the variable. If you try to step into a function that has been optimized away, the debugger will simply skip over it. So if you are debugging your code and the debugger is behaving strangely, this is the most likely reason.\n\nAt compile-time, we have little visibility and few tools to help us understand what the compiler is even doing. If a variable or expression is replaced with a value, and that value is wrong, how do we even go about debugging the issue? This is an ongoing challenge.\n\nTo help minimize such issues, debug builds will typically leave optimizations turned off, so that the compiled code will more closely match the source code.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/the-as-if-rule-and-compile-time-optimization/",
+  "tags": [],
+  "updated_at": "2026-09-23T13:23:46Z"
+}

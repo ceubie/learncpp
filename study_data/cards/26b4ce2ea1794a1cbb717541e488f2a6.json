@@ -1,0 +1,15 @@
+{
+  "back": "When a variable is removed from a program because it is no longer needed, we say the variable has been optimized out (or optimized away).",
+  "created_at": "2026-09-23T12:30:22Z",
+  "front": "What does optimized out (or optimized away) mean?",
+  "id": "26b4ce2ea1794a1cbb717541e488f2a6",
+  "lesson_id": "the-as-if-rule-and-compile-time-optimization",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/the-as-if-rule-and-compile-time-optimization/",
+  "tags": [],
+  "updated_at": "2026-09-23T12:30:22Z"
+}

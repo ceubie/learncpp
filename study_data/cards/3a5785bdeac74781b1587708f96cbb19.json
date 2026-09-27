@@ -1,0 +1,17 @@
+{
+  "back": "An early return is a return statement that occurs before the last line of a function. It causes the function to return to the caller immediately.",
+  "created_at": "2026-09-15T16:26:16Z",
+  "front": "What is an early return, and what is its behavior?",
+  "id": "3a5785bdeac74781b1587708f96cbb19",
+  "lesson_id": "introduction-to-if-statements",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/introduction-to-if-statements/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-15T16:26:16Z"
+}

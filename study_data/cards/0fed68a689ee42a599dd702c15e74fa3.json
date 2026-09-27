@@ -1,0 +1,17 @@
+{
+  "back": "A program called a profiler can be used to see how long various parts of the program are taking to run, and which are impacting overall performance.",
+  "created_at": "2026-09-23T12:11:40Z",
+  "front": "What is a profiler?",
+  "id": "0fed68a689ee42a599dd702c15e74fa3",
+  "lesson_id": "the-as-if-rule-and-compile-time-optimization",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "Introduction to optimizationIn programming, optimization is the process of modifying software to make it work more efficiently (e.g. to run faster, or use fewer resources). Optimization can have a huge impact on the overall performance level of an application.Some types of optimization are typically done by hand.",
+  "source_suffix": "The programmer can then look for ways to alleviate those performance issues. Because hand-optimization is slow, programmers typically focuses on making high-level improvements that will have a large impact (such as choosing more performant algorithms, optimizing data storage and access, reducing resource utilization, parallelizing tasks, etc…)Other kinds of optimization can be performed automatically. A program that optimizes another program is called an optimizer. Optimizers typically work at",
+  "source_text": "A program called a profiler can be used to see how long various parts of the program are taking to run, and which are impacting overall performance.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/the-as-if-rule-and-compile-time-optimization/",
+  "tags": [
+    "fundamentals"
+  ],
+  "updated_at": "2026-09-23T12:11:40Z"
+}
