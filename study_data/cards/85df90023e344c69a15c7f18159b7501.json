@@ -1,0 +1,15 @@
+{
+  "back": "The best use for std::string_view is as a read-only function parameter. This allows us to pass in a C-style string, std::string, or std::string_view argument without making a copy, as the std::string_view will create a view to the argument.",
+  "created_at": "2026-09-28T15:45:00Z",
+  "front": "What is the best use for a strd::string_view ?",
+  "id": "85df90023e344c69a15c7f18159b7501",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "still being used, unexpected or undefined behavior will result.Whenever we use a view, it is up to us to ensure these possibilities do not occur.WarningA view is dependent on the object being viewed. If the object being viewed is modified or destroyed while the view is still being used, unexpected or undefined behavior will result.A std::string_view that is viewing a string that has been destroyed is sometimes called a dangling view.std::string_view is best used as a read-only function parameter",
+  "source_suffix": "#include <iostream>\n#include <string>\n#include <string_view>\nvoid printSV(std::string_view str) // now a std::string_view, creates a view of the argument\n{\n std::cout << str << '\\n';\n}\nint main()\n{\n printSV(\"Hello, world!\"); // call with C-style string literal\n std::string s2{ \"Hello, world!\" };\n printSV(s2); // call with std::string\n std::string_view s3 { s2 };\n printSV(s3); // call with std::string_view\n \n return 0;\n}\nBecause the str function parameter is created, initialized, used, and destro",
+  "source_text": "The best use for std::string_view is as a read-only function parameter. This allows us to pass in a C-style string, std::string, or std::string_view argument without making a copy, as the std::string_view will create a view to the argument.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T15:45:00Z"
+}

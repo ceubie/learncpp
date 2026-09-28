@@ -1,0 +1,15 @@
+{
+  "back": "#define constants do not show up in the debugger and are more likely to have naming conflicts.",
+  "created_at": "2026-09-28T16:22:19Z",
+  "front": "Why are const/constexpr variables usually a better choice than #defined symbolic constants?",
+  "id": "b5532cb12f6942b1a68b315885cb90a4",
+  "lesson_id": "chapter-5-summary-and-quiz",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/chapter-5-summary-and-quiz/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:22:19Z"
+}

@@ -1,0 +1,15 @@
+{
+  "back": "The return value is a std::string local variable or function parameter.\nThe return value is a function call or operator that returns a std::string by value.",
+  "created_at": "2026-09-28T16:14:39Z",
+  "front": "Use a std::string return type when:",
+  "id": "a7236cbff94448c1b288827b63a797cf",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:14:39Z"
+}

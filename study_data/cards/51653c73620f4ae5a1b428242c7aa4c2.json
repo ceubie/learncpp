@@ -1,0 +1,15 @@
+{
+  "back": "The function returns a C-style string literal or local std::string_view that has been initialized with a C-style string literal.\nThe function returns a std::string_view parameter.",
+  "created_at": "2026-09-28T16:15:30Z",
+  "front": "Use a std::string_view return type when:",
+  "id": "51653c73620f4ae5a1b428242c7aa4c2",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": ":string_view may not be null-terminated).Use a std::string& function parameter when:You are using a std::string as an out-parameter (see 12.13 -- In and out parameters).You are calling other functions that require a std::string&, or non-const C-style string.Return typesUse a std::string return type when:The return value is a std::string local variable or function parameter.The return value is a function call or operator that returns a std::string by value.Use a std::string_view return type when:",
+  "source_suffix": "For advanced readersSee lesson 12.12 -- Return by reference and return by address for more information on returning reference types.Use a std::string_view return type when:Writing an accessor for a std::string_view member.Use a std::string& return type when:The function returns a std::string& parameter.Use a const std::string& return type when:The function returns a const std::string& parameter.Writing an accessor for a std::string or const std::string member.The function returns a static (local",
+  "source_text": "The function returns a C-style string literal or local std::string_view that has been initialized with a C-style string literal.\nThe function returns a std::string_view parameter.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:15:30Z"
+}

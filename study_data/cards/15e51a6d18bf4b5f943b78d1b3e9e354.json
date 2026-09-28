@@ -1,0 +1,15 @@
+{
+  "back": "The function needs to modify the string passed in as an argument without affecting the caller. This is rare.\nYou are using language standard C++14 or older and aren’t comfortable using references yet.",
+  "created_at": "2026-09-28T16:13:42Z",
+  "front": "Use a std::string function parameter when:",
+  "id": "15e51a6d18bf4b5f943b78d1b3e9e354",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:13:42Z"
+}

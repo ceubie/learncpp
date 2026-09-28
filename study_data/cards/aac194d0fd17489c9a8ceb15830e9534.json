@@ -1,0 +1,15 @@
+{
+  "back": "The function needs a read-only string.\nThe function needs to work with non-null-terminated strings.",
+  "created_at": "2026-09-28T16:14:00Z",
+  "front": "Use a std::string_view function parameter when:",
+  "id": "aac194d0fd17489c9a8ceb15830e9534",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:14:00Z"
+}

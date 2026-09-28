@@ -1,0 +1,15 @@
+{
+  "back": "True",
+  "created_at": "2026-09-28T15:26:29Z",
+  "front": "True or False: An initialized object has no control over what happens to the initialization value after initialization is finished.",
+  "id": "f38be53fe4a14a13864163cf9e668ce0",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "he object, who is passing in the initializer? The caller. When initialization is done, control returns back to the caller. At this point, the initialization statement is complete, and one of two things will typically happen:If the initializer was a temporary value or object, that temporary will be destroyed immediately.If the initializer was a variable, the caller still has access to that object. The caller can then do whatever it wants with the object, including modify or destroy it.Key insight",
+  "source_suffix": "Because std::string makes its own copy of the initializer, it doesn’t have to worry about what happens to the initializer after initialization is finished. The initializer can be destroyed, or modified, and it doesn’t affect the std::string. The downside is that this independence comes with the cost of making an expensive copy.In the context of our analogy, std::string is an owner -- it is responsible for acquiring its string data from the initializer, managing access to the string data, and pro",
+  "source_text": "An initialized object has no control over what happens to the initialization value after initialization is finished.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T15:26:29Z"
+}

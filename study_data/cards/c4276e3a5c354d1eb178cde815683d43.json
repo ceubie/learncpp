@@ -1,0 +1,15 @@
+{
+  "back": "In programming, when we call an object an owner, we generally mean that it is the sole owner (unless otherwise specified). Sole ownership (also called single ownership) ensures it is clear who has responsibility for that data.",
+  "created_at": "2026-09-28T15:26:55Z",
+  "front": "What does it mean when we say an object is an owner?",
+  "id": "c4276e3a5c354d1eb178cde815683d43",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T15:26:55Z"
+}

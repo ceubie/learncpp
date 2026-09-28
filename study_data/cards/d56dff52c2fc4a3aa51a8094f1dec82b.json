@@ -1,0 +1,15 @@
+{
+  "back": "Using literal constants (a.k.a. magic numbers) in your program makes your program harder to understand and harder to modify. Symbolic constants help document what the numbers actually represent, and changing a symbolic constant at its declaration changes the value everywhere it is used.",
+  "created_at": "2026-09-28T16:22:08Z",
+  "front": "Why are named constants often a better choice than literal constants?",
+  "id": "d56dff52c2fc4a3aa51a8094f1dec82b",
+  "lesson_id": "chapter-5-summary-and-quiz",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "nvalidated, meaning those views are now invalid. Using an invalidated view (other than to revalidate it) will produce undefined behavior.Because C-style string literals exist for the entire program, it is okay to set a std::string_view to a C-style string literal, and even return such a std::string_view from a function.A substring is a contiguous sequence of characters within an existing string.Quiz timeQuestion #1Why are named constants often a better choice than literal constants?Show solution",
+  "source_suffix": "Why are const/constexpr variables usually a better choice than #defined symbolic constants?Show solution#define constants do not show up in the debugger and are more likely to have naming conflicts.Question #2Find 3 issues in the following code:#include <cstdint> // for std::uint8_t\n#include <iostream>\nint main()\n{\n std::cout << \"How old are you?\\n\";\n std::uint8_t age{};\n std::cin >> age;\n std::cout << \"Allowed to drive a car in Texas: \";\n if (age >= 16)\n std::cout << \"Yes\";\n else\n std::cout <<",
+  "source_text": "Using literal constants (a.k.a. magic numbers) in your program makes your program harder to understand and harder to modify. Symbolic constants help document what the numbers actually represent, and changing a symbolic constant at its declaration changes the value everywhere it is used.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/chapter-5-summary-and-quiz/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:22:08Z"
+}

@@ -1,0 +1,15 @@
+{
+  "back": "You need read-only access to part or all of a string that already exists elsewhere and will not be modified or destroyed before use of the std::string_view is complete.\nYou need a symbolic constant for a C-style string.\nYou need to continue viewing the return value of a function that returns a C-style string or a non-dangling std::string_view.",
+  "created_at": "2026-09-28T16:13:28Z",
+  "front": "Use a std::string_view variable when:",
+  "id": "181f2eedeb3f47af8c23705843f32bc5",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:13:28Z"
+}

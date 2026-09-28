@@ -1,0 +1,15 @@
+{
+  "back": "Convert the string view into a std string",
+  "created_at": "2026-09-28T16:11:51Z",
+  "front": "If you have a non-null-terminated std::string_view and you need a null-terminated string for some reason, what do you do?",
+  "id": "de3d4e958323444184f093e13e47edbe",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:11:51Z"
+}

@@ -1,0 +1,15 @@
+{
+  "back": "It creates a dangling view.",
+  "created_at": "2026-09-28T15:52:12Z",
+  "front": "Why don't we initialize a string view with a string literal?",
+  "id": "d77a7de58e4c4756877b57fb8159f28e",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T15:52:12Z"
+}

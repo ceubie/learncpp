@@ -1,0 +1,15 @@
+{
+  "back": "You need a string that you can modify.\nYou need to store user-inputted text.\nYou need to store the return value of a function that returns a std::string.",
+  "created_at": "2026-09-28T16:13:16Z",
+  "front": "Use a std::string variable when:",
+  "id": "f0b0d69fb0144a0284d936334dbf55c7",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "whether or not the std::string_view is null-terminated.WarningTake care not to write any code that assumes a std::string_view is null terminated.TipIf you have a non-null-terminated std::string_view and you need a null-terminated string for some reason, convert the std::string_view into a std::string.A quick guide on when to use std::string vs std::string_view This guide is not meant to be comprehensive, but is intended to highlight the most common cases:VariablesUse a std::string variable when:",
+  "source_suffix": "Use a std::string_view variable when:You need read-only access to part or all of a string that already exists elsewhere and will not be modified or destroyed before use of the std::string_view is complete.You need a symbolic constant for a C-style string.You need to continue viewing the return value of a function that returns a C-style string or a non-dangling std::string_view.Function parametersUse a std::string function parameter when:The function needs to modify the string passed in as an arg",
+  "source_text": "You need a string that you can modify.\nYou need to store user-inputted text.\nYou need to store the return value of a function that returns a std::string.",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T16:13:16Z"
+}

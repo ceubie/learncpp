@@ -1,0 +1,15 @@
+{
+  "back": "Unexpected or undefined behavior. A std::string_view that is viewing a string that has been destroyed is sometimes called a dangling view.",
+  "created_at": "2026-09-28T15:44:18Z",
+  "front": "What happens if a string being viewed is modified or destroyed while a string view is still being used?",
+  "id": "e9de45c6d638419482f79e197c038fbc",
+  "lesson_id": "stdstring_view-part-2",
+  "review_count": 0,
+  "schema_version": 1,
+  "source_prefix": "",
+  "source_suffix": "",
+  "source_text": "",
+  "source_url": "https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/",
+  "tags": [],
+  "updated_at": "2026-09-28T15:44:18Z"
+}
